@@ -18,9 +18,29 @@ namespace project_akhir_stock_gudang
         private int jumlahdrawingpen = 1;
         private int jumlahpensilwarna = 1;
         private int jumlahspidolwarna = 1;
-        public Dashboard_User1()
+        private const decimal HargaBukuGambar = 5000;
+        private const decimal HargaPensil2H = 4000;
+        private const decimal HargaKrayon = 15000;
+        private const decimal HargaDrawingPen = 4000;
+        private const decimal HargaPensilWarna = 9000;
+        private const decimal HargaSpidol = 12000;
+        private readonly string EmailAktif;
+        public Dashboard_User1(string email)
         {
             InitializeComponent();
+            EmailAktif = email;
+            jumlah_beli_buku_gambar.Text = jumlahbuku.ToString();
+            jumlah_beli_pensil_2H.Text = jumlahpensil2H.ToString();
+            jumlah_beli_krayon.Text = jumlahkrayon.ToString();
+            jumlah_beli_drawing_pen.Text = jumlahdrawingpen.ToString();
+            jumlah_beli_pensil_warna.Text = jumlahpensilwarna.ToString();
+            jumlah_beli_spidol_warna.Text = jumlahspidolwarna.ToString();
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentException(
+                    "Email tidak boleh kosong."
+                );
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -44,7 +64,7 @@ namespace project_akhir_stock_gudang
 
         private void kembali_ke_login_Click(object sender, EventArgs e)
         {
-            Form1 kembali = new Form1();
+            Form1 kembali = new Form1(EmailAktif);
             kembali.Show();
             this.Hide();
         }
@@ -137,23 +157,107 @@ namespace project_akhir_stock_gudang
 
         private void tombol_alat_tulis_Click(object sender, EventArgs e)
         {
-            Dashboard_User2 menuju = new Dashboard_User2();
+            Dashboard_User2 menuju = new Dashboard_User2(EmailAktif);
             menuju.Show();
             this.Hide();
         }
 
         private void tombol_perlengkapan_sekolah_Click(object sender, EventArgs e)
         {
-            Dashboard_User3 menuju5 = new Dashboard_User3();
+            Dashboard_User3 menuju5 = new Dashboard_User3(EmailAktif);
             menuju5.Show();
             this.Hide();
         }
 
         private void tombol_keranjang_Click(object sender, EventArgs e)
         {
-            Dashboard_Keranjang menuju15 = new Dashboard_Keranjang();
+            Dashboard_Keranjang menuju15 = new Dashboard_Keranjang(EmailAktif);
             menuju15.Show();
             this.Hide();
+        }
+
+        private void beli_buku_gambar_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "buku gambar",
+            HargaBukuGambar,
+            jumlahbuku
+        );
+
+            MessageBox.Show(
+                "Buku gambar berhasil ditambahkan ke keranjang."
+            );
+        }
+
+        private void beli_pensil_2H_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "pensil 2H",
+            HargaPensil2H,
+            jumlahpensil2H
+        );
+
+            MessageBox.Show(
+                "Pensil 2H berhasil ditambahkan ke keranjang."
+            );
+        }
+
+        private void beli_krayon_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "krayon",
+            HargaKrayon,
+            jumlahkrayon
+        );
+
+            MessageBox.Show(
+                "Krayon berhasil ditambahkan ke keranjang."
+            );
+        }
+
+        private void beli_drawing_pen_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "drawinng pen",
+            HargaDrawingPen,
+            jumlahdrawingpen
+        );
+
+            MessageBox.Show(
+                "Drawing pen berhasil ditambahkan ke keranjang."
+            );
+        }
+
+        private void beli_pensil_warna_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "pensil warna",
+            HargaPensilWarna,
+            jumlahpensilwarna
+        );
+
+            MessageBox.Show(
+                "Pensil warna berhasil ditambahkan ke keranjang."
+            );
+        }
+
+        private void beli_spidol_warna_Click(object sender, EventArgs e)
+        {
+            CartJsonStore.Tambah(
+            EmailAktif,
+            "spidol warna",
+            HargaSpidol,
+            jumlahspidolwarna
+        );
+
+            MessageBox.Show(
+                "Spidol warna berhasil ditambahkan ke keranjang."
+            );
         }
     }
 }

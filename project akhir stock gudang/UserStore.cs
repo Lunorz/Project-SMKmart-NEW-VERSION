@@ -48,26 +48,32 @@ public static class UserStore
         File.WriteAllText(filePath, json);
     }
 
-    public static bool Register(string username, string password)
+    public static bool Register(string email, string password)
     {
         List<UserAccount> users = LoadUsers();
 
-        bool usernameSudahAda = users.Any(
+        bool emailSudahAda = users.Any(
             user => string.Equals(
-                user.Username,
-                username,
+                user.Email,
+                email,
                 StringComparison.OrdinalIgnoreCase
             )
         );
 
-        if (usernameSudahAda)
+        if (emailSudahAda)
         {
+            MessageBox.Show(
+                "Email sudah terdaftar. Silakan gunakan email lain.",
+                "Pendaftaran Gagal",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
             return false;
         }
 
         UserAccount userBaru = new UserAccount
         {
-            Username = username,
+            Email = email,
             Password = password
         };
 
@@ -78,15 +84,15 @@ public static class UserStore
         return true;
     }
 
-    public static bool ValidateLogin(string username, string password)
+    public static bool ValidateLogin(string email, string password)
     {
         List<UserAccount> users = LoadUsers();
 
         return users.Any(
             user =>
                 string.Equals(
-                    user.Username,
-                    username,
+                    user.Email,
+                    email,
                     StringComparison.OrdinalIgnoreCase
                 )
                 && user.Password == password

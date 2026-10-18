@@ -12,11 +12,12 @@ namespace project_akhir_stock_gudang
 {
     public partial class Form_Daftar : Form
     {
+        private readonly string emailAktif;
         public Form_Daftar()
         {
             InitializeComponent();
         }
-
+        
         private void Form_Daftar_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -36,7 +37,7 @@ namespace project_akhir_stock_gudang
 
         private void kembali_ke_login_Click(object sender, EventArgs e)
         {
-            Form1 kembali = new Form1();
+            Form1 kembali = new Form1(emailAktif);
             kembali.Show();
             this.Hide();
         }
@@ -48,27 +49,42 @@ namespace project_akhir_stock_gudang
 
         private void tombol_login_Click(object sender, EventArgs e)
         {
-            string username = reg_nama.Text;
-            string password = reg_password.Text;
-            if (username == "" || password == "")
+            string email = reg_email.Text.Trim();
+            if (string.IsNullOrWhiteSpace(email) ||
+            !System.Text.RegularExpressions.Regex.IsMatch(
+             email,
+             @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
             {
-                MessageBox.Show("username dan password wajib diisi!");
+                MessageBox.Show(
+                    "Masukkan email dengan format yang benar dan harus menggunakan @gmail.com!",
+                    "Email Tidak Valid",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
-            bool berhasil = UserStore.Register(username, password);
+            string password = reg_password.Text;
+            if (email == "" || password == "")
+            {
+                MessageBox.Show("Email dan password wajib diisi!");
+                return;
+            }
+
+            bool berhasil = UserStore.Register(email, password);
 
             if (berhasil)
             {
                 MessageBox.Show("Pendaftaran berhasil!silahkan login.");
 
-                Form1 login = new Form1();
+                Form1 login = new Form1(emailAktif);
                 login.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("username sudah digunakan");
+                MessageBox.Show("Email sudah terdaftar");
             }
         }
 

@@ -1,7 +1,9 @@
 namespace project_akhir_stock_gudang
 {
+    
     internal static class Program
     {
+        
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

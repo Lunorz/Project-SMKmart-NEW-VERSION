@@ -2,9 +2,17 @@ namespace project_akhir_stock_gudang
 {
     public partial class Form1 : Form
     {
+        private readonly string EmailAktif;
         public Form1()
         {
             InitializeComponent();
+            
+        }
+
+        public Form1(string email)
+        {
+            InitializeComponent();
+            EmailAktif = email;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -41,10 +49,10 @@ namespace project_akhir_stock_gudang
 
         private void tombol_login_Click(object sender, EventArgs e)
         {
-            string username = textnama.Text;
+            string email = textemail.Text.Trim();
             string password = textpassword.Text;
 
-            if (username == "admin" && password == "admin758150")
+            if (email == "admin" && password == "admin758150")
             {
                 MessageBox.Show("login berhasil! selamat datang di panel admin");
                 panel_admin panel = new panel_admin();
@@ -53,26 +61,25 @@ namespace project_akhir_stock_gudang
             }
 
 
-            if (username == "" || password == "")
+            if (email == "" || password == "")
             {
-                MessageBox.Show("username dan password wajib diisi!");
+                MessageBox.Show("email dan password wajib diisi!");
                 return;
             }
 
-            bool valid = UserStore.ValidateLogin(username, password);
+            bool valid = UserStore.ValidateLogin(email, password);
 
-            if (valid)
+            if (UserStore.ValidateLogin(email, password))
             {
-                MessageBox.Show("Login berhasil!");
+                Dashboard_User1 dashboard =
+                    new Dashboard_User1(email);
 
-                Dashboard_User1 dashboard = new Dashboard_User1();
                 dashboard.Show();
                 this.Hide();
-
             }
             else
             {
-                MessageBox.Show("username atau password salah!");
+                MessageBox.Show("Email atau password salah.");
             }
 
         }

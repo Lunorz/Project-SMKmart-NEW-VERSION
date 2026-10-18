@@ -145,24 +145,27 @@
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(panel2);
             panel1.Location = new Point(2, 0);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1204, 636);
+            panel1.Size = new Size(963, 509);
             panel1.TabIndex = 0;
             // 
             // panel26
             // 
             panel26.BackColor = Color.Teal;
-            panel26.Location = new Point(689, 373);
+            panel26.Location = new Point(551, 298);
+            panel26.Margin = new Padding(2);
             panel26.Name = "panel26";
-            panel26.Size = new Size(166, 19);
+            panel26.Size = new Size(133, 15);
             panel26.TabIndex = 7;
             // 
             // panel27
             // 
             panel27.BackColor = Color.Teal;
-            panel27.Location = new Point(967, 373);
+            panel27.Location = new Point(774, 298);
+            panel27.Margin = new Padding(2);
             panel27.Name = "panel27";
-            panel27.Size = new Size(166, 19);
+            panel27.Size = new Size(133, 15);
             panel27.TabIndex = 11;
             // 
             // panel23
@@ -171,46 +174,52 @@
             panel23.Controls.Add(panel24);
             panel23.Controls.Add(label11);
             panel23.Controls.Add(pictureBox6);
-            panel23.Location = new Point(692, 373);
+            panel23.Location = new Point(554, 298);
+            panel23.Margin = new Padding(2);
             panel23.Name = "panel23";
-            panel23.Size = new Size(166, 241);
+            panel23.Size = new Size(133, 193);
             panel23.TabIndex = 10;
             // 
             // beli_pensil_warna
             // 
             beli_pensil_warna.BackColor = Color.Teal;
             beli_pensil_warna.ForeColor = Color.White;
-            beli_pensil_warna.Location = new Point(3, 197);
+            beli_pensil_warna.Location = new Point(2, 158);
+            beli_pensil_warna.Margin = new Padding(2);
             beli_pensil_warna.Name = "beli_pensil_warna";
-            beli_pensil_warna.Size = new Size(160, 41);
+            beli_pensil_warna.Size = new Size(128, 33);
             beli_pensil_warna.TabIndex = 3;
             beli_pensil_warna.Text = "9000";
             beli_pensil_warna.UseVisualStyleBackColor = false;
+            beli_pensil_warna.Click += beli_pensil_warna_Click;
             // 
             // panel24
             // 
             panel24.Controls.Add(nsajkj);
             panel24.Controls.Add(tambah_pensil_warna);
             panel24.Controls.Add(kurang_pensil_warna);
-            panel24.Location = new Point(0, 160);
+            panel24.Location = new Point(0, 128);
+            panel24.Margin = new Padding(2);
             panel24.Name = "panel24";
-            panel24.Size = new Size(166, 31);
+            panel24.Size = new Size(133, 25);
             panel24.TabIndex = 2;
             // 
             // nsajkj
             // 
             nsajkj.Controls.Add(jumlah_beli_pensil_warna);
-            nsajkj.Location = new Point(53, 0);
+            nsajkj.Location = new Point(42, 0);
+            nsajkj.Margin = new Padding(2);
             nsajkj.Name = "nsajkj";
-            nsajkj.Size = new Size(60, 31);
+            nsajkj.Size = new Size(48, 25);
             nsajkj.TabIndex = 5;
             // 
             // jumlah_beli_pensil_warna
             // 
             jumlah_beli_pensil_warna.AutoSize = true;
-            jumlah_beli_pensil_warna.Location = new Point(19, 3);
+            jumlah_beli_pensil_warna.Location = new Point(15, 2);
+            jumlah_beli_pensil_warna.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_pensil_warna.Name = "jumlah_beli_pensil_warna";
-            jumlah_beli_pensil_warna.Size = new Size(22, 25);
+            jumlah_beli_pensil_warna.Size = new Size(17, 20);
             jumlah_beli_pensil_warna.TabIndex = 0;
             jumlah_beli_pensil_warna.Text = "1";
             // 
@@ -219,9 +228,10 @@
             tambah_pensil_warna.BackColor = Color.Teal;
             tambah_pensil_warna.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_pensil_warna.ForeColor = Color.White;
-            tambah_pensil_warna.Location = new Point(119, 0);
+            tambah_pensil_warna.Location = new Point(95, 0);
+            tambah_pensil_warna.Margin = new Padding(2);
             tambah_pensil_warna.Name = "tambah_pensil_warna";
-            tambah_pensil_warna.Size = new Size(47, 31);
+            tambah_pensil_warna.Size = new Size(38, 25);
             tambah_pensil_warna.TabIndex = 4;
             tambah_pensil_warna.Text = "+";
             tambah_pensil_warna.UseVisualStyleBackColor = false;
@@ -233,8 +243,9 @@
             kurang_pensil_warna.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_pensil_warna.ForeColor = Color.White;
             kurang_pensil_warna.Location = new Point(0, 0);
+            kurang_pensil_warna.Margin = new Padding(2);
             kurang_pensil_warna.Name = "kurang_pensil_warna";
-            kurang_pensil_warna.Size = new Size(47, 31);
+            kurang_pensil_warna.Size = new Size(38, 25);
             kurang_pensil_warna.TabIndex = 0;
             kurang_pensil_warna.Text = "-";
             kurang_pensil_warna.UseVisualStyleBackColor = false;
@@ -244,18 +255,20 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(3, 136);
+            label11.Location = new Point(2, 109);
+            label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(107, 21);
+            label11.Size = new Size(93, 19);
             label11.TabIndex = 1;
             label11.Text = "pensil warna";
             // 
             // pictureBox6
             // 
             pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(30, 25);
+            pictureBox6.Location = new Point(24, 20);
+            pictureBox6.Margin = new Padding(2);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(111, 108);
+            pictureBox6.Size = new Size(89, 86);
             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox6.TabIndex = 0;
             pictureBox6.TabStop = false;
@@ -266,46 +279,52 @@
             panel20.Controls.Add(panel21);
             panel20.Controls.Add(label9);
             panel20.Controls.Add(pictureBox5);
-            panel20.Location = new Point(967, 373);
+            panel20.Location = new Point(774, 298);
+            panel20.Margin = new Padding(2);
             panel20.Name = "panel20";
-            panel20.Size = new Size(166, 241);
+            panel20.Size = new Size(133, 193);
             panel20.TabIndex = 9;
             // 
             // beli_spidol_warna
             // 
             beli_spidol_warna.BackColor = Color.Teal;
             beli_spidol_warna.ForeColor = Color.White;
-            beli_spidol_warna.Location = new Point(3, 197);
+            beli_spidol_warna.Location = new Point(2, 158);
+            beli_spidol_warna.Margin = new Padding(2);
             beli_spidol_warna.Name = "beli_spidol_warna";
-            beli_spidol_warna.Size = new Size(160, 41);
+            beli_spidol_warna.Size = new Size(128, 33);
             beli_spidol_warna.TabIndex = 3;
             beli_spidol_warna.Text = "12000";
             beli_spidol_warna.UseVisualStyleBackColor = false;
+            beli_spidol_warna.Click += beli_spidol_warna_Click;
             // 
             // panel21
             // 
             panel21.Controls.Add(panel22);
             panel21.Controls.Add(tambah_spidol_warna);
             panel21.Controls.Add(kurang_spidol_warna);
-            panel21.Location = new Point(0, 160);
+            panel21.Location = new Point(0, 128);
+            panel21.Margin = new Padding(2);
             panel21.Name = "panel21";
-            panel21.Size = new Size(166, 31);
+            panel21.Size = new Size(133, 25);
             panel21.TabIndex = 2;
             // 
             // panel22
             // 
             panel22.Controls.Add(jumlah_beli_spidol_warna);
-            panel22.Location = new Point(53, 0);
+            panel22.Location = new Point(42, 0);
+            panel22.Margin = new Padding(2);
             panel22.Name = "panel22";
-            panel22.Size = new Size(60, 31);
+            panel22.Size = new Size(48, 25);
             panel22.TabIndex = 5;
             // 
             // jumlah_beli_spidol_warna
             // 
             jumlah_beli_spidol_warna.AutoSize = true;
-            jumlah_beli_spidol_warna.Location = new Point(19, 3);
+            jumlah_beli_spidol_warna.Location = new Point(15, 2);
+            jumlah_beli_spidol_warna.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_spidol_warna.Name = "jumlah_beli_spidol_warna";
-            jumlah_beli_spidol_warna.Size = new Size(22, 25);
+            jumlah_beli_spidol_warna.Size = new Size(17, 20);
             jumlah_beli_spidol_warna.TabIndex = 0;
             jumlah_beli_spidol_warna.Text = "1";
             // 
@@ -314,9 +333,10 @@
             tambah_spidol_warna.BackColor = Color.Teal;
             tambah_spidol_warna.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_spidol_warna.ForeColor = Color.White;
-            tambah_spidol_warna.Location = new Point(119, 0);
+            tambah_spidol_warna.Location = new Point(95, 0);
+            tambah_spidol_warna.Margin = new Padding(2);
             tambah_spidol_warna.Name = "tambah_spidol_warna";
-            tambah_spidol_warna.Size = new Size(47, 31);
+            tambah_spidol_warna.Size = new Size(38, 25);
             tambah_spidol_warna.TabIndex = 4;
             tambah_spidol_warna.Text = "+";
             tambah_spidol_warna.UseVisualStyleBackColor = false;
@@ -328,8 +348,9 @@
             kurang_spidol_warna.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_spidol_warna.ForeColor = Color.White;
             kurang_spidol_warna.Location = new Point(0, 0);
+            kurang_spidol_warna.Margin = new Padding(2);
             kurang_spidol_warna.Name = "kurang_spidol_warna";
-            kurang_spidol_warna.Size = new Size(47, 31);
+            kurang_spidol_warna.Size = new Size(38, 25);
             kurang_spidol_warna.TabIndex = 0;
             kurang_spidol_warna.Text = "-";
             kurang_spidol_warna.UseVisualStyleBackColor = false;
@@ -339,18 +360,20 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(3, 136);
+            label9.Location = new Point(2, 109);
+            label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(108, 21);
+            label9.Size = new Size(95, 19);
             label9.TabIndex = 1;
             label9.Text = "spidol warna";
             // 
             // pictureBox5
             // 
             pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new Point(30, 25);
+            pictureBox5.Location = new Point(24, 20);
+            pictureBox5.Margin = new Padding(2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(111, 108);
+            pictureBox5.Size = new Size(89, 86);
             pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox5.TabIndex = 0;
             pictureBox5.TabStop = false;
@@ -358,9 +381,10 @@
             // panel19
             // 
             panel19.BackColor = Color.Teal;
-            panel19.Location = new Point(398, 373);
+            panel19.Location = new Point(318, 298);
+            panel19.Margin = new Padding(2);
             panel19.Name = "panel19";
-            panel19.Size = new Size(166, 19);
+            panel19.Size = new Size(133, 15);
             panel19.TabIndex = 8;
             // 
             // panel16
@@ -369,46 +393,52 @@
             panel16.Controls.Add(panel17);
             panel16.Controls.Add(asjhkfjksa);
             panel16.Controls.Add(pictureBox4);
-            panel16.Location = new Point(398, 373);
+            panel16.Location = new Point(318, 298);
+            panel16.Margin = new Padding(2);
             panel16.Name = "panel16";
-            panel16.Size = new Size(166, 241);
+            panel16.Size = new Size(133, 193);
             panel16.TabIndex = 7;
             // 
             // beli_drawing_pen
             // 
             beli_drawing_pen.BackColor = Color.Teal;
             beli_drawing_pen.ForeColor = Color.White;
-            beli_drawing_pen.Location = new Point(3, 197);
+            beli_drawing_pen.Location = new Point(2, 158);
+            beli_drawing_pen.Margin = new Padding(2);
             beli_drawing_pen.Name = "beli_drawing_pen";
-            beli_drawing_pen.Size = new Size(160, 41);
+            beli_drawing_pen.Size = new Size(128, 33);
             beli_drawing_pen.TabIndex = 3;
             beli_drawing_pen.Text = "4000";
             beli_drawing_pen.UseVisualStyleBackColor = false;
+            beli_drawing_pen.Click += beli_drawing_pen_Click;
             // 
             // panel17
             // 
             panel17.Controls.Add(panel18);
             panel17.Controls.Add(tambah_drawing_pen);
             panel17.Controls.Add(kurang_drawing_pen);
-            panel17.Location = new Point(0, 160);
+            panel17.Location = new Point(0, 128);
+            panel17.Margin = new Padding(2);
             panel17.Name = "panel17";
-            panel17.Size = new Size(166, 31);
+            panel17.Size = new Size(133, 25);
             panel17.TabIndex = 2;
             // 
             // panel18
             // 
             panel18.Controls.Add(jumlah_beli_drawing_pen);
-            panel18.Location = new Point(53, 0);
+            panel18.Location = new Point(42, 0);
+            panel18.Margin = new Padding(2);
             panel18.Name = "panel18";
-            panel18.Size = new Size(60, 31);
+            panel18.Size = new Size(48, 25);
             panel18.TabIndex = 5;
             // 
             // jumlah_beli_drawing_pen
             // 
             jumlah_beli_drawing_pen.AutoSize = true;
-            jumlah_beli_drawing_pen.Location = new Point(19, 3);
+            jumlah_beli_drawing_pen.Location = new Point(15, 2);
+            jumlah_beli_drawing_pen.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_drawing_pen.Name = "jumlah_beli_drawing_pen";
-            jumlah_beli_drawing_pen.Size = new Size(22, 25);
+            jumlah_beli_drawing_pen.Size = new Size(17, 20);
             jumlah_beli_drawing_pen.TabIndex = 0;
             jumlah_beli_drawing_pen.Text = "1";
             // 
@@ -417,9 +447,10 @@
             tambah_drawing_pen.BackColor = Color.Teal;
             tambah_drawing_pen.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_drawing_pen.ForeColor = Color.White;
-            tambah_drawing_pen.Location = new Point(119, 0);
+            tambah_drawing_pen.Location = new Point(95, 0);
+            tambah_drawing_pen.Margin = new Padding(2);
             tambah_drawing_pen.Name = "tambah_drawing_pen";
-            tambah_drawing_pen.Size = new Size(47, 31);
+            tambah_drawing_pen.Size = new Size(38, 25);
             tambah_drawing_pen.TabIndex = 4;
             tambah_drawing_pen.Text = "+";
             tambah_drawing_pen.UseVisualStyleBackColor = false;
@@ -431,8 +462,9 @@
             kurang_drawing_pen.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_drawing_pen.ForeColor = Color.White;
             kurang_drawing_pen.Location = new Point(0, 0);
+            kurang_drawing_pen.Margin = new Padding(2);
             kurang_drawing_pen.Name = "kurang_drawing_pen";
-            kurang_drawing_pen.Size = new Size(47, 31);
+            kurang_drawing_pen.Size = new Size(38, 25);
             kurang_drawing_pen.TabIndex = 0;
             kurang_drawing_pen.Text = "-";
             kurang_drawing_pen.UseVisualStyleBackColor = false;
@@ -442,18 +474,20 @@
             // 
             asjhkfjksa.AutoSize = true;
             asjhkfjksa.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            asjhkfjksa.Location = new Point(3, 136);
+            asjhkfjksa.Location = new Point(2, 109);
+            asjhkfjksa.Margin = new Padding(2, 0, 2, 0);
             asjhkfjksa.Name = "asjhkfjksa";
-            asjhkfjksa.Size = new Size(106, 21);
+            asjhkfjksa.Size = new Size(93, 19);
             asjhkfjksa.TabIndex = 1;
             asjhkfjksa.Text = "drawing pen";
             // 
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(30, 25);
+            pictureBox4.Location = new Point(24, 20);
+            pictureBox4.Margin = new Padding(2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(111, 108);
+            pictureBox4.Size = new Size(89, 86);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 0;
             pictureBox4.TabStop = false;
@@ -461,17 +495,19 @@
             // panel15
             // 
             panel15.BackColor = Color.Teal;
-            panel15.Location = new Point(967, 97);
+            panel15.Location = new Point(774, 78);
+            panel15.Margin = new Padding(2);
             panel15.Name = "panel15";
-            panel15.Size = new Size(166, 19);
+            panel15.Size = new Size(133, 15);
             panel15.TabIndex = 4;
             // 
             // panel14
             // 
             panel14.BackColor = Color.Teal;
-            panel14.Location = new Point(692, 97);
+            panel14.Location = new Point(554, 78);
+            panel14.Margin = new Padding(2);
             panel14.Name = "panel14";
-            panel14.Size = new Size(166, 19);
+            panel14.Size = new Size(133, 15);
             panel14.TabIndex = 6;
             // 
             // panel11
@@ -480,46 +516,52 @@
             panel11.Controls.Add(panel12);
             panel11.Controls.Add(label5);
             panel11.Controls.Add(pictureBox3);
-            panel11.Location = new Point(967, 97);
+            panel11.Location = new Point(774, 78);
+            panel11.Margin = new Padding(2);
             panel11.Name = "panel11";
-            panel11.Size = new Size(166, 241);
+            panel11.Size = new Size(133, 193);
             panel11.TabIndex = 5;
             // 
             // beli_krayon
             // 
             beli_krayon.BackColor = Color.Teal;
             beli_krayon.ForeColor = Color.White;
-            beli_krayon.Location = new Point(3, 197);
+            beli_krayon.Location = new Point(2, 158);
+            beli_krayon.Margin = new Padding(2);
             beli_krayon.Name = "beli_krayon";
-            beli_krayon.Size = new Size(160, 41);
+            beli_krayon.Size = new Size(128, 33);
             beli_krayon.TabIndex = 3;
             beli_krayon.Text = "15000";
             beli_krayon.UseVisualStyleBackColor = false;
+            beli_krayon.Click += beli_krayon_Click;
             // 
             // panel12
             // 
             panel12.Controls.Add(panel13);
             panel12.Controls.Add(tambah_krayon);
             panel12.Controls.Add(kurang_krayon);
-            panel12.Location = new Point(0, 160);
+            panel12.Location = new Point(0, 128);
+            panel12.Margin = new Padding(2);
             panel12.Name = "panel12";
-            panel12.Size = new Size(166, 31);
+            panel12.Size = new Size(133, 25);
             panel12.TabIndex = 2;
             // 
             // panel13
             // 
             panel13.Controls.Add(jumlah_beli_krayon);
-            panel13.Location = new Point(53, 0);
+            panel13.Location = new Point(42, 0);
+            panel13.Margin = new Padding(2);
             panel13.Name = "panel13";
-            panel13.Size = new Size(60, 31);
+            panel13.Size = new Size(48, 25);
             panel13.TabIndex = 5;
             // 
             // jumlah_beli_krayon
             // 
             jumlah_beli_krayon.AutoSize = true;
-            jumlah_beli_krayon.Location = new Point(19, 3);
+            jumlah_beli_krayon.Location = new Point(15, 2);
+            jumlah_beli_krayon.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_krayon.Name = "jumlah_beli_krayon";
-            jumlah_beli_krayon.Size = new Size(22, 25);
+            jumlah_beli_krayon.Size = new Size(17, 20);
             jumlah_beli_krayon.TabIndex = 0;
             jumlah_beli_krayon.Text = "1";
             // 
@@ -528,9 +570,10 @@
             tambah_krayon.BackColor = Color.Teal;
             tambah_krayon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_krayon.ForeColor = Color.White;
-            tambah_krayon.Location = new Point(119, 0);
+            tambah_krayon.Location = new Point(95, 0);
+            tambah_krayon.Margin = new Padding(2);
             tambah_krayon.Name = "tambah_krayon";
-            tambah_krayon.Size = new Size(47, 31);
+            tambah_krayon.Size = new Size(38, 25);
             tambah_krayon.TabIndex = 4;
             tambah_krayon.Text = "+";
             tambah_krayon.UseVisualStyleBackColor = false;
@@ -542,8 +585,9 @@
             kurang_krayon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_krayon.ForeColor = Color.White;
             kurang_krayon.Location = new Point(0, 0);
+            kurang_krayon.Margin = new Padding(2);
             kurang_krayon.Name = "kurang_krayon";
-            kurang_krayon.Size = new Size(47, 31);
+            kurang_krayon.Size = new Size(38, 25);
             kurang_krayon.TabIndex = 0;
             kurang_krayon.Text = "-";
             kurang_krayon.UseVisualStyleBackColor = false;
@@ -553,18 +597,20 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(3, 136);
+            label5.Location = new Point(2, 109);
+            label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
-            label5.Size = new Size(63, 21);
+            label5.Size = new Size(56, 19);
             label5.TabIndex = 1;
             label5.Text = "krayon";
             // 
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(30, 25);
+            pictureBox3.Location = new Point(24, 20);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(111, 108);
+            pictureBox3.Size = new Size(89, 86);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 0;
             pictureBox3.TabStop = false;
@@ -575,46 +621,52 @@
             panel8.Controls.Add(panel9);
             panel8.Controls.Add(label3);
             panel8.Controls.Add(pictureBox2);
-            panel8.Location = new Point(692, 97);
+            panel8.Location = new Point(554, 78);
+            panel8.Margin = new Padding(2);
             panel8.Name = "panel8";
-            panel8.Size = new Size(166, 241);
+            panel8.Size = new Size(133, 193);
             panel8.TabIndex = 4;
             // 
             // beli_pensil_2H
             // 
             beli_pensil_2H.BackColor = Color.Teal;
             beli_pensil_2H.ForeColor = Color.White;
-            beli_pensil_2H.Location = new Point(3, 197);
+            beli_pensil_2H.Location = new Point(2, 158);
+            beli_pensil_2H.Margin = new Padding(2);
             beli_pensil_2H.Name = "beli_pensil_2H";
-            beli_pensil_2H.Size = new Size(160, 41);
+            beli_pensil_2H.Size = new Size(128, 33);
             beli_pensil_2H.TabIndex = 3;
             beli_pensil_2H.Text = "4000";
             beli_pensil_2H.UseVisualStyleBackColor = false;
+            beli_pensil_2H.Click += beli_pensil_2H_Click;
             // 
             // panel9
             // 
             panel9.Controls.Add(asjkj);
             panel9.Controls.Add(tambah_pensil_2H);
             panel9.Controls.Add(kurang_pensil_2H);
-            panel9.Location = new Point(0, 160);
+            panel9.Location = new Point(0, 128);
+            panel9.Margin = new Padding(2);
             panel9.Name = "panel9";
-            panel9.Size = new Size(166, 31);
+            panel9.Size = new Size(133, 25);
             panel9.TabIndex = 2;
             // 
             // asjkj
             // 
             asjkj.Controls.Add(jumlah_beli_pensil_2H);
-            asjkj.Location = new Point(53, 0);
+            asjkj.Location = new Point(42, 0);
+            asjkj.Margin = new Padding(2);
             asjkj.Name = "asjkj";
-            asjkj.Size = new Size(60, 31);
+            asjkj.Size = new Size(48, 25);
             asjkj.TabIndex = 5;
             // 
             // jumlah_beli_pensil_2H
             // 
             jumlah_beli_pensil_2H.AutoSize = true;
-            jumlah_beli_pensil_2H.Location = new Point(19, 3);
+            jumlah_beli_pensil_2H.Location = new Point(15, 2);
+            jumlah_beli_pensil_2H.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_pensil_2H.Name = "jumlah_beli_pensil_2H";
-            jumlah_beli_pensil_2H.Size = new Size(22, 25);
+            jumlah_beli_pensil_2H.Size = new Size(17, 20);
             jumlah_beli_pensil_2H.TabIndex = 0;
             jumlah_beli_pensil_2H.Text = "1";
             // 
@@ -623,9 +675,10 @@
             tambah_pensil_2H.BackColor = Color.Teal;
             tambah_pensil_2H.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_pensil_2H.ForeColor = Color.White;
-            tambah_pensil_2H.Location = new Point(119, 0);
+            tambah_pensil_2H.Location = new Point(95, 0);
+            tambah_pensil_2H.Margin = new Padding(2);
             tambah_pensil_2H.Name = "tambah_pensil_2H";
-            tambah_pensil_2H.Size = new Size(47, 31);
+            tambah_pensil_2H.Size = new Size(38, 25);
             tambah_pensil_2H.TabIndex = 4;
             tambah_pensil_2H.Text = "+";
             tambah_pensil_2H.UseVisualStyleBackColor = false;
@@ -637,8 +690,9 @@
             kurang_pensil_2H.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_pensil_2H.ForeColor = Color.White;
             kurang_pensil_2H.Location = new Point(0, 0);
+            kurang_pensil_2H.Margin = new Padding(2);
             kurang_pensil_2H.Name = "kurang_pensil_2H";
-            kurang_pensil_2H.Size = new Size(47, 31);
+            kurang_pensil_2H.Size = new Size(38, 25);
             kurang_pensil_2H.TabIndex = 0;
             kurang_pensil_2H.Text = "-";
             kurang_pensil_2H.UseVisualStyleBackColor = false;
@@ -648,18 +702,20 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(3, 136);
+            label3.Location = new Point(2, 109);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(81, 21);
+            label3.Size = new Size(71, 19);
             label3.TabIndex = 1;
             label3.Text = "pensil 2H";
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(30, 25);
+            pictureBox2.Location = new Point(24, 20);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(111, 108);
+            pictureBox2.Size = new Size(89, 86);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 0;
             pictureBox2.TabStop = false;
@@ -667,9 +723,10 @@
             // panel5
             // 
             panel5.BackColor = Color.Teal;
-            panel5.Location = new Point(398, 97);
+            panel5.Location = new Point(318, 78);
+            panel5.Margin = new Padding(2);
             panel5.Name = "panel5";
-            panel5.Size = new Size(166, 19);
+            panel5.Size = new Size(133, 15);
             panel5.TabIndex = 3;
             // 
             // panel4
@@ -678,46 +735,52 @@
             panel4.Controls.Add(panel6);
             panel4.Controls.Add(label1);
             panel4.Controls.Add(pictureBox1);
-            panel4.Location = new Point(398, 97);
+            panel4.Location = new Point(318, 78);
+            panel4.Margin = new Padding(2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(166, 241);
+            panel4.Size = new Size(133, 193);
             panel4.TabIndex = 2;
             // 
             // beli_buku_gambar
             // 
             beli_buku_gambar.BackColor = Color.Teal;
             beli_buku_gambar.ForeColor = Color.White;
-            beli_buku_gambar.Location = new Point(3, 197);
+            beli_buku_gambar.Location = new Point(2, 158);
+            beli_buku_gambar.Margin = new Padding(2);
             beli_buku_gambar.Name = "beli_buku_gambar";
-            beli_buku_gambar.Size = new Size(160, 41);
+            beli_buku_gambar.Size = new Size(128, 33);
             beli_buku_gambar.TabIndex = 3;
             beli_buku_gambar.Text = "5000";
             beli_buku_gambar.UseVisualStyleBackColor = false;
+            beli_buku_gambar.Click += beli_buku_gambar_Click;
             // 
             // panel6
             // 
             panel6.Controls.Add(panel7);
             panel6.Controls.Add(tambah_buku_gambar);
             panel6.Controls.Add(kurang_buku_gambar);
-            panel6.Location = new Point(0, 160);
+            panel6.Location = new Point(0, 128);
+            panel6.Margin = new Padding(2);
             panel6.Name = "panel6";
-            panel6.Size = new Size(166, 31);
+            panel6.Size = new Size(133, 25);
             panel6.TabIndex = 2;
             // 
             // panel7
             // 
             panel7.Controls.Add(jumlah_beli_buku_gambar);
-            panel7.Location = new Point(53, 0);
+            panel7.Location = new Point(42, 0);
+            panel7.Margin = new Padding(2);
             panel7.Name = "panel7";
-            panel7.Size = new Size(60, 31);
+            panel7.Size = new Size(48, 25);
             panel7.TabIndex = 5;
             // 
             // jumlah_beli_buku_gambar
             // 
             jumlah_beli_buku_gambar.AutoSize = true;
-            jumlah_beli_buku_gambar.Location = new Point(19, 3);
+            jumlah_beli_buku_gambar.Location = new Point(15, 2);
+            jumlah_beli_buku_gambar.Margin = new Padding(2, 0, 2, 0);
             jumlah_beli_buku_gambar.Name = "jumlah_beli_buku_gambar";
-            jumlah_beli_buku_gambar.Size = new Size(22, 25);
+            jumlah_beli_buku_gambar.Size = new Size(17, 20);
             jumlah_beli_buku_gambar.TabIndex = 0;
             jumlah_beli_buku_gambar.Text = "1";
             jumlah_beli_buku_gambar.Click += jumlah_buku_gambar_Click;
@@ -727,9 +790,10 @@
             tambah_buku_gambar.BackColor = Color.Teal;
             tambah_buku_gambar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_buku_gambar.ForeColor = Color.White;
-            tambah_buku_gambar.Location = new Point(119, 0);
+            tambah_buku_gambar.Location = new Point(95, 0);
+            tambah_buku_gambar.Margin = new Padding(2);
             tambah_buku_gambar.Name = "tambah_buku_gambar";
-            tambah_buku_gambar.Size = new Size(47, 31);
+            tambah_buku_gambar.Size = new Size(38, 25);
             tambah_buku_gambar.TabIndex = 4;
             tambah_buku_gambar.Text = "+";
             tambah_buku_gambar.UseVisualStyleBackColor = false;
@@ -741,8 +805,9 @@
             kurang_buku_gambar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kurang_buku_gambar.ForeColor = Color.White;
             kurang_buku_gambar.Location = new Point(0, 0);
+            kurang_buku_gambar.Margin = new Padding(2);
             kurang_buku_gambar.Name = "kurang_buku_gambar";
-            kurang_buku_gambar.Size = new Size(47, 31);
+            kurang_buku_gambar.Size = new Size(38, 25);
             kurang_buku_gambar.TabIndex = 0;
             kurang_buku_gambar.Text = "-";
             kurang_buku_gambar.UseVisualStyleBackColor = false;
@@ -752,9 +817,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(3, 136);
+            label1.Location = new Point(2, 109);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(112, 21);
+            label1.Size = new Size(99, 19);
             label1.TabIndex = 1;
             label1.Text = "buku gambar";
             label1.Click += label1_Click;
@@ -762,9 +828,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.buku_gambar2;
-            pictureBox1.Location = new Point(30, 25);
+            pictureBox1.Location = new Point(24, 20);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(111, 108);
+            pictureBox1.Size = new Size(89, 86);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -776,16 +843,18 @@
             panel3.Controls.Add(kembali_ke_login);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
+            panel3.Margin = new Padding(2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1204, 67);
+            panel3.Size = new Size(963, 54);
             panel3.TabIndex = 1;
             // 
             // pictureBox7
             // 
             pictureBox7.Image = (Image)resources.GetObject("pictureBox7.Image");
-            pictureBox7.Location = new Point(-3, 0);
+            pictureBox7.Location = new Point(-2, 0);
+            pictureBox7.Margin = new Padding(2);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(328, 67);
+            pictureBox7.Size = new Size(262, 54);
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox7.TabIndex = 2;
             pictureBox7.TabStop = false;
@@ -793,9 +862,10 @@
             // kembali_ke_login
             // 
             kembali_ke_login.AutoSize = true;
-            kembali_ke_login.Location = new Point(1170, 25);
+            kembali_ke_login.Location = new Point(936, 20);
+            kembali_ke_login.Margin = new Padding(2, 0, 2, 0);
             kembali_ke_login.Name = "kembali_ke_login";
-            kembali_ke_login.Size = new Size(23, 25);
+            kembali_ke_login.Size = new Size(18, 20);
             kembali_ke_login.TabIndex = 0;
             kembali_ke_login.Text = "X";
             kembali_ke_login.Click += kembali_ke_login_Click;
@@ -807,17 +877,19 @@
             panel2.Controls.Add(tombol_perlengkapan_sekolah);
             panel2.Controls.Add(tombol_alat_tulis);
             panel2.Controls.Add(tombol_alat_gambar);
-            panel2.Location = new Point(0, 65);
+            panel2.Location = new Point(0, 52);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(325, 573);
+            panel2.Size = new Size(260, 458);
             panel2.TabIndex = 0;
             // 
             // tombol_keranjang
             // 
             tombol_keranjang.Font = new Font("Leelawadee UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tombol_keranjang.Location = new Point(-3, 201);
+            tombol_keranjang.Location = new Point(-2, 161);
+            tombol_keranjang.Margin = new Padding(2);
             tombol_keranjang.Name = "tombol_keranjang";
-            tombol_keranjang.Size = new Size(328, 72);
+            tombol_keranjang.Size = new Size(262, 58);
             tombol_keranjang.TabIndex = 3;
             tombol_keranjang.Text = "Keranjang";
             tombol_keranjang.UseVisualStyleBackColor = true;
@@ -826,9 +898,10 @@
             // tombol_perlengkapan_sekolah
             // 
             tombol_perlengkapan_sekolah.Font = new Font("Leelawadee UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tombol_perlengkapan_sekolah.Location = new Point(-3, 132);
+            tombol_perlengkapan_sekolah.Location = new Point(-2, 106);
+            tombol_perlengkapan_sekolah.Margin = new Padding(2);
             tombol_perlengkapan_sekolah.Name = "tombol_perlengkapan_sekolah";
-            tombol_perlengkapan_sekolah.Size = new Size(328, 72);
+            tombol_perlengkapan_sekolah.Size = new Size(262, 58);
             tombol_perlengkapan_sekolah.TabIndex = 2;
             tombol_perlengkapan_sekolah.Text = "Perlengkapan Sekolah";
             tombol_perlengkapan_sekolah.UseVisualStyleBackColor = true;
@@ -837,9 +910,10 @@
             // tombol_alat_tulis
             // 
             tombol_alat_tulis.Font = new Font("Leelawadee UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tombol_alat_tulis.Location = new Point(-3, 68);
+            tombol_alat_tulis.Location = new Point(-2, 54);
+            tombol_alat_tulis.Margin = new Padding(2);
             tombol_alat_tulis.Name = "tombol_alat_tulis";
-            tombol_alat_tulis.Size = new Size(328, 72);
+            tombol_alat_tulis.Size = new Size(262, 58);
             tombol_alat_tulis.TabIndex = 1;
             tombol_alat_tulis.Text = "Alat Tulis";
             tombol_alat_tulis.UseVisualStyleBackColor = true;
@@ -850,20 +924,22 @@
             tombol_alat_gambar.BackColor = Color.Teal;
             tombol_alat_gambar.Font = new Font("Leelawadee UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tombol_alat_gambar.ForeColor = Color.White;
-            tombol_alat_gambar.Location = new Point(-3, 0);
+            tombol_alat_gambar.Location = new Point(-2, 0);
+            tombol_alat_gambar.Margin = new Padding(2);
             tombol_alat_gambar.Name = "tombol_alat_gambar";
-            tombol_alat_gambar.Size = new Size(328, 72);
+            tombol_alat_gambar.Size = new Size(262, 58);
             tombol_alat_gambar.TabIndex = 0;
             tombol_alat_gambar.Text = "Alat Gambar";
             tombol_alat_gambar.UseVisualStyleBackColor = false;
             // 
             // Dashboard_User1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1206, 636);
+            ClientSize = new Size(965, 509);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
             Name = "Dashboard_User1";
             Text = "Dashboard_User1";
             FormClosed += Dashboard_User1_FormClosed;
