@@ -71,8 +71,8 @@ namespace project_akhir_stock_gudang
 
             if (UserStore.ValidateLogin(email, password))
             {
-                Dashboard_User1 dashboard =
-                    new Dashboard_User1(email);
+                Dashboard_kasir dashboard =
+                    new Dashboard_kasir(new List<DetailTransaksi>());
 
                 dashboard.Show();
                 this.Hide();
