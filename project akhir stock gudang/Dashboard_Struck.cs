@@ -14,6 +14,7 @@ namespace project_akhir_stock_gudang
 {
     public partial class Dashboard_Struck : Form
     {
+        private readonly string usernameKasir;
         public Dashboard_Struck()
         {
             InitializeComponent();
@@ -266,7 +267,7 @@ namespace project_akhir_stock_gudang
 
         private void btnTransaksiBaru_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir dashboardKasirKEMBALI = new Dashboard_kasir(new List<DetailTransaksi>());
+            Dashboard_kasir dashboardKasirKEMBALI = new Dashboard_kasir(new List<DetailTransaksi>(),usernameKasir);
             dashboardKasirKEMBALI.Show();
             this.Hide();
         }

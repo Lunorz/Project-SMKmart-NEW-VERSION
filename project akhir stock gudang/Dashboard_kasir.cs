@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace project_akhir_stock_gudang
 {
@@ -16,11 +17,14 @@ namespace project_akhir_stock_gudang
   
         private List<Produk> daftarProduk = new();
         private List<DetailTransaksi> keranjang = new();
-        public Dashboard_kasir(List<DetailTransaksi> dataKeranjang)
+        private string usernameKasir = "";
+        public Dashboard_kasir(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
             MuatProduk();
             daftarProduk = ProdukJsonStore.Load();
+            usernameKasir = username ?? "";
+
             SiapkanDaftarBarang();
             PerbaruiInfoTransaksi();
            
@@ -85,25 +89,57 @@ namespace project_akhir_stock_gudang
             }
         }
 
-        private void TampilkanDaftarBarang()
-        {
-            string kategori = textbox_kategori_barang.Text.Trim();
+        
+        
+          private void TampilkanDaftarBarang()
+          {
+            string kataKunci = textbox_kategori_barang.Text.Trim();
 
             listbox_barang.BeginUpdate();
             listbox_barang.Items.Clear();
 
             foreach (Produk produk in daftarProduk)
             {
-                if (string.IsNullOrWhiteSpace(kategori) ||
+                
+                if (produk.IsDeleted)
+                {
+                    continue;
+                }
+
+                
+                bool cocokKategori =
                     produk.Kategori.Contains(
-                        kategori,
-                        StringComparison.OrdinalIgnoreCase))
+                        kataKunci,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+
+                
+                bool cocokNama =
+                    produk.Nama.Contains(
+                        kataKunci,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+
+                
+                bool cocokKode =
+                    produk.Kode.Contains(
+                        kataKunci,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+
+                
+                if (string.IsNullOrWhiteSpace(kataKunci) ||
+                    cocokKategori ||
+                    cocokNama ||
+                    cocokKode)
                 {
                     listbox_barang.Items.Add(produk);
                 }
             }
+
             listbox_barang.EndUpdate();
         }
+        
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -247,7 +283,7 @@ namespace project_akhir_stock_gudang
 
         private void menuju_dashboard2_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir2 dashboard2 = new Dashboard_kasir2(keranjang);
+            Dashboard_kasir2 dashboard2 = new Dashboard_kasir2(keranjang, usernameKasir);
             dashboard2.Show();
             this.Hide();
         }

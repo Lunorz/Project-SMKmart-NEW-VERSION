@@ -13,6 +13,11 @@ namespace project_akhir_stock_gudang
         public string Kategori { get; set; } = "";
         public decimal Harga { get; set; }
         public int Stok { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public int StokMinimum { get; set; } = 10;
+        public int JumlahFisikTerakhir { get; set; }
+        public string AlasanSelisihTerakhir { get; set; } = "";
+        public DateTime? TanggalOpnameTerakhir { get; set; }
 
         public override string ToString()
         {

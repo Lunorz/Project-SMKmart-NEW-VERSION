@@ -13,6 +13,7 @@ namespace project_akhir_stock_gudang
         {
             InitializeComponent();
             EmailAktif = email;
+            this.AcceptButton = tombol_login;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -52,10 +53,10 @@ namespace project_akhir_stock_gudang
             string email = textemail.Text.Trim();
             string password = textpassword.Text;
 
-            if (email == "admin" && password == "admin758150")
+            if (email == "admin@gmail.com" && password == "admin758150")
             {
                 MessageBox.Show("login berhasil! selamat datang di panel admin");
-                panel_admin panel = new panel_admin();
+                MainFormAdmin panel = new MainFormAdmin();
                 panel.Show();
                 this.Hide();
             }
@@ -67,22 +68,51 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            bool valid = UserStore.ValidateLogin(email, password);
 
-            if (UserStore.ValidateLogin(email, password))
             {
-                Dashboard_kasir dashboard =
-                    new Dashboard_kasir(new List<DetailTransaksi>());
+                bool berhasil = UserStore.TryLogin(
+                    textemail.Text.Trim(),
+                    textpassword.Text,
+                    out UserAccount? akun,
+                    out string pesan);
 
-                dashboard.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Email atau password salah.");
+                if (!berhasil)
+                {
+                    MessageBox.Show(pesan, "Login gagal",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                MessageBox.Show($"Login berhasil sebagai {akun!.Role}.", "Login berhasil",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (akun == null)
+                {
+                    MessageBox.Show("Email atau password salah.");
+                    return;
+                }
+
+                if (akun.Role == "Kasir")
+                {
+                    Dashboard_kasir dashboard = new Dashboard_kasir(new List<DetailTransaksi>(), akun.Username);
+                    dashboard.Show();
+                    this.Hide();
+                }
+                else if (akun.Role == "Gudang")
+                {
+                    MainFormGudang dashboard = new MainFormGudang(akun.Username);
+                    dashboard.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Role akun tidak dikenali.");
+                }
+
             }
 
-        }
+
+            }
 
         private void label8_Click(object sender, EventArgs e)
         {

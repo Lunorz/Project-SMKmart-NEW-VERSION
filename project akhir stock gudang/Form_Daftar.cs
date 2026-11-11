@@ -16,24 +16,23 @@ namespace project_akhir_stock_gudang
         public Form_Daftar()
         {
             InitializeComponent();
+            tombol_daftar.Click -= tombol_daftar_Click;
+            tombol_daftar.Click += tombol_daftar_Click;
+            cmbRole.Items.Clear();
+
+            cmbRole.Items.Add("Kasir");
+            cmbRole.Items.Add("Gudang");
+
+            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRole.SelectedIndex = -1;
         }
-        
+
         private void Form_Daftar_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
 
-        private void reg_lihat_password_CheckedChanged(object sender, EventArgs e)
-        {
-            if (reg_lihat_password.Checked)
-            {
-                reg_password.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                reg_password.UseSystemPasswordChar = true;
-            }
-        }
+
 
         private void kembali_ke_login_Click(object sender, EventArgs e)
         {
@@ -47,46 +46,37 @@ namespace project_akhir_stock_gudang
 
         }
 
-        private void tombol_login_Click(object sender, EventArgs e)
+        private void tombol_daftar_Click(object sender, EventArgs e)
         {
+            string username = reg_username.Text.Trim();
             string email = reg_email.Text.Trim();
-            if (string.IsNullOrWhiteSpace(email) ||
-            !System.Text.RegularExpressions.Regex.IsMatch(
-             email,
-             @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
-            {
-                MessageBox.Show(
-                    "Masukkan email dengan format yang benar dan harus menggunakan @gmail.com!",
-                    "Email Tidak Valid",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+            string role = cmbRole.SelectedItem?.ToString() ?? "";
 
+            if (string.IsNullOrWhiteSpace(username) ||
+                string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(role))
+            {
+                MessageBox.Show("Lengkapi username, email, dan role terlebih dahulu.",
+                    "Pendaftaran", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string password = reg_password.Text;
-            if (email == "" || password == "")
+            bool berhasil = UserStore.RegisterPending(username, email, role, out string pesan);
+            if (!berhasil)
             {
-                MessageBox.Show("Email dan password wajib diisi!");
+                MessageBox.Show(pesan, "Pendaftaran gagal",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            bool berhasil = UserStore.Register(email, password);
-
-            if (berhasil)
-            {
-                MessageBox.Show("Pendaftaran berhasil!silahkan login.");
-
-                Form1 login = new Form1(emailAktif);
-                login.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Email sudah terdaftar");
-            }
+            MessageBox.Show(pesan, "Pendaftaran berhasil",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            reg_username.Clear();
+            reg_email.Clear();
+            cmbRole.SelectedIndex = -1;
         }
+
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -103,9 +93,9 @@ namespace project_akhir_stock_gudang
 
         }
 
-        private void reg_password_TextChanged(object sender, EventArgs e)
+        private void reg_username_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -114,6 +104,11 @@ namespace project_akhir_stock_gudang
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbRole_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

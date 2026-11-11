@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace project_akhir_stock_gudang
 {
@@ -15,12 +16,14 @@ namespace project_akhir_stock_gudang
     {
         private readonly List<DetailTransaksi> keranjang;
         private readonly List<Produk> daftarProduk;
-        public Dashboard_kasir2(List<DetailTransaksi> dataKeranjang)
+        private readonly string usernameKasir;
+        public Dashboard_kasir2(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
             keranjang = dataKeranjang;
+              
             daftarProduk = ProdukJsonStore.Load();
-
+            usernameKasir = username ?? "";
             SiapkanKeranjang();
             TampilkanKeranjang();
         }
@@ -225,7 +228,7 @@ namespace project_akhir_stock_gudang
 
         private void kembali_ke_Dashboard1_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir kembali_ke_kategori = new Dashboard_kasir(new List<DetailTransaksi>());
+            Dashboard_kasir kembali_ke_kategori = new Dashboard_kasir(new List<DetailTransaksi>(), usernameKasir);
             kembali_ke_kategori.Show();
             this.Hide();
         }
@@ -243,7 +246,7 @@ namespace project_akhir_stock_gudang
             }
             if (keranjang != null)
             {
-                using Dashboard_kasir3 formCheckout = new Dashboard_kasir3(keranjang);
+                using Dashboard_kasir3 formCheckout = new Dashboard_kasir3(keranjang, usernameKasir);
                 formCheckout.ShowDialog();
                 this.Hide();
 

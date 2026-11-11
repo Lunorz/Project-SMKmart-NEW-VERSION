@@ -8,18 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ProdukJsonStore;
+using static project_akhir_stock_gudang.ProdukJsonStore;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace project_akhir_stock_gudang
 {
     public partial class Dashboard_kasir3 : Form
     {
 
-
-        public Dashboard_kasir3(List<DetailTransaksi> dataKeranjang)
+        private readonly string usernameKasir;
+        public Dashboard_kasir3(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
             keranjang = dataKeranjang ?? new List<DetailTransaksi>();
+            usernameKasir = username ?? "";
             txtUangDiterima.TextChanged +=
            txtUangDiterima_TextChanged;
             SiapkanTabel();
@@ -460,13 +462,28 @@ namespace project_akhir_stock_gudang
             HitungKembalian();
         }
 
+
+
         private void btnSelesaikan_Click(object sender, EventArgs e)
         {
+         
             decimal total = TotalBelanja();
             decimal uang = total;
 
+         
+            if (keranjang == null || keranjang.Count == 0)
+            {
+                MessageBox.Show("Keranjang masih kosong!");
+                return;
+            }
 
+            if (string.IsNullOrWhiteSpace(metodePembayaranTerpilih))
+            {
+                MessageBox.Show("Silakan pilih metode pembayaran.");
+                return;
+            }
 
+          
             if (metodePembayaranTerpilih == "Tunai")
             {
                 if (!decimal.TryParse(
@@ -474,64 +491,215 @@ namespace project_akhir_stock_gudang
                     out uang) || uang < total)
                 {
                     MessageBox.Show(
-                        "Uang diterima tidak valid atau kurang dari total pembayaran.");
+                        "Uang diterima tidak valid atau kurang dari total pembayaran."
+                    );
 
                     txtUangDiterima.Focus();
                     return;
                 }
             }
-            List<TransaksiSimpan> riwayat;
+
+           
+            List<Produk> produkTerbaru = new List<Produk>();
+
+            Dictionary<string, int> stokLama =
+                new Dictionary<string, int>();
+
+            bool stokSudahDisimpan = false;
+
+          
+            TransaksiSimpan transaksi = null;
 
             try
             {
-                riwayat = TransaksiJsonStore.Load();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Gagal membaca riwayat transaksi:\n" + ex.Message);
-                return;
-            }
+               
+                produkTerbaru = ProdukJsonStore.Load();
 
-            TransaksiSimpan transaksi = new TransaksiSimpan
-            {
-                NomorTransaksi = label_nomor_transaksi2.Text,
-                Tanggal = DateTime.Now,
-                MetodePembayaran = metodePembayaranTerpilih,
-                TotalPembayaran = total,
-                UangDiterima = uang,
-                Kembalian = metodePembayaranTerpilih == "Tunai"
-                    ? uang - total
-                    : 0,
-
-                Barang = keranjang.Select(item => new DetailTransaksiSimpan
+                if (produkTerbaru == null || produkTerbaru.Count == 0)
                 {
-                    Kode = item.Kode,
-                    Nama = item.Nama,
-                    Harga = item.Harga,
-                    Jumlah = item.Jumlah,
-                    Subtotal = item.Harga * item.Jumlah
-                }).ToList()
+                    throw new Exception(
+                        "Data produk tidak ditemukan di produk.json."
+                    );
+                }
+
               
-            };
+                foreach (DetailTransaksi item in keranjang)
+                {
+                    if (item.Jumlah <= 0)
+                    {
+                        throw new Exception(
+                            "Jumlah barang tidak valid: " + item.Nama
+                        );
+                    }
 
-            riwayat.Add(transaksi);
+                    Produk produk = produkTerbaru.FirstOrDefault(p =>
+                        string.Equals(
+                            p.Kode,
+                            item.Kode,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
 
-            try
-            {
+                    if (produk == null)
+                    {
+                        throw new Exception(
+                            "Produk dengan kode " + item.Kode +
+                            " tidak ditemukan di produk.json."
+                        );
+                    }
+
+                    if (produk.Stok < item.Jumlah)
+                    {
+                        throw new Exception(
+                            "Stok barang " + produk.Nama +
+                            " tidak mencukupi.\n" +
+                            "Stok tersedia: " + produk.Stok +
+                            "\nJumlah dibeli: " + item.Jumlah
+                        );
+                    }
+
+                    
+                    if (!stokLama.ContainsKey(produk.Kode))
+                    {
+                        stokLama.Add(produk.Kode, produk.Stok);
+                    }
+
+                   
+                    produk.Stok -= item.Jumlah;
+                }
+
+               
+                ProdukJsonStore.Save(produkTerbaru);
+
+                stokSudahDisimpan = true;
+
+              
+                transaksi = new TransaksiSimpan
+                {
+                    NomorTransaksi = nomorTransaksi,
+
+                    UsernameKasir = usernameKasir,
+
+                    Tanggal = tanggalTransaksi,
+
+                    MetodePembayaran = metodePembayaranTerpilih,
+
+                    TotalPembayaran = total,
+
+                    UangDiterima = uang,
+
+                    Kembalian = metodePembayaranTerpilih == "Tunai"
+                        ? uang - total
+                        : 0,
+
+                    Barang = keranjang.Select(item =>
+                        new DetailTransaksiSimpan
+                        {
+                            Kode = item.Kode,
+                            Nama = item.Nama,
+                            Harga = item.Harga,
+                            Jumlah = item.Jumlah,
+                            Subtotal = item.Harga * item.Jumlah
+                        }
+                    ).ToList()
+                };
+
+               
+                List<TransaksiSimpan> riwayat =
+                    TransaksiJsonStore.Load();
+
+              
+                riwayat.Add(transaksi);
+
+             
                 TransaksiJsonStore.Save(riwayat);
+                try
+                {
+                    List<BarangKeluarSimpan> daftarBarangKeluar =
+                        BarangKeluarJsonStore.Load();
+
+                    foreach (DetailTransaksi item in keranjang)
+                    {
+                        BarangKeluarSimpan barangKeluar =
+                            new BarangKeluarSimpan
+                            {
+                                Waktu = tanggalTransaksi,
+
+                                KodeBarang = item.Kode,
+
+                                NamaBarang = item.Nama,
+
+                                Jumlah = item.Jumlah,
+
+                                Jenis = "Penjualan",
+
+                                Alasan = "Transaksi Kasir",
+
+                                Petugas = usernameKasir,
+
+                                Catatan = "Nomor transaksi: " + nomorTransaksi
+                            };
+
+                        daftarBarangKeluar.Add(barangKeluar);
+                    }
+
+                    BarangKeluarJsonStore.Save(daftarBarangKeluar);
+                }
+                catch (Exception errorBarangKeluar)
+                {
+                    MessageBox.Show(
+                        "Transaksi berhasil disimpan, tetapi pencatatan barang keluar gagal:\n"
+                        + errorBarangKeluar.Message
+                    );
+                }
             }
             catch (Exception ex)
             {
+                
+                if (stokSudahDisimpan)
+                {
+                    try
+                    {
+                        foreach (Produk produk in produkTerbaru)
+                        {
+                            if (stokLama.ContainsKey(produk.Kode))
+                            {
+                                produk.Stok = stokLama[produk.Kode];
+                            }
+                        }
+
+                        ProdukJsonStore.Save(produkTerbaru);
+                    }
+                    catch (Exception errorRollback)
+                    {
+                        MessageBox.Show(
+                            "Stok gagal dikembalikan:\n" +
+                            errorRollback.Message
+                        );
+                    }
+                }
+
                 MessageBox.Show(
-                    "Gagal menyimpan transaksi:\n" + ex.Message);
+                    "Gagal menyimpan transaksi:\n" + ex.Message,
+                    "Kesalahan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
                 return;
             }
+
+          
             Dashboard_Struck strukForm = new Dashboard_Struck();
+
             strukForm.TampilkanStruk(transaksi);
+
             strukForm.Show();
+
             this.Hide();
         }
+
+
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
@@ -545,7 +713,7 @@ namespace project_akhir_stock_gudang
 
         private void btnBatal_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir2 kembaliform2 = new Dashboard_kasir2(keranjang);
+            Dashboard_kasir2 kembaliform2 = new Dashboard_kasir2(keranjang,usernameKasir);
             kembaliform2.Show();
             this.Hide();
         }

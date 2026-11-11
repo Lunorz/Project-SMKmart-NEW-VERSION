@@ -1,7 +1,8 @@
-﻿using project_akhir_stock_gudang;
+﻿
+using project_akhir_stock_gudang;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 
 public static class TransaksiJsonStore
@@ -12,22 +13,33 @@ public static class TransaksiJsonStore
             "transaksi.json"
         );
 
+    
     public static List<TransaksiSimpan> Load()
     {
         if (!File.Exists(filePath))
+        {
             return new List<TransaksiSimpan>();
+        }
 
         string json = File.ReadAllText(filePath);
 
         if (string.IsNullOrWhiteSpace(json))
+        {
             return new List<TransaksiSimpan>();
+        }
 
         return JsonSerializer.Deserialize<List<TransaksiSimpan>>(json)
                ?? new List<TransaksiSimpan>();
     }
 
+    
     public static void Save(List<TransaksiSimpan> transaksi)
     {
+        if (transaksi == null)
+        {
+            throw new ArgumentNullException(nameof(transaksi));
+        }
+
         string json = JsonSerializer.Serialize(
             transaksi,
             new JsonSerializerOptions
@@ -39,10 +51,18 @@ public static class TransaksiJsonStore
         File.WriteAllText(filePath, json);
     }
 
+    
     public static void Tambah(TransaksiSimpan transaksi)
     {
+        if (transaksi == null)
+        {
+            throw new ArgumentNullException(nameof(transaksi));
+        }
+
         List<TransaksiSimpan> daftar = Load();
+
         daftar.Add(transaksi);
+
         Save(daftar);
     }
 }

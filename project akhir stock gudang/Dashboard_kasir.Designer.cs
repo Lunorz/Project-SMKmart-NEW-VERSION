@@ -266,7 +266,7 @@
             textbox_kategori_barang.Location = new Point(12, 49);
             textbox_kategori_barang.Multiline = true;
             textbox_kategori_barang.Name = "textbox_kategori_barang";
-            textbox_kategori_barang.PlaceholderText = "Masukkan kategori barang";
+            textbox_kategori_barang.PlaceholderText = "Masukkan nama,kode atau kategori barang";
             textbox_kategori_barang.Size = new Size(662, 46);
             textbox_kategori_barang.TabIndex = 1;
             textbox_kategori_barang.TextChanged += textbox_kategori_barang_TextChanged;
