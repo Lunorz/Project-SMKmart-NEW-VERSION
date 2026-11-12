@@ -48,6 +48,7 @@
             // 
             // pnlSideBarGudangMainform
             // 
+            pnlSideBarGudangMainform.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlSideBarGudangMainform.Angle = 90F;
             pnlSideBarGudangMainform.ColorBottom = Color.FromArgb(26, 90, 56);
             pnlSideBarGudangMainform.ColorTop = Color.FromArgb(38, 119, 74);
@@ -58,7 +59,6 @@
             pnlSideBarGudangMainform.Controls.Add(pnlAktifGudangMainform);
             pnlSideBarGudangMainform.Controls.Add(btnMenuDashboardGudangMainform);
             pnlSideBarGudangMainform.Controls.Add(lblLogoGudangMainform);
-            pnlSideBarGudangMainform.Dock = DockStyle.Left;
             pnlSideBarGudangMainform.Location = new Point(0, 0);
             pnlSideBarGudangMainform.Name = "pnlSideBarGudangMainform";
             pnlSideBarGudangMainform.Size = new Size(260, 943);
@@ -161,7 +161,6 @@
             // 
             pnlTopBarGudangMainform.Controls.Add(lblJudulGudangMainform);
             pnlTopBarGudangMainform.Controls.Add(pnlTopLineGudangMainform);
-            pnlTopBarGudangMainform.Dock = DockStyle.Top;
             pnlTopBarGudangMainform.Location = new Point(260, 0);
             pnlTopBarGudangMainform.Name = "pnlTopBarGudangMainform";
             pnlTopBarGudangMainform.Size = new Size(1270, 64);
@@ -189,8 +188,8 @@
             // 
             // pnlContentGudangMainform
             // 
+            pnlContentGudangMainform.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlContentGudangMainform.Controls.Add(ucDashboardGudang1);
-            pnlContentGudangMainform.Dock = DockStyle.Fill;
             pnlContentGudangMainform.Location = new Point(260, 64);
             pnlContentGudangMainform.Name = "pnlContentGudangMainform";
             pnlContentGudangMainform.Size = new Size(1270, 879);
@@ -198,10 +197,10 @@
             // 
             // ucDashboardGudang1
             // 
+            ucDashboardGudang1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ucDashboardGudang1.BackColor = Color.FromArgb(245, 251, 248);
-            ucDashboardGudang1.Dock = DockStyle.Fill;
             ucDashboardGudang1.Font = new Font("Leelawadee UI", 10.5F);
-            ucDashboardGudang1.Location = new Point(0, 0);
+            ucDashboardGudang1.Location = new Point(0, -64);
             ucDashboardGudang1.Name = "ucDashboardGudang1";
             ucDashboardGudang1.Size = new Size(1270, 879);
             ucDashboardGudang1.TabIndex = 0;
@@ -212,11 +211,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 251, 248);
             ClientSize = new Size(1530, 943);
-            Controls.Add(pnlContentGudangMainform);
             Controls.Add(pnlTopBarGudangMainform);
+            Controls.Add(pnlContentGudangMainform);
             Controls.Add(pnlSideBarGudangMainform);
             Font = new Font("Leelawadee UI", 10.5F);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainFormGudang";
             Text = "MainFormGudang";
             FormClosed += MainFormGudang_FormClosed;

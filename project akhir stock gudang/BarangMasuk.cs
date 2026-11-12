@@ -17,5 +17,7 @@ namespace project_akhir_stock_gudang
         public string NomorSuratJalan { get; set; } = "";
 
         public string Catatan { get; set; } = "";
+
+        public string Petugas { get; set; } = "";
     }
 }

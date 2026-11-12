@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace project_akhir_stock_gudang
 {
@@ -14,11 +15,16 @@ namespace project_akhir_stock_gudang
     {
         private List<Produk> daftarProduk = new List<Produk>();
 
+        private string usernamePetugas = "";
+
+       
+
         private List<BarangMasuk> riwayatBarangMasuk =
             new List<BarangMasuk>();
-        public ucBarangMasuk()
+        public ucBarangMasuk(string username)
         {
             InitializeComponent();
+            usernamePetugas = username;
             InisialisasiBarangMasuk();
         }
 
@@ -284,7 +290,8 @@ namespace project_akhir_stock_gudang
                     Jumlah = jumlah,
                     AsalBarang = asal,
                     NomorSuratJalan = nomorSurat,
-                    Catatan = txtCatatanGudang2.Text.Trim()
+                    Catatan = txtCatatanGudang2.Text.Trim(),
+                    Petugas = usernamePetugas
                 };
 
 

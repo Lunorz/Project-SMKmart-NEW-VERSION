@@ -50,8 +50,14 @@ namespace project_akhir_stock_gudang
             Save(daftar);
         }
 
-        public static void CatatPenjualan(List<DetailTransaksiSimpan> barang,string usernameKasir,DateTime waktuTransaksi)
+        public static void CatatPenjualan(
+     List<DetailTransaksiSimpan> barang,
+     string usernameKasir,
+     DateTime waktuTransaksi)
         {
+            if (barang == null)
+                throw new ArgumentNullException(nameof(barang));
+
             List<BarangKeluarSimpan> daftar = Load();
 
             foreach (var item in barang)
@@ -68,6 +74,8 @@ namespace project_akhir_stock_gudang
                     Catatan = ""
                 });
             }
+
+            Save(daftar);
         }
     }
 }

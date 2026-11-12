@@ -15,12 +15,15 @@ namespace project_akhir_stock_gudang
         private List<Produk> daftarProduk = new List<Produk>();
         private Produk? produkTerpilih = null;
         private bool sedangMemuat = false;
+        private string usernamePetugas = "";
 
-        public ucStockBarang()
+        public ucStockBarang(string username = "")
         {
             InitializeComponent();
+            usernamePetugas = username;
             txtCarigudang1.TextChanged -=
-           txtCarigudang1_TextChanged;
+                 txtCarigudang1_TextChanged;
+           
 
             txtCarigudang1.TextChanged +=
                 txtCarigudang1_TextChanged;
@@ -123,16 +126,7 @@ namespace project_akhir_stock_gudang
                 }
 
 
-                MessageBox.Show(
-                    "Lokasi file: " +
-                    System.IO.Path.Combine(
-                        AppDomain.CurrentDomain.BaseDirectory,
-                        "produk.json"
-                    ) +
-                    "\n\nJumlah produk terbaca: " + daftarProduk.Count +
-                    "\nJumlah produk aktif: " +
-                    daftarProduk.Count(p => !p.IsDeleted)
-                );
+                
             }
             catch (Exception ex)
             {
@@ -505,6 +499,20 @@ namespace project_akhir_stock_gudang
 
 
                 ProdukJsonStore.Save(daftarProduk);
+                if (selisih != 0)
+                {
+                    KoreksiStokJsonStore.Tambah(new KoreksiStokSimpan
+                    {
+                        Waktu = DateTime.Now,
+                        KodeBarang = produkTerpilih.Kode,
+                        NamaBarang = produkTerpilih.Nama,
+                        Jumlah = selisih,
+                        StokSebelum = stokSistem,
+                        StokSesudah = jumlahFisik,
+                        Keterangan = alasan,
+                        Petugas = usernamePetugas
+                    });
+                }
 
                 string kode = produkTerpilih.Kode;
 

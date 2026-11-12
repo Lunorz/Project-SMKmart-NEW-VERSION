@@ -72,7 +72,7 @@ namespace project_akhir_stock_gudang
 
         private void btnMenuMasukGudangMainform_Click(object sender, EventArgs e)
         {
-            _masuk ??= new ucBarangMasuk();
+            _masuk ??= new ucBarangMasuk(usernamePetugas);
             Buka(_masuk, "Barang Masuk", btnMenuMasukGudangMainform);
         }
 
@@ -84,7 +84,7 @@ namespace project_akhir_stock_gudang
 
         private void btnMenuStokGudangMainform_Click(object sender, EventArgs e)
         {
-            _stok ??= new ucStockBarang();
+            _stok ??= new ucStockBarang(usernamePetugas);
             Buka(_stok, "Stock Barang", btnMenuStokGudangMainform);
 
         }

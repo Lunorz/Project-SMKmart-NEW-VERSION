@@ -13,6 +13,7 @@ namespace project_akhir_stock_gudang
     public partial class MainFormAdmin : Form
     {
         ucPenjualan? _halPenjualan;
+        ucLaporanGudang? _halLaporanGudang;
         public MainFormAdmin()
         {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace project_akhir_stock_gudang
         }
         ucAdminDataUser? _halUser;
         ucDataBarang? _halBarang;
+
         readonly Font _fReg = new("Leelawadee UI", 10.5f);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
         void Buka(UserControl halaman, string judul, Button menu)
@@ -79,11 +81,22 @@ namespace project_akhir_stock_gudang
             _halBarang ??= new ucDataBarang();
             Buka(_halBarang, "Data barang", btnDataBarang);
         }
-       
+
         private void btnMenuLapPenjualan_Click(object sender, EventArgs e)
         {
             _halPenjualan ??= new ucPenjualan();
             Buka(_halPenjualan, "Laporan penjualan", btnMenuLapPenjualan);
+        }
+
+        private void btnMenuLapGudang_Click(object sender, EventArgs e)
+        {
+            _halLaporanGudang ??= new ucLaporanGudang();
+
+            Buka(
+                _halLaporanGudang,
+                "Laporan gudang",
+                btnMenuLapGudang
+            );
         }
     }
 }

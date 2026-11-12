@@ -49,6 +49,7 @@
             // 
             // pnlSideBar
             // 
+            pnlSideBar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlSideBar.Angle = 90F;
             pnlSideBar.ColorBottom = Color.FromArgb(26, 90, 56);
             pnlSideBar.ColorTop = Color.FromArgb(38, 119, 74);
@@ -60,21 +61,22 @@
             pnlSideBar.Controls.Add(btnDataBarang);
             pnlSideBar.Controls.Add(btnMenuDashboard);
             pnlSideBar.Controls.Add(label1);
-            pnlSideBar.Location = new Point(0, 0);
+            pnlSideBar.Location = new Point(0, 64);
             pnlSideBar.Name = "pnlSideBar";
             pnlSideBar.Padding = new Padding(16, 24, 16, 24);
-            pnlSideBar.Size = new Size(260, 943);
+            pnlSideBar.Size = new Size(260, 879);
             pnlSideBar.TabIndex = 0;
             // 
             // btnKeluar
             // 
             btnKeluar.BackColor = Color.FromArgb(38, 119, 74);
+            btnKeluar.Dock = DockStyle.Bottom;
             btnKeluar.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
             btnKeluar.FlatAppearance.BorderSize = 0;
             btnKeluar.FlatStyle = FlatStyle.Flat;
             btnKeluar.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnKeluar.ForeColor = Color.FromArgb(230, 247, 238);
-            btnKeluar.Location = new Point(16, 872);
+            btnKeluar.Location = new Point(16, 811);
             btnKeluar.Name = "btnKeluar";
             btnKeluar.Size = new Size(228, 44);
             btnKeluar.TabIndex = 6;
@@ -140,6 +142,7 @@
             btnMenuLapGudang.Text = "Laporan gudang";
             btnMenuLapGudang.TextAlign = ContentAlignment.MiddleLeft;
             btnMenuLapGudang.UseVisualStyleBackColor = false;
+            btnMenuLapGudang.Click += btnMenuLapGudang_Click;
             // 
             // btnDataBarang
             // 
@@ -189,12 +192,11 @@
             // 
             // pnlTopBar
             // 
-            pnlTopBar.Anchor = AnchorStyles.Top;
             pnlTopBar.BackColor = Color.White;
             pnlTopBar.Controls.Add(lblTopBar10);
-            pnlTopBar.Location = new Point(260, 0);
+            pnlTopBar.Location = new Point(0, 0);
             pnlTopBar.Name = "pnlTopBar";
-            pnlTopBar.Size = new Size(1270, 64);
+            pnlTopBar.Size = new Size(1530, 64);
             pnlTopBar.TabIndex = 1;
             // 
             // lblTopBar10
@@ -220,22 +222,22 @@
             // 
             // pnlContent
             // 
-            pnlContent.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pnlContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlContent.Controls.Add(ucAdminDataUser1);
-            pnlContent.Location = new Point(0, 0);
+            pnlContent.Location = new Point(260, 64);
             pnlContent.Name = "pnlContent";
-            pnlContent.Size = new Size(1530, 942);
+            pnlContent.Size = new Size(1270, 878);
             pnlContent.TabIndex = 3;
             // 
             // ucAdminDataUser1
             // 
             ucAdminDataUser1.BackColor = Color.FromArgb(245, 251, 248);
+            ucAdminDataUser1.Dock = DockStyle.Fill;
             ucAdminDataUser1.Font = new Font("Leelawadee UI", 10.5F);
-            ucAdminDataUser1.Location = new Point(260, 70);
+            ucAdminDataUser1.Location = new Point(0, 0);
             ucAdminDataUser1.Name = "ucAdminDataUser1";
-            ucAdminDataUser1.Size = new Size(1270, 872);
+            ucAdminDataUser1.Size = new Size(1270, 878);
             ucAdminDataUser1.TabIndex = 0;
-            ucAdminDataUser1.Load += ucAdminDataUser1_Load;
             // 
             // MainFormAdmin
             // 
@@ -244,11 +246,11 @@
             BackColor = Color.FromArgb(245, 251, 248);
             ClientSize = new Size(1530, 943);
             Controls.Add(pnlTopBar);
-            Controls.Add(pnlSideBar);
             Controls.Add(pnlContent);
             Controls.Add(pnlTopline);
+            Controls.Add(pnlSideBar);
             Font = new Font("Leelawadee UI", 10.5F);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainFormAdmin";
             Text = "MainFormAdmin";
             FormClosed += MainFormAdmin_FormClosed;
@@ -274,7 +276,7 @@
         private Label lblTopBar10;
         private Panel pnlTopline;
         private Panel pnlContent;
-        private ucAdminDataUser ucAdminDataUser1;
         private Button btnKeluar;
+        private ucAdminDataUser ucAdminDataUser1;
     }
 }
