@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace project_akhir_stock_gudang
 {
-    public partial class ucLaporanPenjualan : UserControl
+    public partial class ucLaporanGudang : UserControl
     {
-        public ucLaporanPenjualan()
+        public ucLaporanGudang()
         {
             InitializeComponent();
         }
