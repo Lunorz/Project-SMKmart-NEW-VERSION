@@ -162,8 +162,8 @@ namespace project_akhir_stock_gudang
             cmbRoleS.SelectedIndexChanged -= cmbFilterRoleSemua_SelectedIndexChanged;
             cmbRoleS.SelectedIndexChanged += cmbFilterRoleSemua_SelectedIndexChanged;
 
-            cmbRole.SelectedIndexChanged -= cmbFilterStatus_SelectedIndexChanged;
-            cmbRole.SelectedIndexChanged += cmbFilterStatus_SelectedIndexChanged;
+            cmbRoleS.SelectedIndexChanged -= cmbFilterRoleSemua_SelectedIndexChanged;
+            cmbRoleS.SelectedIndexChanged += cmbFilterRoleSemua_SelectedIndexChanged;
 
         }
 
@@ -328,8 +328,7 @@ namespace project_akhir_stock_gudang
         private void FilterSemuaPengguna()
         {
             string kataKunci = txtCariS.Text.Trim();
-            string role = cmbRoleS.Text;
-            string roleFilter = cmbRole.Text;
+            string roleFilter = cmbRoleS.Text;
 
             dgvSemua.Rows.Clear();
 
@@ -338,38 +337,32 @@ namespace project_akhir_stock_gudang
                 .Where(u =>
                     (u.Username ?? "").Contains(
                         kataKunci,
-                        StringComparison.OrdinalIgnoreCase) ||
-
+                        StringComparison.OrdinalIgnoreCase
+                    ) ||
                     (u.Email ?? "").Contains(
                         kataKunci,
-                        StringComparison.OrdinalIgnoreCase))
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 .Where(u =>
-                    role == "Semua Role" ||
-                    string.IsNullOrWhiteSpace(role) ||
-                    u.Role == role)
-                .Where(u =>
-                roleFilter == "Semua Role" ||
-                string.IsNullOrWhiteSpace(roleFilter) ||
-                u.Role == roleFilter)
+                    roleFilter == "Semua Role" ||
+                    string.IsNullOrWhiteSpace(roleFilter) ||
+                    string.Equals(
+                        u.Role,
+                        roleFilter,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 .ToList();
 
             foreach (var user in hasil)
             {
                 int index = dgvSemua.Rows.Add();
 
-                dgvSemua.Rows[index].Cells["colUsernameS"].Value =
-                    user.Username;
-
-                dgvSemua.Rows[index].Cells["colEmailS"].Value =
-                    user.Email;
-
-                dgvSemua.Rows[index].Cells["colRoleS"].Value =
-                    user.Role;
-
-                dgvSemua.Rows[index].Cells["status"].Value =
-                    user.Status;
-
-
+                dgvSemua.Rows[index].Cells["colUsernameS"].Value = user.Username;
+                dgvSemua.Rows[index].Cells["colEmailS"].Value = user.Email;
+                dgvSemua.Rows[index].Cells["colRoleS"].Value = user.Role;
+                dgvSemua.Rows[index].Cells["status"].Value = user.Status;
 
                 dgvSemua.Rows[index].Cells["btnBanned"].Value =
                     user.Status == UserStore.Diblokir
@@ -380,49 +373,25 @@ namespace project_akhir_stock_gudang
 
         private void SiapkanFilter()
         {
-
-            cmbRoleP.Items.Clear();
-            cmbRoleP.Items.Add("Semua Role");
-
-            foreach (var item in cmbRole.Items)
-            {
-                string role = item?.ToString() ?? "";
-
-                if (!string.IsNullOrWhiteSpace(role) &&
-                    !cmbRoleP.Items.Contains(role))
-                {
-                    cmbRoleP.Items.Add(role);
-                }
-            }
-
-            cmbRoleP.SelectedIndex = 0;
-
-
-
-            cmbRoleS.Items.Clear();
-            cmbRoleS.Items.Add("Semua Role");
-
-            foreach (var item in cmbRole.Items)
-            {
-                string role = item?.ToString() ?? "";
-
-                if (!string.IsNullOrWhiteSpace(role) &&
-                    !cmbRoleS.Items.Contains(role))
-                {
-                    cmbRoleS.Items.Add(role);
-                }
-            }
-
-            cmbRoleS.SelectedIndex = 0;
-
-
-
+            
             cmbRole.Items.Clear();
-           
             cmbRole.Items.Add("Kasir");
             cmbRole.Items.Add("Gudang");
-
             cmbRole.SelectedIndex = 0;
+
+          
+            cmbRoleP.Items.Clear();
+            cmbRoleP.Items.Add("Semua Role");
+            cmbRoleP.Items.Add("Kasir");
+            cmbRoleP.Items.Add("Gudang");
+            cmbRoleP.SelectedIndex = 0;
+
+           
+            cmbRoleS.Items.Clear();
+            cmbRoleS.Items.Add("Semua Role");
+            cmbRoleS.Items.Add("Kasir");
+            cmbRoleS.Items.Add("Gudang");
+            cmbRoleS.SelectedIndex = 0;
         }
 
         private void btnBatal_Click(object sender, EventArgs e)

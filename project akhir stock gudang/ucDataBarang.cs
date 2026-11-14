@@ -45,6 +45,11 @@ namespace project_akhir_stock_gudang
 
             MuatKategori();
             TampilkanDataProduk();
+            numStockAwal.Minimum = 0;
+            numStockAwal.Maximum = 1000000;
+            numStockAwal.Value = 0;
+            numStockAwal.DecimalPlaces = 0;
+            numStockAwal.Increment = 1;
         }
         private void MuatDataProduk()
         {
@@ -276,6 +281,17 @@ namespace project_akhir_stock_gudang
                     produk.Harga = harga;
 
                     ProdukJsonStore.Save(daftarProduk);
+                    LogAktivitasJsonStore.Catat(
+                    emailAdmin,
+                   "Barang",
+                   "Mengubah data barang",
+                    produk.Kode + " - " + produk.Nama,
+                   "Admin mengubah data barang. " +
+                   "Nama: " + namaLama + " menjadi " + produk.Nama +
+                   "; Kategori: " + kategoriLama + " menjadi " + produk.Kategori +
+                   "; Harga: Rp" + hargaLama.ToString("N0") +
+                   " menjadi Rp" + produk.Harga.ToString("N0")
+                    );
 
                     MuatKategori();
                     TampilkanDataProduk();
@@ -336,7 +352,8 @@ namespace project_akhir_stock_gudang
                 Nama = nama,
                 Kategori = kategori,
                 Harga = harga,
-                Stok = 0,
+                Stok = (int)numStockAwal.Value,
+
                 IsDeleted = false
             };
 
@@ -500,6 +517,9 @@ namespace project_akhir_stock_gudang
             txtKategori1.Clear();
             txtHargaBarang.Clear();
 
+            numStockAwal.Value = 0;
+            numStockAwal.Enabled = true;
+         
 
             kodeProdukDiedit = null;
 
@@ -540,11 +560,19 @@ namespace project_akhir_stock_gudang
 
             kodeProdukDiedit = produk.Kode;
 
-
             txtKode1.Text = produk.Kode;
             txtNama1.Text = produk.Nama;
             txtKategori1.Text = produk.Kategori;
             txtHargaBarang.Text = produk.Harga.ToString();
+
+         
+            numStockAwal.Value = Math.Min(
+                numStockAwal.Maximum,
+                Math.Max(numStockAwal.Minimum, produk.Stok)
+            );
+
+            
+            numStockAwal.Enabled = false;
 
 
             txtKode1.ReadOnly = true;
