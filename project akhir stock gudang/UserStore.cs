@@ -59,7 +59,7 @@ namespace project_akhir_stock_gudang
                 return false;
             }
 
-            // Domain @gmail.com harus menggunakan huruf kecil persis.
+       
             if (!Regex.IsMatch(email, @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
             {
                 message = "Gunakan email Gmail dan tulis domain sebagai @gmail.com.";
@@ -171,8 +171,12 @@ namespace project_akhir_stock_gudang
         public static bool ToggleBan(string email, out string message)
         {
             List<UserAccount> users = LoadInternal();
+
             UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
+                string.Equals(
+                    u.Email,
+                    email,
+                    StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
             {
@@ -188,25 +192,188 @@ namespace project_akhir_stock_gudang
             else if (user.Status == Diblokir)
             {
                 user.Status = Aktif;
-                message = "Akun berhasil diaktifkan kembali.";
+
+             
+                user.PercobaanLoginGagal = 0;
+
+                message = "Akun berhasil diaktifkan kembali. Percobaan login direset.";
             }
             else
             {
-                message = "Hanya akun Aktif atau Diblokir yang dapat diubah.";
+                message = "Status akun tidak dapat diubah.";
                 return false;
             }
 
             SaveInternal(users);
+
+            return true;
+        }
+
+
+        public static bool CreateActiveAccount(
+            string username,
+            string email,
+            string role,
+            string password,
+            out string message)
+        {
+            username = (username ?? "").Trim();
+            email = (email ?? "").Trim();
+
+            if (username.Length < 3)
+            {
+                message = "Username minimal 3 karakter.";
+                return false;
+            }
+
+            if (!Regex.IsMatch(
+                email,
+                @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
+            {
+                message = "Gunakan email Gmail dengan domain @gmail.com.";
+                return false;
+            }
+
+            if (role != "Kasir" && role != "Gudang")
+            {
+                message = "Pilih role Kasir atau Gudang.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                message = "Password tidak boleh kosong.";
+                return false;
+            }
+
+            if (PasswordTools.GetStrengthLevel(password) < 3)
+            {
+                message = "Password terlalu lemah. Gunakan tingkat 3 atau 4.";
+                return false;
+            }
+
+            email = email.ToLowerInvariant();
+
+            List<UserAccount> users = LoadInternal();
+
+            bool emailSudahAda = users.Any(u =>
+                string.Equals(
+                    u.Email,
+                    email,
+                    StringComparison.OrdinalIgnoreCase));
+
+            if (emailSudahAda)
+            {
+                message = "Email sudah terdaftar.";
+                return false;
+            }
+
+            byte[] salt = RandomNumberGenerator.GetBytes(16);
+
+            byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
+                password,
+                salt,
+                210000,
+                HashAlgorithmName.SHA256,
+                32);
+
+            users.Add(new UserAccount
+            {
+                Username = username,
+                Email = email,
+                Role = role,
+                Status = Aktif,
+                TanggalDaftar = DateTime.Now,
+                PasswordSalt = Convert.ToBase64String(salt),
+                PasswordHash = Convert.ToBase64String(hash)
+            });
+
+            SaveInternal(users);
+
+            message = "Akun baru berhasil dibuat dan diaktifkan.";
+            return true;
+        }
+
+
+ 
+
+        public static bool UpdatePassword(
+    string email,
+    string password,
+    out string message)
+        {
+            List<UserAccount> users = LoadInternal();
+
+            UserAccount? user = users.FirstOrDefault(u =>
+                string.Equals(
+                    u.Email,
+                    email,
+                    StringComparison.OrdinalIgnoreCase));
+
+            if (user == null)
+            {
+                message = "Akun tidak ditemukan.";
+                return false;
+            }
+
+          
+            if (user.Status == Diblokir)
+            {
+                message = "Password tidak dapat diubah karena akun sedang diblokir. Aktifkan akun terlebih dahulu.";
+                return false;
+            }
+
+            if (user.Status != Aktif)
+            {
+                message = "Password hanya dapat diubah untuk akun yang aktif.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                message = "Password tidak boleh kosong.";
+                return false;
+            }
+
+            if (PasswordTools.GetStrengthLevel(password) < 3)
+            {
+                message = "Password terlalu lemah. Gunakan password tingkat 3 atau 4.";
+                return false;
+            }
+
+            byte[] salt = RandomNumberGenerator.GetBytes(16);
+
+            byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
+                password,
+                salt,
+                210000,
+                HashAlgorithmName.SHA256,
+                32);
+
+            user.PasswordSalt = Convert.ToBase64String(salt);
+            user.PasswordHash = Convert.ToBase64String(hash);
+
+            SaveInternal(users);
+
+            message = "Password berhasil diperbarui.";
             return true;
         }
 
         public static bool TryLogin(
-            string email, string password, out UserAccount? account, out string message)
+      string email,
+      string password,
+      out UserAccount? account,
+      out string message)
         {
             account = null;
+
             List<UserAccount> users = LoadInternal();
+
             UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Email, (email ?? "").Trim(), StringComparison.OrdinalIgnoreCase));
+                string.Equals(
+                    u.Email,
+                    (email ?? "").Trim(),
+                    StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
             {
@@ -214,22 +381,27 @@ namespace project_akhir_stock_gudang
                 return false;
             }
 
+       
             if (user.Status == Menunggu)
             {
                 message = "Akun masih menunggu persetujuan admin.";
                 return false;
             }
+
             if (user.Status == Ditolak)
             {
                 message = "Pendaftaran akun ditolak.";
                 return false;
             }
+
             if (user.Status == Diblokir)
             {
-                message = "Akun sedang diblokir. Hubungi admin.";
+                message = "Akun telah diblokir. Hubungi admin untuk mengaktifkannya kembali.";
                 return false;
             }
-            if (user.Status != Aktif || string.IsNullOrEmpty(user.PasswordSalt) ||
+
+            if (user.Status != Aktif ||
+                string.IsNullOrEmpty(user.PasswordSalt) ||
                 string.IsNullOrEmpty(user.PasswordHash))
             {
                 message = "Akun belum siap digunakan.";
@@ -239,13 +411,41 @@ namespace project_akhir_stock_gudang
             try
             {
                 byte[] salt = Convert.FromBase64String(user.PasswordSalt);
-                byte[] storedHash = Convert.FromBase64String(user.PasswordHash);
-                byte[] enteredHash = Rfc2898DeriveBytes.Pbkdf2(
-                    password ?? "", salt, 210000, HashAlgorithmName.SHA256, 32);
 
-                if (!CryptographicOperations.FixedTimeEquals(enteredHash, storedHash))
+                byte[] storedHash =
+                    Convert.FromBase64String(user.PasswordHash);
+
+                byte[] enteredHash = Rfc2898DeriveBytes.Pbkdf2(
+                    password ?? "",
+                    salt,
+                    210000,
+                    HashAlgorithmName.SHA256,
+                    32);
+
+          
+                if (!CryptographicOperations.FixedTimeEquals(
+                    enteredHash, storedHash))
                 {
-                    message = "Email atau password salah.";
+                    user.PercobaanLoginGagal++;
+
+                    if (user.PercobaanLoginGagal >= 3)
+                    {
+                        user.Status = Diblokir;
+
+                        SaveInternal(users);
+
+                        message = "Password salah 3 kali. Akun telah diblokir. Hubungi admin untuk mengaktifkannya kembali.";
+                    }
+                    else
+                    {
+                        int sisa = 3 - user.PercobaanLoginGagal;
+
+                        SaveInternal(users);
+
+                        message = "Password salah. Kesempatan tersisa: "
+                                  + sisa + " kali.";
+                    }
+
                     return false;
                 }
             }
@@ -255,8 +455,14 @@ namespace project_akhir_stock_gudang
                 return false;
             }
 
+         
+            user.PercobaanLoginGagal = 0;
+
+            SaveInternal(users);
+
             account = user;
             message = "Login berhasil.";
+
             return true;
         }
     }

@@ -35,7 +35,6 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            pnlPage = new GradientPanel();
             pnlBawah = new Panel();
             pnlKartuTabel = new Panel();
             pnlKartuTabelDalam = new Panel();
@@ -64,29 +63,33 @@
             pnlGap = new Panel();
             pnlSetujuiLuar = new Panel();
             pnlSetujuiDalam = new Panel();
+            cmbRole = new ComboBox();
+            lblRole = new Label();
+            txtUsername = new TextBox();
+            lblUsername = new Label();
+            txtEmail = new TextBox();
+            label1 = new Label();
             btnSetujui = new Button();
             btnBatal = new Button();
             btnGenerate = new Button();
             prgKekuatan = new ProgressBar();
             txtPassword = new TextBox();
             lblPassword = new Label();
-            pnlHeaderSetuju = new GradientPanel();
             lblJudul = new Label();
             pnlJarak = new Panel();
             tlpKartu = new TableLayoutPanel();
+            pnlKartuTotal = new GradientPanel();
             pnlKartuNonaktif = new Panel();
             lblBanned = new Label();
             lblNnonaktifjudul = new Label();
             pnlKartuAktif = new Panel();
             lblAktif = new Label();
             lblAktifJudul = new Label();
-            pnlKartuTotal = new GradientPanel();
-            lblTotal = new Label();
-            lblTotalJudul = new Label();
             pnlKartuMenunngu = new Panel();
             lblMenunggu = new Label();
             lblMenungguJudul = new Label();
-            pnlPage.SuspendLayout();
+            lblTotal = new Label();
+            lblTotalJudul = new Label();
             pnlBawah.SuspendLayout();
             pnlKartuTabel.SuspendLayout();
             pnlKartuTabelDalam.SuspendLayout();
@@ -99,28 +102,11 @@
             pnlToolbarS.SuspendLayout();
             pnlSetujuiLuar.SuspendLayout();
             pnlSetujuiDalam.SuspendLayout();
-            pnlHeaderSetuju.SuspendLayout();
             tlpKartu.SuspendLayout();
             pnlKartuNonaktif.SuspendLayout();
             pnlKartuAktif.SuspendLayout();
-            pnlKartuTotal.SuspendLayout();
             pnlKartuMenunngu.SuspendLayout();
             SuspendLayout();
-            // 
-            // pnlPage
-            // 
-            pnlPage.Angle = 90F;
-            pnlPage.ColorBottom = Color.White;
-            pnlPage.ColorTop = Color.FromArgb(230, 247, 238);
-            pnlPage.Controls.Add(pnlBawah);
-            pnlPage.Controls.Add(pnlJarak);
-            pnlPage.Controls.Add(tlpKartu);
-            pnlPage.Dock = DockStyle.Fill;
-            pnlPage.Location = new Point(0, 0);
-            pnlPage.Name = "pnlPage";
-            pnlPage.Padding = new Padding(24);
-            pnlPage.Size = new Size(1100, 700);
-            pnlPage.TabIndex = 0;
             // 
             // pnlBawah
             // 
@@ -224,6 +210,7 @@
             dgvPermintaan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPermintaan.Size = new Size(672, 402);
             dgvPermintaan.TabIndex = 2;
+            dgvPermintaan.CellContentClick += dgvPermintaan_CellContentClick;
             // 
             // colUsernameP
             // 
@@ -311,7 +298,7 @@
             cmbRoleP.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
             cmbRoleP.Location = new Point(500, 18);
             cmbRoleP.Name = "cmbRoleP";
-            cmbRoleP.Size = new Size(150, 31);
+            cmbRoleP.Size = new Size(150, 28);
             cmbRoleP.TabIndex = 1;
             // 
             // txtCariP
@@ -455,7 +442,7 @@
             cmbRoleS.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
             cmbRoleS.Location = new Point(500, 18);
             cmbRoleS.Name = "cmbRoleS";
-            cmbRoleS.Size = new Size(150, 31);
+            cmbRoleS.Size = new Size(150, 28);
             cmbRoleS.TabIndex = 2;
             // 
             // txtCariS
@@ -493,18 +480,90 @@
             // pnlSetujuiDalam
             // 
             pnlSetujuiDalam.BackColor = Color.White;
+            pnlSetujuiDalam.Controls.Add(cmbRole);
+            pnlSetujuiDalam.Controls.Add(lblRole);
+            pnlSetujuiDalam.Controls.Add(txtUsername);
+            pnlSetujuiDalam.Controls.Add(lblUsername);
+            pnlSetujuiDalam.Controls.Add(txtEmail);
+            pnlSetujuiDalam.Controls.Add(label1);
             pnlSetujuiDalam.Controls.Add(btnSetujui);
             pnlSetujuiDalam.Controls.Add(btnBatal);
             pnlSetujuiDalam.Controls.Add(btnGenerate);
             pnlSetujuiDalam.Controls.Add(prgKekuatan);
             pnlSetujuiDalam.Controls.Add(txtPassword);
             pnlSetujuiDalam.Controls.Add(lblPassword);
-            pnlSetujuiDalam.Controls.Add(pnlHeaderSetuju);
             pnlSetujuiDalam.Dock = DockStyle.Fill;
             pnlSetujuiDalam.Location = new Point(1, 1);
             pnlSetujuiDalam.Name = "pnlSetujuiDalam";
             pnlSetujuiDalam.Size = new Size(338, 526);
             pnlSetujuiDalam.TabIndex = 0;
+            // 
+            // cmbRole
+            // 
+            cmbRole.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cmbRole.BackColor = Color.White;
+            cmbRole.ForeColor = Color.FromArgb(18, 55, 42);
+            cmbRole.FormattingEnabled = true;
+            cmbRole.Items.AddRange(new object[] { "kasir", "gudang" });
+            cmbRole.Location = new Point(20, 236);
+            cmbRole.Name = "cmbRole";
+            cmbRole.Size = new Size(298, 28);
+            cmbRole.TabIndex = 12;
+            // 
+            // lblRole
+            // 
+            lblRole.AutoSize = true;
+            lblRole.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRole.ForeColor = Color.FromArgb(79, 106, 92);
+            lblRole.Location = new Point(20, 213);
+            lblRole.Name = "lblRole";
+            lblRole.Size = new Size(40, 20);
+            lblRole.TabIndex = 11;
+            lblRole.Text = "Role";
+            // 
+            // txtUsername
+            // 
+            txtUsername.BackColor = Color.White;
+            txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.Font = new Font("Leelawadee UI", 11F);
+            txtUsername.ForeColor = Color.FromArgb(18, 55, 42);
+            txtUsername.Location = new Point(20, 178);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(298, 32);
+            txtUsername.TabIndex = 10;
+            // 
+            // lblUsername
+            // 
+            lblUsername.AutoSize = true;
+            lblUsername.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.FromArgb(79, 106, 92);
+            lblUsername.Location = new Point(20, 155);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(80, 20);
+            lblUsername.TabIndex = 9;
+            lblUsername.Text = "Username";
+            // 
+            // txtEmail
+            // 
+            txtEmail.BackColor = Color.White;
+            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.Font = new Font("Leelawadee UI", 11F);
+            txtEmail.ForeColor = Color.FromArgb(18, 55, 42);
+            txtEmail.Location = new Point(20, 120);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(298, 32);
+            txtEmail.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(79, 106, 92);
+            label1.Location = new Point(20, 97);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 20);
+            label1.TabIndex = 7;
+            label1.Text = "Email";
             // 
             // btnSetujui
             // 
@@ -513,7 +572,7 @@
             btnSetujui.FlatStyle = FlatStyle.Flat;
             btnSetujui.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSetujui.ForeColor = Color.White;
-            btnSetujui.Location = new Point(118, 270);
+            btnSetujui.Location = new Point(118, 460);
             btnSetujui.Name = "btnSetujui";
             btnSetujui.Size = new Size(200, 40);
             btnSetujui.TabIndex = 6;
@@ -527,7 +586,7 @@
             btnBatal.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnBatal.FlatStyle = FlatStyle.Flat;
             btnBatal.ForeColor = Color.FromArgb(18, 55, 42);
-            btnBatal.Location = new Point(20, 270);
+            btnBatal.Location = new Point(20, 460);
             btnBatal.Name = "btnBatal";
             btnBatal.Size = new Size(90, 40);
             btnBatal.TabIndex = 5;
@@ -541,7 +600,7 @@
             btnGenerate.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnGenerate.FlatStyle = FlatStyle.Flat;
             btnGenerate.ForeColor = Color.FromArgb(31, 107, 66);
-            btnGenerate.Location = new Point(20, 216);
+            btnGenerate.Location = new Point(20, 414);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(298, 40);
             btnGenerate.TabIndex = 4;
@@ -551,7 +610,7 @@
             // 
             // prgKekuatan
             // 
-            prgKekuatan.Location = new Point(20, 172);
+            prgKekuatan.Location = new Point(20, 368);
             prgKekuatan.Maximum = 4;
             prgKekuatan.Name = "prgKekuatan";
             prgKekuatan.Size = new Size(298, 8);
@@ -564,7 +623,7 @@
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
             txtPassword.Font = new Font("Leelawadee UI", 11F);
             txtPassword.ForeColor = Color.FromArgb(18, 55, 42);
-            txtPassword.Location = new Point(20, 126);
+            txtPassword.Location = new Point(20, 330);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(298, 32);
             txtPassword.TabIndex = 2;
@@ -575,23 +634,11 @@
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.FromArgb(79, 106, 92);
-            lblPassword.Location = new Point(20, 104);
+            lblPassword.Location = new Point(20, 307);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(114, 20);
             lblPassword.TabIndex = 1;
             lblPassword.Text = "Password akun";
-            // 
-            // pnlHeaderSetuju
-            // 
-            pnlHeaderSetuju.Angle = 45F;
-            pnlHeaderSetuju.ColorBottom = Color.FromArgb(152, 232, 193);
-            pnlHeaderSetuju.ColorTop = Color.FromArgb(42, 127, 80);
-            pnlHeaderSetuju.Controls.Add(lblJudul);
-            pnlHeaderSetuju.Dock = DockStyle.Top;
-            pnlHeaderSetuju.Location = new Point(0, 0);
-            pnlHeaderSetuju.Name = "pnlHeaderSetuju";
-            pnlHeaderSetuju.Size = new Size(338, 84);
-            pnlHeaderSetuju.TabIndex = 0;
             // 
             // lblJudul
             // 
@@ -621,10 +668,10 @@
             tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlpKartu.Controls.Add(pnlKartuNonaktif, 3, 0);
-            tlpKartu.Controls.Add(pnlKartuAktif, 2, 0);
             tlpKartu.Controls.Add(pnlKartuTotal, 0, 0);
             tlpKartu.Controls.Add(pnlKartuMenunngu, 1, 0);
+            tlpKartu.Controls.Add(pnlKartuAktif, 2, 0);
+            tlpKartu.Controls.Add(pnlKartuNonaktif, 3, 0);
             tlpKartu.Dock = DockStyle.Top;
             tlpKartu.Location = new Point(24, 24);
             tlpKartu.Margin = new Padding(0);
@@ -634,6 +681,19 @@
             tlpKartu.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpKartu.Size = new Size(1052, 100);
             tlpKartu.TabIndex = 0;
+            // 
+            // pnlKartuTotal
+            // 
+            pnlKartuTotal.BackColor = Color.FromArgb(42, 127, 80);
+            pnlKartuTotal.Controls.Add(lblTotal);
+            pnlKartuTotal.Controls.Add(lblTotalJudul);
+            pnlKartuTotal.Dock = DockStyle.Fill;
+            pnlKartuTotal.Location = new Point(0, 0);
+            pnlKartuTotal.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuTotal.Name = "pnlKartuTotal";
+            pnlKartuTotal.Padding = new Padding(1);
+            pnlKartuTotal.Size = new Size(247, 100);
+            pnlKartuTotal.TabIndex = 0;
             // 
             // pnlKartuNonaktif
             // 
@@ -705,44 +765,6 @@
             lblAktifJudul.TabIndex = 1;
             lblAktifJudul.Text = "Akun aktif";
             // 
-            // pnlKartuTotal
-            // 
-            pnlKartuTotal.Angle = 45F;
-            pnlKartuTotal.ColorBottom = Color.FromArgb(62, 156, 106);
-            pnlKartuTotal.ColorTop = Color.FromArgb(31, 107, 66);
-            pnlKartuTotal.Controls.Add(lblTotal);
-            pnlKartuTotal.Controls.Add(lblTotalJudul);
-            pnlKartuTotal.Dock = DockStyle.Fill;
-            pnlKartuTotal.Location = new Point(0, 0);
-            pnlKartuTotal.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuTotal.Name = "pnlKartuTotal";
-            pnlKartuTotal.Size = new Size(247, 100);
-            pnlKartuTotal.TabIndex = 0;
-            // 
-            // lblTotal
-            // 
-            lblTotal.AutoSize = true;
-            lblTotal.BackColor = Color.Transparent;
-            lblTotal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblTotal.ForeColor = Color.White;
-            lblTotal.Location = new Point(20, 42);
-            lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(40, 47);
-            lblTotal.TabIndex = 1;
-            lblTotal.Text = "0";
-            // 
-            // lblTotalJudul
-            // 
-            lblTotalJudul.AutoSize = true;
-            lblTotalJudul.BackColor = Color.Transparent;
-            lblTotalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalJudul.ForeColor = Color.White;
-            lblTotalJudul.Location = new Point(20, 18);
-            lblTotalJudul.Name = "lblTotalJudul";
-            lblTotalJudul.Size = new Size(119, 20);
-            lblTotalJudul.TabIndex = 0;
-            lblTotalJudul.Text = "Total pengguna";
-            // 
             // pnlKartuMenunngu
             // 
             pnlKartuMenunngu.BackColor = Color.White;
@@ -778,16 +800,39 @@
             lblMenungguJudul.TabIndex = 0;
             lblMenungguJudul.Text = "Menunggu persetujuan";
             // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.BackColor = Color.Transparent;
+            lblTotal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblTotal.ForeColor = Color.White;
+            lblTotal.Location = new Point(20, 42);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(40, 47);
+            lblTotal.TabIndex = 1;
+            lblTotal.Text = "0";
+            // 
+            // lblTotalJudul
+            // 
+            lblTotalJudul.AutoSize = true;
+            lblTotalJudul.BackColor = Color.Transparent;
+            lblTotalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalJudul.ForeColor = Color.White;
+            lblTotalJudul.Location = new Point(20, 18);
+            lblTotalJudul.Name = "lblTotalJudul";
+            lblTotalJudul.Size = new Size(119, 20);
+            lblTotalJudul.TabIndex = 0;
+            lblTotalJudul.Text = "Total pengguna";
+            // 
             // ucAdminDataUser
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 251, 248);
-            Controls.Add(pnlPage);
             Font = new Font("Leelawadee UI", 10.5F);
             Name = "ucAdminDataUser";
             Size = new Size(1100, 700);
-            pnlPage.ResumeLayout(false);
+            Load += ucAdminDataUser_Load;
             pnlBawah.ResumeLayout(false);
             pnlKartuTabel.ResumeLayout(false);
             pnlKartuTabelDalam.ResumeLayout(false);
@@ -803,17 +848,18 @@
             pnlSetujuiLuar.ResumeLayout(false);
             pnlSetujuiDalam.ResumeLayout(false);
             pnlSetujuiDalam.PerformLayout();
-            pnlHeaderSetuju.ResumeLayout(false);
-            pnlHeaderSetuju.PerformLayout();
             tlpKartu.ResumeLayout(false);
             pnlKartuNonaktif.ResumeLayout(false);
             pnlKartuNonaktif.PerformLayout();
             pnlKartuAktif.ResumeLayout(false);
             pnlKartuAktif.PerformLayout();
-            pnlKartuTotal.ResumeLayout(false);
-            pnlKartuTotal.PerformLayout();
             pnlKartuMenunngu.ResumeLayout(false);
             pnlKartuMenunngu.PerformLayout();
+            Controls.Add(pnlBawah);
+            Controls.Add(pnlJarak);
+            Controls.Add(tlpKartu);
+
+            Padding = new Padding(24);
             ResumeLayout(false);
         }
 
@@ -870,5 +916,11 @@
         private DataGridViewTextBoxColumn colRoleS;
         private DataGridViewTextBoxColumn status;
         private DataGridViewButtonColumn btnBanned;
+        private Label lblUsername;
+        private TextBox txtEmail;
+        private Label label1;
+        private ComboBox cmbRole;
+        private Label lblRole;
+        private TextBox txtUsername;
     }
 }

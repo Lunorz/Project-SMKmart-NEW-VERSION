@@ -42,6 +42,7 @@
             pnlTopline = new Panel();
             pnlContent = new Panel();
             ucAdminDataUser1 = new ucAdminDataUser();
+            btnLogAktivitas = new Button();
             pnlSideBar.SuspendLayout();
             pnlTopBar.SuspendLayout();
             pnlContent.SuspendLayout();
@@ -53,6 +54,7 @@
             pnlSideBar.Angle = 90F;
             pnlSideBar.ColorBottom = Color.FromArgb(26, 90, 56);
             pnlSideBar.ColorTop = Color.FromArgb(38, 119, 74);
+            pnlSideBar.Controls.Add(btnLogAktivitas);
             pnlSideBar.Controls.Add(btnKeluar);
             pnlSideBar.Controls.Add(pnlAktif);
             pnlSideBar.Controls.Add(btnMenuLapPenjualan);
@@ -239,6 +241,23 @@
             ucAdminDataUser1.Size = new Size(1270, 878);
             ucAdminDataUser1.TabIndex = 0;
             // 
+            // btnLogAktivitas
+            // 
+            btnLogAktivitas.BackColor = Color.FromArgb(38, 119, 74);
+            btnLogAktivitas.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnLogAktivitas.FlatAppearance.BorderSize = 0;
+            btnLogAktivitas.FlatStyle = FlatStyle.Flat;
+            btnLogAktivitas.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogAktivitas.ForeColor = Color.FromArgb(230, 247, 238);
+            btnLogAktivitas.Location = new Point(16, 344);
+            btnLogAktivitas.Name = "btnLogAktivitas";
+            btnLogAktivitas.Size = new Size(228, 44);
+            btnLogAktivitas.TabIndex = 7;
+            btnLogAktivitas.Text = "Log aktivitas";
+            btnLogAktivitas.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogAktivitas.UseVisualStyleBackColor = false;
+            btnLogAktivitas.Click += btnLogAktivitas_Click;
+            // 
             // MainFormAdmin
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -278,5 +297,6 @@
         private Panel pnlContent;
         private Button btnKeluar;
         private ucAdminDataUser ucAdminDataUser1;
+        private Button btnLogAktivitas;
     }
 }

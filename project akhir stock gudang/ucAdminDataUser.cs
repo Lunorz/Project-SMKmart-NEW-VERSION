@@ -18,22 +18,64 @@ namespace project_akhir_stock_gudang
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hWnd, string appName, string idList);
         private string emailTerpilih = "";
+        private bool modeEditPengguna = false;
+        private bool modePersetujuan = false;
+        private List<UserAccount> semuaDataPengguna = new List<UserAccount>();
+        private string emailPenggunaTerpilih = "";
         public ucAdminDataUser()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
             ConfigureProgressBar();
+            SiapkanFilter();
             ConnectEvents();
-
             UpdateStrength();
-
             TampilkanDataUser();
         }
+
         private void ConfigureProgressBar()
         {
             prgKekuatan.Minimum = 0;
             prgKekuatan.Maximum = 4;
             prgKekuatan.Value = 0;
             prgKekuatan.Style = ProgressBarStyle.Continuous;
+        }
+        private void FilterPermintaan()
+        {
+            string kataKunci = txtCariP.Text.Trim();
+            string role = cmbRoleP.Text;
+
+            dgvPermintaan.Rows.Clear();
+
+            var hasil = semuaDataPengguna
+                .Where(u => u.Status == UserStore.Menunggu)
+                .Where(u =>
+                    (u.Username ?? "").Contains(
+                        kataKunci, StringComparison.OrdinalIgnoreCase) ||
+                    (u.Email ?? "").Contains(
+                        kataKunci, StringComparison.OrdinalIgnoreCase))
+                .Where(u =>
+                    role == "Semua Role" ||
+                    string.IsNullOrWhiteSpace(role) ||
+                    u.Role == role)
+                .ToList();
+
+            foreach (var user in hasil)
+            {
+                int index = dgvPermintaan.Rows.Add();
+
+                dgvPermintaan.Rows[index].Cells["colUsernameP"].Value = user.Username;
+                dgvPermintaan.Rows[index].Cells["colEmailP"].Value = user.Email;
+                dgvPermintaan.Rows[index].Cells["colRoleP"].Value = user.Role;
+                dgvPermintaan.Rows[index].Cells["colTanggalP"].Value =
+                    user.TanggalDaftar.ToString("dd/MM/yyyy");
+
+                dgvPermintaan.Rows[index].Cells["colSetujui"].Value = "ACC";
+                dgvPermintaan.Rows[index].Cells["colTolak"].Value = "Tolak";
+            }
         }
         private void UpdateStrength()
         {
@@ -47,14 +89,12 @@ namespace project_akhir_stock_gudang
         }
         private void ConnectEvents()
         {
-            btnGenerate.Click -= btnGenerate_Click;
-            btnGenerate.Click += btnGenerate_Click;
 
             btnBatal.Click -= btnBatal_Click;
             btnBatal.Click += btnBatal_Click;
 
-            btnSetujui.Click -= btnSetujui_Click;
-            btnSetujui.Click += btnSetujui_Click;
+            btnSetujui.Click -= btnSetujui_Click_1;
+            btnSetujui.Click += btnSetujui_Click_1;
 
             txtPassword.TextChanged -= txtPassword_TextChanged;
             txtPassword.TextChanged += txtPassword_TextChanged;
@@ -65,11 +105,33 @@ namespace project_akhir_stock_gudang
             dgvPermintaan.CellContentClick -= dgvPermintaan_CellContentClick;
             dgvPermintaan.CellContentClick += dgvPermintaan_CellContentClick;
 
+            dgvSemua.CellClick -= dgvSemua_CellClick;
+            dgvSemua.CellClick += dgvSemua_CellClick;
+
             dgvSemua.CellContentClick -= dgvSemua_CellContentClick;
             dgvSemua.CellContentClick += dgvSemua_CellContentClick;
 
             dgvSemua.CellFormatting -= dgvSemua_CellFormatting;
             dgvSemua.CellFormatting += dgvSemua_CellFormatting;
+
+            btnGenerate.Click -= btnGenerate_Click_1;
+            btnGenerate.Click += btnGenerate_Click_1;
+
+            txtCariP.TextChanged -= txtCariPermintaan_TextChanged;
+            txtCariP.TextChanged += txtCariPermintaan_TextChanged;
+
+            cmbRoleP.SelectedIndexChanged -= cmbFilterRolePermintaan_SelectedIndexChanged;
+            cmbRoleP.SelectedIndexChanged += cmbFilterRolePermintaan_SelectedIndexChanged;
+
+            txtCariS.TextChanged -= txtCariSemua_TextChanged;
+            txtCariS.TextChanged += txtCariSemua_TextChanged;
+
+            cmbRoleS.SelectedIndexChanged -= cmbFilterRoleSemua_SelectedIndexChanged;
+            cmbRoleS.SelectedIndexChanged += cmbFilterRoleSemua_SelectedIndexChanged;
+
+            cmbRole.SelectedIndexChanged -= cmbFilterStatus_SelectedIndexChanged;
+            cmbRole.SelectedIndexChanged += cmbFilterStatus_SelectedIndexChanged;
+
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -103,6 +165,7 @@ namespace project_akhir_stock_gudang
             txtPassword.Text = password;
             CekKekuatanPassword();
         }
+
         private void CekKekuatanPassword()
         {
             string password = txtPassword.Text;
@@ -157,7 +220,177 @@ namespace project_akhir_stock_gudang
 
             }
         }
+        private void txtCariPermintaan_TextChanged(object sender, EventArgs e)
+        {
+            FilterPermintaan();
+        }
 
+        private void cmbFilterRolePermintaan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterPermintaan();
+        }
+
+        private void txtCariSemua_TextChanged(object sender, EventArgs e)
+        {
+            FilterSemuaPengguna();
+        }
+
+        private void cmbFilterRoleSemua_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterSemuaPengguna();
+        }
+
+        private void cmbFilterStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterSemuaPengguna();
+        }
+
+        private void AturModeBuatAkun()
+        {
+            modeEditPengguna = false;
+            modePersetujuan = false;
+
+            emailPenggunaTerpilih = "";
+            emailTerpilih = "";
+
+            txtEmail.Clear();
+            txtUsername.Clear();
+            txtPassword.Clear();
+
+            txtEmail.ReadOnly = false;
+            txtUsername.ReadOnly = false;
+
+            cmbRole.Enabled = true;
+
+            if (cmbRole.Items.Count > 0)
+                cmbRole.SelectedIndex = 0;
+
+            btnSetujui.Text = "Setujui & buat akun";
+
+            prgKekuatan.Value = 0;
+
+            dgvPermintaan.ClearSelection();
+            dgvSemua.ClearSelection();
+
+            PerbaruiKekuatanPassword();
+        }
+
+
+        private void TampilkanDataPenggunaPadaPanel(UserAccount user)
+        {
+            txtEmail.Text = user.Email;
+            txtUsername.Text = user.Username;
+            txtPassword.Clear();
+
+            cmbRole.SelectedItem = user.Role;
+
+            txtEmail.ReadOnly = true;
+            txtUsername.ReadOnly = true;
+
+            cmbRole.Enabled = false;
+
+            PerbaruiKekuatanPassword();
+        }
+
+        private void FilterSemuaPengguna()
+        {
+            string kataKunci = txtCariS.Text.Trim();
+            string role = cmbRoleS.Text;
+            string statusFilter = cmbRole.Text;
+
+            dgvSemua.Rows.Clear();
+
+            var hasil = semuaDataPengguna
+                .Where(u => u.Status != UserStore.Menunggu)
+                .Where(u =>
+                    (u.Username ?? "").Contains(
+                        kataKunci,
+                        StringComparison.OrdinalIgnoreCase) ||
+
+                    (u.Email ?? "").Contains(
+                        kataKunci,
+                        StringComparison.OrdinalIgnoreCase))
+                .Where(u =>
+                    role == "Semua Role" ||
+                    string.IsNullOrWhiteSpace(role) ||
+                    u.Role == role)
+                .Where(u =>
+                    statusFilter == "Semua Status" ||
+                    string.IsNullOrWhiteSpace(statusFilter) ||
+                    u.Status == statusFilter)
+                .ToList();
+
+            foreach (var user in hasil)
+            {
+                int index = dgvSemua.Rows.Add();
+
+                dgvSemua.Rows[index].Cells["colUsernameS"].Value =
+                    user.Username;
+
+                dgvSemua.Rows[index].Cells["colEmailS"].Value =
+                    user.Email;
+
+                dgvSemua.Rows[index].Cells["colRoleS"].Value =
+                    user.Role;
+
+                dgvSemua.Rows[index].Cells["status"].Value =
+                    user.Status;
+
+            
+
+                dgvSemua.Rows[index].Cells["btnBanned"].Value =
+                    user.Status == UserStore.Diblokir
+                        ? "Aktifkan"
+                        : "Banned";
+            }
+        }
+
+        private void SiapkanFilter()
+        {
+
+            cmbRoleP.Items.Clear();
+            cmbRoleP.Items.Add("Semua Role");
+
+            foreach (var item in cmbRole.Items)
+            {
+                string role = item?.ToString() ?? "";
+
+                if (!string.IsNullOrWhiteSpace(role) &&
+                    !cmbRoleP.Items.Contains(role))
+                {
+                    cmbRoleP.Items.Add(role);
+                }
+            }
+
+            cmbRoleP.SelectedIndex = 0;
+
+
+
+            cmbRoleS.Items.Clear();
+            cmbRoleS.Items.Add("Semua Role");
+
+            foreach (var item in cmbRole.Items)
+            {
+                string role = item?.ToString() ?? "";
+
+                if (!string.IsNullOrWhiteSpace(role) &&
+                    !cmbRoleS.Items.Contains(role))
+                {
+                    cmbRoleS.Items.Add(role);
+                }
+            }
+
+            cmbRoleS.SelectedIndex = 0;
+
+
+
+            cmbRole.Items.Clear();
+            cmbRole.Items.Add("Semua Status");
+            cmbRole.Items.Add(UserStore.Aktif);
+            cmbRole.Items.Add(UserStore.Diblokir);
+
+            cmbRole.SelectedIndex = 0;
+        }
 
         private void btnBatal_Click(object sender, EventArgs e)
         {
@@ -167,15 +400,15 @@ namespace project_akhir_stock_gudang
 
 
 
-            dgvPermintaan.ClearSelection();
+
+            AturModeBuatAkun();
 
             MessageBox.Show(
-                "Proses persetujuan dibatalkan.",
+                "Form berhasil dikosongkan.",
                 "Informasi",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
             );
-            PerbaruiKekuatanPassword();
         }
 
 
@@ -209,34 +442,50 @@ namespace project_akhir_stock_gudang
         }
 
         private void dgvPermintaan_CellContentClick(
-            object sender, DataGridViewCellEventArgs e)
+    object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            string namaKolom = dgvPermintaan.Columns[e.ColumnIndex].Name;
+
+            if (namaKolom != "colSetujui" && namaKolom != "colTolak")
+                return;
+
+            string email = dgvPermintaan.Rows[e.RowIndex]
+                .Cells["colEmailP"].Value?.ToString() ?? "";
+
+            if (string.IsNullOrWhiteSpace(email))
+                return;
+
+            if (namaKolom == "colSetujui")
             {
-                if (e.RowIndex < 0)
-                    return;
+                emailTerpilih = email;
+                modePersetujuan = true;
+                modeEditPengguna = false;
 
-                string email = dgvPermintaan.Rows[e.RowIndex]
-                    .Cells["colEmailP"].Value?.ToString() ?? "";
+                txtPassword.Clear();
 
-                if (string.IsNullOrWhiteSpace(email))
-                    return;
+                MessageBox.Show(
+                    "Masukkan atau generate password untuk akun ini."
+                );
 
-                string namaKolom = dgvPermintaan.Columns[e.ColumnIndex].Name;
+                return;
+            }
 
+            if (namaKolom == "colTolak")
+            {
+                DialogResult hasil = MessageBox.Show(
+                    "Apakah kamu yakin ingin menolak pendaftaran ini?",
+                    "Konfirmasi Penolakan",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
 
-                if (namaKolom == "colSetujui")
+                if (hasil == DialogResult.Yes)
                 {
-                    emailTerpilih = email;
-
-                    if (string.IsNullOrWhiteSpace(txtPassword.Text))
-                    {
-                        MessageBox.Show("Masukkan atau generate password terlebih dahulu.");
-                        return;
-                    }
-
-                    bool berhasil = UserStore.ApproveAccount(
-                        emailTerpilih,
-                        txtPassword.Text,
+                    bool berhasil = UserStore.RejectAccount(
+                        email,
                         out string pesan
                     );
 
@@ -245,49 +494,22 @@ namespace project_akhir_stock_gudang
                     if (berhasil)
                     {
                         emailTerpilih = "";
+                        modePersetujuan = false;
                         txtPassword.Clear();
                         TampilkanDataUser();
                     }
                 }
-
-                
-                else if (namaKolom == "colTolak")
-                {
-                    DialogResult hasil = MessageBox.Show(
-                        "Apakah kamu yakin ingin menolak pendaftaran ini?",
-                        "Konfirmasi Penolakan",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
-                    );
-
-                    if (hasil == DialogResult.Yes)
-                    {
-                        bool berhasil = UserStore.RejectAccount(
-                            email,
-                            out string pesan
-                        );
-
-                        MessageBox.Show(pesan);
-
-                        if (berhasil)
-                        {
-                            emailTerpilih = "";
-                            txtPassword.Clear();
-                            TampilkanDataUser();
-                        }
-                    }
-                }
-
             }
         }
 
 
         private void dgvSemua_CellContentClick(
-            object sender, DataGridViewCellEventArgs e)
+       object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
+            
             if (dgvSemua.Columns[e.ColumnIndex].Name != "btnBanned")
                 return;
 
@@ -298,7 +520,7 @@ namespace project_akhir_stock_gudang
                 return;
 
             string status = dgvSemua.Rows[e.RowIndex]
-                .Cells["Status"].Value?.ToString() ?? "";
+                .Cells["status"].Value?.ToString() ?? "";
 
             string konfirmasi = status == UserStore.Aktif
                 ? "Apakah kamu yakin ingin memblokir akun ini?"
@@ -313,13 +535,15 @@ namespace project_akhir_stock_gudang
 
             if (hasil == DialogResult.Yes)
             {
-                bool berhasil = UserStore.ToggleBan(email, out string pesan);
+                bool berhasil = UserStore.ToggleBan(
+                    email, out string pesan);
 
                 MessageBox.Show(pesan);
 
                 if (berhasil)
                 {
                     TampilkanDataUser();
+                    AturModeBuatAkun();
                 }
             }
         }
@@ -327,42 +551,18 @@ namespace project_akhir_stock_gudang
 
         private void TampilkanDataUser()
         {
-            List<UserAccount> semuaUser = UserStore.GetAll();
+
+            semuaDataPengguna = UserStore.GetAll();
 
 
-            dgvPermintaan.Rows.Clear();
-
-            foreach (UserAccount user in semuaUser)
-            {
-                if (user.Status == UserStore.Menunggu)
-                {
-                    dgvPermintaan.Rows.Add(
-                        user.Username,
-                        user.Email,
-                        user.Role,
-                        user.TanggalDaftar.ToString("dd/MM/yyyy")
-                    );
-                }
-                PerbaruiRingkasan();
-            }
+            PerbaruiRingkasan();
 
 
-            dgvSemua.Rows.Clear();
-
-            foreach (UserAccount user in semuaUser)
-            {
-                if (user.Status != UserStore.Menunggu)
-                {
-                    dgvSemua.Rows.Add(
-                        user.Username,
-                        user.Email,
-                        user.Role,
-                        user.Status,
-                        user.TanggalDaftar.ToString("dd/MM/yyyy")
-                    );
-                }
-            }
+            FilterPermintaan();
+            FilterSemuaPengguna();
         }
+
+
 
         private void btnGenerate_Click_1(object sender, EventArgs e)
         {
@@ -372,27 +572,85 @@ namespace project_akhir_stock_gudang
 
         private void btnSetujui_Click_1(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(emailTerpilih))
+
+            string password = txtPassword.Text;
+
+
+            if (modeEditPengguna)
             {
-                MessageBox.Show("Pilih permintaan pendaftaran terlebih dahulu.");
+                DialogResult konfirmasi = MessageBox.Show(
+                    "Apakah kamu yakin ingin mengubah password pengguna ini?",
+                    "Konfirmasi Perubahan Password",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (konfirmasi != DialogResult.Yes)
+                    return;
+
+                bool berhasil = UserStore.UpdatePassword(
+                    emailPenggunaTerpilih,
+                    password,
+                    out string pesan
+                );
+
+                MessageBox.Show(pesan);
+
+                if (berhasil)
+                {
+                    TampilkanDataUser();
+                    AturModeBuatAkun();
+                }
+
                 return;
             }
 
-            bool berhasil = UserStore.ApproveAccount(
-                emailTerpilih,
-                txtPassword.Text,
-                out string pesan
+
+
+            if (modePersetujuan)
+            {
+                if (string.IsNullOrWhiteSpace(emailTerpilih))
+                {
+                    MessageBox.Show("Pilih pendaftaran terlebih dahulu.");
+                    return;
+                }
+
+                bool berhasil = UserStore.ApproveAccount(
+                    emailTerpilih,
+                    password,
+                    out string pesan
+                );
+
+                MessageBox.Show(pesan);
+
+                if (berhasil)
+                {
+                    TampilkanDataUser();
+                    AturModeBuatAkun();
+                }
+
+                return;
+            }
+
+
+
+            bool akunBerhasil = UserStore.CreateActiveAccount(
+                txtUsername.Text,
+                txtEmail.Text,
+                cmbRole.Text,
+                password,
+                out string pesanAkun
             );
 
-            MessageBox.Show(pesan);
+            MessageBox.Show(pesanAkun);
 
-            if (berhasil)
+            if (akunBerhasil)
             {
-                emailTerpilih = "";
-                txtPassword.Clear();
                 TampilkanDataUser();
+                AturModeBuatAkun();
             }
         }
+
 
         private void dgvSemua_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -403,7 +661,7 @@ namespace project_akhir_stock_gudang
                 return;
 
             string status = dgvSemua.Rows[e.RowIndex]
-                .Cells["Status"].Value?.ToString() ?? "";
+                  .Cells["status"].Value?.ToString() ?? "";
 
             if (status == UserStore.Aktif)
             {
@@ -469,6 +727,56 @@ namespace project_akhir_stock_gudang
             }
         }
 
-    
+        private void dgvSemua_CellClick(
+       object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+
+            if (dgvSemua.Columns[e.ColumnIndex].Name == "btnBanned")
+                return;
+
+            string email = dgvSemua.Rows[e.RowIndex]
+                .Cells["colEmailS"].Value?.ToString() ?? "";
+
+            if (string.IsNullOrWhiteSpace(email))
+                return;
+
+
+            UserAccount? user = UserStore.GetAll()
+                .FirstOrDefault(u =>
+                    string.Equals(
+                        u.Email,
+                        email,
+                        StringComparison.OrdinalIgnoreCase));
+
+            if (user == null)
+            {
+                MessageBox.Show("Data pengguna tidak ditemukan.");
+                return;
+            }
+
+            modeEditPengguna = true;
+            modePersetujuan = false;
+
+            emailPenggunaTerpilih = user.Email;
+            emailTerpilih = "";
+
+
+            TampilkanDataPenggunaPadaPanel(user);
+
+
+            btnSetujui.Text = "Simpan perubahan";
+
+
+            dgvPermintaan.ClearSelection();
+        }
+
+        private void ucAdminDataUser_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

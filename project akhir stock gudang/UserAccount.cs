@@ -15,6 +15,7 @@ namespace project_akhir_stock_gudang
         public DateTime TanggalDaftar { get; set; } = DateTime.Now;
         public string PasswordHash { get; set; } = "";
         public string PasswordSalt { get; set; } = "";
+        public int PercobaanLoginGagal { get; set; } = 0;
     }
 }
 

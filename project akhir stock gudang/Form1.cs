@@ -53,12 +53,22 @@ namespace project_akhir_stock_gudang
             string email = textemail.Text.Trim();
             string password = textpassword.Text;
 
-            if (email == "admin@gmail.com" && password == "admin758150")
+            if (email == "admin@gmail.com" &&
+          password == "Admin758150!")
             {
-                MessageBox.Show("login berhasil! selamat datang di panel admin");
-                MainFormAdmin panel = new MainFormAdmin();
-                panel.Show();
+                MessageBox.Show(
+                    "Login admin berhasil.",
+                    "Informasi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                MainFormAdmin admin = new MainFormAdmin();
+                admin.Show();
+
                 this.Hide();
+
+                return;
             }
 
 

@@ -14,13 +14,16 @@ namespace project_akhir_stock_gudang
     {
         ucPenjualan? _halPenjualan;
         ucLaporanGudang? _halLaporanGudang;
+        ucDashboardAdmin? _halDashboard;
+
         public MainFormAdmin()
         {
             InitializeComponent();
-            btnMenuUser_Click(this, EventArgs.Empty);
+            btnMenuDashboard_Click(this, EventArgs.Empty);
         }
         ucAdminDataUser? _halUser;
         ucDataBarang? _halBarang;
+        ucLogAktivitas? _halLogAktivitas;
 
         readonly Font _fReg = new("Leelawadee UI", 10.5f);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
@@ -59,7 +62,29 @@ namespace project_akhir_stock_gudang
 
         private void btnMenuDashboard_Click(object sender, EventArgs e)
         {
+            if (_halDashboard == null)
+            {
+                _halDashboard = new ucDashboardAdmin();
 
+                _halDashboard.LihatLaporanDiminta += (s, args) =>
+                {
+                    _halPenjualan ??= new ucPenjualan();
+
+                    Buka(
+                        _halPenjualan,
+                        "Laporan Penjualan",
+                        btnMenuLapPenjualan
+                    );
+                };
+            }
+
+            _halDashboard.RefreshDashboard();
+
+            Buka(
+                _halDashboard,
+                "Dashboard Admin",
+                btnMenuDashboard
+            );
         }
 
         private void btnKeluar_Click(object sender, EventArgs e)
@@ -97,6 +122,12 @@ namespace project_akhir_stock_gudang
                 "Laporan gudang",
                 btnMenuLapGudang
             );
+        }
+
+        private void btnLogAktivitas_Click(object sender, EventArgs e)
+        {
+            _halLogAktivitas ??= new ucLogAktivitas();
+            Buka(_halLogAktivitas, "Log aktivitas", btnLogAktivitas);
         }
     }
 }

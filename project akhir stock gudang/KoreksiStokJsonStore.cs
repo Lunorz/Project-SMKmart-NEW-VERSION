@@ -38,7 +38,7 @@ namespace project_akhir_stock_gudang
                 data,
                 new JsonSerializerOptions
                 {
-                    WriteIndented = true
+                    WriteIndented = true    
                 }
             );
 
