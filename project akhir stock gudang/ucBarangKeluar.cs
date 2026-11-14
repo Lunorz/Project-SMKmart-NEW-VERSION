@@ -208,9 +208,13 @@ namespace project_akhir_stock_gudang
                 }
 
 
+             
+                int stokSebelum = produk.Stok;
+
+              
                 produk.Stok -= jumlah;
 
-
+             
                 ProdukJsonStore.Save(produkTerbaru);
 
 
@@ -228,6 +232,33 @@ namespace project_akhir_stock_gudang
                     };
 
                 BarangKeluarJsonStore.Tambah(dataBaru);
+              
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        usernamePetugas,
+                        "Pengelola Gudang",
+                        "Barang Keluar",
+                        "Pengeluaran barang manual",
+                        produk.Kode + " - " + produk.Nama,
+                        "Petugas mengeluarkan barang sebanyak " +
+                        jumlah + " unit. " +
+                        "Alasan: " + cmbAlasanGudang3.Text +
+                        ". Stok sebelumnya: " + stokSebelum +
+                        ". Stok sekarang: " + produk.Stok +
+                        ". Catatan: " + txtCatatanGudang3.Text.Trim()
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Barang keluar berhasil disimpan, tetapi log aktivitas gagal dicatat:\n" +
+                        ex.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
 
 
                 MuatBarangDariAdmin();

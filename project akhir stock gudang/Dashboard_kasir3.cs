@@ -652,6 +652,58 @@ namespace project_akhir_stock_gudang
                         + errorBarangKeluar.Message
                     );
                 }
+                // Catat barang keluar dari transaksi penjualan ke Log Aktivitas
+                try
+                {
+                    var kelompokBarang = keranjang.GroupBy(
+                        item => item.Kode,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+
+                    foreach (var kelompok in kelompokBarang)
+                    {
+                        string kode = kelompok.Key;
+
+                        int jumlahTerjual = kelompok.Sum(item => item.Jumlah);
+
+                        Produk produk = produkTerbaru.FirstOrDefault(
+                            p => string.Equals(
+                                p.Kode,
+                                kode,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
+
+                        if (produk == null)
+                            continue;
+
+                        int stokSebelum = stokLama[kode];
+                        int stokSekarang = produk.Stok;
+
+                        LogAktivitasJsonStore.Catat(
+                            usernameKasir,
+                            "Kasir",
+                            "Barang Keluar",
+                            "Barang keluar melalui penjualan",
+                            produk.Kode + " - " + produk.Nama,
+                            "Barang terjual sebanyak " + jumlahTerjual +
+                            " unit melalui transaksi " + nomorTransaksi +
+                            ". Stok sebelumnya: " + stokSebelum +
+                            ". Stok sekarang: " + stokSekarang +
+                            ". Metode pembayaran: " + metodePembayaranTerpilih
+                        );
+                    }
+                }
+                catch (Exception errorLog)
+                {
+                    MessageBox.Show(
+                        "Transaksi berhasil disimpan, tetapi log aktivitas barang keluar gagal dicatat:\n" +
+                        errorLog.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
             catch (Exception ex)
             {

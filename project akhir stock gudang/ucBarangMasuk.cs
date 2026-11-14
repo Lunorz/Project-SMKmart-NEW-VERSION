@@ -280,6 +280,7 @@ namespace project_akhir_stock_gudang
                     MessageBox.Show("Jumlah stok terlalu besar.");
                     return;
                 }
+                int stokSebelum = produk.Stok;
 
 
                 BarangMasuk dataBaru = new BarangMasuk
@@ -309,6 +310,19 @@ namespace project_akhir_stock_gudang
                 BarangMasukJsonStore.Save(
                     riwayatBarangMasuk
                 );
+                LogAktivitasJsonStore.Catat(
+                usernamePetugas,
+                "Pengelola Gudang",
+                "Barang Masuk",
+                "Mencatat barang masuk",
+                produk.Kode + " - " + produk.Nama,
+               "Petugas mencatat barang masuk sebanyak " +
+               jumlah + " unit dari " + asal +
+               ". Nomor surat jalan: " + nomorSurat +
+               ". Stok sebelumnya: " + stokSebelum +
+               ". Stok sekarang: " + produk.Stok +
+               ". Catatan: " + txtCatatanGudang2.Text.Trim()
+               );
 
 
                 MuatProduk();
