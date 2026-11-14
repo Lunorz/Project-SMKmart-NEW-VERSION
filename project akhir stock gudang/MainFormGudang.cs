@@ -16,17 +16,19 @@ namespace project_akhir_stock_gudang
         ucBarangMasuk? _masuk;
         ucBarangKeluar? _keluar;
         ucStockBarang? _stok;
+        private readonly string emailAktif;
 
         private string username;
         private string usernamePetugas;
 
         readonly Font _fReg = new("Leelawadee UI", 10.5f, FontStyle.Regular);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
-        public MainFormGudang(string username)
+        public MainFormGudang(string username, string email)
         {
             InitializeComponent();
             btnMenuDashboardGudangMainform_Click(this, EventArgs.Empty);
             usernamePetugas = username ?? "";
+            emailAktif = email;
         }
 
 
@@ -93,6 +95,26 @@ namespace project_akhir_stock_gudang
         {
             if (MessageBox.Show("Keluar dari aplikasi?", "Konfirmasi", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAktif,
+                        "User",
+                        "Autentikasi",
+                        "Logout",
+                        "Sistem",
+                        "User keluar dari aplikasi."
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Gagal mencatat aktivitas logout:\n" + ex.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
                 Form1 keluar100 = new Form1();
                 keluar100.Show();
                 this.Hide();

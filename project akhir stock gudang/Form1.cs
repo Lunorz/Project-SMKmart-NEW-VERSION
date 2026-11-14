@@ -93,7 +93,7 @@ namespace project_akhir_stock_gudang
                         MessageBoxIcon.Information
                     );
 
-                    MainFormAdmin admin = new MainFormAdmin();
+                    MainFormAdmin admin = new MainFormAdmin(email);
                     admin.Show();
 
                     this.Hide();
@@ -169,7 +169,7 @@ namespace project_akhir_stock_gudang
             else if (akun.Role == "Gudang")
             {
                 MainFormGudang dashboard =
-                    new MainFormGudang(akun.Username);
+                    new MainFormGudang(akun.Username, email);
 
                 dashboard.Show();
                 this.Hide();

@@ -15,10 +15,12 @@ namespace project_akhir_stock_gudang
         ucPenjualan? _halPenjualan;
         ucLaporanGudang? _halLaporanGudang;
         ucDashboardAdmin? _halDashboard;
+        private readonly string emailAktif;
 
-        public MainFormAdmin()
+        public MainFormAdmin(string email)
         {
             InitializeComponent();
+            emailAktif = email;
             btnMenuDashboard_Click(this, EventArgs.Empty);
         }
         ucAdminDataUser? _halUser;
@@ -89,9 +91,31 @@ namespace project_akhir_stock_gudang
 
         private void btnKeluar_Click(object sender, EventArgs e)
         {
+         
+            try
+            {
+                LogAktivitasJsonStore.Catat(
+                    emailAktif,
+                    "Admin",
+                    "Autentikasi",
+                    "Logout",
+                    "Sistem",
+                    "Admin keluar dari aplikasi."
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Gagal mencatat aktivitas logout:\n" + ex.Message,
+                    "Peringatan Log",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
             Form1 kembalilagi = new Form1();
             kembalilagi.Show();
             this.Hide();
+
         }
 
         private void btnMenuUser_Click(object sender, EventArgs e)

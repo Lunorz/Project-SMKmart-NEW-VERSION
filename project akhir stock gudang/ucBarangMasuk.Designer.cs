@@ -394,7 +394,7 @@
             btnSimpanGudang2.FlatStyle = FlatStyle.Flat;
             btnSimpanGudang2.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSimpanGudang2.ForeColor = Color.White;
-            btnSimpanGudang2.Location = new Point(118, 468);
+            btnSimpanGudang2.Location = new Point(118, 514);
             btnSimpanGudang2.Name = "btnSimpanGudang2";
             btnSimpanGudang2.Size = new Size(200, 40);
             btnSimpanGudang2.TabIndex = 8;
@@ -407,7 +407,7 @@
             btnBersihkanGudang2.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnBersihkanGudang2.FlatStyle = FlatStyle.Flat;
             btnBersihkanGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            btnBersihkanGudang2.Location = new Point(20, 468);
+            btnBersihkanGudang2.Location = new Point(20, 514);
             btnBersihkanGudang2.Name = "btnBersihkanGudang2";
             btnBersihkanGudang2.Size = new Size(98, 40);
             btnBersihkanGudang2.TabIndex = 7;
