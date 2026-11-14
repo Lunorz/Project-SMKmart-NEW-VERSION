@@ -17,7 +17,7 @@ namespace project_akhir_stock_gudang
 
         private string usernamePetugas = "";
 
-       
+
 
         private List<BarangMasuk> riwayatBarangMasuk =
             new List<BarangMasuk>();
@@ -361,6 +361,16 @@ namespace project_akhir_stock_gudang
         }
 
         private void cmbBarangGudang2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAsalGudang2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nudJumlahGudang2_ValueChanged(object sender, EventArgs e)
         {
 
         }
