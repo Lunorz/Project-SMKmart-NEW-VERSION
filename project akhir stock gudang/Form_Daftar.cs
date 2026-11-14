@@ -61,13 +61,49 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            bool berhasil = UserStore.RegisterPending(username, email, role, out string pesan);
+
+            bool berhasil = UserStore.RegisterPending(
+                username,
+                email,
+                role,
+                out string pesan
+            );
+
             if (!berhasil)
             {
-                MessageBox.Show(pesan, "Pendaftaran gagal",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    pesan,
+                    "Pendaftaran gagal",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
+
+            
+            try
+            {
+                LogAktivitasJsonStore.Catat(
+                    email,
+                    role,
+                    "Akun",
+                    "Pendaftaran akun",
+                    email,
+                    "Pengguna mendaftarkan akun dengan username: " +
+                    username
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Pendaftaran berhasil, tetapi log gagal disimpan.\n\n" +
+                    ex.Message,
+                    "Peringatan Log",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+
 
             MessageBox.Show(pesan, "Pendaftaran berhasil",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);

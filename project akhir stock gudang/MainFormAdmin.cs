@@ -127,6 +127,8 @@ namespace project_akhir_stock_gudang
         private void btnLogAktivitas_Click(object sender, EventArgs e)
         {
             _halLogAktivitas ??= new ucLogAktivitas();
+            _halLogAktivitas.RefreshLog();
+
             Buka(_halLogAktivitas, "Log aktivitas", btnLogAktivitas);
         }
     }

@@ -79,17 +79,17 @@
             pnlJarak = new Panel();
             tlpKartu = new TableLayoutPanel();
             pnlKartuTotal = new GradientPanel();
-            pnlKartuNonaktif = new Panel();
-            lblBanned = new Label();
-            lblNnonaktifjudul = new Label();
-            pnlKartuAktif = new Panel();
-            lblAktif = new Label();
-            lblAktifJudul = new Label();
+            lblTotal = new Label();
+            lblTotalJudul = new Label();
             pnlKartuMenunngu = new Panel();
             lblMenunggu = new Label();
             lblMenungguJudul = new Label();
-            lblTotal = new Label();
-            lblTotalJudul = new Label();
+            pnlKartuAktif = new Panel();
+            lblAktif = new Label();
+            lblAktifJudul = new Label();
+            pnlKartuNonaktif = new Panel();
+            lblBanned = new Label();
+            lblNnonaktifjudul = new Label();
             pnlBawah.SuspendLayout();
             pnlKartuTabel.SuspendLayout();
             pnlKartuTabelDalam.SuspendLayout();
@@ -103,9 +103,10 @@
             pnlSetujuiLuar.SuspendLayout();
             pnlSetujuiDalam.SuspendLayout();
             tlpKartu.SuspendLayout();
-            pnlKartuNonaktif.SuspendLayout();
-            pnlKartuAktif.SuspendLayout();
+            pnlKartuTotal.SuspendLayout();
             pnlKartuMenunngu.SuspendLayout();
+            pnlKartuAktif.SuspendLayout();
+            pnlKartuNonaktif.SuspendLayout();
             SuspendLayout();
             // 
             // pnlBawah
@@ -298,7 +299,7 @@
             cmbRoleP.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
             cmbRoleP.Location = new Point(500, 18);
             cmbRoleP.Name = "cmbRoleP";
-            cmbRoleP.Size = new Size(150, 28);
+            cmbRoleP.Size = new Size(150, 31);
             cmbRoleP.TabIndex = 1;
             // 
             // txtCariP
@@ -442,7 +443,7 @@
             cmbRoleS.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
             cmbRoleS.Location = new Point(500, 18);
             cmbRoleS.Name = "cmbRoleS";
-            cmbRoleS.Size = new Size(150, 28);
+            cmbRoleS.Size = new Size(150, 31);
             cmbRoleS.TabIndex = 2;
             // 
             // txtCariS
@@ -507,8 +508,9 @@
             cmbRole.Items.AddRange(new object[] { "kasir", "gudang" });
             cmbRole.Location = new Point(20, 236);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(298, 28);
+            cmbRole.Size = new Size(298, 31);
             cmbRole.TabIndex = 12;
+            cmbRole.SelectedIndexChanged += cmbRole_SelectedIndexChanged;
             // 
             // lblRole
             // 
@@ -684,7 +686,10 @@
             // 
             // pnlKartuTotal
             // 
+            pnlKartuTotal.Angle = 90F;
             pnlKartuTotal.BackColor = Color.FromArgb(42, 127, 80);
+            pnlKartuTotal.ColorBottom = Color.FromArgb(26, 90, 56);
+            pnlKartuTotal.ColorTop = Color.FromArgb(38, 119, 74);
             pnlKartuTotal.Controls.Add(lblTotal);
             pnlKartuTotal.Controls.Add(lblTotalJudul);
             pnlKartuTotal.Dock = DockStyle.Fill;
@@ -695,75 +700,29 @@
             pnlKartuTotal.Size = new Size(247, 100);
             pnlKartuTotal.TabIndex = 0;
             // 
-            // pnlKartuNonaktif
+            // lblTotal
             // 
-            pnlKartuNonaktif.BackColor = Color.White;
-            pnlKartuNonaktif.Controls.Add(lblBanned);
-            pnlKartuNonaktif.Controls.Add(lblNnonaktifjudul);
-            pnlKartuNonaktif.Dock = DockStyle.Fill;
-            pnlKartuNonaktif.Location = new Point(789, 0);
-            pnlKartuNonaktif.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuNonaktif.Name = "pnlKartuNonaktif";
-            pnlKartuNonaktif.Padding = new Padding(1);
-            pnlKartuNonaktif.Size = new Size(247, 100);
-            pnlKartuNonaktif.TabIndex = 3;
+            lblTotal.AutoSize = true;
+            lblTotal.BackColor = Color.Transparent;
+            lblTotal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblTotal.ForeColor = Color.White;
+            lblTotal.Location = new Point(21, 43);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(40, 47);
+            lblTotal.TabIndex = 1;
+            lblTotal.Text = "0";
             // 
-            // lblBanned
+            // lblTotalJudul
             // 
-            lblBanned.AutoSize = true;
-            lblBanned.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblBanned.ForeColor = Color.FromArgb(31, 107, 66);
-            lblBanned.Location = new Point(20, 42);
-            lblBanned.Name = "lblBanned";
-            lblBanned.Size = new Size(40, 47);
-            lblBanned.TabIndex = 2;
-            lblBanned.Text = "0";
-            // 
-            // lblNnonaktifjudul
-            // 
-            lblNnonaktifjudul.AutoSize = true;
-            lblNnonaktifjudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNnonaktifjudul.ForeColor = Color.FromArgb(79, 106, 92);
-            lblNnonaktifjudul.Location = new Point(20, 18);
-            lblNnonaktifjudul.Name = "lblNnonaktifjudul";
-            lblNnonaktifjudul.Size = new Size(105, 20);
-            lblNnonaktifjudul.TabIndex = 1;
-            lblNnonaktifjudul.Text = "Nonaktif/Ban";
-            // 
-            // pnlKartuAktif
-            // 
-            pnlKartuAktif.BackColor = Color.White;
-            pnlKartuAktif.Controls.Add(lblAktif);
-            pnlKartuAktif.Controls.Add(lblAktifJudul);
-            pnlKartuAktif.Dock = DockStyle.Fill;
-            pnlKartuAktif.Location = new Point(526, 0);
-            pnlKartuAktif.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuAktif.Name = "pnlKartuAktif";
-            pnlKartuAktif.Padding = new Padding(1);
-            pnlKartuAktif.Size = new Size(247, 100);
-            pnlKartuAktif.TabIndex = 2;
-            // 
-            // lblAktif
-            // 
-            lblAktif.AutoSize = true;
-            lblAktif.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblAktif.ForeColor = Color.FromArgb(31, 107, 66);
-            lblAktif.Location = new Point(20, 42);
-            lblAktif.Name = "lblAktif";
-            lblAktif.Size = new Size(40, 47);
-            lblAktif.TabIndex = 2;
-            lblAktif.Text = "0";
-            // 
-            // lblAktifJudul
-            // 
-            lblAktifJudul.AutoSize = true;
-            lblAktifJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAktifJudul.ForeColor = Color.FromArgb(79, 106, 92);
-            lblAktifJudul.Location = new Point(20, 18);
-            lblAktifJudul.Name = "lblAktifJudul";
-            lblAktifJudul.Size = new Size(82, 20);
-            lblAktifJudul.TabIndex = 1;
-            lblAktifJudul.Text = "Akun aktif";
+            lblTotalJudul.AutoSize = true;
+            lblTotalJudul.BackColor = Color.Transparent;
+            lblTotalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalJudul.ForeColor = Color.White;
+            lblTotalJudul.Location = new Point(21, 19);
+            lblTotalJudul.Name = "lblTotalJudul";
+            lblTotalJudul.Size = new Size(119, 20);
+            lblTotalJudul.TabIndex = 0;
+            lblTotalJudul.Text = "Total pengguna";
             // 
             // pnlKartuMenunngu
             // 
@@ -800,37 +759,87 @@
             lblMenungguJudul.TabIndex = 0;
             lblMenungguJudul.Text = "Menunggu persetujuan";
             // 
-            // lblTotal
+            // pnlKartuAktif
             // 
-            lblTotal.AutoSize = true;
-            lblTotal.BackColor = Color.Transparent;
-            lblTotal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblTotal.ForeColor = Color.White;
-            lblTotal.Location = new Point(20, 42);
-            lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(40, 47);
-            lblTotal.TabIndex = 1;
-            lblTotal.Text = "0";
+            pnlKartuAktif.BackColor = Color.White;
+            pnlKartuAktif.Controls.Add(lblAktif);
+            pnlKartuAktif.Controls.Add(lblAktifJudul);
+            pnlKartuAktif.Dock = DockStyle.Fill;
+            pnlKartuAktif.Location = new Point(526, 0);
+            pnlKartuAktif.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuAktif.Name = "pnlKartuAktif";
+            pnlKartuAktif.Padding = new Padding(1);
+            pnlKartuAktif.Size = new Size(247, 100);
+            pnlKartuAktif.TabIndex = 2;
             // 
-            // lblTotalJudul
+            // lblAktif
             // 
-            lblTotalJudul.AutoSize = true;
-            lblTotalJudul.BackColor = Color.Transparent;
-            lblTotalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotalJudul.ForeColor = Color.White;
-            lblTotalJudul.Location = new Point(20, 18);
-            lblTotalJudul.Name = "lblTotalJudul";
-            lblTotalJudul.Size = new Size(119, 20);
-            lblTotalJudul.TabIndex = 0;
-            lblTotalJudul.Text = "Total pengguna";
+            lblAktif.AutoSize = true;
+            lblAktif.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblAktif.ForeColor = Color.FromArgb(31, 107, 66);
+            lblAktif.Location = new Point(20, 42);
+            lblAktif.Name = "lblAktif";
+            lblAktif.Size = new Size(40, 47);
+            lblAktif.TabIndex = 2;
+            lblAktif.Text = "0";
+            // 
+            // lblAktifJudul
+            // 
+            lblAktifJudul.AutoSize = true;
+            lblAktifJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAktifJudul.ForeColor = Color.FromArgb(79, 106, 92);
+            lblAktifJudul.Location = new Point(20, 18);
+            lblAktifJudul.Name = "lblAktifJudul";
+            lblAktifJudul.Size = new Size(82, 20);
+            lblAktifJudul.TabIndex = 1;
+            lblAktifJudul.Text = "Akun aktif";
+            // 
+            // pnlKartuNonaktif
+            // 
+            pnlKartuNonaktif.BackColor = Color.White;
+            pnlKartuNonaktif.Controls.Add(lblBanned);
+            pnlKartuNonaktif.Controls.Add(lblNnonaktifjudul);
+            pnlKartuNonaktif.Dock = DockStyle.Fill;
+            pnlKartuNonaktif.Location = new Point(789, 0);
+            pnlKartuNonaktif.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuNonaktif.Name = "pnlKartuNonaktif";
+            pnlKartuNonaktif.Padding = new Padding(1);
+            pnlKartuNonaktif.Size = new Size(247, 100);
+            pnlKartuNonaktif.TabIndex = 3;
+            // 
+            // lblBanned
+            // 
+            lblBanned.AutoSize = true;
+            lblBanned.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblBanned.ForeColor = Color.FromArgb(31, 107, 66);
+            lblBanned.Location = new Point(20, 42);
+            lblBanned.Name = "lblBanned";
+            lblBanned.Size = new Size(40, 47);
+            lblBanned.TabIndex = 2;
+            lblBanned.Text = "0";
+            // 
+            // lblNnonaktifjudul
+            // 
+            lblNnonaktifjudul.AutoSize = true;
+            lblNnonaktifjudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNnonaktifjudul.ForeColor = Color.FromArgb(79, 106, 92);
+            lblNnonaktifjudul.Location = new Point(20, 18);
+            lblNnonaktifjudul.Name = "lblNnonaktifjudul";
+            lblNnonaktifjudul.Size = new Size(105, 20);
+            lblNnonaktifjudul.TabIndex = 1;
+            lblNnonaktifjudul.Text = "Nonaktif/Ban";
             // 
             // ucAdminDataUser
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 251, 248);
+            Controls.Add(pnlBawah);
+            Controls.Add(pnlJarak);
+            Controls.Add(tlpKartu);
             Font = new Font("Leelawadee UI", 10.5F);
             Name = "ucAdminDataUser";
+            Padding = new Padding(24);
             Size = new Size(1100, 700);
             Load += ucAdminDataUser_Load;
             pnlBawah.ResumeLayout(false);
@@ -849,17 +858,14 @@
             pnlSetujuiDalam.ResumeLayout(false);
             pnlSetujuiDalam.PerformLayout();
             tlpKartu.ResumeLayout(false);
-            pnlKartuNonaktif.ResumeLayout(false);
-            pnlKartuNonaktif.PerformLayout();
-            pnlKartuAktif.ResumeLayout(false);
-            pnlKartuAktif.PerformLayout();
+            pnlKartuTotal.ResumeLayout(false);
+            pnlKartuTotal.PerformLayout();
             pnlKartuMenunngu.ResumeLayout(false);
             pnlKartuMenunngu.PerformLayout();
-            Controls.Add(pnlBawah);
-            Controls.Add(pnlJarak);
-            Controls.Add(tlpKartu);
-
-            Padding = new Padding(24);
+            pnlKartuAktif.ResumeLayout(false);
+            pnlKartuAktif.PerformLayout();
+            pnlKartuNonaktif.ResumeLayout(false);
+            pnlKartuNonaktif.PerformLayout();
             ResumeLayout(false);
         }
 

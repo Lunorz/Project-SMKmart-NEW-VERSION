@@ -116,6 +116,8 @@ namespace project_akhir_stock_gudang
         }
 
 
+       
+
         private void FilterBerubah(object? sender, EventArgs e)
         {
             TampilkanTabel();
@@ -142,7 +144,8 @@ namespace project_akhir_stock_gudang
             );
 
 
-            if (roleDipilih != "Semua role")
+            if (!string.IsNullOrWhiteSpace(roleDipilih) &&
+       roleDipilih != "Semua role")
             {
                 hasil = hasil.Where(x =>
                     string.Equals(
@@ -153,8 +156,8 @@ namespace project_akhir_stock_gudang
                 );
             }
 
-
-            if (kategoriDipilih != "Semua kategori")
+            if (!string.IsNullOrWhiteSpace(kategoriDipilih) &&
+                kategoriDipilih != "Semua kategori")
             {
                 hasil = hasil.Where(x =>
                     string.Equals(
@@ -164,6 +167,9 @@ namespace project_akhir_stock_gudang
                     )
                 );
             }
+
+
+           
 
 
             if (!string.IsNullOrWhiteSpace(kataKunci))
@@ -192,6 +198,7 @@ namespace project_akhir_stock_gudang
         }
 
 
+
         private void TampilkanTabel()
         {
             dgvLog.Rows.Clear();
@@ -213,9 +220,14 @@ namespace project_akhir_stock_gudang
             }
 
             KosongkanDetail();
-
             dgvLog.ClearSelection();
+
+          
+
+         
+          
         }
+
 
 
 

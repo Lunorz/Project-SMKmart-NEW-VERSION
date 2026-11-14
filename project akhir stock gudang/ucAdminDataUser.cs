@@ -22,6 +22,11 @@ namespace project_akhir_stock_gudang
         private bool modePersetujuan = false;
         private List<UserAccount> semuaDataPengguna = new List<UserAccount>();
         private string emailPenggunaTerpilih = "";
+
+        private const string EmailAdminLog = "admin@gmail.com";
+
+
+
         public ucAdminDataUser()
         {
             InitializeComponent();
@@ -35,6 +40,34 @@ namespace project_akhir_stock_gudang
             UpdateStrength();
             TampilkanDataUser();
         }
+        private void CatatLogAkun(
+           string aktivitas,
+           string target,
+           string keterangan)
+        {
+            try
+            {
+                LogAktivitasJsonStore.Catat(
+                    EmailAdminLog,
+                    "Admin",
+                    "Akun",
+                    aktivitas,
+                    target,
+                    keterangan
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Operasi akun berhasil, tetapi log gagal disimpan.\n\n" +
+                    ex.Message,
+                    "Peringatan Log",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+            }
+        }
+
 
         private void ConfigureProgressBar()
         {
@@ -296,7 +329,7 @@ namespace project_akhir_stock_gudang
         {
             string kataKunci = txtCariS.Text.Trim();
             string role = cmbRoleS.Text;
-            string statusFilter = cmbRole.Text;
+            string roleFilter = cmbRole.Text;
 
             dgvSemua.Rows.Clear();
 
@@ -315,9 +348,9 @@ namespace project_akhir_stock_gudang
                     string.IsNullOrWhiteSpace(role) ||
                     u.Role == role)
                 .Where(u =>
-                    statusFilter == "Semua Status" ||
-                    string.IsNullOrWhiteSpace(statusFilter) ||
-                    u.Status == statusFilter)
+                roleFilter == "Semua Role" ||
+                string.IsNullOrWhiteSpace(roleFilter) ||
+                u.Role == roleFilter)
                 .ToList();
 
             foreach (var user in hasil)
@@ -336,7 +369,7 @@ namespace project_akhir_stock_gudang
                 dgvSemua.Rows[index].Cells["status"].Value =
                     user.Status;
 
-            
+
 
                 dgvSemua.Rows[index].Cells["btnBanned"].Value =
                     user.Status == UserStore.Diblokir
@@ -385,9 +418,9 @@ namespace project_akhir_stock_gudang
 
 
             cmbRole.Items.Clear();
-            cmbRole.Items.Add("Semua Status");
-            cmbRole.Items.Add(UserStore.Aktif);
-            cmbRole.Items.Add(UserStore.Diblokir);
+           
+            cmbRole.Items.Add("Kasir");
+            cmbRole.Items.Add("Gudang");
 
             cmbRole.SelectedIndex = 0;
         }
@@ -503,18 +536,25 @@ namespace project_akhir_stock_gudang
         }
 
 
+
         private void dgvSemua_CellContentClick(
-       object sender, DataGridViewCellEventArgs e)
+            object sender,
+            DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            
             if (dgvSemua.Columns[e.ColumnIndex].Name != "btnBanned")
                 return;
 
             string email = dgvSemua.Rows[e.RowIndex]
                 .Cells["colEmailS"].Value?.ToString() ?? "";
+
+            string username = dgvSemua.Rows[e.RowIndex]
+                .Cells["colUsernameS"].Value?.ToString() ?? "";
+
+            string role = dgvSemua.Rows[e.RowIndex]
+                .Cells["colRoleS"].Value?.ToString() ?? "";
 
             if (string.IsNullOrWhiteSpace(email))
                 return;
@@ -522,7 +562,9 @@ namespace project_akhir_stock_gudang
             string status = dgvSemua.Rows[e.RowIndex]
                 .Cells["status"].Value?.ToString() ?? "";
 
-            string konfirmasi = status == UserStore.Aktif
+            bool akanDiblokir = status == UserStore.Aktif;
+
+            string konfirmasi = akanDiblokir
                 ? "Apakah kamu yakin ingin memblokir akun ini?"
                 : "Apakah kamu yakin ingin mengaktifkan kembali akun ini?";
 
@@ -533,20 +575,42 @@ namespace project_akhir_stock_gudang
                 MessageBoxIcon.Question
             );
 
-            if (hasil == DialogResult.Yes)
+            if (hasil != DialogResult.Yes)
+                return;
+
+            bool berhasil = UserStore.ToggleBan(
+                email,
+                out string pesan
+            );
+
+            MessageBox.Show(pesan);
+
+            if (berhasil)
             {
-                bool berhasil = UserStore.ToggleBan(
-                    email, out string pesan);
-
-                MessageBox.Show(pesan);
-
-                if (berhasil)
+                if (akanDiblokir)
                 {
-                    TampilkanDataUser();
-                    AturModeBuatAkun();
+                    CatatLogAkun(
+                        "Pemblokiran akun",
+                        email,
+                        "Admin memblokir akun. Username: " +
+                        username + ", Role: " + role
+                    );
                 }
+                else
+                {
+                    CatatLogAkun(
+                        "Pengaktifan akun",
+                        email,
+                        "Admin mengaktifkan kembali akun. Username: " +
+                        username + ", Role: " + role
+                    );
+                }
+
+                TampilkanDataUser();
+                AturModeBuatAkun();
             }
         }
+
 
 
         private void TampilkanDataUser()
@@ -570,11 +634,10 @@ namespace project_akhir_stock_gudang
             PerbaruiKekuatanPassword();
         }
 
+
         private void btnSetujui_Click_1(object sender, EventArgs e)
         {
-
             string password = txtPassword.Text;
-
 
             if (modeEditPengguna)
             {
@@ -588,6 +651,21 @@ namespace project_akhir_stock_gudang
                 if (konfirmasi != DialogResult.Yes)
                     return;
 
+
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show(
+                        "Password baru wajib diisi.",
+                        "Peringatan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    txtPassword.Focus();
+                    return;
+                }
+
+
                 bool berhasil = UserStore.UpdatePassword(
                     emailPenggunaTerpilih,
                     password,
@@ -598,13 +676,19 @@ namespace project_akhir_stock_gudang
 
                 if (berhasil)
                 {
+
+                    CatatLogAkun(
+                        "Perubahan password pengguna",
+                        emailPenggunaTerpilih,
+                        "Admin berhasil mengubah password akun pengguna."
+                    );
+
                     TampilkanDataUser();
                     AturModeBuatAkun();
                 }
 
                 return;
             }
-
 
 
             if (modePersetujuan)
@@ -614,6 +698,16 @@ namespace project_akhir_stock_gudang
                     MessageBox.Show("Pilih pendaftaran terlebih dahulu.");
                     return;
                 }
+
+
+                UserAccount? pendaftar = UserStore.GetAll()
+                    .FirstOrDefault(u =>
+                        string.Equals(
+                            u.Email,
+                            emailTerpilih,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
 
                 bool berhasil = UserStore.ApproveAccount(
                     emailTerpilih,
@@ -625,6 +719,14 @@ namespace project_akhir_stock_gudang
 
                 if (berhasil)
                 {
+                    CatatLogAkun(
+                        "Persetujuan pembuatan akun",
+                        emailTerpilih,
+                        "Admin menyetujui pendaftaran akun. Username: " +
+                        (pendaftar?.Username ?? "-") +
+                        ", Role: " + (pendaftar?.Role ?? "-")
+                    );
+
                     TampilkanDataUser();
                     AturModeBuatAkun();
                 }
@@ -633,11 +735,14 @@ namespace project_akhir_stock_gudang
             }
 
 
+            string usernameBaru = txtUsername.Text.Trim();
+            string emailBaru = txtEmail.Text.Trim();
+            string roleBaru = cmbRole.Text;
 
             bool akunBerhasil = UserStore.CreateActiveAccount(
-                txtUsername.Text,
-                txtEmail.Text,
-                cmbRole.Text,
+                usernameBaru,
+                emailBaru,
+                roleBaru,
                 password,
                 out string pesanAkun
             );
@@ -646,6 +751,14 @@ namespace project_akhir_stock_gudang
 
             if (akunBerhasil)
             {
+                CatatLogAkun(
+                    "Pembuatan akun",
+                    emailBaru,
+                    "Admin membuat akun aktif secara langsung. Username: " +
+                    usernameBaru +
+                    ", Role: " + roleBaru
+                );
+
                 TampilkanDataUser();
                 AturModeBuatAkun();
             }
@@ -775,6 +888,11 @@ namespace project_akhir_stock_gudang
         }
 
         private void ucAdminDataUser_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbRole_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

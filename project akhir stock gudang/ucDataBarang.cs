@@ -15,6 +15,7 @@ namespace project_akhir_stock_gudang
     {
         private List<Produk> daftarProduk = new List<Produk>();
         private string? kodeProdukDiedit = null;
+        private string emailAdmin = "admin@gmail.com";
         public ucDataBarang()
         {
             InitializeComponent();
@@ -345,6 +346,19 @@ namespace project_akhir_stock_gudang
 
                 ProdukJsonStore.Save(daftarProduk);
 
+                LogAktivitasJsonStore.Catat(
+                emailAdmin,
+                "Admin",
+                "Barang",
+                "Menambahkan produk",
+                 produkBaru.Kode + " - " + produkBaru.Nama,
+                 "Admin menambahkan produk baru dengan kategori " +
+                 produkBaru.Kategori +
+                 " dan harga Rp" +
+                 produkBaru.Harga.ToString("N0")
+                 );
+
+
                 MuatKategori();
                 TampilkanDataProduk();
                 BersihkanInput();
@@ -428,15 +442,37 @@ namespace project_akhir_stock_gudang
 
                 produk.IsDeleted = false;
             }
-
             try
             {
                 ProdukJsonStore.Save(daftarProduk);
+
+                if (produk.IsDeleted)
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAdmin,
+                        "Admin",
+                        "Barang",
+                        "Menonaktifkan produk",
+                        produk.Kode + " - " + produk.Nama,
+                        "Admin menonaktifkan produk. Produk tidak lagi muncul di Dashboard Kasir."
+                    );
+                }
+                else
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAdmin,
+                        "Admin",
+                        "Barang",
+                        "Mengaktifkan kembali produk",
+                        produk.Kode + " - " + produk.Nama,
+                        "Admin mengaktifkan kembali produk agar muncul di Dashboard Kasir."
+                    );
+                }
+
                 TampilkanDataProduk();
             }
             catch (Exception ex)
             {
-
                 produk.IsDeleted = !produk.IsDeleted;
 
                 MessageBox.Show(

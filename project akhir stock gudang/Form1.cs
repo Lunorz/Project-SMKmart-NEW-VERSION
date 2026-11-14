@@ -53,76 +53,170 @@ namespace project_akhir_stock_gudang
             string email = textemail.Text.Trim();
             string password = textpassword.Text;
 
-            if (email == "admin@gmail.com" &&
-          password == "Admin758150!")
+          
+            if (string.IsNullOrWhiteSpace(email) ||
+                string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show(
-                    "Login admin berhasil.",
-                    "Informasi",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
+                CatatLogLogin(
+                    email,
+                    "Tidak diketahui",
+                    "Login gagal",
+                    "Email atau password belum diisi."
                 );
 
-                MainFormAdmin admin = new MainFormAdmin();
-                admin.Show();
+                MessageBox.Show(
+                    "Email dan password wajib diisi!",
+                    "Peringatan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
 
+                return;
+            }
+
+       
+            if (email == "admin@gmail.com")
+            {
+                if (password == "Admin758150!")
+                {
+                    CatatLogLogin(
+                        email,
+                        "Admin",
+                        "Login berhasil",
+                        "Admin berhasil masuk ke aplikasi."
+                    );
+
+                    MessageBox.Show(
+                        "Login admin berhasil.",
+                        "Informasi",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    MainFormAdmin admin = new MainFormAdmin();
+                    admin.Show();
+
+                    this.Hide();
+                    return;
+                }
+            }
+
+           
+            bool berhasil = UserStore.TryLogin(
+                email,
+                password,
+                out UserAccount? akun,
+                out string pesan
+            );
+
+            if (!berhasil)
+            {
+                CatatLogLogin(
+                    email,
+                    "Tidak diketahui",
+                    "Login gagal",
+                    pesan
+                );
+
+                MessageBox.Show(
+                    pesan,
+                    "Login gagal",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            if (akun == null)
+            {
+                CatatLogLogin(
+                    email,
+                    "Tidak diketahui",
+                    "Login gagal",
+                    "Data akun tidak ditemukan."
+                );
+
+                MessageBox.Show("Data akun tidak ditemukan.");
+                return;
+            }
+
+            CatatLogLogin(
+                email,
+                akun.Role,
+                "Login berhasil",
+                "Pengguna berhasil masuk ke aplikasi."
+            );
+
+            MessageBox.Show(
+                $"Login berhasil sebagai {akun.Role}.",
+                "Login berhasil",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
+            if (akun.Role == "Kasir")
+            {
+                Dashboard_kasir dashboard =
+                    new Dashboard_kasir(
+                        new List<DetailTransaksi>(),
+                        akun.Username
+                    );
+
+                dashboard.Show();
                 this.Hide();
-
-                return;
             }
-
-
-            if (email == "" || password == "")
+            else if (akun.Role == "Gudang")
             {
-                MessageBox.Show("email dan password wajib diisi!");
-                return;
+                MainFormGudang dashboard =
+                    new MainFormGudang(akun.Username);
+
+                dashboard.Show();
+                this.Hide();
             }
-
-
+            else
             {
-                bool berhasil = UserStore.TryLogin(
-                    textemail.Text.Trim(),
-                    textpassword.Text,
-                    out UserAccount? akun,
-                    out string pesan);
-
-                if (!berhasil)
-                {
-                    MessageBox.Show(pesan, "Login gagal",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                MessageBox.Show($"Login berhasil sebagai {akun!.Role}.", "Login berhasil",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (akun == null)
-                {
-                    MessageBox.Show("Email atau password salah.");
-                    return;
-                }
-
-                if (akun.Role == "Kasir")
-                {
-                    Dashboard_kasir dashboard = new Dashboard_kasir(new List<DetailTransaksi>(), akun.Username);
-                    dashboard.Show();
-                    this.Hide();
-                }
-                else if (akun.Role == "Gudang")
-                {
-                    MainFormGudang dashboard = new MainFormGudang(akun.Username);
-                    dashboard.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Role akun tidak dikenali.");
-                }
-
+                MessageBox.Show("Role akun tidak dikenali.");
             }
 
+                 
+        }
+      
+        
 
+      
+        private void CatatLogLogin(
+            string pengguna,
+            string role,
+            string aktivitas,
+            string keterangan)
+        {
+            try
+            {
+                LogAktivitasJsonStore.Catat(
+                    pengguna,
+                    role,
+                    "Akses",
+                    aktivitas,
+                    pengguna,
+                    keterangan
+                );
+
+               
+            
             }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Gagal menyimpan log aktivitas.\n\n" + ex.Message,
+                    "Kesalahan Log",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
 
         private void label8_Click(object sender, EventArgs e)
         {

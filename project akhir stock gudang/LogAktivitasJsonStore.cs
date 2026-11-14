@@ -81,5 +81,10 @@ namespace project_akhir_stock_gudang
                 Keterangan = keterangan ?? ""
             });
         }
+
+        public static string AmbilLokasiFile()
+        {
+            return filePath;
+        }
     }
 }
