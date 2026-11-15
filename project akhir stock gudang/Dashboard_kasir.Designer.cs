@@ -60,7 +60,6 @@
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(kembali_ke_login2);
-            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(686, 102);
@@ -120,7 +119,7 @@
             panel2.Controls.Add(panel3);
             panel2.Dock = DockStyle.Top;
             panel2.ForeColor = SystemColors.Control;
-            panel2.Location = new Point(0, 102);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(686, 133);
             panel2.TabIndex = 3;
@@ -180,6 +179,7 @@
             // 
             // panel5
             // 
+            panel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel5.BackColor = Color.Honeydew;
             panel5.Controls.Add(menuju_dashboard2);
             panel5.Controls.Add(tambah_ke_keranjang);
@@ -188,10 +188,9 @@
             panel5.Controls.Add(listbox_barang);
             panel5.Controls.Add(textbox_kategori_barang);
             panel5.Controls.Add(label3);
-            panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 235);
             panel5.Name = "panel5";
-            panel5.Size = new Size(686, 645);
+            panel5.Size = new Size(686, 842);
             panel5.TabIndex = 4;
             panel5.Paint += panel5_Paint;
             // 
@@ -287,7 +286,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 880);
+            ClientSize = new Size(686, 961);
             Controls.Add(panel5);
             Controls.Add(panel2);
             Controls.Add(panel1);

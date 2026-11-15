@@ -16,6 +16,8 @@ namespace project_akhir_stock_gudang
         public string PasswordHash { get; set; } = "";
         public string PasswordSalt { get; set; } = "";
         public int PercobaanLoginGagal { get; set; } = 0;
+        public DateTime? TerakhirLogin { get; set; }
+        public DateTime? TerakhirGantiPassword { get; set; }
     }
 }
 

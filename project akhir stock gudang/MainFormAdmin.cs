@@ -26,6 +26,7 @@ namespace project_akhir_stock_gudang
         ucAdminDataUser? _halUser;
         ucDataBarang? _halBarang;
         ucLogAktivitas? _halLogAktivitas;
+        ucAkunSaya? _halLogAkun;
 
         readonly Font _fReg = new("Leelawadee UI", 10.5f);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
@@ -39,7 +40,7 @@ namespace project_akhir_stock_gudang
         }
         void Tandai(Button aktif)
         {
-            var semua = new[] { btnMenuDashboard, btnMenuUser, btnDataBarang, btnMenuLapPenjualan, btnMenuLapGudang };
+            var semua = new[] { btnMenuDashboard, btnMenuUser, btnDataBarang, btnMenuLapPenjualan, btnMenuLapGudang,btnLogAktivitas,btnPengaturan };
             foreach (var b in semua)
             {
                 bool on = b == aktif;
@@ -91,7 +92,7 @@ namespace project_akhir_stock_gudang
 
         private void btnKeluar_Click(object sender, EventArgs e)
         {
-         
+
             try
             {
                 LogAktivitasJsonStore.Catat(
@@ -154,6 +155,16 @@ namespace project_akhir_stock_gudang
             _halLogAktivitas.RefreshLog();
 
             Buka(_halLogAktivitas, "Log aktivitas", btnLogAktivitas);
+        }
+
+        private void btnPengaturan_Click(object sender, EventArgs e)
+        {
+            _halLogAkun ??= new ucAkunSaya(emailAktif,
+            "Administrator",
+            "Admin");
+           
+
+            Buka(_halLogAkun, "Akun Saya", btnPengaturan);
         }
     }
 }

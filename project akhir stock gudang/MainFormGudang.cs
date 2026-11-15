@@ -16,10 +16,14 @@ namespace project_akhir_stock_gudang
         ucBarangMasuk? _masuk;
         ucBarangKeluar? _keluar;
         ucStockBarang? _stok;
+        ucAkunSaya? _AkunSaya;
+
         private readonly string emailAktif;
 
         private string username;
         private string usernamePetugas;
+        private readonly string usernameAktif;
+
 
         readonly Font _fReg = new("Leelawadee UI", 10.5f, FontStyle.Regular);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
@@ -43,7 +47,7 @@ namespace project_akhir_stock_gudang
             pnlContentGudangMainform.Controls.Add(halaman);
             lblJudulGudangMainform.Text = judul;
 
-            foreach (var b in new[] { btnMenuDashboardGudangMainform, btnMenuMasukGudangMainform, btnMenuKeluarGudangMainform, btnMenuStokGudangMainform })
+            foreach (var b in new[] { btnMenuDashboardGudangMainform, btnMenuMasukGudangMainform, btnMenuKeluarGudangMainform, btnMenuStokGudangMainform,btnPengaturan })
             {
                 bool aktif = b == menu;
                 b.BackColor = aktif ? Color.FromArgb(26, 90, 56) : Color.FromArgb(38, 119, 74);
@@ -125,6 +129,14 @@ namespace project_akhir_stock_gudang
         private void pnlSideBarGudangMainform_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnPengaturan_Click(object sender, EventArgs e)
+        {
+            _AkunSaya ??= new ucAkunSaya(emailAktif,
+            usernameAktif,
+            "Gudang");
+            Buka(_AkunSaya, "Akun Saya", btnPengaturan);
         }
     }
 }

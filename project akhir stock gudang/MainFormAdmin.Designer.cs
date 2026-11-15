@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnlSideBar = new GradientPanel();
+            btnLogAktivitas = new Button();
             btnKeluar = new Button();
             pnlAktif = new Panel();
             btnMenuLapPenjualan = new Button();
@@ -42,7 +43,7 @@
             pnlTopline = new Panel();
             pnlContent = new Panel();
             ucAdminDataUser1 = new ucAdminDataUser();
-            btnLogAktivitas = new Button();
+            btnPengaturan = new Button();
             pnlSideBar.SuspendLayout();
             pnlTopBar.SuspendLayout();
             pnlContent.SuspendLayout();
@@ -54,6 +55,7 @@
             pnlSideBar.Angle = 90F;
             pnlSideBar.ColorBottom = Color.FromArgb(26, 90, 56);
             pnlSideBar.ColorTop = Color.FromArgb(38, 119, 74);
+            pnlSideBar.Controls.Add(btnPengaturan);
             pnlSideBar.Controls.Add(btnLogAktivitas);
             pnlSideBar.Controls.Add(btnKeluar);
             pnlSideBar.Controls.Add(pnlAktif);
@@ -68,6 +70,23 @@
             pnlSideBar.Padding = new Padding(16, 24, 16, 24);
             pnlSideBar.Size = new Size(260, 879);
             pnlSideBar.TabIndex = 0;
+            // 
+            // btnLogAktivitas
+            // 
+            btnLogAktivitas.BackColor = Color.FromArgb(38, 119, 74);
+            btnLogAktivitas.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnLogAktivitas.FlatAppearance.BorderSize = 0;
+            btnLogAktivitas.FlatStyle = FlatStyle.Flat;
+            btnLogAktivitas.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogAktivitas.ForeColor = Color.FromArgb(230, 247, 238);
+            btnLogAktivitas.Location = new Point(16, 344);
+            btnLogAktivitas.Name = "btnLogAktivitas";
+            btnLogAktivitas.Size = new Size(228, 44);
+            btnLogAktivitas.TabIndex = 7;
+            btnLogAktivitas.Text = "Log aktivitas";
+            btnLogAktivitas.TextAlign = ContentAlignment.MiddleLeft;
+            btnLogAktivitas.UseVisualStyleBackColor = false;
+            btnLogAktivitas.Click += btnLogAktivitas_Click;
             // 
             // btnKeluar
             // 
@@ -238,25 +257,26 @@
             ucAdminDataUser1.Font = new Font("Leelawadee UI", 10.5F);
             ucAdminDataUser1.Location = new Point(0, 0);
             ucAdminDataUser1.Name = "ucAdminDataUser1";
+            ucAdminDataUser1.Padding = new Padding(24);
             ucAdminDataUser1.Size = new Size(1270, 878);
             ucAdminDataUser1.TabIndex = 0;
             // 
-            // btnLogAktivitas
+            // btnPengaturan
             // 
-            btnLogAktivitas.BackColor = Color.FromArgb(38, 119, 74);
-            btnLogAktivitas.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
-            btnLogAktivitas.FlatAppearance.BorderSize = 0;
-            btnLogAktivitas.FlatStyle = FlatStyle.Flat;
-            btnLogAktivitas.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogAktivitas.ForeColor = Color.FromArgb(230, 247, 238);
-            btnLogAktivitas.Location = new Point(16, 344);
-            btnLogAktivitas.Name = "btnLogAktivitas";
-            btnLogAktivitas.Size = new Size(228, 44);
-            btnLogAktivitas.TabIndex = 7;
-            btnLogAktivitas.Text = "Log aktivitas";
-            btnLogAktivitas.TextAlign = ContentAlignment.MiddleLeft;
-            btnLogAktivitas.UseVisualStyleBackColor = false;
-            btnLogAktivitas.Click += btnLogAktivitas_Click;
+            btnPengaturan.BackColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatAppearance.BorderSize = 0;
+            btnPengaturan.FlatStyle = FlatStyle.Flat;
+            btnPengaturan.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPengaturan.ForeColor = Color.FromArgb(230, 247, 238);
+            btnPengaturan.Location = new Point(16, 394);
+            btnPengaturan.Name = "btnPengaturan";
+            btnPengaturan.Size = new Size(228, 44);
+            btnPengaturan.TabIndex = 8;
+            btnPengaturan.Text = "Pengaturan";
+            btnPengaturan.TextAlign = ContentAlignment.MiddleLeft;
+            btnPengaturan.UseVisualStyleBackColor = false;
+            btnPengaturan.Click += btnPengaturan_Click;
             // 
             // MainFormAdmin
             // 
@@ -298,5 +318,6 @@
         private Button btnKeluar;
         private ucAdminDataUser ucAdminDataUser1;
         private Button btnLogAktivitas;
+        private Button btnPengaturan;
     }
 }

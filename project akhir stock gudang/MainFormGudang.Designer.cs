@@ -41,6 +41,7 @@
             pnlTopLineGudangMainform = new Panel();
             pnlContentGudangMainform = new Panel();
             ucDashboardGudang1 = new ucDashboardGudang();
+            btnPengaturan = new Button();
             pnlSideBarGudangMainform.SuspendLayout();
             pnlTopBarGudangMainform.SuspendLayout();
             pnlContentGudangMainform.SuspendLayout();
@@ -52,6 +53,7 @@
             pnlSideBarGudangMainform.Angle = 90F;
             pnlSideBarGudangMainform.ColorBottom = Color.FromArgb(26, 90, 56);
             pnlSideBarGudangMainform.ColorTop = Color.FromArgb(38, 119, 74);
+            pnlSideBarGudangMainform.Controls.Add(btnPengaturan);
             pnlSideBarGudangMainform.Controls.Add(btmMenuKeluar);
             pnlSideBarGudangMainform.Controls.Add(btnMenuKeluarGudangMainform);
             pnlSideBarGudangMainform.Controls.Add(btnMenuStokGudangMainform);
@@ -205,6 +207,20 @@
             ucDashboardGudang1.Size = new Size(1270, 879);
             ucDashboardGudang1.TabIndex = 0;
             // 
+            // btnPengaturan
+            // 
+            btnPengaturan.BackColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatStyle = FlatStyle.Flat;
+            btnPengaturan.ForeColor = Color.FromArgb(230, 247, 238);
+            btnPengaturan.Location = new Point(15, 290);
+            btnPengaturan.Name = "btnPengaturan";
+            btnPengaturan.Size = new Size(228, 44);
+            btnPengaturan.TabIndex = 7;
+            btnPengaturan.Text = "Pengaturan";
+            btnPengaturan.UseVisualStyleBackColor = false;
+            btnPengaturan.Click += btnPengaturan_Click;
+            // 
             // MainFormGudang
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -242,5 +258,6 @@
         private Button btnMenuKeluarGudangMainform;
         private Button btnMenuStokGudangMainform;
         private ucDashboardGudang ucDashboardGudang1;
+        private Button btnPengaturan;
     }
 }

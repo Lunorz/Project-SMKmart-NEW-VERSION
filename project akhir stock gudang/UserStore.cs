@@ -457,12 +457,114 @@ namespace project_akhir_stock_gudang
 
          
             user.PercobaanLoginGagal = 0;
+            user.TerakhirLogin = DateTime.Now;
 
             SaveInternal(users);
 
             account = user;
             message = "Login berhasil.";
 
+            return true;
+        }
+
+        public static bool GantiPasswordSendiri(
+        string email,
+        string passwordLama,
+        string passwordBaru,
+        out string message)
+        {
+            List<UserAccount> users = LoadInternal();
+
+            UserAccount? user = users.FirstOrDefault(u =>
+                string.Equals(
+                    u.Email,
+                    email,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
+
+            if (user == null)
+            {
+                message = "Akun tidak ditemukan.";
+                return false;
+            }
+
+            if (user.Status != Aktif)
+            {
+                message = "Password hanya dapat diubah pada akun aktif.";
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(passwordLama) ||
+                string.IsNullOrWhiteSpace(passwordBaru))
+            {
+                message = "Password lama dan password baru wajib diisi.";
+                return false;
+            }
+
+            try
+            {
+                byte[] saltLama =
+                    Convert.FromBase64String(user.PasswordSalt);
+
+                byte[] hashTersimpan =
+                    Convert.FromBase64String(user.PasswordHash);
+
+                byte[] hashLama = Rfc2898DeriveBytes.Pbkdf2(
+                    passwordLama,
+                    saltLama,
+                    210000,
+                    HashAlgorithmName.SHA256,
+                    32
+                );
+
+                if (!CryptographicOperations.FixedTimeEquals(
+                    hashLama, hashTersimpan))
+                {
+                    message = "Password lama yang kamu masukkan salah.";
+                    return false;
+                }
+            }
+            catch (FormatException)
+            {
+                message = "Data keamanan akun tidak valid.";
+                return false;
+            }
+
+            if (passwordLama == passwordBaru)
+            {
+                message = "Password baru harus berbeda dari password lama.";
+                return false;
+            }
+
+
+            if (passwordBaru.Length < 8 ||
+                !passwordBaru.Any(char.IsLower) ||
+                !passwordBaru.Any(char.IsUpper) ||
+                !passwordBaru.Any(char.IsDigit) ||
+                !passwordBaru.Any(c => !char.IsLetterOrDigit(c)))
+            {
+                message = "Password baru belum memenuhi semua kriteria.";
+                return false;
+            }
+
+            byte[] saltBaru = RandomNumberGenerator.GetBytes(16);
+
+            byte[] hashBaru = Rfc2898DeriveBytes.Pbkdf2(
+                passwordBaru,
+                saltBaru,
+                210000,
+                HashAlgorithmName.SHA256,
+                32
+            );
+
+            user.PasswordSalt = Convert.ToBase64String(saltBaru);
+            user.PasswordHash = Convert.ToBase64String(hashBaru);
+            user.TerakhirGantiPassword = DateTime.Now;
+
+            SaveInternal(users);
+
+            message = "Password berhasil diperbarui.";
             return true;
         }
     }

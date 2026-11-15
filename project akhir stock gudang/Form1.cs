@@ -74,10 +74,32 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-       
-            if (email == "admin@gmail.com")
+            if (email.Equals(
+            "admin@gmail.com",
+            StringComparison.OrdinalIgnoreCase))
             {
-                if (password == "Admin758150!")
+                bool loginAdmin = false;
+
+                try
+                {
+                    loginAdmin = AdminPasswordStore.TryLogin(
+                        email,
+                        password
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Gagal membaca data akun Admin:\n" + ex.Message,
+                        "Kesalahan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+
+                    return;
+                }
+
+                if (loginAdmin)
                 {
                     CatatLogLogin(
                         email,
@@ -99,9 +121,25 @@ namespace project_akhir_stock_gudang
                     this.Hide();
                     return;
                 }
+
+                CatatLogLogin(
+                    email,
+                    "Admin",
+                    "Login gagal",
+                    "Password Admin salah."
+                );
+
+                MessageBox.Show(
+                    "Email atau password Admin salah.",
+                    "Login gagal",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
             }
 
-           
+
             bool berhasil = UserStore.TryLogin(
                 email,
                 password,
@@ -169,7 +207,7 @@ namespace project_akhir_stock_gudang
             else if (akun.Role == "Gudang")
             {
                 MainFormGudang dashboard =
-                    new MainFormGudang(akun.Username, email);
+                    new MainFormGudang(akun.Username, akun.Email);
 
                 dashboard.Show();
                 this.Hide();

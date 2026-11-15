@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace project_akhir_stock_gudang
 {
-    public partial class ucHargaBatch : UserControl
+    public partial class ucAkunSayaKasir : UserControl
     {
-        public ucHargaBatch()
+        public ucAkunSayaKasir()
         {
             InitializeComponent();
         }
