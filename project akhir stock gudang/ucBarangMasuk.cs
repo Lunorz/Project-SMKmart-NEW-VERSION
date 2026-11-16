@@ -164,12 +164,14 @@ namespace project_akhir_stock_gudang
             foreach (BarangMasuk item in data.OrderByDescending(x => x.Waktu))
             {
                 dataGridView1.Rows.Add(
-                    item.Waktu.ToString("dd/MM/yyyy HH:mm"),
-                    item.NamaBarang,
-                    item.Jumlah,
-                    item.AsalBarang,
-                    item.NomorSuratJalan
-                );
+                item.Waktu.ToString("dd/MM/yyyy HH:mm"),
+                item.NamaBarang,
+                item.Jumlah,
+                item.HargaBeli.ToString("N0"),
+                 item.AsalBarang,
+                 item.NomorSuratJalan
+                 );
+                
             }
         }
 
@@ -196,23 +198,20 @@ namespace project_akhir_stock_gudang
             txtCatatanGudang2.Clear();
 
             cmbBarangGudang2.Focus();
+            nudHargaBeli.Value = 0;
         }
+
 
         private void btnSimpanGudang2_Click(object sender, EventArgs e)
         {
-
             if (cmbBarangGudang2.SelectedItem == null)
             {
-                MessageBox.Show(
-                    "Silakan pilih barang terlebih dahulu."
-                );
+                MessageBox.Show("Silakan pilih barang terlebih dahulu.");
                 cmbBarangGudang2.Focus();
                 return;
             }
 
-
-            Produk produkDipilih =
-                cmbBarangGudang2.SelectedItem as Produk;
+            Produk produkDipilih = cmbBarangGudang2.SelectedItem as Produk;
 
             if (produkDipilih == null)
             {
@@ -224,42 +223,42 @@ namespace project_akhir_stock_gudang
 
             if (jumlah <= 0)
             {
-                MessageBox.Show(
-                    "Jumlah barang masuk harus lebih dari 0."
-                );
+                MessageBox.Show("Jumlah barang masuk harus lebih dari 0.");
                 nudJumlahGudang2.Focus();
                 return;
             }
 
+            decimal hargaBeli = nudHargaBeli.Value;
+
+            if (hargaBeli <= 0)
+            {
+                MessageBox.Show("Harga beli harus lebih dari 0.");
+                nudHargaBeli.Focus();
+                return;
+            }
 
             string asal = txtAsalGudang2.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(asal))
             {
-                MessageBox.Show(
-                    "Asal barang harus diisi."
-                );
+                MessageBox.Show("Asal barang harus diisi.");
                 txtAsalGudang2.Focus();
                 return;
             }
-
 
             string nomorSurat = txtSJGudang2.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(nomorSurat))
             {
-                MessageBox.Show(
-                    "Nomor surat jalan harus diisi."
-                );
+                MessageBox.Show("Nomor surat jalan harus diisi.");
                 txtSJGudang2.Focus();
                 return;
             }
 
             try
             {
-
-                List<Produk> produkTerbaru =
-                    ProdukJsonStore.Load();
+                // Ambil data produk terbaru
+                List<Produk> produkTerbaru = ProdukJsonStore.Load();
 
                 Produk produk = produkTerbaru.FirstOrDefault(
                     p => p.Kode == produkDipilih.Kode
@@ -270,71 +269,111 @@ namespace project_akhir_stock_gudang
                     MessageBox.Show(
                         "Produk tidak ditemukan atau sudah tidak aktif."
                     );
+
                     MuatProduk();
                     return;
                 }
-
 
                 if (produk.Stok > int.MaxValue - jumlah)
                 {
                     MessageBox.Show("Jumlah stok terlalu besar.");
                     return;
                 }
+
                 int stokSebelum = produk.Stok;
+                DateTime waktuMasuk = DateTime.Now;
 
-
+              
                 BarangMasuk dataBaru = new BarangMasuk
                 {
-                    Waktu = DateTime.Now,
+                    Waktu = waktuMasuk,
                     KodeBarang = produk.Kode,
                     NamaBarang = produk.Nama,
                     Jumlah = jumlah,
+                    HargaBeli = hargaBeli,
                     AsalBarang = asal,
                     NomorSuratJalan = nomorSurat,
                     Catatan = txtCatatanGudang2.Text.Trim(),
                     Petugas = usernamePetugas
                 };
 
+               
+                LapisanStok lapisanBaru = new LapisanStok
+                {
+                    IdLapisan = Guid.NewGuid().ToString(),
+                    KodeBarang = produk.Kode,
+                    NamaBarang = produk.Nama,
+                    TanggalMasuk = waktuMasuk,
+                    Petugas = usernamePetugas,
+                    NomorSuratJalan = nomorSurat,
+                    StokAwal = jumlah,
+                    SisaStok = jumlah,
+                    HargaBeli = hargaBeli
+                };
 
+              
                 produk.Stok += jumlah;
 
+               
+                List<LapisanStok> semuaLapisan =
+                    LapisanStokJsonStore.Load();
 
-                ProdukJsonStore.Save(produkTerbaru);
+                semuaLapisan.Add(lapisanBaru);
 
+                LapisanStokJsonStore.Save(semuaLapisan);
 
-                riwayatBarangMasuk =
-                    BarangMasukJsonStore.Load();
-
+             
+                riwayatBarangMasuk = BarangMasukJsonStore.Load();
                 riwayatBarangMasuk.Add(dataBaru);
 
-                BarangMasukJsonStore.Save(
-                    riwayatBarangMasuk
-                );
-                LogAktivitasJsonStore.Catat(
-                usernamePetugas,
-                "Pengelola Gudang",
-                "Barang Masuk",
-                "Mencatat barang masuk",
-                produk.Kode + " - " + produk.Nama,
-               "Petugas mencatat barang masuk sebanyak " +
-               jumlah + " unit dari " + asal +
-               ". Nomor surat jalan: " + nomorSurat +
-               ". Stok sebelumnya: " + stokSebelum +
-               ". Stok sekarang: " + produk.Stok +
-               ". Catatan: " + txtCatatanGudang2.Text.Trim()
-               );
+                BarangMasukJsonStore.Save(riwayatBarangMasuk);
 
+               
+                ProdukJsonStore.Save(produkTerbaru);
+
+               
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        usernamePetugas,
+                        "Pengelola Gudang",
+                        "Barang Masuk",
+                        "Mencatat barang masuk",
+                        produk.Kode + " - " + produk.Nama,
+                        "Petugas mencatat barang masuk sebanyak " +
+                        jumlah + " unit dari " + asal +
+                        ". Harga beli per unit: Rp" +
+                        hargaBeli.ToString("N0") +
+                        ". Total pembelian: Rp" +
+                        (hargaBeli * jumlah).ToString("N0") +
+                        ". Nomor surat jalan: " + nomorSurat +
+                        ". Stok sebelumnya: " + stokSebelum +
+                        ". Stok sekarang: " + produk.Stok +
+                        ". Catatan: " + txtCatatanGudang2.Text.Trim()
+                    );
+                }
+                catch (Exception errorLog)
+                {
+                    MessageBox.Show(
+                        "Barang masuk berhasil disimpan, tetapi log aktivitas gagal dicatat:\n" +
+                        errorLog.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
 
                 MuatProduk();
-
                 TampilkanRiwayatBarangMasuk();
-
                 BersihkanFormBarangMasuk();
 
                 MessageBox.Show(
-                    "Barang masuk berhasil disimpan.\n" +
-                    "Stok " + produk.Nama +
-                    " bertambah sebanyak " + jumlah + " unit.",
+                    "Barang masuk berhasil disimpan.\n\n" +
+                    "Nama barang: " + produk.Nama +
+                    "\nJumlah masuk: " + jumlah +
+                    "\nHarga beli/unit: Rp" + hargaBeli.ToString("N0") +
+                    "\nTotal pembelian: Rp" + (hargaBeli * jumlah).ToString("N0") +
+                    "\nStok sekarang: " + produk.Stok,
                     "Berhasil",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information

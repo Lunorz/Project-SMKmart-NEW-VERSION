@@ -11,7 +11,8 @@ namespace project_akhir_stock_gudang
         public string NamaBarang { get; set; } = "";
 
         public int Jumlah { get; set; }
-
+        public decimal HargaBeli { get; set; }
+        public decimal HargaJual { get; set; }
         public string AsalBarang { get; set; } = "";
 
         public string NomorSuratJalan { get; set; } = "";
@@ -19,5 +20,6 @@ namespace project_akhir_stock_gudang
         public string Catatan { get; set; } = "";
 
         public string Petugas { get; set; } = "";
+        
     }
 }

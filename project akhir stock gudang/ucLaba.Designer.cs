@@ -35,41 +35,19 @@
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             pnlPage = new Panel();
-            tlpKartu = new TableLayoutPanel();
-            pnlJarak = new Panel();
             pnlBawah = new Panel();
-            pnlKartuModal = new GradientPanel();
-            pnlKartuPotensi = new Panel();
-            pnlKartuNaik = new Panel();
-            pnlKartuMargin = new Panel();
-            pnlKartuPotensiDalam = new Panel();
-            pnlKartuNaikDalam = new Panel();
-            PnlKartuMarginDalam = new Panel();
-            lblModalJudul = new Label();
-            lblMarginJudul = new Label();
-            lblNaikDalam = new Label();
-            lblPotensiJudul = new Label();
-            lblModal = new Label();
-            lblPotensi = new Label();
-            lblNaik = new Label();
-            lblMargin = new Label();
-            pnlAturLuar = new Panel();
-            pnlGap = new Panel();
             pnlKartuTabel = new Panel();
             pnlKartuTabelDalam = new Panel();
             tabUtama = new TabControl();
             tabDaftar = new TabPage();
-            tabLapisan = new TabPage();
-            tabRiwayat = new TabPage();
             dgvDaftar = new DataGridView();
-            dgvRiwayat = new DataGridView();
-            lblCatatanLapisan = new Label();
             colKode = new DataGridViewTextBoxColumn();
             colBarang = new DataGridViewTextBoxColumn();
             colStok = new DataGridViewTextBoxColumn();
             colBeliTerakhir = new DataGridViewTextBoxColumn();
             colJual = new DataGridViewTextBoxColumn();
             colLabaBaru = new DataGridViewTextBoxColumn();
+            tabLapisan = new TabPage();
             dgvLapisan = new DataGridView();
             colLapisan = new DataGridViewTextBoxColumn();
             colMasuk = new DataGridViewTextBoxColumn();
@@ -78,45 +56,77 @@
             colJualL = new DataGridViewTextBoxColumn();
             colLaba = new DataGridViewTextBoxColumn();
             colPotensi = new DataGridViewTextBoxColumn();
+            lblCatatanLapisan = new Label();
+            tabRiwayat = new TabPage();
+            dgvRiwayat = new DataGridView();
             colWaktuR = new DataGridViewTextBoxColumn();
             colBarangR = new DataGridViewTextBoxColumn();
             colBeliR = new DataGridViewTextBoxColumn();
             colJualR = new DataGridViewTextBoxColumn();
             colOleh = new DataGridViewTextBoxColumn();
             colAlasan = new DataGridViewTextBoxColumn();
+            pnlGap = new Panel();
+            pnlAturLuar = new Panel();
             pnlAturDalam = new Panel();
+            pnlDampak = new Panel();
+            lblDampakJudul = new Label();
+            txtAlasan = new TextBox();
+            nudJualBaru = new NumericUpDown();
+            lblAlasan = new Label();
+            txtJualSekarang = new TextBox();
+            txtBeliTerakhir = new TextBox();
+            lblJualSekarang = new Label();
+            lblJualBaru = new Label();
+            lblBeliTerakhir = new Label();
             pnlHeaderAtur = new GradientPanel();
             lblJudulAtur = new Label();
-            lblBeliTerakhir = new Label();
-            lblJualBaru = new Label();
-            lblJualSekarang = new Label();
-            txtBeliTerakhir = new TextBox();
-            txtJualSekarang = new TextBox();
-            lblAlasan = new Label();
-            nudJualBaru = new NumericUpDown();
+            pnlJarak = new Panel();
+            tlpKartu = new TableLayoutPanel();
+            pnlKartuMargin = new Panel();
+            PnlKartuMarginDalam = new Panel();
+            lblMargin = new Label();
+            lblMarginJudul = new Label();
+            pnlKartuNaik = new Panel();
+            pnlKartuNaikDalam = new Panel();
+            lblNaik = new Label();
+            lblNaikDalam = new Label();
+            pnlKartuModal = new GradientPanel();
+            lblModal = new Label();
+            lblModalJudul = new Label();
+            pnlKartuPotensi = new Panel();
+            pnlKartuPotensiDalam = new Panel();
+            lblPotensi = new Label();
+            lblPotensiJudul = new Label();
+            lblDampakLama = new Label();
+            lblDamapakLamaNilai = new Label();
+            lblDampakBaru = new Label();
+            lblDampakBaruNilai = new Label();
+            btnSimpanHarga = new Button();
+            btnBatal = new Button();
             pnlPage.SuspendLayout();
-            tlpKartu.SuspendLayout();
             pnlBawah.SuspendLayout();
-            pnlKartuModal.SuspendLayout();
-            pnlKartuPotensi.SuspendLayout();
-            pnlKartuNaik.SuspendLayout();
-            pnlKartuMargin.SuspendLayout();
-            pnlKartuPotensiDalam.SuspendLayout();
-            pnlKartuNaikDalam.SuspendLayout();
-            PnlKartuMarginDalam.SuspendLayout();
-            pnlAturLuar.SuspendLayout();
             pnlKartuTabel.SuspendLayout();
             pnlKartuTabelDalam.SuspendLayout();
             tabUtama.SuspendLayout();
             tabDaftar.SuspendLayout();
-            tabLapisan.SuspendLayout();
-            tabRiwayat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDaftar).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).BeginInit();
+            tabLapisan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLapisan).BeginInit();
+            tabRiwayat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).BeginInit();
+            pnlAturLuar.SuspendLayout();
             pnlAturDalam.SuspendLayout();
-            pnlHeaderAtur.SuspendLayout();
+            pnlDampak.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudJualBaru).BeginInit();
+            pnlHeaderAtur.SuspendLayout();
+            tlpKartu.SuspendLayout();
+            pnlKartuMargin.SuspendLayout();
+            PnlKartuMarginDalam.SuspendLayout();
+            pnlKartuNaik.SuspendLayout();
+            pnlKartuNaikDalam.SuspendLayout();
+            pnlKartuModal.SuspendLayout();
+            pnlKartuPotensi.SuspendLayout();
+            pnlKartuPotensiDalam.SuspendLayout();
             SuspendLayout();
             // 
             // pnlPage
@@ -131,33 +141,6 @@
             pnlPage.Size = new Size(1238, 805);
             pnlPage.TabIndex = 0;
             // 
-            // tlpKartu
-            // 
-            tlpKartu.ColumnCount = 4;
-            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tlpKartu.Controls.Add(pnlKartuMargin, 3, 0);
-            tlpKartu.Controls.Add(pnlKartuNaik, 2, 0);
-            tlpKartu.Controls.Add(pnlKartuModal, 0, 0);
-            tlpKartu.Controls.Add(pnlKartuPotensi, 1, 0);
-            tlpKartu.Dock = DockStyle.Top;
-            tlpKartu.Location = new Point(24, 24);
-            tlpKartu.Name = "tlpKartu";
-            tlpKartu.RowCount = 1;
-            tlpKartu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tlpKartu.Size = new Size(1190, 100);
-            tlpKartu.TabIndex = 0;
-            // 
-            // pnlJarak
-            // 
-            pnlJarak.Dock = DockStyle.Top;
-            pnlJarak.Location = new Point(24, 124);
-            pnlJarak.Name = "pnlJarak";
-            pnlJarak.Size = new Size(1190, 24);
-            pnlJarak.TabIndex = 1;
-            // 
             // pnlBawah
             // 
             pnlBawah.BackColor = Color.Transparent;
@@ -169,204 +152,6 @@
             pnlBawah.Name = "pnlBawah";
             pnlBawah.Size = new Size(1190, 633);
             pnlBawah.TabIndex = 2;
-            // 
-            // pnlKartuModal
-            // 
-            pnlKartuModal.Angle = 45F;
-            pnlKartuModal.ColorBottom = Color.FromArgb(62, 156, 106);
-            pnlKartuModal.ColorTop = Color.FromArgb(31, 107, 66);
-            pnlKartuModal.Controls.Add(lblModal);
-            pnlKartuModal.Controls.Add(lblModalJudul);
-            pnlKartuModal.Dock = DockStyle.Fill;
-            pnlKartuModal.Location = new Point(0, 0);
-            pnlKartuModal.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuModal.Name = "pnlKartuModal";
-            pnlKartuModal.Size = new Size(281, 100);
-            pnlKartuModal.TabIndex = 0;
-            // 
-            // pnlKartuPotensi
-            // 
-            pnlKartuPotensi.BackColor = Color.FromArgb(213, 235, 223);
-            pnlKartuPotensi.Controls.Add(pnlKartuPotensiDalam);
-            pnlKartuPotensi.Dock = DockStyle.Fill;
-            pnlKartuPotensi.Location = new Point(297, 0);
-            pnlKartuPotensi.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuPotensi.Name = "pnlKartuPotensi";
-            pnlKartuPotensi.Padding = new Padding(1);
-            pnlKartuPotensi.Size = new Size(281, 100);
-            pnlKartuPotensi.TabIndex = 1;
-            // 
-            // pnlKartuNaik
-            // 
-            pnlKartuNaik.BackColor = Color.FromArgb(213, 235, 223);
-            pnlKartuNaik.Controls.Add(pnlKartuNaikDalam);
-            pnlKartuNaik.Dock = DockStyle.Fill;
-            pnlKartuNaik.Location = new Point(594, 0);
-            pnlKartuNaik.Margin = new Padding(0, 0, 16, 0);
-            pnlKartuNaik.Name = "pnlKartuNaik";
-            pnlKartuNaik.Padding = new Padding(1);
-            pnlKartuNaik.Size = new Size(281, 100);
-            pnlKartuNaik.TabIndex = 2;
-            // 
-            // pnlKartuMargin
-            // 
-            pnlKartuMargin.BackColor = Color.FromArgb(213, 235, 223);
-            pnlKartuMargin.Controls.Add(PnlKartuMarginDalam);
-            pnlKartuMargin.Dock = DockStyle.Fill;
-            pnlKartuMargin.Location = new Point(891, 0);
-            pnlKartuMargin.Margin = new Padding(0);
-            pnlKartuMargin.Name = "pnlKartuMargin";
-            pnlKartuMargin.Padding = new Padding(1);
-            pnlKartuMargin.Size = new Size(299, 100);
-            pnlKartuMargin.TabIndex = 3;
-            // 
-            // pnlKartuPotensiDalam
-            // 
-            pnlKartuPotensiDalam.BackColor = Color.White;
-            pnlKartuPotensiDalam.Controls.Add(lblPotensi);
-            pnlKartuPotensiDalam.Controls.Add(lblPotensiJudul);
-            pnlKartuPotensiDalam.Dock = DockStyle.Fill;
-            pnlKartuPotensiDalam.Location = new Point(1, 1);
-            pnlKartuPotensiDalam.Name = "pnlKartuPotensiDalam";
-            pnlKartuPotensiDalam.Size = new Size(279, 98);
-            pnlKartuPotensiDalam.TabIndex = 0;
-            // 
-            // pnlKartuNaikDalam
-            // 
-            pnlKartuNaikDalam.BackColor = Color.White;
-            pnlKartuNaikDalam.Controls.Add(lblNaik);
-            pnlKartuNaikDalam.Controls.Add(lblNaikDalam);
-            pnlKartuNaikDalam.Dock = DockStyle.Fill;
-            pnlKartuNaikDalam.Location = new Point(1, 1);
-            pnlKartuNaikDalam.Name = "pnlKartuNaikDalam";
-            pnlKartuNaikDalam.Size = new Size(279, 98);
-            pnlKartuNaikDalam.TabIndex = 1;
-            // 
-            // PnlKartuMarginDalam
-            // 
-            PnlKartuMarginDalam.BackColor = Color.White;
-            PnlKartuMarginDalam.Controls.Add(lblMargin);
-            PnlKartuMarginDalam.Controls.Add(lblMarginJudul);
-            PnlKartuMarginDalam.Dock = DockStyle.Fill;
-            PnlKartuMarginDalam.Location = new Point(1, 1);
-            PnlKartuMarginDalam.Name = "PnlKartuMarginDalam";
-            PnlKartuMarginDalam.Size = new Size(297, 98);
-            PnlKartuMarginDalam.TabIndex = 1;
-            // 
-            // lblModalJudul
-            // 
-            lblModalJudul.AutoSize = true;
-            lblModalJudul.BackColor = Color.Transparent;
-            lblModalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblModalJudul.ForeColor = Color.White;
-            lblModalJudul.Location = new Point(20, 18);
-            lblModalJudul.Name = "lblModalJudul";
-            lblModalJudul.Size = new Size(136, 20);
-            lblModalJudul.TabIndex = 0;
-            lblModalJudul.Text = "Nilai Stok (modal)";
-            // 
-            // lblMarginJudul
-            // 
-            lblMarginJudul.AutoSize = true;
-            lblMarginJudul.BackColor = Color.Transparent;
-            lblMarginJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMarginJudul.ForeColor = Color.FromArgb(79, 106, 92);
-            lblMarginJudul.Location = new Point(20, 18);
-            lblMarginJudul.Name = "lblMarginJudul";
-            lblMarginJudul.Size = new Size(129, 20);
-            lblMarginJudul.TabIndex = 1;
-            lblMarginJudul.Text = "Margin Rata-rata";
-            // 
-            // lblNaikDalam
-            // 
-            lblNaikDalam.AutoSize = true;
-            lblNaikDalam.BackColor = Color.Transparent;
-            lblNaikDalam.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNaikDalam.ForeColor = Color.FromArgb(79, 106, 92);
-            lblNaikDalam.Location = new Point(20, 18);
-            lblNaikDalam.Name = "lblNaikDalam";
-            lblNaikDalam.Size = new Size(141, 20);
-            lblNaikDalam.TabIndex = 2;
-            lblNaikDalam.Text = "Barang Harga Naik\t";
-            // 
-            // lblPotensiJudul
-            // 
-            lblPotensiJudul.AutoSize = true;
-            lblPotensiJudul.BackColor = Color.Transparent;
-            lblPotensiJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPotensiJudul.ForeColor = Color.FromArgb(79, 106, 92);
-            lblPotensiJudul.Location = new Point(20, 18);
-            lblPotensiJudul.Name = "lblPotensiJudul";
-            lblPotensiJudul.Size = new Size(98, 20);
-            lblPotensiJudul.TabIndex = 2;
-            lblPotensiJudul.Text = "Potensi Laba";
-            // 
-            // lblModal
-            // 
-            lblModal.AutoSize = true;
-            lblModal.BackColor = Color.Transparent;
-            lblModal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblModal.ForeColor = Color.White;
-            lblModal.Location = new Point(20, 42);
-            lblModal.Name = "lblModal";
-            lblModal.Size = new Size(40, 47);
-            lblModal.TabIndex = 3;
-            lblModal.Text = "0";
-            // 
-            // lblPotensi
-            // 
-            lblPotensi.AutoSize = true;
-            lblPotensi.BackColor = Color.Transparent;
-            lblPotensi.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblPotensi.ForeColor = Color.FromArgb(79, 106, 92);
-            lblPotensi.Location = new Point(20, 42);
-            lblPotensi.Name = "lblPotensi";
-            lblPotensi.Size = new Size(40, 47);
-            lblPotensi.TabIndex = 4;
-            lblPotensi.Text = "0";
-            // 
-            // lblNaik
-            // 
-            lblNaik.AutoSize = true;
-            lblNaik.BackColor = Color.Transparent;
-            lblNaik.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblNaik.ForeColor = Color.FromArgb(79, 106, 92);
-            lblNaik.Location = new Point(20, 42);
-            lblNaik.Name = "lblNaik";
-            lblNaik.Size = new Size(40, 47);
-            lblNaik.TabIndex = 5;
-            lblNaik.Text = "0";
-            // 
-            // lblMargin
-            // 
-            lblMargin.AutoSize = true;
-            lblMargin.BackColor = Color.Transparent;
-            lblMargin.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
-            lblMargin.ForeColor = Color.FromArgb(79, 106, 92);
-            lblMargin.Location = new Point(20, 42);
-            lblMargin.Name = "lblMargin";
-            lblMargin.Size = new Size(40, 47);
-            lblMargin.TabIndex = 5;
-            lblMargin.Text = "0";
-            // 
-            // pnlAturLuar
-            // 
-            pnlAturLuar.BackColor = Color.FromArgb(213, 235, 223);
-            pnlAturLuar.Controls.Add(pnlAturDalam);
-            pnlAturLuar.Dock = DockStyle.Right;
-            pnlAturLuar.Location = new Point(850, 0);
-            pnlAturLuar.Name = "pnlAturLuar";
-            pnlAturLuar.Padding = new Padding(1);
-            pnlAturLuar.Size = new Size(340, 633);
-            pnlAturLuar.TabIndex = 0;
-            // 
-            // pnlGap
-            // 
-            pnlGap.Dock = DockStyle.Right;
-            pnlGap.Location = new Point(826, 0);
-            pnlGap.Name = "pnlGap";
-            pnlGap.Size = new Size(24, 633);
-            pnlGap.TabIndex = 1;
             // 
             // pnlKartuTabel
             // 
@@ -411,29 +196,6 @@
             tabDaftar.Size = new Size(816, 595);
             tabDaftar.TabIndex = 0;
             tabDaftar.Text = "Daftar Harga";
-            // 
-            // tabLapisan
-            // 
-            tabLapisan.BackColor = Color.White;
-            tabLapisan.Controls.Add(dgvLapisan);
-            tabLapisan.Controls.Add(lblCatatanLapisan);
-            tabLapisan.Location = new Point(4, 32);
-            tabLapisan.Name = "tabLapisan";
-            tabLapisan.Padding = new Padding(3);
-            tabLapisan.Size = new Size(816, 595);
-            tabLapisan.TabIndex = 1;
-            tabLapisan.Text = "\tLapisan Stok";
-            // 
-            // tabRiwayat
-            // 
-            tabRiwayat.BackColor = Color.White;
-            tabRiwayat.Controls.Add(dgvRiwayat);
-            tabRiwayat.Location = new Point(4, 32);
-            tabRiwayat.Name = "tabRiwayat";
-            tabRiwayat.Padding = new Padding(3);
-            tabRiwayat.Size = new Size(816, 595);
-            tabRiwayat.TabIndex = 2;
-            tabRiwayat.Text = "Riwayat Harga";
             // 
             // dgvDaftar
             // 
@@ -481,64 +243,6 @@
             dgvDaftar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDaftar.Size = new Size(810, 589);
             dgvDaftar.TabIndex = 2;
-            // 
-            // dgvRiwayat
-            // 
-            dgvRiwayat.AllowUserToAddRows = false;
-            dgvRiwayat.AllowUserToDeleteRows = false;
-            dgvRiwayat.AllowUserToOrderColumns = true;
-            dgvRiwayat.AllowUserToResizeColumns = false;
-            dgvRiwayat.AllowUserToResizeRows = false;
-            dgvRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvRiwayat.BackgroundColor = Color.White;
-            dgvRiwayat.BorderStyle = BorderStyle.None;
-            dgvRiwayat.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvRiwayat.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle9.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle9.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dgvRiwayat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            dgvRiwayat.ColumnHeadersHeight = 60;
-            dgvRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvRiwayat.Columns.AddRange(new DataGridViewColumn[] { colWaktuR, colBarangR, colBeliR, colJualR, colOleh, colAlasan });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.White;
-            dataGridViewCellStyle10.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle10.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle10.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle10.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            dgvRiwayat.DefaultCellStyle = dataGridViewCellStyle10;
-            dgvRiwayat.Dock = DockStyle.Fill;
-            dgvRiwayat.EnableHeadersVisualStyles = false;
-            dgvRiwayat.GridColor = Color.FromArgb(230, 247, 238);
-            dgvRiwayat.Location = new Point(3, 3);
-            dgvRiwayat.MultiSelect = false;
-            dgvRiwayat.Name = "dgvRiwayat";
-            dgvRiwayat.ReadOnly = true;
-            dgvRiwayat.RowHeadersVisible = false;
-            dgvRiwayat.RowHeadersWidth = 51;
-            dgvRiwayat.RowTemplate.Height = 56;
-            dgvRiwayat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRiwayat.Size = new Size(810, 589);
-            dgvRiwayat.TabIndex = 3;
-            // 
-            // lblCatatanLapisan
-            // 
-            lblCatatanLapisan.Dock = DockStyle.Bottom;
-            lblCatatanLapisan.Font = new Font("Leelawadee UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCatatanLapisan.Location = new Point(3, 548);
-            lblCatatanLapisan.Name = "lblCatatanLapisan";
-            lblCatatanLapisan.Size = new Size(810, 44);
-            lblCatatanLapisan.TabIndex = 0;
-            lblCatatanLapisan.Text = "Penjualan mengambil stok dari lapisan (batch) tertua lebih dulu. Laba per unit = harga jual saat ini − harga beli lapisan itu.";
-            lblCatatanLapisan.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // colKode
             // 
@@ -588,6 +292,18 @@
             colLabaBaru.Name = "colLabaBaru";
             colLabaBaru.ReadOnly = true;
             // 
+            // tabLapisan
+            // 
+            tabLapisan.BackColor = Color.White;
+            tabLapisan.Controls.Add(dgvLapisan);
+            tabLapisan.Controls.Add(lblCatatanLapisan);
+            tabLapisan.Location = new Point(4, 32);
+            tabLapisan.Name = "tabLapisan";
+            tabLapisan.Padding = new Padding(3);
+            tabLapisan.Size = new Size(816, 595);
+            tabLapisan.TabIndex = 1;
+            tabLapisan.Text = "\tLapisan Stok";
+            // 
             // dgvLapisan
             // 
             dgvLapisan.AllowUserToAddRows = false;
@@ -600,27 +316,27 @@
             dgvLapisan.BorderStyle = BorderStyle.None;
             dgvLapisan.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvLapisan.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle11.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle11.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle11.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle11.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dgvLapisan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle9.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle9.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dgvLapisan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dgvLapisan.ColumnHeadersHeight = 60;
             dgvLapisan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvLapisan.Columns.AddRange(new DataGridViewColumn[] { colLapisan, colMasuk, colSisa, colBeli, colJualL, colLaba, colPotensi });
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle12.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            dgvLapisan.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.White;
+            dataGridViewCellStyle10.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle10.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle10.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle10.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            dgvLapisan.DefaultCellStyle = dataGridViewCellStyle10;
             dgvLapisan.Dock = DockStyle.Fill;
             dgvLapisan.EnableHeadersVisualStyles = false;
             dgvLapisan.GridColor = Color.FromArgb(230, 247, 238);
@@ -691,6 +407,75 @@
             colPotensi.Name = "colPotensi";
             colPotensi.ReadOnly = true;
             // 
+            // lblCatatanLapisan
+            // 
+            lblCatatanLapisan.Dock = DockStyle.Bottom;
+            lblCatatanLapisan.Font = new Font("Leelawadee UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCatatanLapisan.Location = new Point(3, 548);
+            lblCatatanLapisan.Name = "lblCatatanLapisan";
+            lblCatatanLapisan.Size = new Size(810, 44);
+            lblCatatanLapisan.TabIndex = 0;
+            lblCatatanLapisan.Text = "Penjualan mengambil stok dari lapisan (batch) tertua lebih dulu. Laba per unit = harga jual saat ini − harga beli lapisan itu.";
+            lblCatatanLapisan.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tabRiwayat
+            // 
+            tabRiwayat.BackColor = Color.White;
+            tabRiwayat.Controls.Add(dgvRiwayat);
+            tabRiwayat.Location = new Point(4, 32);
+            tabRiwayat.Name = "tabRiwayat";
+            tabRiwayat.Padding = new Padding(3);
+            tabRiwayat.Size = new Size(816, 595);
+            tabRiwayat.TabIndex = 2;
+            tabRiwayat.Text = "Riwayat Harga";
+            // 
+            // dgvRiwayat
+            // 
+            dgvRiwayat.AllowUserToAddRows = false;
+            dgvRiwayat.AllowUserToDeleteRows = false;
+            dgvRiwayat.AllowUserToOrderColumns = true;
+            dgvRiwayat.AllowUserToResizeColumns = false;
+            dgvRiwayat.AllowUserToResizeRows = false;
+            dgvRiwayat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvRiwayat.BackgroundColor = Color.White;
+            dgvRiwayat.BorderStyle = BorderStyle.None;
+            dgvRiwayat.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvRiwayat.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle11.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle11.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle11.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle11.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            dgvRiwayat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dgvRiwayat.ColumnHeadersHeight = 60;
+            dgvRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvRiwayat.Columns.AddRange(new DataGridViewColumn[] { colWaktuR, colBarangR, colBeliR, colJualR, colOleh, colAlasan });
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.White;
+            dataGridViewCellStyle12.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle12.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            dgvRiwayat.DefaultCellStyle = dataGridViewCellStyle12;
+            dgvRiwayat.Dock = DockStyle.Fill;
+            dgvRiwayat.EnableHeadersVisualStyles = false;
+            dgvRiwayat.GridColor = Color.FromArgb(230, 247, 238);
+            dgvRiwayat.Location = new Point(3, 3);
+            dgvRiwayat.MultiSelect = false;
+            dgvRiwayat.Name = "dgvRiwayat";
+            dgvRiwayat.ReadOnly = true;
+            dgvRiwayat.RowHeadersVisible = false;
+            dgvRiwayat.RowHeadersWidth = 51;
+            dgvRiwayat.RowTemplate.Height = 56;
+            dgvRiwayat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvRiwayat.Size = new Size(810, 589);
+            dgvRiwayat.TabIndex = 3;
+            // 
             // colWaktuR
             // 
             colWaktuR.FillWeight = 16F;
@@ -739,9 +524,32 @@
             colAlasan.Name = "colAlasan";
             colAlasan.ReadOnly = true;
             // 
+            // pnlGap
+            // 
+            pnlGap.Dock = DockStyle.Right;
+            pnlGap.Location = new Point(826, 0);
+            pnlGap.Name = "pnlGap";
+            pnlGap.Size = new Size(24, 633);
+            pnlGap.TabIndex = 1;
+            // 
+            // pnlAturLuar
+            // 
+            pnlAturLuar.BackColor = Color.FromArgb(213, 235, 223);
+            pnlAturLuar.Controls.Add(pnlAturDalam);
+            pnlAturLuar.Dock = DockStyle.Right;
+            pnlAturLuar.Location = new Point(850, 0);
+            pnlAturLuar.Name = "pnlAturLuar";
+            pnlAturLuar.Padding = new Padding(1);
+            pnlAturLuar.Size = new Size(340, 633);
+            pnlAturLuar.TabIndex = 0;
+            // 
             // pnlAturDalam
             // 
             pnlAturDalam.BackColor = Color.White;
+            pnlAturDalam.Controls.Add(btnBatal);
+            pnlAturDalam.Controls.Add(btnSimpanHarga);
+            pnlAturDalam.Controls.Add(pnlDampak);
+            pnlAturDalam.Controls.Add(txtAlasan);
             pnlAturDalam.Controls.Add(nudJualBaru);
             pnlAturDalam.Controls.Add(lblAlasan);
             pnlAturDalam.Controls.Add(txtJualSekarang);
@@ -755,6 +563,122 @@
             pnlAturDalam.Name = "pnlAturDalam";
             pnlAturDalam.Size = new Size(338, 631);
             pnlAturDalam.TabIndex = 0;
+            // 
+            // pnlDampak
+            // 
+            pnlDampak.BackColor = Color.FromArgb(245, 251, 248);
+            pnlDampak.Controls.Add(lblDampakBaruNilai);
+            pnlDampak.Controls.Add(lblDampakBaru);
+            pnlDampak.Controls.Add(lblDamapakLamaNilai);
+            pnlDampak.Controls.Add(lblDampakLama);
+            pnlDampak.Controls.Add(lblDampakJudul);
+            pnlDampak.Location = new Point(20, 364);
+            pnlDampak.Name = "pnlDampak";
+            pnlDampak.Size = new Size(298, 112);
+            pnlDampak.TabIndex = 10;
+            // 
+            // lblDampakJudul
+            // 
+            lblDampakJudul.AutoSize = true;
+            lblDampakJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDampakJudul.ForeColor = Color.FromArgb(79, 106, 92);
+            lblDampakJudul.Location = new Point(12, 10);
+            lblDampakJudul.Name = "lblDampakJudul";
+            lblDampakJudul.Size = new Size(179, 20);
+            lblDampakJudul.TabIndex = 0;
+            lblDampakJudul.Text = "Dampak ke laba per unit";
+            // 
+            // txtAlasan
+            // 
+            txtAlasan.BackColor = Color.White;
+            txtAlasan.BorderStyle = BorderStyle.FixedSingle;
+            txtAlasan.Font = new Font("Leelawadee UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAlasan.ForeColor = Color.FromArgb(18, 55, 42);
+            txtAlasan.Location = new Point(20, 318);
+            txtAlasan.Name = "txtAlasan";
+            txtAlasan.Size = new Size(298, 31);
+            txtAlasan.TabIndex = 9;
+            txtAlasan.Text = "Contoh : Harga beli naik dari pemasok";
+            // 
+            // nudJualBaru
+            // 
+            nudJualBaru.BackColor = Color.White;
+            nudJualBaru.BorderStyle = BorderStyle.FixedSingle;
+            nudJualBaru.Increment = new decimal(new int[] { 500, 0, 0, 0 });
+            nudJualBaru.Location = new Point(20, 254);
+            nudJualBaru.Maximum = new decimal(new int[] { -1530494976, 232830, 0, 0 });
+            nudJualBaru.Name = "nudJualBaru";
+            nudJualBaru.Size = new Size(298, 31);
+            nudJualBaru.TabIndex = 8;
+            nudJualBaru.ThousandsSeparator = true;
+            // 
+            // lblAlasan
+            // 
+            lblAlasan.AutoSize = true;
+            lblAlasan.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAlasan.ForeColor = Color.FromArgb(79, 106, 92);
+            lblAlasan.Location = new Point(20, 296);
+            lblAlasan.Name = "lblAlasan";
+            lblAlasan.Size = new Size(135, 20);
+            lblAlasan.TabIndex = 7;
+            lblAlasan.Text = "Alasan perubahan";
+            // 
+            // txtJualSekarang
+            // 
+            txtJualSekarang.BackColor = Color.FromArgb(245, 251, 248);
+            txtJualSekarang.BorderStyle = BorderStyle.FixedSingle;
+            txtJualSekarang.Font = new Font("Leelawadee UI", 11F);
+            txtJualSekarang.ForeColor = Color.FromArgb(79, 106, 92);
+            txtJualSekarang.Location = new Point(20, 190);
+            txtJualSekarang.Name = "txtJualSekarang";
+            txtJualSekarang.ReadOnly = true;
+            txtJualSekarang.Size = new Size(298, 32);
+            txtJualSekarang.TabIndex = 6;
+            // 
+            // txtBeliTerakhir
+            // 
+            txtBeliTerakhir.BackColor = Color.FromArgb(245, 251, 248);
+            txtBeliTerakhir.BorderStyle = BorderStyle.FixedSingle;
+            txtBeliTerakhir.Font = new Font("Leelawadee UI", 11F);
+            txtBeliTerakhir.ForeColor = Color.FromArgb(79, 106, 92);
+            txtBeliTerakhir.Location = new Point(20, 126);
+            txtBeliTerakhir.Name = "txtBeliTerakhir";
+            txtBeliTerakhir.ReadOnly = true;
+            txtBeliTerakhir.Size = new Size(298, 32);
+            txtBeliTerakhir.TabIndex = 5;
+            // 
+            // lblJualSekarang
+            // 
+            lblJualSekarang.AutoSize = true;
+            lblJualSekarang.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJualSekarang.ForeColor = Color.FromArgb(79, 106, 92);
+            lblJualSekarang.Location = new Point(20, 168);
+            lblJualSekarang.Name = "lblJualSekarang";
+            lblJualSekarang.Size = new Size(134, 20);
+            lblJualSekarang.TabIndex = 4;
+            lblJualSekarang.Text = "Harga jual saat ini\t";
+            // 
+            // lblJualBaru
+            // 
+            lblJualBaru.AutoSize = true;
+            lblJualBaru.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblJualBaru.ForeColor = Color.FromArgb(79, 106, 92);
+            lblJualBaru.Location = new Point(20, 232);
+            lblJualBaru.Name = "lblJualBaru";
+            lblJualBaru.Size = new Size(116, 20);
+            lblJualBaru.TabIndex = 2;
+            lblJualBaru.Text = "Harga jual baru";
+            // 
+            // lblBeliTerakhir
+            // 
+            lblBeliTerakhir.AutoSize = true;
+            lblBeliTerakhir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblBeliTerakhir.ForeColor = Color.FromArgb(79, 106, 92);
+            lblBeliTerakhir.Location = new Point(20, 104);
+            lblBeliTerakhir.Name = "lblBeliTerakhir";
+            lblBeliTerakhir.Size = new Size(139, 20);
+            lblBeliTerakhir.TabIndex = 1;
+            lblBeliTerakhir.Text = "Harga beli terakhir";
             // 
             // pnlHeaderAtur
             // 
@@ -780,83 +704,276 @@
             lblJudulAtur.TabIndex = 0;
             lblJudulAtur.Text = "Atur Harga";
             // 
-            // lblBeliTerakhir
+            // pnlJarak
             // 
-            lblBeliTerakhir.AutoSize = true;
-            lblBeliTerakhir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblBeliTerakhir.ForeColor = Color.FromArgb(79, 106, 92);
-            lblBeliTerakhir.Location = new Point(20, 104);
-            lblBeliTerakhir.Name = "lblBeliTerakhir";
-            lblBeliTerakhir.Size = new Size(139, 20);
-            lblBeliTerakhir.TabIndex = 1;
-            lblBeliTerakhir.Text = "Harga beli terakhir";
+            pnlJarak.Dock = DockStyle.Top;
+            pnlJarak.Location = new Point(24, 124);
+            pnlJarak.Name = "pnlJarak";
+            pnlJarak.Size = new Size(1190, 24);
+            pnlJarak.TabIndex = 1;
             // 
-            // lblJualBaru
+            // tlpKartu
             // 
-            lblJualBaru.AutoSize = true;
-            lblJualBaru.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJualBaru.ForeColor = Color.FromArgb(79, 106, 92);
-            lblJualBaru.Location = new Point(20, 232);
-            lblJualBaru.Name = "lblJualBaru";
-            lblJualBaru.Size = new Size(116, 20);
-            lblJualBaru.TabIndex = 2;
-            lblJualBaru.Text = "Harga jual baru";
+            tlpKartu.ColumnCount = 4;
+            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpKartu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tlpKartu.Controls.Add(pnlKartuMargin, 3, 0);
+            tlpKartu.Controls.Add(pnlKartuNaik, 2, 0);
+            tlpKartu.Controls.Add(pnlKartuModal, 0, 0);
+            tlpKartu.Controls.Add(pnlKartuPotensi, 1, 0);
+            tlpKartu.Dock = DockStyle.Top;
+            tlpKartu.Location = new Point(24, 24);
+            tlpKartu.Name = "tlpKartu";
+            tlpKartu.RowCount = 1;
+            tlpKartu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpKartu.Size = new Size(1190, 100);
+            tlpKartu.TabIndex = 0;
             // 
-            // lblJualSekarang
+            // pnlKartuMargin
             // 
-            lblJualSekarang.AutoSize = true;
-            lblJualSekarang.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblJualSekarang.ForeColor = Color.FromArgb(79, 106, 92);
-            lblJualSekarang.Location = new Point(20, 168);
-            lblJualSekarang.Name = "lblJualSekarang";
-            lblJualSekarang.Size = new Size(134, 20);
-            lblJualSekarang.TabIndex = 4;
-            lblJualSekarang.Text = "Harga jual saat ini\t";
+            pnlKartuMargin.BackColor = Color.FromArgb(213, 235, 223);
+            pnlKartuMargin.Controls.Add(PnlKartuMarginDalam);
+            pnlKartuMargin.Dock = DockStyle.Fill;
+            pnlKartuMargin.Location = new Point(891, 0);
+            pnlKartuMargin.Margin = new Padding(0);
+            pnlKartuMargin.Name = "pnlKartuMargin";
+            pnlKartuMargin.Padding = new Padding(1);
+            pnlKartuMargin.Size = new Size(299, 100);
+            pnlKartuMargin.TabIndex = 3;
             // 
-            // txtBeliTerakhir
+            // PnlKartuMarginDalam
             // 
-            txtBeliTerakhir.BackColor = Color.FromArgb(245, 251, 248);
-            txtBeliTerakhir.BorderStyle = BorderStyle.FixedSingle;
-            txtBeliTerakhir.Font = new Font("Leelawadee UI", 11F);
-            txtBeliTerakhir.ForeColor = Color.FromArgb(79, 106, 92);
-            txtBeliTerakhir.Location = new Point(20, 126);
-            txtBeliTerakhir.Name = "txtBeliTerakhir";
-            txtBeliTerakhir.ReadOnly = true;
-            txtBeliTerakhir.Size = new Size(298, 32);
-            txtBeliTerakhir.TabIndex = 5;
+            PnlKartuMarginDalam.BackColor = Color.White;
+            PnlKartuMarginDalam.Controls.Add(lblMargin);
+            PnlKartuMarginDalam.Controls.Add(lblMarginJudul);
+            PnlKartuMarginDalam.Dock = DockStyle.Fill;
+            PnlKartuMarginDalam.Location = new Point(1, 1);
+            PnlKartuMarginDalam.Name = "PnlKartuMarginDalam";
+            PnlKartuMarginDalam.Size = new Size(297, 98);
+            PnlKartuMarginDalam.TabIndex = 1;
             // 
-            // txtJualSekarang
+            // lblMargin
             // 
-            txtJualSekarang.BackColor = Color.FromArgb(245, 251, 248);
-            txtJualSekarang.BorderStyle = BorderStyle.FixedSingle;
-            txtJualSekarang.Font = new Font("Leelawadee UI", 11F);
-            txtJualSekarang.ForeColor = Color.FromArgb(79, 106, 92);
-            txtJualSekarang.Location = new Point(20, 190);
-            txtJualSekarang.Name = "txtJualSekarang";
-            txtJualSekarang.ReadOnly = true;
-            txtJualSekarang.Size = new Size(298, 32);
-            txtJualSekarang.TabIndex = 6;
+            lblMargin.AutoSize = true;
+            lblMargin.BackColor = Color.Transparent;
+            lblMargin.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblMargin.ForeColor = Color.FromArgb(79, 106, 92);
+            lblMargin.Location = new Point(20, 42);
+            lblMargin.Name = "lblMargin";
+            lblMargin.Size = new Size(40, 47);
+            lblMargin.TabIndex = 5;
+            lblMargin.Text = "0";
             // 
-            // lblAlasan
+            // lblMarginJudul
             // 
-            lblAlasan.AutoSize = true;
-            lblAlasan.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAlasan.ForeColor = Color.FromArgb(79, 106, 92);
-            lblAlasan.Location = new Point(20, 296);
-            lblAlasan.Name = "lblAlasan";
-            lblAlasan.Size = new Size(135, 20);
-            lblAlasan.TabIndex = 7;
-            lblAlasan.Text = "Alasan perubahan";
+            lblMarginJudul.AutoSize = true;
+            lblMarginJudul.BackColor = Color.Transparent;
+            lblMarginJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMarginJudul.ForeColor = Color.FromArgb(79, 106, 92);
+            lblMarginJudul.Location = new Point(20, 18);
+            lblMarginJudul.Name = "lblMarginJudul";
+            lblMarginJudul.Size = new Size(129, 20);
+            lblMarginJudul.TabIndex = 1;
+            lblMarginJudul.Text = "Margin Rata-rata";
             // 
-            // nudJualBaru
+            // pnlKartuNaik
             // 
-            nudJualBaru.Increment = new decimal(new int[] { 500, 0, 0, 0 });
-            nudJualBaru.Location = new Point(69, 392);
-            nudJualBaru.Maximum = new decimal(new int[] { -1530494976, 232830, 0, 0 });
-            nudJualBaru.Name = "nudJualBaru";
-            nudJualBaru.Size = new Size(298, 31);
-            nudJualBaru.TabIndex = 8;
-            nudJualBaru.ThousandsSeparator = true;
+            pnlKartuNaik.BackColor = Color.FromArgb(213, 235, 223);
+            pnlKartuNaik.Controls.Add(pnlKartuNaikDalam);
+            pnlKartuNaik.Dock = DockStyle.Fill;
+            pnlKartuNaik.Location = new Point(594, 0);
+            pnlKartuNaik.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuNaik.Name = "pnlKartuNaik";
+            pnlKartuNaik.Padding = new Padding(1);
+            pnlKartuNaik.Size = new Size(281, 100);
+            pnlKartuNaik.TabIndex = 2;
+            // 
+            // pnlKartuNaikDalam
+            // 
+            pnlKartuNaikDalam.BackColor = Color.White;
+            pnlKartuNaikDalam.Controls.Add(lblNaik);
+            pnlKartuNaikDalam.Controls.Add(lblNaikDalam);
+            pnlKartuNaikDalam.Dock = DockStyle.Fill;
+            pnlKartuNaikDalam.Location = new Point(1, 1);
+            pnlKartuNaikDalam.Name = "pnlKartuNaikDalam";
+            pnlKartuNaikDalam.Size = new Size(279, 98);
+            pnlKartuNaikDalam.TabIndex = 1;
+            // 
+            // lblNaik
+            // 
+            lblNaik.AutoSize = true;
+            lblNaik.BackColor = Color.Transparent;
+            lblNaik.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblNaik.ForeColor = Color.FromArgb(79, 106, 92);
+            lblNaik.Location = new Point(20, 42);
+            lblNaik.Name = "lblNaik";
+            lblNaik.Size = new Size(40, 47);
+            lblNaik.TabIndex = 5;
+            lblNaik.Text = "0";
+            // 
+            // lblNaikDalam
+            // 
+            lblNaikDalam.AutoSize = true;
+            lblNaikDalam.BackColor = Color.Transparent;
+            lblNaikDalam.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNaikDalam.ForeColor = Color.FromArgb(79, 106, 92);
+            lblNaikDalam.Location = new Point(20, 18);
+            lblNaikDalam.Name = "lblNaikDalam";
+            lblNaikDalam.Size = new Size(141, 20);
+            lblNaikDalam.TabIndex = 2;
+            lblNaikDalam.Text = "Barang Harga Naik\t";
+            // 
+            // pnlKartuModal
+            // 
+            pnlKartuModal.Angle = 45F;
+            pnlKartuModal.ColorBottom = Color.FromArgb(62, 156, 106);
+            pnlKartuModal.ColorTop = Color.FromArgb(31, 107, 66);
+            pnlKartuModal.Controls.Add(lblModal);
+            pnlKartuModal.Controls.Add(lblModalJudul);
+            pnlKartuModal.Dock = DockStyle.Fill;
+            pnlKartuModal.Location = new Point(0, 0);
+            pnlKartuModal.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuModal.Name = "pnlKartuModal";
+            pnlKartuModal.Size = new Size(281, 100);
+            pnlKartuModal.TabIndex = 0;
+            // 
+            // lblModal
+            // 
+            lblModal.AutoSize = true;
+            lblModal.BackColor = Color.Transparent;
+            lblModal.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblModal.ForeColor = Color.White;
+            lblModal.Location = new Point(20, 42);
+            lblModal.Name = "lblModal";
+            lblModal.Size = new Size(40, 47);
+            lblModal.TabIndex = 3;
+            lblModal.Text = "0";
+            // 
+            // lblModalJudul
+            // 
+            lblModalJudul.AutoSize = true;
+            lblModalJudul.BackColor = Color.Transparent;
+            lblModalJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModalJudul.ForeColor = Color.White;
+            lblModalJudul.Location = new Point(20, 18);
+            lblModalJudul.Name = "lblModalJudul";
+            lblModalJudul.Size = new Size(136, 20);
+            lblModalJudul.TabIndex = 0;
+            lblModalJudul.Text = "Nilai Stok (modal)";
+            // 
+            // pnlKartuPotensi
+            // 
+            pnlKartuPotensi.BackColor = Color.FromArgb(213, 235, 223);
+            pnlKartuPotensi.Controls.Add(pnlKartuPotensiDalam);
+            pnlKartuPotensi.Dock = DockStyle.Fill;
+            pnlKartuPotensi.Location = new Point(297, 0);
+            pnlKartuPotensi.Margin = new Padding(0, 0, 16, 0);
+            pnlKartuPotensi.Name = "pnlKartuPotensi";
+            pnlKartuPotensi.Padding = new Padding(1);
+            pnlKartuPotensi.Size = new Size(281, 100);
+            pnlKartuPotensi.TabIndex = 1;
+            // 
+            // pnlKartuPotensiDalam
+            // 
+            pnlKartuPotensiDalam.BackColor = Color.White;
+            pnlKartuPotensiDalam.Controls.Add(lblPotensi);
+            pnlKartuPotensiDalam.Controls.Add(lblPotensiJudul);
+            pnlKartuPotensiDalam.Dock = DockStyle.Fill;
+            pnlKartuPotensiDalam.Location = new Point(1, 1);
+            pnlKartuPotensiDalam.Name = "pnlKartuPotensiDalam";
+            pnlKartuPotensiDalam.Size = new Size(279, 98);
+            pnlKartuPotensiDalam.TabIndex = 0;
+            // 
+            // lblPotensi
+            // 
+            lblPotensi.AutoSize = true;
+            lblPotensi.BackColor = Color.Transparent;
+            lblPotensi.Font = new Font("Leelawadee UI", 21F, FontStyle.Bold);
+            lblPotensi.ForeColor = Color.FromArgb(79, 106, 92);
+            lblPotensi.Location = new Point(20, 42);
+            lblPotensi.Name = "lblPotensi";
+            lblPotensi.Size = new Size(40, 47);
+            lblPotensi.TabIndex = 4;
+            lblPotensi.Text = "0";
+            // 
+            // lblPotensiJudul
+            // 
+            lblPotensiJudul.AutoSize = true;
+            lblPotensiJudul.BackColor = Color.Transparent;
+            lblPotensiJudul.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPotensiJudul.ForeColor = Color.FromArgb(79, 106, 92);
+            lblPotensiJudul.Location = new Point(20, 18);
+            lblPotensiJudul.Name = "lblPotensiJudul";
+            lblPotensiJudul.Size = new Size(98, 20);
+            lblPotensiJudul.TabIndex = 2;
+            lblPotensiJudul.Text = "Potensi Laba";
+            // 
+            // lblDampakLama
+            // 
+            lblDampakLama.AutoSize = true;
+            lblDampakLama.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDampakLama.ForeColor = Color.FromArgb(18, 55, 42);
+            lblDampakLama.Location = new Point(12, 36);
+            lblDampakLama.Name = "lblDampakLama";
+            lblDampakLama.Size = new Size(206, 17);
+            lblDampakLama.TabIndex = 1;
+            lblDampakLama.Text = "Stok lama (20 unit, beli Rp 10.000)";
+            // 
+            // lblDamapakLamaNilai
+            // 
+            lblDamapakLamaNilai.AutoSize = true;
+            lblDamapakLamaNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDamapakLamaNilai.Location = new Point(216, 34);
+            lblDamapakLamaNilai.Name = "lblDamapakLamaNilai";
+            lblDamapakLamaNilai.Size = new Size(76, 17);
+            lblDamapakLamaNilai.TabIndex = 2;
+            lblDamapakLamaNilai.Text = "Rp 6.000 ▲";
+            // 
+            // lblDampakBaru
+            // 
+            lblDampakBaru.AutoSize = true;
+            lblDampakBaru.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDampakBaru.ForeColor = Color.FromArgb(18, 55, 42);
+            lblDampakBaru.Location = new Point(12, 70);
+            lblDampakBaru.Name = "lblDampakBaru";
+            lblDampakBaru.Size = new Size(212, 17);
+            lblDampakBaru.TabIndex = 3;
+            lblDampakBaru.Text = "Stok baru (50 unit, beli Rp 14.000)\t1";
+            // 
+            // lblDampakBaruNilai
+            // 
+            lblDampakBaruNilai.AutoSize = true;
+            lblDampakBaruNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDampakBaruNilai.Location = new Point(230, 70);
+            lblDampakBaruNilai.Name = "lblDampakBaruNilai";
+            lblDampakBaruNilai.Size = new Size(60, 17);
+            lblDampakBaruNilai.TabIndex = 4;
+            lblDampakBaruNilai.Text = "Rp 2.000";
+            // 
+            // btnSimpanHarga
+            // 
+            btnSimpanHarga.BackColor = Color.FromArgb(42, 127, 80);
+            btnSimpanHarga.FlatAppearance.BorderSize = 0;
+            btnSimpanHarga.FlatStyle = FlatStyle.Flat;
+            btnSimpanHarga.Font = new Font("Leelawadee UI", 10.5F, FontStyle.Bold);
+            btnSimpanHarga.ForeColor = Color.White;
+            btnSimpanHarga.Location = new Point(118, 492);
+            btnSimpanHarga.Name = "btnSimpanHarga";
+            btnSimpanHarga.Size = new Size(200, 40);
+            btnSimpanHarga.TabIndex = 11;
+            btnSimpanHarga.Text = "Simpan Harga";
+            btnSimpanHarga.UseVisualStyleBackColor = false;
+            // 
+            // btnBatal
+            // 
+            btnBatal.Location = new Point(20, 492);
+            btnBatal.Name = "btnBatal";
+            btnBatal.Size = new Size(90, 40);
+            btnBatal.TabIndex = 12;
+            btnBatal.Text = "Batal";
+            btnBatal.UseVisualStyleBackColor = true;
             // 
             // ucLaba
             // 
@@ -869,34 +986,36 @@
             Name = "ucLaba";
             Size = new Size(1238, 805);
             pnlPage.ResumeLayout(false);
-            tlpKartu.ResumeLayout(false);
             pnlBawah.ResumeLayout(false);
-            pnlKartuModal.ResumeLayout(false);
-            pnlKartuModal.PerformLayout();
-            pnlKartuPotensi.ResumeLayout(false);
-            pnlKartuNaik.ResumeLayout(false);
-            pnlKartuMargin.ResumeLayout(false);
-            pnlKartuPotensiDalam.ResumeLayout(false);
-            pnlKartuPotensiDalam.PerformLayout();
-            pnlKartuNaikDalam.ResumeLayout(false);
-            pnlKartuNaikDalam.PerformLayout();
-            PnlKartuMarginDalam.ResumeLayout(false);
-            PnlKartuMarginDalam.PerformLayout();
-            pnlAturLuar.ResumeLayout(false);
             pnlKartuTabel.ResumeLayout(false);
             pnlKartuTabelDalam.ResumeLayout(false);
             tabUtama.ResumeLayout(false);
             tabDaftar.ResumeLayout(false);
-            tabLapisan.ResumeLayout(false);
-            tabRiwayat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvDaftar).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).EndInit();
+            tabLapisan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvLapisan).EndInit();
+            tabRiwayat.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRiwayat).EndInit();
+            pnlAturLuar.ResumeLayout(false);
             pnlAturDalam.ResumeLayout(false);
             pnlAturDalam.PerformLayout();
+            pnlDampak.ResumeLayout(false);
+            pnlDampak.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudJualBaru).EndInit();
             pnlHeaderAtur.ResumeLayout(false);
             pnlHeaderAtur.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudJualBaru).EndInit();
+            tlpKartu.ResumeLayout(false);
+            pnlKartuMargin.ResumeLayout(false);
+            PnlKartuMarginDalam.ResumeLayout(false);
+            PnlKartuMarginDalam.PerformLayout();
+            pnlKartuNaik.ResumeLayout(false);
+            pnlKartuNaikDalam.ResumeLayout(false);
+            pnlKartuNaikDalam.PerformLayout();
+            pnlKartuModal.ResumeLayout(false);
+            pnlKartuModal.PerformLayout();
+            pnlKartuPotensi.ResumeLayout(false);
+            pnlKartuPotensiDalam.ResumeLayout(false);
+            pnlKartuPotensiDalam.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -962,5 +1081,14 @@
         private TextBox txtBeliTerakhir;
         private NumericUpDown nudJualBaru;
         private Label lblAlasan;
+        private Panel pnlDampak;
+        private TextBox txtAlasan;
+        private Label lblDampakJudul;
+        private Label lblDampakLama;
+        private Label lblDamapakLamaNilai;
+        private Label lblDampakBaruNilai;
+        private Label lblDampakBaru;
+        private Button btnBatal;
+        private Button btnSimpanHarga;
     }
 }

@@ -329,7 +329,13 @@ namespace project_akhir_stock_gudang
 
         private void btnBersihkan_Click(object sender, EventArgs e)
         {
+            BersihkanForm();
 
+            MessageBox.Show(
+                "Form berhasil dibersihkan.",
+                "Informasi",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

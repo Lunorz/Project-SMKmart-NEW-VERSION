@@ -464,13 +464,12 @@ namespace project_akhir_stock_gudang
 
 
 
+
         private void btnSelesaikan_Click(object sender, EventArgs e)
         {
-         
             decimal total = TotalBelanja();
             decimal uang = total;
 
-         
             if (keranjang == null || keranjang.Count == 0)
             {
                 MessageBox.Show("Keranjang masih kosong!");
@@ -483,7 +482,6 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-          
             if (metodePembayaranTerpilih == "Tunai")
             {
                 if (!decimal.TryParse(
@@ -499,21 +497,33 @@ namespace project_akhir_stock_gudang
                 }
             }
 
-           
             List<Produk> produkTerbaru = new List<Produk>();
 
-            Dictionary<string, int> stokLama =
-                new Dictionary<string, int>();
+            List<LapisanStok> lapisanTerbaru =
+                new List<LapisanStok>();
 
+            List<LapisanStok> salinanLapisanLama =
+                new List<LapisanStok>();
+
+            Dictionary<string, int> stokLama =
+                new Dictionary<string, int>(
+                    StringComparer.OrdinalIgnoreCase
+                );
+
+            List<DetailTransaksiSimpan> detailTransaksiBaru =
+                new List<DetailTransaksiSimpan>();
+
+            bool lapisanSudahDisimpan = false;
             bool stokSudahDisimpan = false;
 
-          
             TransaksiSimpan transaksi = null;
 
             try
             {
-               
+              
                 produkTerbaru = ProdukJsonStore.Load();
+                lapisanTerbaru = LapisanStokJsonStore.Load()
+                    ?? new List<LapisanStok>();
 
                 if (produkTerbaru == null || produkTerbaru.Count == 0)
                 {
@@ -522,68 +532,101 @@ namespace project_akhir_stock_gudang
                     );
                 }
 
-              
-                foreach (DetailTransaksi item in keranjang)
+                
+                salinanLapisanLama = lapisanTerbaru
+                    .Select(lapisan => new LapisanStok
+                    {
+                        IdLapisan = lapisan.IdLapisan,
+                        KodeBarang = lapisan.KodeBarang,
+                        NamaBarang = lapisan.NamaBarang,
+                        TanggalMasuk = lapisan.TanggalMasuk,
+                        Petugas = lapisan.Petugas,
+                        NomorSuratJalan = lapisan.NomorSuratJalan,
+                        StokAwal = lapisan.StokAwal,
+                        SisaStok = lapisan.SisaStok,
+                        HargaBeli = lapisan.HargaBeli
+                    })
+                    .ToList();
+
+                
+                foreach (var grupBarang in keranjang.GroupBy(
+                    barang => barang.Kode,
+                    StringComparer.OrdinalIgnoreCase))
                 {
-                    if (item.Jumlah <= 0)
+                    string kodeProduk = grupBarang.Key;
+
+                    int jumlahDibeli = grupBarang.Sum(
+                        barang => barang.Jumlah
+                    );
+
+                    if (jumlahDibeli <= 0)
                     {
                         throw new Exception(
-                            "Jumlah barang tidak valid: " + item.Nama
+                            "Jumlah barang tidak valid untuk kode " +
+                            kodeProduk
                         );
                     }
 
-                    Produk produk = produkTerbaru.FirstOrDefault(p =>
-                        string.Equals(
-                            p.Kode,
-                            item.Kode,
+                  
+                    Produk produkDitemukan = produkTerbaru.FirstOrDefault(
+                        data => string.Equals(
+                            data.Kode,
+                            kodeProduk,
                             StringComparison.OrdinalIgnoreCase
                         )
                     );
 
-                    if (produk == null)
+                    if (produkDitemukan == null)
                     {
                         throw new Exception(
-                            "Produk dengan kode " + item.Kode +
-                            " tidak ditemukan di produk.json."
+                            "Produk dengan kode " + kodeProduk +
+                            " tidak ditemukan."
                         );
                     }
 
-                    if (produk.Stok < item.Jumlah)
+                
+                    if (produkDitemukan.Stok < jumlahDibeli)
                     {
                         throw new Exception(
-                            "Stok barang " + produk.Nama +
+                            "Stok barang " + produkDitemukan.Nama +
                             " tidak mencukupi.\n" +
-                            "Stok tersedia: " + produk.Stok +
-                            "\nJumlah dibeli: " + item.Jumlah
+                            "Stok tersedia: " + produkDitemukan.Stok +
+                            "\nJumlah dibeli: " + jumlahDibeli
                         );
-                    }
-
-                    
-                    if (!stokLama.ContainsKey(produk.Kode))
-                    {
-                        stokLama.Add(produk.Kode, produk.Stok);
                     }
 
                    
-                    produk.Stok -= item.Jumlah;
+                    stokLama[produkDitemukan.Kode] =
+                        produkDitemukan.Stok;
+
+                   
+                    foreach (DetailTransaksi detailKeranjang in grupBarang)
+                    {
+                        DetailTransaksiSimpan hasilFIFO =
+                            ProsesFIFO(detailKeranjang, lapisanTerbaru);
+
+                        detailTransaksiBaru.Add(hasilFIFO);
+                    }
+
+                 
+                    produkDitemukan.Stok -= jumlahDibeli;
                 }
 
                
-                ProdukJsonStore.Save(produkTerbaru);
+                LapisanStokJsonStore.Save(lapisanTerbaru);
+                lapisanSudahDisimpan = true;
 
+               
+                ProdukJsonStore.Save(produkTerbaru);
                 stokSudahDisimpan = true;
 
-              
+             
                 transaksi = new TransaksiSimpan
                 {
                     NomorTransaksi = nomorTransaksi,
-
                     UsernameKasir = usernameKasir,
-
                     Tanggal = tanggalTransaksi,
-
                     MetodePembayaran = metodePembayaranTerpilih,
-
                     TotalPembayaran = total,
 
                     UangDiterima = uang,
@@ -592,55 +635,50 @@ namespace project_akhir_stock_gudang
                         ? uang - total
                         : 0,
 
-                    Barang = keranjang.Select(item =>
-                        new DetailTransaksiSimpan
-                        {
-                            Kode = item.Kode,
-                            Nama = item.Nama,
-                            Harga = item.Harga,
-                            Jumlah = item.Jumlah,
-                            Subtotal = item.Harga * item.Jumlah
-                        }
-                    ).ToList()
+                    Barang = detailTransaksiBaru,
+
+                    TotalModal = detailTransaksiBaru.Sum(
+                        data => data.TotalModal
+                    ),
+
+                    TotalLabaKotor = detailTransaksiBaru.Sum(
+                        data => data.LabaKotor
+                    )
                 };
 
-               
-                List<TransaksiSimpan> riwayat =
-                    TransaksiJsonStore.Load();
-
               
-                riwayat.Add(transaksi);
+                List<TransaksiSimpan> riwayatTransaksi =
+                    TransaksiJsonStore.Load()
+                    ?? new List<TransaksiSimpan>();
 
-             
-                TransaksiJsonStore.Save(riwayat);
+                riwayatTransaksi.Add(transaksi);
+
+                TransaksiJsonStore.Save(riwayatTransaksi);
+
+            
                 try
                 {
                     List<BarangKeluarSimpan> daftarBarangKeluar =
-                        BarangKeluarJsonStore.Load();
+                        BarangKeluarJsonStore.Load()
+                        ?? new List<BarangKeluarSimpan>();
 
-                    foreach (DetailTransaksi item in keranjang)
+                    foreach (DetailTransaksi detailBarangKeluar in keranjang)
                     {
-                        BarangKeluarSimpan barangKeluar =
+                        BarangKeluarSimpan dataBarangKeluar =
                             new BarangKeluarSimpan
                             {
                                 Waktu = tanggalTransaksi,
-
-                                KodeBarang = item.Kode,
-
-                                NamaBarang = item.Nama,
-
-                                Jumlah = item.Jumlah,
-
+                                KodeBarang = detailBarangKeluar.Kode,
+                                NamaBarang = detailBarangKeluar.Nama,
+                                Jumlah = detailBarangKeluar.Jumlah,
                                 Jenis = "Penjualan",
-
                                 Alasan = "Transaksi Kasir",
-
                                 Petugas = usernameKasir,
-
-                                Catatan = "Nomor transaksi: " + nomorTransaksi
+                                Catatan = "Nomor transaksi: " +
+                                          nomorTransaksi
                             };
 
-                        daftarBarangKeluar.Add(barangKeluar);
+                        daftarBarangKeluar.Add(dataBarangKeluar);
                     }
 
                     BarangKeluarJsonStore.Save(daftarBarangKeluar);
@@ -648,56 +686,60 @@ namespace project_akhir_stock_gudang
                 catch (Exception errorBarangKeluar)
                 {
                     MessageBox.Show(
-                        "Transaksi berhasil disimpan, tetapi pencatatan barang keluar gagal:\n"
-                        + errorBarangKeluar.Message
+                        "Transaksi berhasil disimpan, tetapi pencatatan barang keluar gagal:\n" +
+                        errorBarangKeluar.Message,
+                        "Peringatan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
                     );
                 }
-                // Catat barang keluar dari transaksi penjualan ke Log Aktivitas
+
+              
                 try
                 {
-                    var kelompokBarang = keranjang.GroupBy(
-                        item => item.Kode,
-                        StringComparer.OrdinalIgnoreCase
-                    );
-
-                    foreach (var kelompok in kelompokBarang)
+                    foreach (var grupLog in keranjang.GroupBy(
+                        barang => barang.Kode,
+                        StringComparer.OrdinalIgnoreCase))
                     {
-                        string kode = kelompok.Key;
+                        string kodeLog = grupLog.Key;
 
-                        int jumlahTerjual = kelompok.Sum(item => item.Jumlah);
+                        int jumlahTerjual = grupLog.Sum(
+                            barang => barang.Jumlah
+                        );
 
-                        Produk produk = produkTerbaru.FirstOrDefault(
-                            p => string.Equals(
-                                p.Kode,
-                                kode,
+                        Produk produkLog = produkTerbaru.FirstOrDefault(
+                            data => string.Equals(
+                                data.Kode,
+                                kodeLog,
                                 StringComparison.OrdinalIgnoreCase
                             )
                         );
 
-                        if (produk == null)
+                        if (produkLog == null)
                             continue;
 
-                        int stokSebelum = stokLama[kode];
-                        int stokSekarang = produk.Stok;
+                        int stokSebelum = stokLama[produkLog.Kode];
+                        int stokSekarang = produkLog.Stok;
 
                         LogAktivitasJsonStore.Catat(
                             usernameKasir,
                             "Kasir",
                             "Barang Keluar",
                             "Barang keluar melalui penjualan",
-                            produk.Kode + " - " + produk.Nama,
+                            produkLog.Kode + " - " + produkLog.Nama,
                             "Barang terjual sebanyak " + jumlahTerjual +
                             " unit melalui transaksi " + nomorTransaksi +
                             ". Stok sebelumnya: " + stokSebelum +
                             ". Stok sekarang: " + stokSekarang +
-                            ". Metode pembayaran: " + metodePembayaranTerpilih
+                            ". Metode pembayaran: " +
+                            metodePembayaranTerpilih
                         );
                     }
                 }
                 catch (Exception errorLog)
                 {
                     MessageBox.Show(
-                        "Transaksi berhasil disimpan, tetapi log aktivitas barang keluar gagal dicatat:\n" +
+                        "Transaksi berhasil disimpan, tetapi log aktivitas gagal dicatat:\n" +
                         errorLog.Message,
                         "Peringatan Log",
                         MessageBoxButtons.OK,
@@ -707,16 +749,17 @@ namespace project_akhir_stock_gudang
             }
             catch (Exception ex)
             {
-                
+             
                 if (stokSudahDisimpan)
                 {
                     try
                     {
-                        foreach (Produk produk in produkTerbaru)
+                        foreach (Produk dataProduk in produkTerbaru)
                         {
-                            if (stokLama.ContainsKey(produk.Kode))
+                            if (stokLama.ContainsKey(dataProduk.Kode))
                             {
-                                produk.Stok = stokLama[produk.Kode];
+                                dataProduk.Stok =
+                                    stokLama[dataProduk.Kode];
                             }
                         }
 
@@ -731,6 +774,25 @@ namespace project_akhir_stock_gudang
                     }
                 }
 
+              
+                if (lapisanSudahDisimpan)
+                {
+                    try
+                    {
+                        LapisanStokJsonStore.Save(salinanLapisanLama);
+                    }
+                    catch (Exception errorRollbackLapisan)
+                    {
+                        MessageBox.Show(
+                            "Lapisan stok gagal dikembalikan:\n" +
+                            errorRollbackLapisan.Message,
+                            "Peringatan Pemulihan",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+                    }
+                }
+
                 MessageBox.Show(
                     "Gagal menyimpan transaksi:\n" + ex.Message,
                     "Kesalahan",
@@ -741,7 +803,7 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-          
+            // 14. Menampilkan struk
             Dashboard_Struck strukForm = new Dashboard_Struck();
 
             strukForm.TampilkanStruk(transaksi);
@@ -750,6 +812,8 @@ namespace project_akhir_stock_gudang
 
             this.Hide();
         }
+
+        
 
 
 
@@ -769,6 +833,75 @@ namespace project_akhir_stock_gudang
             kembaliform2.Show();
             this.Hide();
         }
+
+
+        private DetailTransaksiSimpan ProsesFIFO(
+            DetailTransaksi item,
+            List<LapisanStok> semuaLapisan)
+        {
+            int jumlahDibutuhkan = item.Jumlah;
+            int jumlahAwal = jumlahDibutuhkan;
+
+            decimal totalModal = 0;
+
+            List<LapisanStok> lapisanProduk = semuaLapisan
+                .Where(x =>
+                    string.Equals(
+                        x.KodeBarang,
+                        item.Kode,
+                        StringComparison.OrdinalIgnoreCase
+                    ) &&
+                    x.SisaStok > 0
+                )
+                .OrderBy(x => x.TanggalMasuk)
+                .ThenBy(x => x.IdLapisan)
+                .ToList();
+
+            int stokLapisanTersedia = lapisanProduk.Sum(x => x.SisaStok);
+
+            if (stokLapisanTersedia < jumlahDibutuhkan)
+            {
+                throw new Exception(
+                    "Lapisan stok untuk " + item.Nama +
+                    " tidak mencukupi.\n" +
+                    "Stok lapisan tersedia: " + stokLapisanTersedia +
+                    "\nJumlah yang dibutuhkan: " + jumlahDibutuhkan +
+                    "\nPastikan stok lama sudah memiliki lapisan awal."
+                );
+            }
+
+            foreach (LapisanStok lapisan in lapisanProduk)
+            {
+                if (jumlahDibutuhkan <= 0)
+                    break;
+
+                int jumlahDiambil = Math.Min(
+                    lapisan.SisaStok,
+                    jumlahDibutuhkan
+                );
+
+                totalModal += jumlahDiambil * lapisan.HargaBeli;
+
+                lapisan.SisaStok -= jumlahDiambil;
+
+                jumlahDibutuhkan -= jumlahDiambil;
+            }
+
+            decimal subtotal = item.Harga * jumlahAwal;
+
+            return new DetailTransaksiSimpan
+            {
+                Kode = item.Kode,
+                Nama = item.Nama,
+                Harga = item.Harga,
+                Jumlah = jumlahAwal,
+                Subtotal = subtotal,
+                TotalModal = totalModal,
+                HargaModalRataRata = totalModal / jumlahAwal,
+                LabaKotor = subtotal - totalModal
+            };
+        }
+
     }
 }
      

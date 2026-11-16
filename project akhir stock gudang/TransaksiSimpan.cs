@@ -1,15 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace project_akhir_stock_gudang
 {
     public class TransaksiSimpan
     {
         public string NomorTransaksi { get; set; } = "";
-
 
         public string UsernameKasir { get; set; } = "";
 
@@ -22,6 +19,12 @@ namespace project_akhir_stock_gudang
         public decimal UangDiterima { get; set; }
 
         public decimal Kembalian { get; set; }
+
+     
+        public decimal TotalModal { get; set; }
+
+   
+        public decimal TotalLabaKotor { get; set; }
 
         public List<DetailTransaksiSimpan> Barang { get; set; }
             = new List<DetailTransaksiSimpan>();
