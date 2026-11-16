@@ -35,12 +35,25 @@
             pnlKartuTabelGudang = new Panel();
             pnlKartuTabelDalamGudang = new Panel();
             dataGridView1 = new DataGridView();
+            colWaktuGudang2 = new DataGridViewTextBoxColumn();
+            colBarangGudang2 = new DataGridViewTextBoxColumn();
+            colJumlahGudang2 = new DataGridViewTextBoxColumn();
+            colHargaBeli = new DataGridViewTextBoxColumn();
+            colHargaJual = new DataGridViewTextBoxColumn();
+            colAsalGudang2 = new DataGridViewTextBoxColumn();
+            colSJGudang2 = new DataGridViewTextBoxColumn();
             pnlToolbarGudang = new Panel();
             txtCariGudang2 = new TextBox();
             cmbPerriodeGudang2 = new ComboBox();
             pnlGapGudang = new Panel();
             pnlFormLuarGudang = new Panel();
             pnlFormDalamGudang = new Panel();
+            txtLaba = new TextBox();
+            lblLaba = new Label();
+            nudHargaJual = new NumericUpDown();
+            lblHargaJual = new Label();
+            nudHargaBeli = new NumericUpDown();
+            lblHargaBeli = new Label();
             txtSJGudang2 = new TextBox();
             txtCatatanGudang2 = new TextBox();
             txtAsalGudang2 = new TextBox();
@@ -56,19 +69,6 @@
             pnlHeaderFormGudang = new GradientPanel();
             lblInfoGudang2 = new Label();
             lblJudulGudang2 = new Label();
-            lblHargaBeli = new Label();
-            nudHargaBeli = new NumericUpDown();
-            lblHargaJual = new Label();
-            nudHargaJual = new NumericUpDown();
-            lblLaba = new Label();
-            txtLaba = new TextBox();
-            colWaktuGudang2 = new DataGridViewTextBoxColumn();
-            colBarangGudang2 = new DataGridViewTextBoxColumn();
-            colJumlahGudang2 = new DataGridViewTextBoxColumn();
-            colHargaBeli = new DataGridViewTextBoxColumn();
-            colHargaJual = new DataGridViewTextBoxColumn();
-            colAsalGudang2 = new DataGridViewTextBoxColumn();
-            colSJGudang2 = new DataGridViewTextBoxColumn();
             pnlPageGudang.SuspendLayout();
             pnlBawahGudang.SuspendLayout();
             pnlKartuTabelGudang.SuspendLayout();
@@ -77,10 +77,10 @@
             pnlToolbarGudang.SuspendLayout();
             pnlFormLuarGudang.SuspendLayout();
             pnlFormDalamGudang.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudHargaJual).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudHargaBeli).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudJumlahGudang2).BeginInit();
             pnlHeaderFormGudang.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudHargaBeli).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)nudHargaJual).BeginInit();
             SuspendLayout();
             // 
             // pnlPageGudang
@@ -177,6 +177,62 @@
             dataGridView1.Size = new Size(686, 578);
             dataGridView1.TabIndex = 1;
             // 
+            // colWaktuGudang2
+            // 
+            colWaktuGudang2.FillWeight = 20F;
+            colWaktuGudang2.HeaderText = "waktu";
+            colWaktuGudang2.MinimumWidth = 6;
+            colWaktuGudang2.Name = "colWaktuGudang2";
+            colWaktuGudang2.ReadOnly = true;
+            // 
+            // colBarangGudang2
+            // 
+            colBarangGudang2.FillWeight = 33F;
+            colBarangGudang2.HeaderText = "barang";
+            colBarangGudang2.MinimumWidth = 6;
+            colBarangGudang2.Name = "colBarangGudang2";
+            colBarangGudang2.ReadOnly = true;
+            // 
+            // colJumlahGudang2
+            // 
+            colJumlahGudang2.FillWeight = 14F;
+            colJumlahGudang2.HeaderText = "jumlah";
+            colJumlahGudang2.MinimumWidth = 6;
+            colJumlahGudang2.Name = "colJumlahGudang2";
+            colJumlahGudang2.ReadOnly = true;
+            // 
+            // colHargaBeli
+            // 
+            colHargaBeli.FillWeight = 14F;
+            colHargaBeli.HeaderText = "Harga beli";
+            colHargaBeli.MinimumWidth = 6;
+            colHargaBeli.Name = "colHargaBeli";
+            colHargaBeli.ReadOnly = true;
+            // 
+            // colHargaJual
+            // 
+            colHargaJual.FillWeight = 14F;
+            colHargaJual.HeaderText = "Harga jual";
+            colHargaJual.MinimumWidth = 6;
+            colHargaJual.Name = "colHargaJual";
+            colHargaJual.ReadOnly = true;
+            // 
+            // colAsalGudang2
+            // 
+            colAsalGudang2.FillWeight = 20F;
+            colAsalGudang2.HeaderText = "Asal barang";
+            colAsalGudang2.MinimumWidth = 6;
+            colAsalGudang2.Name = "colAsalGudang2";
+            colAsalGudang2.ReadOnly = true;
+            // 
+            // colSJGudang2
+            // 
+            colSJGudang2.FillWeight = 17F;
+            colSJGudang2.HeaderText = "No. surat jalan";
+            colSJGudang2.MinimumWidth = 6;
+            colSJGudang2.Name = "colSJGudang2";
+            colSJGudang2.ReadOnly = true;
+            // 
             // pnlToolbarGudang
             // 
             pnlToolbarGudang.Controls.Add(txtCariGudang2);
@@ -261,6 +317,77 @@
             pnlFormDalamGudang.Size = new Size(338, 650);
             pnlFormDalamGudang.TabIndex = 0;
             // 
+            // txtLaba
+            // 
+            txtLaba.BackColor = Color.White;
+            txtLaba.BorderStyle = BorderStyle.FixedSingle;
+            txtLaba.Font = new Font("Leelawadee UI", 11F);
+            txtLaba.ForeColor = Color.FromArgb(18, 55, 42);
+            txtLaba.Location = new Point(179, 251);
+            txtLaba.Name = "txtLaba";
+            txtLaba.ReadOnly = true;
+            txtLaba.Size = new Size(140, 32);
+            txtLaba.TabIndex = 23;
+            // 
+            // lblLaba
+            // 
+            lblLaba.AutoSize = true;
+            lblLaba.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLaba.ForeColor = Color.FromArgb(79, 106, 92);
+            lblLaba.Location = new Point(179, 228);
+            lblLaba.Name = "lblLaba";
+            lblLaba.Size = new Size(42, 20);
+            lblLaba.TabIndex = 22;
+            lblLaba.Text = "Laba";
+            // 
+            // nudHargaJual
+            // 
+            nudHargaJual.BackColor = Color.White;
+            nudHargaJual.BorderStyle = BorderStyle.FixedSingle;
+            nudHargaJual.Font = new Font("Leelawadee UI", 11F);
+            nudHargaJual.ForeColor = Color.FromArgb(18, 55, 42);
+            nudHargaJual.Location = new Point(21, 251);
+            nudHargaJual.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
+            nudHargaJual.Name = "nudHargaJual";
+            nudHargaJual.Size = new Size(140, 32);
+            nudHargaJual.TabIndex = 21;
+            nudHargaJual.ThousandsSeparator = true;
+            // 
+            // lblHargaJual
+            // 
+            lblHargaJual.AutoSize = true;
+            lblHargaJual.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHargaJual.ForeColor = Color.FromArgb(79, 106, 92);
+            lblHargaJual.Location = new Point(21, 228);
+            lblHargaJual.Name = "lblHargaJual";
+            lblHargaJual.Size = new Size(80, 20);
+            lblHargaJual.TabIndex = 20;
+            lblHargaJual.Text = "Harga jual";
+            // 
+            // nudHargaBeli
+            // 
+            nudHargaBeli.BackColor = Color.White;
+            nudHargaBeli.BorderStyle = BorderStyle.FixedSingle;
+            nudHargaBeli.Font = new Font("Leelawadee UI", 11F);
+            nudHargaBeli.ForeColor = Color.FromArgb(18, 55, 42);
+            nudHargaBeli.Location = new Point(179, 191);
+            nudHargaBeli.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
+            nudHargaBeli.Name = "nudHargaBeli";
+            nudHargaBeli.Size = new Size(140, 32);
+            nudHargaBeli.TabIndex = 19;
+            nudHargaBeli.ThousandsSeparator = true;
+            // 
+            // lblHargaBeli
+            // 
+            lblHargaBeli.AutoSize = true;
+            lblHargaBeli.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHargaBeli.ForeColor = Color.FromArgb(79, 106, 92);
+            lblHargaBeli.Location = new Point(179, 168);
+            lblHargaBeli.Name = "lblHargaBeli";
+            lblHargaBeli.Size = new Size(80, 20);
+            lblHargaBeli.TabIndex = 18;
+            lblHargaBeli.Text = "Harga beli";
+            // 
             // txtSJGudang2
             // 
             txtSJGudang2.BackColor = Color.White;
@@ -290,9 +417,9 @@
             txtAsalGudang2.BorderStyle = BorderStyle.FixedSingle;
             txtAsalGudang2.Font = new Font("Leelawadee UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAsalGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            txtAsalGudang2.Location = new Point(21, 191);
+            txtAsalGudang2.Location = new Point(20, 433);
             txtAsalGudang2.Name = "txtAsalGudang2";
-            txtAsalGudang2.Size = new Size(140, 31);
+            txtAsalGudang2.Size = new Size(298, 31);
             txtAsalGudang2.TabIndex = 15;
             // 
             // lblCatatanGudang2
@@ -397,10 +524,10 @@
             nudJumlahGudang2.BorderStyle = BorderStyle.FixedSingle;
             nudJumlahGudang2.Font = new Font("Leelawadee UI", 11F);
             nudJumlahGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            nudJumlahGudang2.Location = new Point(20, 433);
+            nudJumlahGudang2.Location = new Point(20, 191);
             nudJumlahGudang2.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             nudJumlahGudang2.Name = "nudJumlahGudang2";
-            nudJumlahGudang2.Size = new Size(298, 32);
+            nudJumlahGudang2.Size = new Size(140, 32);
             nudJumlahGudang2.TabIndex = 3;
             nudJumlahGudang2.ValueChanged += nudJumlahGudang2_ValueChanged;
             // 
@@ -441,133 +568,6 @@
             lblJudulGudang2.TabIndex = 0;
             lblJudulGudang2.Text = "Catat Barang Masuk";
             // 
-            // lblHargaBeli
-            // 
-            lblHargaBeli.AutoSize = true;
-            lblHargaBeli.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHargaBeli.ForeColor = Color.FromArgb(79, 106, 92);
-            lblHargaBeli.Location = new Point(179, 168);
-            lblHargaBeli.Name = "lblHargaBeli";
-            lblHargaBeli.Size = new Size(80, 20);
-            lblHargaBeli.TabIndex = 18;
-            lblHargaBeli.Text = "Harga beli";
-            // 
-            // nudHargaBeli
-            // 
-            nudHargaBeli.BackColor = Color.White;
-            nudHargaBeli.BorderStyle = BorderStyle.FixedSingle;
-            nudHargaBeli.Font = new Font("Leelawadee UI", 11F);
-            nudHargaBeli.ForeColor = Color.FromArgb(18, 55, 42);
-            nudHargaBeli.Location = new Point(179, 191);
-            nudHargaBeli.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
-            nudHargaBeli.Name = "nudHargaBeli";
-            nudHargaBeli.Size = new Size(140, 32);
-            nudHargaBeli.TabIndex = 19;
-            nudHargaBeli.ThousandsSeparator = true;
-            // 
-            // lblHargaJual
-            // 
-            lblHargaJual.AutoSize = true;
-            lblHargaJual.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblHargaJual.ForeColor = Color.FromArgb(79, 106, 92);
-            lblHargaJual.Location = new Point(21, 228);
-            lblHargaJual.Name = "lblHargaJual";
-            lblHargaJual.Size = new Size(80, 20);
-            lblHargaJual.TabIndex = 20;
-            lblHargaJual.Text = "Harga jual";
-            // 
-            // nudHargaJual
-            // 
-            nudHargaJual.BackColor = Color.White;
-            nudHargaJual.BorderStyle = BorderStyle.FixedSingle;
-            nudHargaJual.Font = new Font("Leelawadee UI", 11F);
-            nudHargaJual.ForeColor = Color.FromArgb(18, 55, 42);
-            nudHargaJual.Location = new Point(21, 251);
-            nudHargaJual.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
-            nudHargaJual.Name = "nudHargaJual";
-            nudHargaJual.Size = new Size(140, 32);
-            nudHargaJual.TabIndex = 21;
-            nudHargaJual.ThousandsSeparator = true;
-            // 
-            // lblLaba
-            // 
-            lblLaba.AutoSize = true;
-            lblLaba.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLaba.ForeColor = Color.FromArgb(79, 106, 92);
-            lblLaba.Location = new Point(179, 228);
-            lblLaba.Name = "lblLaba";
-            lblLaba.Size = new Size(42, 20);
-            lblLaba.TabIndex = 22;
-            lblLaba.Text = "Laba";
-            // 
-            // txtLaba
-            // 
-            txtLaba.BackColor = Color.White;
-            txtLaba.BorderStyle = BorderStyle.FixedSingle;
-            txtLaba.Font = new Font("Leelawadee UI", 11F);
-            txtLaba.ForeColor = Color.FromArgb(18, 55, 42);
-            txtLaba.Location = new Point(179, 251);
-            txtLaba.Name = "txtLaba";
-            txtLaba.ReadOnly = true;
-            txtLaba.Size = new Size(140, 32);
-            txtLaba.TabIndex = 23;
-            // 
-            // colWaktuGudang2
-            // 
-            colWaktuGudang2.FillWeight = 20F;
-            colWaktuGudang2.HeaderText = "waktu";
-            colWaktuGudang2.MinimumWidth = 6;
-            colWaktuGudang2.Name = "colWaktuGudang2";
-            colWaktuGudang2.ReadOnly = true;
-            // 
-            // colBarangGudang2
-            // 
-            colBarangGudang2.FillWeight = 33F;
-            colBarangGudang2.HeaderText = "barang";
-            colBarangGudang2.MinimumWidth = 6;
-            colBarangGudang2.Name = "colBarangGudang2";
-            colBarangGudang2.ReadOnly = true;
-            // 
-            // colJumlahGudang2
-            // 
-            colJumlahGudang2.FillWeight = 14F;
-            colJumlahGudang2.HeaderText = "jumlah";
-            colJumlahGudang2.MinimumWidth = 6;
-            colJumlahGudang2.Name = "colJumlahGudang2";
-            colJumlahGudang2.ReadOnly = true;
-            // 
-            // colHargaBeli
-            // 
-            colHargaBeli.FillWeight = 14F;
-            colHargaBeli.HeaderText = "Harga beli";
-            colHargaBeli.MinimumWidth = 6;
-            colHargaBeli.Name = "colHargaBeli";
-            colHargaBeli.ReadOnly = true;
-            // 
-            // colHargaJual
-            // 
-            colHargaJual.FillWeight = 14F;
-            colHargaJual.HeaderText = "Harga jual";
-            colHargaJual.MinimumWidth = 6;
-            colHargaJual.Name = "colHargaJual";
-            colHargaJual.ReadOnly = true;
-            // 
-            // colAsalGudang2
-            // 
-            colAsalGudang2.FillWeight = 20F;
-            colAsalGudang2.HeaderText = "Asal barang";
-            colAsalGudang2.MinimumWidth = 6;
-            colAsalGudang2.Name = "colAsalGudang2";
-            colAsalGudang2.ReadOnly = true;
-            // 
-            // colSJGudang2
-            // 
-            colSJGudang2.FillWeight = 17F;
-            colSJGudang2.HeaderText = "No. surat jalan";
-            colSJGudang2.MinimumWidth = 6;
-            colSJGudang2.Name = "colSJGudang2";
-            colSJGudang2.ReadOnly = true;
-            // 
             // ucBarangMasuk
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -587,11 +587,11 @@
             pnlFormLuarGudang.ResumeLayout(false);
             pnlFormDalamGudang.ResumeLayout(false);
             pnlFormDalamGudang.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudHargaJual).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudHargaBeli).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudJumlahGudang2).EndInit();
             pnlHeaderFormGudang.ResumeLayout(false);
             pnlHeaderFormGudang.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudHargaBeli).EndInit();
-            ((System.ComponentModel.ISupportInitialize)nudHargaJual).EndInit();
             ResumeLayout(false);
         }
 

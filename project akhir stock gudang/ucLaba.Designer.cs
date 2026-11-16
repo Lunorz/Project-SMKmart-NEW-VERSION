@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             pnlPage = new Panel();
             pnlBawah = new Panel();
             pnlKartuTabel = new Panel();
@@ -41,34 +41,21 @@
             tabUtama = new TabControl();
             tabDaftar = new TabPage();
             dgvDaftar = new DataGridView();
-            colKode = new DataGridViewTextBoxColumn();
-            colBarang = new DataGridViewTextBoxColumn();
-            colStok = new DataGridViewTextBoxColumn();
-            colBeliTerakhir = new DataGridViewTextBoxColumn();
-            colJual = new DataGridViewTextBoxColumn();
-            colLabaBaru = new DataGridViewTextBoxColumn();
             tabLapisan = new TabPage();
             dgvLapisan = new DataGridView();
-            colLapisan = new DataGridViewTextBoxColumn();
-            colMasuk = new DataGridViewTextBoxColumn();
-            colSisa = new DataGridViewTextBoxColumn();
-            colBeli = new DataGridViewTextBoxColumn();
-            colJualL = new DataGridViewTextBoxColumn();
-            colLaba = new DataGridViewTextBoxColumn();
-            colPotensi = new DataGridViewTextBoxColumn();
             lblCatatanLapisan = new Label();
             tabRiwayat = new TabPage();
             dgvRiwayat = new DataGridView();
-            colWaktuR = new DataGridViewTextBoxColumn();
-            colBarangR = new DataGridViewTextBoxColumn();
-            colBeliR = new DataGridViewTextBoxColumn();
-            colJualR = new DataGridViewTextBoxColumn();
-            colOleh = new DataGridViewTextBoxColumn();
-            colAlasan = new DataGridViewTextBoxColumn();
             pnlGap = new Panel();
             pnlAturLuar = new Panel();
             pnlAturDalam = new Panel();
+            btnBatal = new Button();
+            btnSimpanHarga = new Button();
             pnlDampak = new Panel();
+            lblDampakBaruNilai = new Label();
+            lblDampakBaru = new Label();
+            lblDamapakLamaNilai = new Label();
+            lblDampakLama = new Label();
             lblDampakJudul = new Label();
             txtAlasan = new TextBox();
             nudJualBaru = new NumericUpDown();
@@ -97,12 +84,25 @@
             pnlKartuPotensiDalam = new Panel();
             lblPotensi = new Label();
             lblPotensiJudul = new Label();
-            lblDampakLama = new Label();
-            lblDamapakLamaNilai = new Label();
-            lblDampakBaru = new Label();
-            lblDampakBaruNilai = new Label();
-            btnSimpanHarga = new Button();
-            btnBatal = new Button();
+            colKode = new DataGridViewTextBoxColumn();
+            colBarang = new DataGridViewTextBoxColumn();
+            colStok = new DataGridViewTextBoxColumn();
+            colBeliTerakhir = new DataGridViewTextBoxColumn();
+            colJual = new DataGridViewTextBoxColumn();
+            colLabaBaru = new DataGridViewTextBoxColumn();
+            colLapisan = new DataGridViewTextBoxColumn();
+            colMasuk = new DataGridViewTextBoxColumn();
+            colSisa = new DataGridViewTextBoxColumn();
+            colBeli = new DataGridViewTextBoxColumn();
+            colJualL = new DataGridViewTextBoxColumn();
+            colLaba = new DataGridViewTextBoxColumn();
+            colPotensi = new DataGridViewTextBoxColumn();
+            colWaktuR = new DataGridViewTextBoxColumn();
+            colBarangR = new DataGridViewTextBoxColumn();
+            colBeliR = new DataGridViewTextBoxColumn();
+            colJualR = new DataGridViewTextBoxColumn();
+            colOleh = new DataGridViewTextBoxColumn();
+            colAlasan = new DataGridViewTextBoxColumn();
             pnlPage.SuspendLayout();
             pnlBawah.SuspendLayout();
             pnlKartuTabel.SuspendLayout();
@@ -209,27 +209,27 @@
             dgvDaftar.BorderStyle = BorderStyle.None;
             dgvDaftar.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvDaftar.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle7.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle7.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle7.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dgvDaftar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle1.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle1.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDaftar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDaftar.ColumnHeadersHeight = 60;
             dgvDaftar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvDaftar.Columns.AddRange(new DataGridViewColumn[] { colKode, colBarang, colStok, colBeliTerakhir, colJual, colLabaBaru });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.White;
-            dataGridViewCellStyle8.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle8.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle8.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle8.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dgvDaftar.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle2.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvDaftar.DefaultCellStyle = dataGridViewCellStyle2;
             dgvDaftar.Dock = DockStyle.Fill;
             dgvDaftar.EnableHeadersVisualStyles = false;
             dgvDaftar.GridColor = Color.FromArgb(230, 247, 238);
@@ -243,54 +243,7 @@
             dgvDaftar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvDaftar.Size = new Size(810, 589);
             dgvDaftar.TabIndex = 2;
-            // 
-            // colKode
-            // 
-            colKode.FillWeight = 12F;
-            colKode.HeaderText = "Kode";
-            colKode.MinimumWidth = 6;
-            colKode.Name = "colKode";
-            colKode.ReadOnly = true;
-            // 
-            // colBarang
-            // 
-            colBarang.FillWeight = 26F;
-            colBarang.HeaderText = "Barang";
-            colBarang.MinimumWidth = 6;
-            colBarang.Name = "colBarang";
-            colBarang.ReadOnly = true;
-            // 
-            // colStok
-            // 
-            colStok.FillWeight = 9F;
-            colStok.HeaderText = "Stok";
-            colStok.MinimumWidth = 6;
-            colStok.Name = "colStok";
-            colStok.ReadOnly = true;
-            // 
-            // colBeliTerakhir
-            // 
-            colBeliTerakhir.FillWeight = 18F;
-            colBeliTerakhir.HeaderText = "Harga beli terakhir";
-            colBeliTerakhir.MinimumWidth = 6;
-            colBeliTerakhir.Name = "colBeliTerakhir";
-            colBeliTerakhir.ReadOnly = true;
-            // 
-            // colJual
-            // 
-            colJual.FillWeight = 17F;
-            colJual.HeaderText = "\tHarga jual";
-            colJual.MinimumWidth = 6;
-            colJual.Name = "colJual";
-            colJual.ReadOnly = true;
-            // 
-            // colLabaBaru
-            // 
-            colLabaBaru.FillWeight = 18F;
-            colLabaBaru.HeaderText = "\tLaba/unit (terbaru)";
-            colLabaBaru.MinimumWidth = 6;
-            colLabaBaru.Name = "colLabaBaru";
-            colLabaBaru.ReadOnly = true;
+            dgvDaftar.SelectionChanged += dgvDaftar_SelectionChanged;
             // 
             // tabLapisan
             // 
@@ -316,27 +269,27 @@
             dgvLapisan.BorderStyle = BorderStyle.None;
             dgvLapisan.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvLapisan.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle9.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle9.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dgvLapisan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle3.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle3.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvLapisan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvLapisan.ColumnHeadersHeight = 60;
             dgvLapisan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvLapisan.Columns.AddRange(new DataGridViewColumn[] { colLapisan, colMasuk, colSisa, colBeli, colJualL, colLaba, colPotensi });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.White;
-            dataGridViewCellStyle10.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle10.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle10.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle10.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle10.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            dgvLapisan.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle4.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvLapisan.DefaultCellStyle = dataGridViewCellStyle4;
             dgvLapisan.Dock = DockStyle.Fill;
             dgvLapisan.EnableHeadersVisualStyles = false;
             dgvLapisan.GridColor = Color.FromArgb(230, 247, 238);
@@ -350,62 +303,6 @@
             dgvLapisan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvLapisan.Size = new Size(810, 545);
             dgvLapisan.TabIndex = 4;
-            // 
-            // colLapisan
-            // 
-            colLapisan.FillWeight = 26F;
-            colLapisan.HeaderText = "Lapisan (barang · masuk)";
-            colLapisan.MinimumWidth = 6;
-            colLapisan.Name = "colLapisan";
-            colLapisan.ReadOnly = true;
-            // 
-            // colMasuk
-            // 
-            colMasuk.FillWeight = 8F;
-            colMasuk.HeaderText = "Masuk";
-            colMasuk.MinimumWidth = 6;
-            colMasuk.Name = "colMasuk";
-            colMasuk.ReadOnly = true;
-            // 
-            // colSisa
-            // 
-            colSisa.FillWeight = 8F;
-            colSisa.HeaderText = "Sisa";
-            colSisa.MinimumWidth = 6;
-            colSisa.Name = "colSisa";
-            colSisa.ReadOnly = true;
-            // 
-            // colBeli
-            // 
-            colBeli.FillWeight = 15F;
-            colBeli.HeaderText = "\tHarga beli";
-            colBeli.MinimumWidth = 6;
-            colBeli.Name = "colBeli";
-            colBeli.ReadOnly = true;
-            // 
-            // colJualL
-            // 
-            colJualL.FillWeight = 15F;
-            colJualL.HeaderText = "\tHarga jual";
-            colJualL.MinimumWidth = 6;
-            colJualL.Name = "colJualL";
-            colJualL.ReadOnly = true;
-            // 
-            // colLaba
-            // 
-            colLaba.FillWeight = 16F;
-            colLaba.HeaderText = "\tLaba/unit";
-            colLaba.MinimumWidth = 6;
-            colLaba.Name = "colLaba";
-            colLaba.ReadOnly = true;
-            // 
-            // colPotensi
-            // 
-            colPotensi.FillWeight = 16F;
-            colPotensi.HeaderText = "Potensi laba";
-            colPotensi.MinimumWidth = 6;
-            colPotensi.Name = "colPotensi";
-            colPotensi.ReadOnly = true;
             // 
             // lblCatatanLapisan
             // 
@@ -441,27 +338,27 @@
             dgvRiwayat.BorderStyle = BorderStyle.None;
             dgvRiwayat.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvRiwayat.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle11.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle11.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle11.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle11.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            dgvRiwayat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle5.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle5.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvRiwayat.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvRiwayat.ColumnHeadersHeight = 60;
             dgvRiwayat.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvRiwayat.Columns.AddRange(new DataGridViewColumn[] { colWaktuR, colBarangR, colBeliR, colJualR, colOleh, colAlasan });
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = Color.White;
-            dataGridViewCellStyle12.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle12.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            dgvRiwayat.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle6.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvRiwayat.DefaultCellStyle = dataGridViewCellStyle6;
             dgvRiwayat.Dock = DockStyle.Fill;
             dgvRiwayat.EnableHeadersVisualStyles = false;
             dgvRiwayat.GridColor = Color.FromArgb(230, 247, 238);
@@ -475,54 +372,6 @@
             dgvRiwayat.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvRiwayat.Size = new Size(810, 589);
             dgvRiwayat.TabIndex = 3;
-            // 
-            // colWaktuR
-            // 
-            colWaktuR.FillWeight = 16F;
-            colWaktuR.HeaderText = "Waktu";
-            colWaktuR.MinimumWidth = 6;
-            colWaktuR.Name = "colWaktuR";
-            colWaktuR.ReadOnly = true;
-            // 
-            // colBarangR
-            // 
-            colBarangR.FillWeight = 22F;
-            colBarangR.HeaderText = "Barang";
-            colBarangR.MinimumWidth = 6;
-            colBarangR.Name = "colBarangR";
-            colBarangR.ReadOnly = true;
-            // 
-            // colBeliR
-            // 
-            colBeliR.FillWeight = 18F;
-            colBeliR.HeaderText = "\tHarga beli (lama → baru)";
-            colBeliR.MinimumWidth = 6;
-            colBeliR.Name = "colBeliR";
-            colBeliR.ReadOnly = true;
-            // 
-            // colJualR
-            // 
-            colJualR.FillWeight = 18F;
-            colJualR.HeaderText = "Harga jual (lama → baru)";
-            colJualR.MinimumWidth = 6;
-            colJualR.Name = "colJualR";
-            colJualR.ReadOnly = true;
-            // 
-            // colOleh
-            // 
-            colOleh.FillWeight = 12F;
-            colOleh.HeaderText = "Oleh";
-            colOleh.MinimumWidth = 6;
-            colOleh.Name = "colOleh";
-            colOleh.ReadOnly = true;
-            // 
-            // colAlasan
-            // 
-            colAlasan.FillWeight = 14F;
-            colAlasan.HeaderText = "Alasan";
-            colAlasan.MinimumWidth = 6;
-            colAlasan.Name = "colAlasan";
-            colAlasan.ReadOnly = true;
             // 
             // pnlGap
             // 
@@ -564,6 +413,31 @@
             pnlAturDalam.Size = new Size(338, 631);
             pnlAturDalam.TabIndex = 0;
             // 
+            // btnBatal
+            // 
+            btnBatal.Location = new Point(20, 492);
+            btnBatal.Name = "btnBatal";
+            btnBatal.Size = new Size(90, 40);
+            btnBatal.TabIndex = 12;
+            btnBatal.Text = "Batal";
+            btnBatal.UseVisualStyleBackColor = true;
+            btnBatal.Click += btnBatal_Click;
+            // 
+            // btnSimpanHarga
+            // 
+            btnSimpanHarga.BackColor = Color.FromArgb(42, 127, 80);
+            btnSimpanHarga.FlatAppearance.BorderSize = 0;
+            btnSimpanHarga.FlatStyle = FlatStyle.Flat;
+            btnSimpanHarga.Font = new Font("Leelawadee UI", 10.5F, FontStyle.Bold);
+            btnSimpanHarga.ForeColor = Color.White;
+            btnSimpanHarga.Location = new Point(118, 492);
+            btnSimpanHarga.Name = "btnSimpanHarga";
+            btnSimpanHarga.Size = new Size(200, 40);
+            btnSimpanHarga.TabIndex = 11;
+            btnSimpanHarga.Text = "Simpan Harga";
+            btnSimpanHarga.UseVisualStyleBackColor = false;
+            btnSimpanHarga.Click += btnSimpanHarga_Click;
+            // 
             // pnlDampak
             // 
             pnlDampak.BackColor = Color.FromArgb(245, 251, 248);
@@ -576,6 +450,48 @@
             pnlDampak.Name = "pnlDampak";
             pnlDampak.Size = new Size(298, 112);
             pnlDampak.TabIndex = 10;
+            // 
+            // lblDampakBaruNilai
+            // 
+            lblDampakBaruNilai.AutoSize = true;
+            lblDampakBaruNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDampakBaruNilai.Location = new Point(230, 70);
+            lblDampakBaruNilai.Name = "lblDampakBaruNilai";
+            lblDampakBaruNilai.Size = new Size(60, 17);
+            lblDampakBaruNilai.TabIndex = 4;
+            lblDampakBaruNilai.Text = "Rp 2.000";
+            // 
+            // lblDampakBaru
+            // 
+            lblDampakBaru.AutoSize = true;
+            lblDampakBaru.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDampakBaru.ForeColor = Color.FromArgb(18, 55, 42);
+            lblDampakBaru.Location = new Point(12, 70);
+            lblDampakBaru.Name = "lblDampakBaru";
+            lblDampakBaru.Size = new Size(212, 17);
+            lblDampakBaru.TabIndex = 3;
+            lblDampakBaru.Text = "Stok baru (50 unit, beli Rp 14.000)\t1";
+            // 
+            // lblDamapakLamaNilai
+            // 
+            lblDamapakLamaNilai.AutoSize = true;
+            lblDamapakLamaNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDamapakLamaNilai.Location = new Point(216, 34);
+            lblDamapakLamaNilai.Name = "lblDamapakLamaNilai";
+            lblDamapakLamaNilai.Size = new Size(76, 17);
+            lblDamapakLamaNilai.TabIndex = 2;
+            lblDamapakLamaNilai.Text = "Rp 6.000 ▲";
+            // 
+            // lblDampakLama
+            // 
+            lblDampakLama.AutoSize = true;
+            lblDampakLama.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDampakLama.ForeColor = Color.FromArgb(18, 55, 42);
+            lblDampakLama.Location = new Point(12, 36);
+            lblDampakLama.Name = "lblDampakLama";
+            lblDampakLama.Size = new Size(206, 17);
+            lblDampakLama.TabIndex = 1;
+            lblDampakLama.Text = "Stok lama (20 unit, beli Rp 10.000)";
             // 
             // lblDampakJudul
             // 
@@ -611,6 +527,7 @@
             nudJualBaru.Size = new Size(298, 31);
             nudJualBaru.TabIndex = 8;
             nudJualBaru.ThousandsSeparator = true;
+            nudJualBaru.ValueChanged += nudJualBaru_ValueChanged;
             // 
             // lblAlasan
             // 
@@ -910,70 +827,176 @@
             lblPotensiJudul.TabIndex = 2;
             lblPotensiJudul.Text = "Potensi Laba";
             // 
-            // lblDampakLama
+            // colKode
             // 
-            lblDampakLama.AutoSize = true;
-            lblDampakLama.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDampakLama.ForeColor = Color.FromArgb(18, 55, 42);
-            lblDampakLama.Location = new Point(12, 36);
-            lblDampakLama.Name = "lblDampakLama";
-            lblDampakLama.Size = new Size(206, 17);
-            lblDampakLama.TabIndex = 1;
-            lblDampakLama.Text = "Stok lama (20 unit, beli Rp 10.000)";
+            colKode.DataPropertyName = "Kode";
+            colKode.FillWeight = 12F;
+            colKode.HeaderText = "Kode";
+            colKode.MinimumWidth = 6;
+            colKode.Name = "colKode";
+            colKode.ReadOnly = true;
             // 
-            // lblDamapakLamaNilai
+            // colBarang
             // 
-            lblDamapakLamaNilai.AutoSize = true;
-            lblDamapakLamaNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDamapakLamaNilai.Location = new Point(216, 34);
-            lblDamapakLamaNilai.Name = "lblDamapakLamaNilai";
-            lblDamapakLamaNilai.Size = new Size(76, 17);
-            lblDamapakLamaNilai.TabIndex = 2;
-            lblDamapakLamaNilai.Text = "Rp 6.000 ▲";
+            colBarang.DataPropertyName = "Nama";
+            colBarang.FillWeight = 26F;
+            colBarang.HeaderText = "Barang";
+            colBarang.MinimumWidth = 6;
+            colBarang.Name = "colBarang";
+            colBarang.ReadOnly = true;
             // 
-            // lblDampakBaru
+            // colStok
             // 
-            lblDampakBaru.AutoSize = true;
-            lblDampakBaru.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDampakBaru.ForeColor = Color.FromArgb(18, 55, 42);
-            lblDampakBaru.Location = new Point(12, 70);
-            lblDampakBaru.Name = "lblDampakBaru";
-            lblDampakBaru.Size = new Size(212, 17);
-            lblDampakBaru.TabIndex = 3;
-            lblDampakBaru.Text = "Stok baru (50 unit, beli Rp 14.000)\t1";
+            colStok.DataPropertyName = "Stok";
+            colStok.FillWeight = 9F;
+            colStok.HeaderText = "Stok";
+            colStok.MinimumWidth = 6;
+            colStok.Name = "colStok";
+            colStok.ReadOnly = true;
             // 
-            // lblDampakBaruNilai
+            // colBeliTerakhir
             // 
-            lblDampakBaruNilai.AutoSize = true;
-            lblDampakBaruNilai.Font = new Font("Leelawadee UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDampakBaruNilai.Location = new Point(230, 70);
-            lblDampakBaruNilai.Name = "lblDampakBaruNilai";
-            lblDampakBaruNilai.Size = new Size(60, 17);
-            lblDampakBaruNilai.TabIndex = 4;
-            lblDampakBaruNilai.Text = "Rp 2.000";
+            colBeliTerakhir.DataPropertyName = "HargaBeliTerakhir";
+            colBeliTerakhir.FillWeight = 18F;
+            colBeliTerakhir.HeaderText = "Harga beli terakhir";
+            colBeliTerakhir.MinimumWidth = 6;
+            colBeliTerakhir.Name = "colBeliTerakhir";
+            colBeliTerakhir.ReadOnly = true;
             // 
-            // btnSimpanHarga
+            // colJual
             // 
-            btnSimpanHarga.BackColor = Color.FromArgb(42, 127, 80);
-            btnSimpanHarga.FlatAppearance.BorderSize = 0;
-            btnSimpanHarga.FlatStyle = FlatStyle.Flat;
-            btnSimpanHarga.Font = new Font("Leelawadee UI", 10.5F, FontStyle.Bold);
-            btnSimpanHarga.ForeColor = Color.White;
-            btnSimpanHarga.Location = new Point(118, 492);
-            btnSimpanHarga.Name = "btnSimpanHarga";
-            btnSimpanHarga.Size = new Size(200, 40);
-            btnSimpanHarga.TabIndex = 11;
-            btnSimpanHarga.Text = "Simpan Harga";
-            btnSimpanHarga.UseVisualStyleBackColor = false;
+            colJual.DataPropertyName = "Harga";
+            colJual.FillWeight = 17F;
+            colJual.HeaderText = "\tHarga jual";
+            colJual.MinimumWidth = 6;
+            colJual.Name = "colJual";
+            colJual.ReadOnly = true;
             // 
-            // btnBatal
+            // colLabaBaru
             // 
-            btnBatal.Location = new Point(20, 492);
-            btnBatal.Name = "btnBatal";
-            btnBatal.Size = new Size(90, 40);
-            btnBatal.TabIndex = 12;
-            btnBatal.Text = "Batal";
-            btnBatal.UseVisualStyleBackColor = true;
+            colLabaBaru.DataPropertyName = "LabaPerUnitTerbaru";
+            colLabaBaru.FillWeight = 18F;
+            colLabaBaru.HeaderText = "\tLaba/unit (terbaru)";
+            colLabaBaru.MinimumWidth = 6;
+            colLabaBaru.Name = "colLabaBaru";
+            colLabaBaru.ReadOnly = true;
+            // 
+            // colLapisan
+            // 
+            colLapisan.DataPropertyName = "NamaBarang";
+            colLapisan.FillWeight = 26F;
+            colLapisan.HeaderText = "Lapisan (barang · masuk)";
+            colLapisan.MinimumWidth = 6;
+            colLapisan.Name = "colLapisan";
+            colLapisan.ReadOnly = true;
+            // 
+            // colMasuk
+            // 
+            colMasuk.DataPropertyName = "TanggalMasuk";
+            colMasuk.FillWeight = 8F;
+            colMasuk.HeaderText = "Masuk";
+            colMasuk.MinimumWidth = 6;
+            colMasuk.Name = "colMasuk";
+            colMasuk.ReadOnly = true;
+            // 
+            // colSisa
+            // 
+            colSisa.DataPropertyName = "SisaStok";
+            colSisa.FillWeight = 8F;
+            colSisa.HeaderText = "Sisa";
+            colSisa.MinimumWidth = 6;
+            colSisa.Name = "colSisa";
+            colSisa.ReadOnly = true;
+            // 
+            // colBeli
+            // 
+            colBeli.DataPropertyName = "HargaBeli";
+            colBeli.FillWeight = 15F;
+            colBeli.HeaderText = "\tHarga beli";
+            colBeli.MinimumWidth = 6;
+            colBeli.Name = "colBeli";
+            colBeli.ReadOnly = true;
+            // 
+            // colJualL
+            // 
+            colJualL.DataPropertyName = "HargaJual";
+            colJualL.FillWeight = 15F;
+            colJualL.HeaderText = "\tHarga jual";
+            colJualL.MinimumWidth = 6;
+            colJualL.Name = "colJualL";
+            colJualL.ReadOnly = true;
+            // 
+            // colLaba
+            // 
+            colLaba.DataPropertyName = "LabaPerUnit";
+            colLaba.FillWeight = 16F;
+            colLaba.HeaderText = "\tLaba/unit";
+            colLaba.MinimumWidth = 6;
+            colLaba.Name = "colLaba";
+            colLaba.ReadOnly = true;
+            // 
+            // colPotensi
+            // 
+            colPotensi.DataPropertyName = "PotensiLaba";
+            colPotensi.FillWeight = 16F;
+            colPotensi.HeaderText = "Potensi laba";
+            colPotensi.MinimumWidth = 6;
+            colPotensi.Name = "colPotensi";
+            colPotensi.ReadOnly = true;
+            // 
+            // colWaktuR
+            // 
+            colWaktuR.DataPropertyName = "WaktuPerubahan";
+            colWaktuR.FillWeight = 16F;
+            colWaktuR.HeaderText = "Waktu";
+            colWaktuR.MinimumWidth = 6;
+            colWaktuR.Name = "colWaktuR";
+            colWaktuR.ReadOnly = true;
+            // 
+            // colBarangR
+            // 
+            colBarangR.DataPropertyName = "NamaBarang";
+            colBarangR.FillWeight = 22F;
+            colBarangR.HeaderText = "Barang";
+            colBarangR.MinimumWidth = 6;
+            colBarangR.Name = "colBarangR";
+            colBarangR.ReadOnly = true;
+            // 
+            // colBeliR
+            // 
+            colBeliR.DataPropertyName = "HargaLama";
+            colBeliR.FillWeight = 18F;
+            colBeliR.HeaderText = "Harga jual lama";
+            colBeliR.MinimumWidth = 6;
+            colBeliR.Name = "colBeliR";
+            colBeliR.ReadOnly = true;
+            // 
+            // colJualR
+            // 
+            colJualR.DataPropertyName = "HargaBaru";
+            colJualR.FillWeight = 18F;
+            colJualR.HeaderText = "Harga jual baru";
+            colJualR.MinimumWidth = 6;
+            colJualR.Name = "colJualR";
+            colJualR.ReadOnly = true;
+            // 
+            // colOleh
+            // 
+            colOleh.DataPropertyName = "Admin";
+            colOleh.FillWeight = 12F;
+            colOleh.HeaderText = "Oleh";
+            colOleh.MinimumWidth = 6;
+            colOleh.Name = "colOleh";
+            colOleh.ReadOnly = true;
+            // 
+            // colAlasan
+            // 
+            colAlasan.DataPropertyName = "Alasan";
+            colAlasan.FillWeight = 14F;
+            colAlasan.HeaderText = "Alasan";
+            colAlasan.MinimumWidth = 6;
+            colAlasan.Name = "colAlasan";
+            colAlasan.ReadOnly = true;
             // 
             // ucLaba
             // 
@@ -1051,26 +1074,7 @@
         private DataGridView dgvDaftar;
         private Label lblCatatanLapisan;
         private DataGridView dgvRiwayat;
-        private DataGridViewTextBoxColumn colKode;
-        private DataGridViewTextBoxColumn colBarang;
-        private DataGridViewTextBoxColumn colStok;
-        private DataGridViewTextBoxColumn colBeliTerakhir;
-        private DataGridViewTextBoxColumn colJual;
-        private DataGridViewTextBoxColumn colLabaBaru;
         private DataGridView dgvLapisan;
-        private DataGridViewTextBoxColumn colLapisan;
-        private DataGridViewTextBoxColumn colMasuk;
-        private DataGridViewTextBoxColumn colSisa;
-        private DataGridViewTextBoxColumn colBeli;
-        private DataGridViewTextBoxColumn colJualL;
-        private DataGridViewTextBoxColumn colLaba;
-        private DataGridViewTextBoxColumn colPotensi;
-        private DataGridViewTextBoxColumn colWaktuR;
-        private DataGridViewTextBoxColumn colBarangR;
-        private DataGridViewTextBoxColumn colBeliR;
-        private DataGridViewTextBoxColumn colJualR;
-        private DataGridViewTextBoxColumn colOleh;
-        private DataGridViewTextBoxColumn colAlasan;
         private Panel pnlAturDalam;
         private GradientPanel pnlHeaderAtur;
         private Label lblJudulAtur;
@@ -1090,5 +1094,24 @@
         private Label lblDampakBaru;
         private Button btnBatal;
         private Button btnSimpanHarga;
+        private DataGridViewTextBoxColumn colKode;
+        private DataGridViewTextBoxColumn colBarang;
+        private DataGridViewTextBoxColumn colStok;
+        private DataGridViewTextBoxColumn colBeliTerakhir;
+        private DataGridViewTextBoxColumn colJual;
+        private DataGridViewTextBoxColumn colLabaBaru;
+        private DataGridViewTextBoxColumn colLapisan;
+        private DataGridViewTextBoxColumn colMasuk;
+        private DataGridViewTextBoxColumn colSisa;
+        private DataGridViewTextBoxColumn colBeli;
+        private DataGridViewTextBoxColumn colJualL;
+        private DataGridViewTextBoxColumn colLaba;
+        private DataGridViewTextBoxColumn colPotensi;
+        private DataGridViewTextBoxColumn colWaktuR;
+        private DataGridViewTextBoxColumn colBarangR;
+        private DataGridViewTextBoxColumn colBeliR;
+        private DataGridViewTextBoxColumn colJualR;
+        private DataGridViewTextBoxColumn colOleh;
+        private DataGridViewTextBoxColumn colAlasan;
     }
 }
