@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard_Struck));
             pnlstruk = new Panel();
+            btnPrint = new Button();
             btnTransaksiBaru = new Button();
             dgvStruk = new DataGridView();
             pnlFooterStruk = new Panel();
@@ -46,7 +48,9 @@
             pnlHeaderStruck = new Panel();
             lblSlogan = new Label();
             lblNamaToko = new Label();
-            btnPrint = new Button();
+            printDialog1 = new PrintDialog();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             pnlstruk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStruk).BeginInit();
             pnlFooterStruk.SuspendLayout();
@@ -70,6 +74,20 @@
             pnlstruk.Size = new Size(498, 857);
             pnlstruk.TabIndex = 0;
             pnlstruk.Paint += pnlstruk_Paint;
+            // 
+            // btnPrint
+            // 
+            btnPrint.BackColor = Color.SeaGreen;
+            btnPrint.FlatStyle = FlatStyle.Flat;
+            btnPrint.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPrint.ForeColor = Color.White;
+            btnPrint.Location = new Point(194, 787);
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new Size(140, 67);
+            btnPrint.TabIndex = 8;
+            btnPrint.Text = "Cetak struk";
+            btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnTransaksiBaru
             // 
@@ -255,18 +273,19 @@
             lblNamaToko.TabIndex = 5;
             lblNamaToko.Text = "ONEMART";
             // 
-            // btnPrint
+            // printDialog1
             // 
-            btnPrint.BackColor = Color.SeaGreen;
-            btnPrint.FlatStyle = FlatStyle.Flat;
-            btnPrint.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPrint.ForeColor = Color.White;
-            btnPrint.Location = new Point(194, 787);
-            btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(140, 67);
-            btnPrint.TabIndex = 8;
-            btnPrint.Text = "Print struck";
-            btnPrint.UseVisualStyleBackColor = false;
+            printDialog1.UseEXDialog = true;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
             // 
             // Dashboard_Struck
             // 
@@ -312,5 +331,8 @@
         private DataGridView dgvStruk;
         private Button btnTransaksiBaru;
         private Button btnPrint;
+        private PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }

@@ -3,27 +3,40 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Printing;
 
 namespace project_akhir_stock_gudang
 {
     public partial class Dashboard_Struck : Form
     {
         private readonly string usernameKasir;
+        private Bitmap gambarStrukUntukCetak;
         public Dashboard_Struck()
         {
             InitializeComponent();
+
             AturTampilanDgvStruk();
+
             string nomor = BuatNomorTransaksi();
             DateTime tanggal = DateTime.Now;
 
             AturInformasiStruk(nomor, tanggal);
 
+            printDocument1.PrintPage -= DokumenCetak_PrintPage;
+            printDocument1.PrintPage += DokumenCetak_PrintPage;
+
+            printPreviewDialog1.Document = printDocument1;
+
+            printPreviewDialog1.Width = 900;
+            printPreviewDialog1.Height = 700;
+
+            btnPrint.Click -= btnPrint_Click;
+            btnPrint.Click += btnPrint_Click;
         }
         private void AturTampilanDgvStruk()
         {
@@ -240,6 +253,121 @@ namespace project_akhir_stock_gudang
             pnlstruk.Visible = true;
             pnlstruk.BringToFront();
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!pnlstruk.Visible)
+                {
+                    MessageBox.Show(
+                        "Struk belum tersedia untuk dicetak.",
+                        "Peringatan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+              
+                pnlstruk.PerformLayout();
+                pnlstruk.Refresh();
+
+                dgvStruk.Refresh();
+
+                
+                if (gambarStrukUntukCetak != null)
+                {
+                    gambarStrukUntukCetak.Dispose();
+                    gambarStrukUntukCetak = null;
+                }
+
+              
+                gambarStrukUntukCetak = new Bitmap(
+                    pnlstruk.Width,
+                    pnlstruk.Height
+                );
+
+                pnlstruk.DrawToBitmap(
+                    gambarStrukUntukCetak,
+                    new Rectangle(
+                        0,
+                        0,
+                        pnlstruk.Width,
+                        pnlstruk.Height
+                    )
+                );
+
+                printPreviewDialog1.Document = printDocument1;
+
+                printPreviewDialog1.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Gagal menampilkan pratinjau struk:\n" + ex.Message,
+                    "Kesalahan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+
+        private void DokumenCetak_PrintPage(
+         object sender,
+         PrintPageEventArgs e)
+        {
+            if (gambarStrukUntukCetak == null)
+            {
+                e.HasMorePages = false;
+                return;
+            }
+
+            Rectangle areaCetak = e.MarginBounds;
+
+            float skalaLebar =
+                (float)areaCetak.Width / gambarStrukUntukCetak.Width;
+
+            float skalaTinggi =
+                (float)areaCetak.Height / gambarStrukUntukCetak.Height;
+
+            float skala = Math.Min(skalaLebar, skalaTinggi);
+
+            int lebar = (int)(
+                gambarStrukUntukCetak.Width * skala
+            );
+
+            int tinggi = (int)(
+                gambarStrukUntukCetak.Height * skala
+            );
+
+            int posisiX = areaCetak.Left +
+                (areaCetak.Width - lebar) / 2;
+
+            int posisiY = areaCetak.Top;
+
+            e.Graphics.DrawImage(
+                gambarStrukUntukCetak,
+                posisiX,
+                posisiY,
+                lebar,
+                tinggi
+            );
+
+            e.HasMorePages = false;
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            if (gambarStrukUntukCetak != null)
+            {
+                gambarStrukUntukCetak.Dispose();
+                gambarStrukUntukCetak = null;
+            }
+
+            base.OnFormClosed(e);
+        }
         private void pnlInfoStruk_Paint(object sender, PaintEventArgs e)
         {
 
@@ -267,9 +395,11 @@ namespace project_akhir_stock_gudang
 
         private void btnTransaksiBaru_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir dashboardKasirKEMBALI = new Dashboard_kasir(new List<DetailTransaksi>(),usernameKasir);
+            Dashboard_kasir dashboardKasirKEMBALI = new Dashboard_kasir(new List<DetailTransaksi>(), usernameKasir);
             dashboardKasirKEMBALI.Show();
             this.Hide();
         }
+
+    
     }
 }
