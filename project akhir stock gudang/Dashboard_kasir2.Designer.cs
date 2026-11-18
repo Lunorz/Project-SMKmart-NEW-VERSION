@@ -43,6 +43,7 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.Honeydew;
             panel1.Controls.Add(total_harga);
             panel1.Controls.Add(checkout_barang_keranjang);
@@ -59,13 +60,14 @@
             // 
             total_harga.AutoSize = true;
             total_harga.Font = new Font("Leelawadee UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            total_harga.Location = new Point(491, 509);
+            total_harga.Location = new Point(498, 543);
             total_harga.Name = "total_harga";
             total_harga.Size = new Size(0, 31);
             total_harga.TabIndex = 9;
             // 
             // checkout_barang_keranjang
             // 
+            checkout_barang_keranjang.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             checkout_barang_keranjang.BackColor = Color.SeaGreen;
             checkout_barang_keranjang.Font = new Font("Leelawadee UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             checkout_barang_keranjang.ForeColor = Color.White;
@@ -79,6 +81,7 @@
             // 
             // hapus_barang_keranjang
             // 
+            hapus_barang_keranjang.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             hapus_barang_keranjang.BackColor = Color.SeaGreen;
             hapus_barang_keranjang.Font = new Font("Leelawadee UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             hapus_barang_keranjang.ForeColor = Color.White;
@@ -92,6 +95,7 @@
             // 
             // kembali_ke_Dashboard1
             // 
+            kembali_ke_Dashboard1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             kembali_ke_Dashboard1.BackColor = Color.SeaGreen;
             kembali_ke_Dashboard1.Font = new Font("Leelawadee UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kembali_ke_Dashboard1.ForeColor = Color.White;
@@ -105,12 +109,13 @@
             // 
             // dgvkeranjang
             // 
+            dgvkeranjang.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvkeranjang.BackgroundColor = Color.White;
             dgvkeranjang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvkeranjang.Location = new Point(12, 93);
             dgvkeranjang.Name = "dgvkeranjang";
             dgvkeranjang.RowHeadersWidth = 51;
-            dgvkeranjang.Size = new Size(698, 413);
+            dgvkeranjang.Size = new Size(698, 447);
             dgvkeranjang.TabIndex = 1;
             dgvkeranjang.CellContentClick += dgvkeranjang_CellContentClick;
             // 
@@ -137,13 +142,14 @@
             // 
             // Dashboard_kasir2
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(722, 741);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Dashboard_kasir2";
             Text = "Dashboard_kasir2";
+            WindowState = FormWindowState.Maximized;
             FormClosed += Dashboard_kasir2_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

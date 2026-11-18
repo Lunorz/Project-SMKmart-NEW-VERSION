@@ -61,6 +61,7 @@
             // 
             // pnlstruk
             // 
+            pnlstruk.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlstruk.BackColor = Color.White;
             pnlstruk.Controls.Add(btnPrint);
             pnlstruk.Controls.Add(btnTransaksiBaru);
@@ -289,13 +290,13 @@
             // 
             // Dashboard_Struck
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(520, 879);
             Controls.Add(pnlstruk);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "Dashboard_Struck";
             Text = "Dashboard_Struck";
+            WindowState = FormWindowState.Maximized;
             FormClosed += Dashboard_Struck_FormClosed;
             pnlstruk.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvStruk).EndInit();

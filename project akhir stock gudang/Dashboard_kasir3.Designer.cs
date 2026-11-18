@@ -57,8 +57,8 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.SeaGreen;
-            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(686, 70);
@@ -66,9 +66,9 @@
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
-            panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 70);
             panel2.Name = "panel2";
             panel2.Size = new Size(686, 133);
@@ -140,10 +140,10 @@
             // 
             // panel5
             // 
+            panel5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel5.Controls.Add(lblTotalPembayaran);
             panel5.Controls.Add(dgvCheckout);
             panel5.Controls.Add(label3);
-            panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 203);
             panel5.Name = "panel5";
             panel5.Size = new Size(686, 456);
@@ -165,7 +165,7 @@
             dgvCheckout.Name = "dgvCheckout";
             dgvCheckout.ReadOnly = true;
             dgvCheckout.RowHeadersWidth = 51;
-            dgvCheckout.Size = new Size(662, 413);
+            dgvCheckout.Size = new Size(662, 399);
             dgvCheckout.TabIndex = 5;
             dgvCheckout.CellContentClick += dgvCheckout_CellContentClick;
             // 
@@ -218,13 +218,13 @@
             // 
             // panel6
             // 
+            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel6.Controls.Add(flpMetodePembayaran);
             panel6.Controls.Add(txtUangDiterima);
             panel6.Controls.Add(lblUangDiterima);
             panel6.Controls.Add(lblKembalian);
             panel6.Controls.Add(btnBatal);
             panel6.Controls.Add(btnSelesaikan);
-            panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 659);
             panel6.Name = "panel6";
             panel6.Size = new Size(686, 313);
@@ -236,7 +236,7 @@
             flpMetodePembayaran.Location = new Point(48, 22);
             flpMetodePembayaran.Name = "flpMetodePembayaran";
             flpMetodePembayaran.Padding = new Padding(3);
-            flpMetodePembayaran.Size = new Size(590, 115);
+            flpMetodePembayaran.Size = new Size(590, 126);
             flpMetodePembayaran.TabIndex = 15;
             flpMetodePembayaran.WrapContents = false;
             // 
@@ -253,16 +253,17 @@
             // 
             // Dashboard_kasir3
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(686, 968);
             Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Dashboard_kasir3";
             Text = "Dashboard_kasir3";
+            WindowState = FormWindowState.Maximized;
             FormClosed += Dashboard_kasir3_FormClosed;
             Load += Dashboard_kasir3_Load;
             panel2.ResumeLayout(false);
