@@ -13,7 +13,7 @@ namespace project_akhir_stock_gudang
 {
     public partial class ucPenjualan : UserControl
     {
-
+        private List<Produk> daftarProduk = new List<Produk>();
         private List<TransaksiSimpan> semuaTransaksi =
             new List<TransaksiSimpan>();
 
@@ -50,11 +50,41 @@ namespace project_akhir_stock_gudang
 
             this.Load += ucPenjualan_Load;
 
+            dgvTransaksi2.Enabled = true;
+            dgvTransaksi2.ReadOnly = true;
+            dgvTransaksi2.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+            dgvTransaksi2.MultiSelect = false;
+            dgvTransaksi2.AllowUserToAddRows = false;
+            dgvTransaksi2.ClearSelection();
+
+            dgvTransaksi2.CellClick -= dgvTransaksi2_CellClick;
+            dgvTransaksi2.CellClick += dgvTransaksi2_CellClick;
+
+            tabUtama2.Enabled = true;
+
+            tabUtama2.SelectedIndexChanged -=
+                tabUtama2_SelectedIndexChanged;
+
+            tabUtama2.SelectedIndexChanged +=
+                tabUtama2_SelectedIndexChanged;
+
+            if (!tabUtama2.TabPages.Contains(tabTerlaris2))
+            {
+                tabUtama2.TabPages.Add(tabTerlaris2);
+            }
+
+            tabTerlaris2.Enabled = true;
         }
         private void MuatDataTransaksi()
         {
             try
             {
+                 semuaTransaksi = TransaksiJsonStore.Load()
+                     ?? new List<TransaksiSimpan>();
+
+                daftarProduk = ProdukJsonStore.Load()
+                    ?? new List<Produk>();
                 semuaTransaksi = TransaksiJsonStore.Load();
 
                 IsiComboBoxKasir();
@@ -106,14 +136,11 @@ namespace project_akhir_stock_gudang
                 PerbaruiRingkasan(transaksiTampil);
 
                 lblTotalDetail2.Text = "Rp0";
-
                 return;
             }
 
             DateTime tanggalAwal = dtpDari2.Value.Date;
-
-            DateTime tanggalAkhir =
-                dtpSampai2.Value.Date.AddDays(1);
+            DateTime tanggalAkhir = dtpSampai2.Value.Date.AddDays(1);
 
             string kasir =
                 cmbKasir2.SelectedItem?.ToString() ?? "Semua Kasir";
@@ -123,31 +150,29 @@ namespace project_akhir_stock_gudang
             transaksiTampil = semuaTransaksi
                 .Where(t =>
                     t.Tanggal >= tanggalAwal &&
-                    t.Tanggal < tanggalAkhir
-                )
+                    t.Tanggal < tanggalAkhir)
                 .Where(t =>
                     kasir == "Semua Kasir" ||
-                    t.UsernameKasir == kasir
-                )
+                    t.UsernameKasir == kasir)
                 .Where(t =>
                     string.IsNullOrWhiteSpace(pencarian) ||
                     (t.NomorTransaksi ?? "").Contains(
                         pencarian,
-                        StringComparison.OrdinalIgnoreCase
-                    )
-                )
+                        StringComparison.OrdinalIgnoreCase))
                 .OrderByDescending(t => t.Tanggal)
                 .ToList();
 
             PerbaruiRingkasan(transaksiTampil);
 
+          
+            dgvDetail2.Rows.Clear();
+            lblTotalDetail2.Text = "Rp0";
+
+          
             TampilkanTabelTransaksi();
 
+           
             TampilkanBarangTerlaris();
-
-            dgvDetail2.Rows.Clear();
-
-            lblTotalDetail2.Text = "Rp0";
         }
         private void PerbaruiRingkasan(
     List<TransaksiSimpan> data)
@@ -204,13 +229,20 @@ namespace project_akhir_stock_gudang
                 );
             }
 
+            dgvTransaksi2.ClearSelection();
+
             if (dgvTransaksi2.Rows.Count > 0)
             {
-                dgvTransaksi2.ClearSelection();
-
+             
                 dgvTransaksi2.Rows[0].Selected = true;
 
+            
                 TampilkanDetailTransaksi(transaksiTampil[0]);
+            }
+            else
+            {
+                dgvDetail2.Rows.Clear();
+                lblTotalDetail2.Text = "Rp0";
             }
         }
         private void TampilkanDetailTransaksi(
@@ -257,7 +289,13 @@ namespace project_akhir_stock_gudang
                 {
                     Kode = g.Key.Kode,
                     Nama = g.Key.Nama,
+
+                    Kategori = daftarProduk
+                        .FirstOrDefault(p => p.Kode == g.Key.Kode)
+                        ?.Kategori ?? "-",
+
                     Jumlah = g.Sum(b => b.Jumlah),
+
                     Omzet = g.Sum(b => b.Harga * b.Jumlah)
                 })
                 .OrderByDescending(b => b.Jumlah)
@@ -270,7 +308,7 @@ namespace project_akhir_stock_gudang
                 dgvTerlaris2.Rows.Add(
                     peringkat,
                     barang.Nama,
-                    "-",
+                    barang.Kategori,
                     barang.Jumlah,
                     barang.Omzet
                 );
@@ -309,20 +347,35 @@ namespace project_akhir_stock_gudang
 
         }
 
-        private void dgvTransaksi2_SelectionChanged(object sender, EventArgs e)
+        private void dgvTransaksi2_SelectionChanged(
+       object sender,
+       EventArgs e)
         {
             if (dgvTransaksi2.CurrentRow == null)
                 return;
 
-            int index = dgvTransaksi2.CurrentRow.Index;
-
-            if (index < 0 || index >= transaksiTampil.Count)
+            if (dgvTransaksi2.CurrentRow.IsNewRow)
                 return;
 
-            TampilkanDetailTransaksi(transaksiTampil[index]);
+            string nomorTransaksi =
+                dgvTransaksi2.CurrentRow.Cells[0].Value?.ToString() ?? "";
+
+            if (string.IsNullOrWhiteSpace(nomorTransaksi))
+                return;
+
+            TransaksiSimpan? transaksi = transaksiTampil
+                .FirstOrDefault(t =>
+                    t.NomorTransaksi == nomorTransaksi);
+
+            if (transaksi == null)
+                return;
+
+            TampilkanDetailTransaksi(transaksi);
         }
 
-        private void tabUtama2_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabUtama2_SelectedIndexChanged(
+     object sender,
+     EventArgs e)
         {
             if (tabUtama2.SelectedTab == tabTerlaris2)
             {
@@ -334,5 +387,31 @@ namespace project_akhir_stock_gudang
         {
             MuatDataTransaksi();
         }
+
+        private void dgvTransaksi2_CellClick(
+    object sender,
+    DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            dgvTransaksi2.ClearSelection();
+            dgvTransaksi2.Rows[e.RowIndex].Selected = true;
+
+            string nomorTransaksi =
+                dgvTransaksi2.Rows[e.RowIndex]
+                .Cells[0].Value?.ToString() ?? "";
+
+            TransaksiSimpan? transaksi = transaksiTampil
+                .FirstOrDefault(t =>
+                    t.NomorTransaksi == nomorTransaksi);
+
+            if (transaksi != null)
+            {
+                TampilkanDetailTransaksi(transaksi);
+            }
+        }
+
+
     }
 }

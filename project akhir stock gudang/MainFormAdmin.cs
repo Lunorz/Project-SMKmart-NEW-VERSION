@@ -93,30 +93,40 @@ namespace project_akhir_stock_gudang
 
         private void btnKeluar_Click(object sender, EventArgs e)
         {
+            DialogResult hasil = MessageBox.Show(
+           "Apakah Anda yakin ingin keluar dari aplikasi?",
+           "Konfirmasi Keluar",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+            );
 
-            try
+            if (hasil == DialogResult.Yes)
             {
-                LogAktivitasJsonStore.Catat(
-                    emailAktif,
-                    "Admin",
-                    "Autentikasi",
-                    "Logout",
-                    "Sistem",
-                    "Admin keluar dari aplikasi."
-                );
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAktif,
+                        "Admin",
+                        "Autentikasi",
+                        "Logout",
+                        "Sistem",
+                        "Admin keluar dari aplikasi."
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Gagal mencatat aktivitas logout:\n" + ex.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+                Form1 kembalilagi = new Form1();
+                kembalilagi.Show();
+                this.Hide();
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Gagal mencatat aktivitas logout:\n" + ex.Message,
-                    "Peringatan Log",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-            }
-            Form1 kembalilagi = new Form1();
-            kembalilagi.Show();
-            this.Hide();
 
         }
 

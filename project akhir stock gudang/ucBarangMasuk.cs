@@ -187,18 +187,38 @@ namespace project_akhir_stock_gudang
 
         private void btnBersihkanGudang2_Click(object sender, EventArgs e)
         {
+            bool adaIsi =
+                cmbBarangGudang2.SelectedIndex != -1 ||
+                nudJumlahGudang2.Value != 0 ||
+                nudHargaBeli.Value != 0 ||
+                !string.IsNullOrWhiteSpace(txtAsalGudang2.Text) ||
+                !string.IsNullOrWhiteSpace(txtSJGudang2.Text) ||
+                !string.IsNullOrWhiteSpace(txtCatatanGudang2.Text);
+
+            if (adaIsi)
+            {
+                DialogResult hasil = MessageBox.Show(
+                    "Apakah Anda yakin ingin mengosongkan seluruh form barang masuk?\n\n" +
+                    "Data yang belum disimpan akan hilang.",
+                    "Konfirmasi Bersihkan Form",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (hasil != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             cmbBarangGudang2.SelectedIndex = -1;
-
             nudJumlahGudang2.Value = 0;
-
+            nudHargaBeli.Value = 0;
             txtAsalGudang2.Clear();
-
             txtSJGudang2.Clear();
-
             txtCatatanGudang2.Clear();
 
             cmbBarangGudang2.Focus();
-            nudHargaBeli.Value = 0;
         }
 
 
@@ -254,10 +274,26 @@ namespace project_akhir_stock_gudang
                 txtSJGudang2.Focus();
                 return;
             }
+            DialogResult konfirmasi = MessageBox.Show(
+            "Apakah Anda yakin ingin menyimpan data barang masuk ini?\n\n" +
+            "Nama barang: " + produkDipilih.Nama + "\n" +
+            "Jumlah masuk: " + jumlah + " unit\n" +
+            "Harga beli/unit: Rp" + hargaBeli.ToString("N0") + "\n" +
+            "Total pembelian: Rp" + (hargaBeli * jumlah).ToString("N0") + "\n" +
+            "Asal barang: " + asal + "\n" +
+            "Nomor surat jalan: " + nomorSurat,
+            "Konfirmasi Barang Masuk",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+            );
 
+            if (konfirmasi != DialogResult.Yes)
+            {
+                return;
+            }
             try
             {
-                // Ambil data produk terbaru
+                
                 List<Produk> produkTerbaru = ProdukJsonStore.Load();
 
                 Produk produk = produkTerbaru.FirstOrDefault(

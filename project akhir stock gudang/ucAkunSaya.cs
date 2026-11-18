@@ -208,46 +208,22 @@ namespace project_akhir_stock_gudang
 
         private void btnSimpan_Click(object sender, EventArgs e)
         {
-            PeriksaPassword();
+          
+            DialogResult hasil = MessageBox.Show(
+                "Apakah Anda yakin ingin mengganti password akun ini?",
+                "Konfirmasi Ganti Password",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
 
-            if (!btnSimpan.Enabled)
+            if (hasil == DialogResult.Yes)
             {
-                MessageBox.Show(
-                    "Periksa kembali semua kriteria password dan konfirmasi password.",
-                    "Peringatan",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                PeriksaPassword();
 
-                return;
-            }
-
-            bool berhasil;
-            string pesan;
-
-            try
-            {
-                if (roleAktif == "Admin")
-                {
-                    berhasil = AdminPasswordStore.GantiPassword(
-                        txtLama.Text,
-                        txtBaru.Text,
-                        out pesan
-                    );
-                }
-                else if (roleAktif == "Gudang")
-                {
-                    berhasil = UserStore.GantiPasswordSendiri(
-                        emailAktif,
-                        txtLama.Text,
-                        txtBaru.Text,
-                        out pesan
-                    );
-                }
-                else
+                if (!btnSimpan.Enabled)
                 {
                     MessageBox.Show(
-                        "Role akun belum didukung.",
+                        "Periksa kembali semua kriteria password dan konfirmasi password.",
                         "Peringatan",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
@@ -255,65 +231,104 @@ namespace project_akhir_stock_gudang
 
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Terjadi kesalahan saat mengubah password:\n" +
-                    ex.Message,
-                    "Kesalahan",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
 
-                return;
-            }
+                bool berhasil;
+                string pesan;
 
-            if (!berhasil)
-            {
+                try
+                {
+                    if (roleAktif == "Admin")
+                    {
+                        berhasil = AdminPasswordStore.GantiPassword(
+                            txtLama.Text,
+                            txtBaru.Text,
+                            out pesan
+                        );
+                    }
+                    else if (roleAktif == "Gudang")
+                    {
+                        berhasil = UserStore.GantiPasswordSendiri(
+                            emailAktif,
+                            txtLama.Text,
+                            txtBaru.Text,
+                            out pesan
+                        );
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Role akun belum didukung.",
+                            "Peringatan",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        );
+
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Terjadi kesalahan saat mengubah password:\n" +
+                        ex.Message,
+                        "Kesalahan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+
+                    return;
+                }
+
+                if (!berhasil)
+                {
+                    MessageBox.Show(
+                        pesan,
+                        "Gagal mengubah password",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    return;
+                }
+
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAktif,
+                        roleAktif == "Gudang"
+                            ? "Pengelola Gudang"
+                            : "Admin",
+                        "Akun",
+                        "Mengubah password",
+                        emailAktif,
+                        "Pengguna berhasil mengubah password akun sendiri."
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "Password berhasil diubah, tetapi log aktivitas gagal dicatat:\n" +
+                        ex.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+
                 MessageBox.Show(
                     pesan,
-                    "Gagal mengubah password",
+                    "Berhasil",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
+                    MessageBoxIcon.Information
                 );
 
-                return;
+                BersihkanForm();
+                TampilkanInformasiAkun();
             }
 
-            try
-            {
-                LogAktivitasJsonStore.Catat(
-                    emailAktif,
-                    roleAktif == "Gudang"
-                        ? "Pengelola Gudang"
-                        : "Admin",
-                    "Akun",
-                    "Mengubah password",
-                    emailAktif,
-                    "Pengguna berhasil mengubah password akun sendiri."
-                );
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    "Password berhasil diubah, tetapi log aktivitas gagal dicatat:\n" +
-                    ex.Message,
-                    "Peringatan Log",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-            }
-
-            MessageBox.Show(
-                pesan,
-                "Berhasil",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-
-            BersihkanForm();
-            TampilkanInformasiAkun();
+          
+        
+       
         }
 
         private void BersihkanForm()
@@ -329,13 +344,25 @@ namespace project_akhir_stock_gudang
 
         private void btnBersihkan_Click(object sender, EventArgs e)
         {
-            BersihkanForm();
+            DialogResult Beersihkan = MessageBox.Show(
+           "Apakah Anda yakin ingin mengganti password akun ini?",
+            "Konfirmasi Ganti Password",
+             MessageBoxButtons.YesNo,
+             MessageBoxIcon.Warning
+            );
 
-            MessageBox.Show(
-                "Form berhasil dibersihkan.",
-                "Informasi",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            if (Beersihkan == DialogResult.No)
+            {
+                BersihkanForm();
+
+                MessageBox.Show(
+                    "Form berhasil dibersihkan.",
+                    "Informasi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+
+            
         }
     }
 }

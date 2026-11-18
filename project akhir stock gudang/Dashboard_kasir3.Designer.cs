@@ -76,6 +76,7 @@
             // 
             // panel4
             // 
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel4.BackColor = Color.MediumSeaGreen;
             panel4.Controls.Add(label_tanggal_transaksi2);
             panel4.Controls.Add(label2);
@@ -159,6 +160,7 @@
             // 
             // dgvCheckout
             // 
+            dgvCheckout.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvCheckout.BackgroundColor = Color.White;
             dgvCheckout.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCheckout.Location = new Point(13, 43);
@@ -181,6 +183,7 @@
             // 
             // btnBatal
             // 
+            btnBatal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnBatal.Location = new Point(403, 239);
             btnBatal.Name = "btnBatal";
             btnBatal.Size = new Size(132, 58);
@@ -191,6 +194,7 @@
             // 
             // btnSelesaikan
             // 
+            btnSelesaikan.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSelesaikan.Location = new Point(541, 239);
             btnSelesaikan.Name = "btnSelesaikan";
             btnSelesaikan.Size = new Size(132, 58);
@@ -209,6 +213,7 @@
             // 
             // lblUangDiterima
             // 
+            lblUangDiterima.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblUangDiterima.AutoSize = true;
             lblUangDiterima.Location = new Point(12, 151);
             lblUangDiterima.Name = "lblUangDiterima";
@@ -218,7 +223,7 @@
             // 
             // panel6
             // 
-            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel6.Controls.Add(flpMetodePembayaran);
             panel6.Controls.Add(txtUangDiterima);
             panel6.Controls.Add(lblUangDiterima);
@@ -232,6 +237,7 @@
             // 
             // flpMetodePembayaran
             // 
+            flpMetodePembayaran.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flpMetodePembayaran.BackColor = Color.White;
             flpMetodePembayaran.Location = new Point(48, 22);
             flpMetodePembayaran.Name = "flpMetodePembayaran";
@@ -242,6 +248,7 @@
             // 
             // txtUangDiterima
             // 
+            txtUangDiterima.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtUangDiterima.BackColor = SystemColors.ControlLight;
             txtUangDiterima.Location = new Point(12, 174);
             txtUangDiterima.Multiline = true;

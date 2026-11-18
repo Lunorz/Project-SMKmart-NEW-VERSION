@@ -406,6 +406,35 @@ namespace project_akhir_stock_gudang
             int stokMinimum =
                 (int)nudMinGudang1.Value;
 
+            if (stokMinimum == produkTerpilih.StokMinimum)
+            {
+                MessageBox.Show(
+                    "Stok minimum tidak mengalami perubahan.",
+                    "Informasi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                return;
+            }
+
+            DialogResult konfirmasi = MessageBox.Show(
+                "Apakah Anda yakin ingin menyimpan pengaturan stok minimum?\n\n" +
+                "Nama barang: " + produkTerpilih.Nama + "\n" +
+                "Kode barang: " + produkTerpilih.Kode + "\n" +
+                "Stok minimum lama: " + produkTerpilih.StokMinimum + "\n" +
+                "Stok minimum baru: " + stokMinimum,
+                "Konfirmasi Pengaturan Stok",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (konfirmasi != DialogResult.Yes)
+            {
+                return;
+            }
+
+
             try
             {
                 produkTerpilih.StokMinimum = stokMinimum;

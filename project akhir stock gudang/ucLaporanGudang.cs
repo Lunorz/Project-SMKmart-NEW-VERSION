@@ -269,7 +269,74 @@ namespace project_akhir_stock_gudang
             DateTime dari = dtpDari.Value.Date;
             DateTime sampai = dtpSampai.Value.Date.AddDays(1);
 
-            List<AktivitasGudang> semuaAktivitas = AmbilSemuaAktivitas()
+          
+            List<AktivitasGudang> semuaAktivitas = AmbilSemuaAktivitas();
+
+           
+            foreach (Produk produk in daftarProduk.Where(x => !x.IsDeleted))
+            {
+                var riwayatBarang = semuaAktivitas
+                    .Where(x => x.Kode == produk.Kode)
+                    .OrderByDescending(x => x.Waktu)
+                    .ToList();
+
+                int stokSesudah = produk.Stok;
+
+                foreach (AktivitasGudang item in riwayatBarang)
+                {
+                    item.SisaStok = stokSesudah;
+
+                    if (item.Jenis == "Barang Masuk")
+                    {
+                        stokSesudah -= item.Jumlah;
+                    }
+                    else if (item.Jenis == "Penjualan" ||
+                             item.Jenis == "Keluar Manual")
+                    {
+                        stokSesudah += item.Jumlah;
+                    }
+                    else if (item.Jenis == "Koreksi Opname")
+                    {
+                        stokSesudah -= item.Jumlah;
+                    }
+                }
+            }
+
+            string jenis = cmbJenis.SelectedItem?.ToString() ?? "Semua";
+            string petugas = cmbPetugas.SelectedItem?.ToString() ?? "Semua";
+
+            var aktivitasTerfilter = semuaAktivitas
+                .Where(x => x.Waktu >= dari && x.Waktu < sampai)
+                .Where(x => CocokBarang(x.Kode))
+                .Where(x => jenis == "Semua" || x.Jenis == jenis)
+                .Where(x => petugas == "Semua" || x.Petugas == petugas)
+                .OrderByDescending(x => x.Waktu)
+                .ToList();
+
+            foreach (AktivitasGudang item in aktivitasTerfilter)
+            {
+                dgvMutasi.Rows.Add(
+                    item.Waktu.ToString("dd/MM/yyyy HH:mm:ss"),
+                    item.Barang,
+                    item.Jenis,
+                    item.Jumlah,
+                    item.Keterangan,
+                    item.Petugas,
+                    item.SisaStok
+                );
+            }
+        }
+
+
+        private void TampilkanRingkasanBarang()
+        {
+            dgvRingkasan.Rows.Clear();
+
+            DateTime dari = dtpDari.Value.Date;
+            DateTime sampai = dtpSampai.Value.Date.AddDays(1);
+
+         
+            List<AktivitasGudang> aktivitas = AmbilSemuaAktivitas()
                 .Where(x => x.Waktu >= dari && x.Waktu < sampai)
                 .ToList();
 
@@ -278,7 +345,7 @@ namespace project_akhir_stock_gudang
                 if (!CocokBarang(produk.Kode))
                     continue;
 
-                var aktivitasBarang = semuaAktivitas
+                var aktivitasBarang = aktivitas
                     .Where(x => x.Kode == produk.Kode)
                     .ToList();
 
@@ -295,11 +362,12 @@ namespace project_akhir_stock_gudang
                     .Where(x => x.Jenis == "Koreksi Opname")
                     .Sum(x => x.Jumlah);
 
+              
                 int stokAwal = produk.Stok - masuk + keluar - koreksi;
 
                 int stokAkhir = stokAwal + masuk - keluar + koreksi;
 
-                dgvMutasi.Rows.Add(
+                dgvRingkasan.Rows.Add(
                     produk.Kode,
                     produk.Nama,
                     stokAwal,
@@ -307,33 +375,6 @@ namespace project_akhir_stock_gudang
                     keluar,
                     koreksi,
                     stokAkhir
-                );
-            }
-        }
-
-
-        private void TampilkanRingkasanBarang()
-        {
-            dgvRingkasan.Rows.Clear();
-
-            List<AktivitasGudang> aktivitas = AmbilAktivitasTerfilter();
-
-            foreach (AktivitasGudang item in aktivitas)
-            {
-                Produk produk = daftarProduk.FirstOrDefault(
-                    x => x.Kode == item.Kode
-                );
-
-                int sisaStok = produk?.Stok ?? 0;
-
-                dgvRingkasan.Rows.Add(
-                    item.Waktu.ToString("dd/MM/yyyy HH:mm:ss"),
-                    item.Barang,
-                    item.Jenis,
-                    item.Jumlah,
-                    item.Keterangan,
-                    item.Petugas,
-                    sisaStok
                 );
             }
         }

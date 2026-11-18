@@ -359,6 +359,27 @@ namespace project_akhir_stock_gudang
 
         private void btnBatal_Click(object sender, EventArgs e)
         {
+            bool adaPerubahan =
+                !string.IsNullOrWhiteSpace(txtAlasan.Text) ||
+                (produkTerpilih != null &&
+                 nudJualBaru.Value != produkTerpilih.Harga);
+
+            if (adaPerubahan)
+            {
+                DialogResult hasil = MessageBox.Show(
+                    "Apakah Anda yakin ingin membatalkan perubahan harga?\n\n" +
+                    "Alasan dan simulasi harga yang belum disimpan akan dikembalikan.",
+                    "Konfirmasi Pembatalan",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (hasil != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             txtAlasan.Clear();
 
             if (produkTerpilih != null)
@@ -368,6 +389,7 @@ namespace project_akhir_stock_gudang
                     Math.Max(nudJualBaru.Minimum, produkTerpilih.Harga)
                 );
             }
+
             TampilkanDampakPerubahanHarga();
         }
 

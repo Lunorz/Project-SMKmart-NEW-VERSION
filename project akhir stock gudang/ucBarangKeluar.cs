@@ -207,8 +207,24 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
+                DialogResult konfirmasi = MessageBox.Show(
+                "Apakah Anda yakin ingin menyimpan data barang keluar ini?\n\n" +
+                "Nama barang: " + produk.Nama + "\n" +
+                "Kode barang: " + produk.Kode + "\n" +
+                "Jumlah keluar: " + jumlah + " unit\n" +
+                "Stok sebelum: " + produk.Stok + " unit\n" +
+                "Stok setelah: " + (produk.Stok - jumlah) + " unit\n" +
+                "Alasan: " + cmbAlasanGudang3.Text,
+                "Konfirmasi Barang Keluar",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
 
-             
+                if (konfirmasi != DialogResult.Yes)
+                {
+                    return;
+                }
+
                 int stokSebelum = produk.Stok;
 
               
@@ -285,6 +301,28 @@ namespace project_akhir_stock_gudang
 
         private void btnBersihkanGudang3_Click(object sender, EventArgs e)
         {
+            bool adaIsi =
+                cmbBarangGudang3.SelectedIndex != -1 ||
+                cmbAlasanGudang3.SelectedIndex != -1 ||
+                nudJumlahGudang3.Value != 0 ||
+                !string.IsNullOrWhiteSpace(txtCatatanGudang3.Text);
+
+            if (adaIsi)
+            {
+                DialogResult hasil = MessageBox.Show(
+                    "Apakah Anda yakin ingin mengosongkan seluruh form barang keluar?\n\n" +
+                    "Data yang belum disimpan akan hilang.",
+                    "Konfirmasi Bersihkan Form",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (hasil != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             BersihkanForm();
         }
 

@@ -235,23 +235,42 @@ namespace project_akhir_stock_gudang
 
         private void checkout_barang_keranjang_Click(object sender, EventArgs e)
         {
-            if (keranjang.Count == 0)
+            if (keranjang == null || keranjang.Count == 0)
             {
                 MessageBox.Show(
                     "Keranjang masih kosong!",
                     "Informasi",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                    MessageBoxIcon.Information
+                );
                 return;
             }
-            if (keranjang != null)
-            {
-                using Dashboard_kasir3 formCheckout = new Dashboard_kasir3(keranjang, usernameKasir);
-                formCheckout.ShowDialog();
-                this.Hide();
 
-            }
-         
+            decimal total = keranjang.Sum(
+                item => (decimal)item.Harga * item.Jumlah
+            );
+
+            int totalItem = keranjang.Sum(item => item.Jumlah);
+
+            DialogResult hasil = MessageBox.Show(
+                "Apakah kamu yakin ingin melanjutkan ke pembayaran?\n\n" +
+                "Jumlah jenis barang: " + keranjang.Count + "\n" +
+                "Total seluruh barang: " + totalItem + " unit\n" +
+                "Total pembayaran: Rp" + total.ToString("N0") + "\n\n" +
+                "Pastikan barang dan jumlahnya sudah benar.",
+                "Konfirmasi Checkout",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (hasil != DialogResult.Yes)
+                return;
+
+            Dashboard_kasir3 formCheckout =
+                new Dashboard_kasir3(keranjang, usernameKasir);
+
+            formCheckout.ShowDialog();
+            this.Hide();
         }
     }
 }

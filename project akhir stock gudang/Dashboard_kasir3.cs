@@ -497,6 +497,29 @@ namespace project_akhir_stock_gudang
                 }
             }
 
+            decimal kembalian = metodePembayaranTerpilih == "Tunai"
+            ? uang - total: 0;
+
+            DialogResult konfirmasi = MessageBox.Show(
+                "Apakah Anda yakin ingin menyelesaikan transaksi ini?\n\n" +
+                "Nomor transaksi: " + nomorTransaksi + "\n" +
+                "Kasir: " + usernameKasir + "\n" +
+                "Jumlah jenis barang: " + keranjang.Count + "\n" +
+                "Total item: " + keranjang.Sum(x => x.Jumlah) + "\n" +
+                "Total pembayaran: Rp" + total.ToString("N0") + "\n" +
+                "Metode pembayaran: " + metodePembayaranTerpilih + "\n" +
+                "Uang diterima: Rp" + uang.ToString("N0") + "\n" +
+                "Kembalian: Rp" + kembalian.ToString("N0") + "\n\n" +
+                "Setelah dikonfirmasi, transaksi akan disimpan dan stok barang diperbarui.",
+                "Konfirmasi Selesaikan Transaksi",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (konfirmasi != DialogResult.Yes)
+            {
+                return;
+            }
             List<Produk> produkTerbaru = new List<Produk>();
 
             List<LapisanStok> lapisanTerbaru =
@@ -803,7 +826,7 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            // 14. Menampilkan struk
+         
             Dashboard_Struck strukForm = new Dashboard_Struck();
 
             strukForm.TampilkanStruk(transaksi);

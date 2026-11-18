@@ -58,6 +58,7 @@
             // 
             // total_harga
             // 
+            total_harga.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             total_harga.AutoSize = true;
             total_harga.Font = new Font("Leelawadee UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             total_harga.Location = new Point(498, 543);
@@ -149,7 +150,6 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Dashboard_kasir2";
             Text = "Dashboard_kasir2";
-            WindowState = FormWindowState.Maximized;
             FormClosed += Dashboard_kasir2_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

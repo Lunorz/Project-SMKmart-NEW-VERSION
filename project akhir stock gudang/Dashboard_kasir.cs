@@ -188,7 +188,22 @@ namespace project_akhir_stock_gudang
                     $"Stok {produk.Nama} hanya tersedia {produk.Stok} buah.");
                 return;
             }
+            DialogResult konfirmasi = MessageBox.Show(
+           "Apakah Anda yakin ingin menambahkan barang ini ke keranjang?\n\n" +
+           "Nama barang: " + produk.Nama + "\n" +
+           "Kode barang: " + produk.Kode + "\n" +
+           "Harga: Rp" + produk.Harga.ToString("N0") + "\n" +
+           "Jumlah: " + jumlah + "\n" +
+           "Subtotal: Rp" + ((decimal)produk.Harga * jumlah).ToString("N0"),
+           "Konfirmasi Tambah Barang",
+           MessageBoxButtons.YesNo,
+           MessageBoxIcon.Question
+            );
 
+            if (konfirmasi != DialogResult.Yes)
+            {
+                return;
+            }
             if (itemLama != null)
             {
                 itemLama.Jumlah += jumlah;

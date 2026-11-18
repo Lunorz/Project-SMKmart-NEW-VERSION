@@ -396,12 +396,30 @@ namespace project_akhir_stock_gudang
 
         private void btnBatal_Click(object sender, EventArgs e)
         {
+            bool adaIsi =
+                !string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                !string.IsNullOrWhiteSpace(txtUsername.Text) ||
+                !string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                modeEditPengguna ||
+                modePersetujuan;
+
+            if (adaIsi)
+            {
+                DialogResult hasil = MessageBox.Show(
+                    "Apakah Anda yakin ingin membatalkan proses ini?\n\n" +
+                    "Data yang sedang diisi atau perubahan yang belum disimpan " +
+                    "akan dikosongkan.",
+                    "Konfirmasi Pembatalan",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (hasil != DialogResult.Yes)
+                    return;
+            }
+
             txtPassword.Clear();
-
             prgKekuatan.Value = 0;
-
-
-
 
             AturModeBuatAkun();
 
@@ -412,6 +430,7 @@ namespace project_akhir_stock_gudang
                 MessageBoxIcon.Information
             );
         }
+        
 
 
 
@@ -606,6 +625,10 @@ namespace project_akhir_stock_gudang
 
         private void btnSetujui_Click_1(object sender, EventArgs e)
         {
+            
+            
+            
+            
             string password = txtPassword.Text;
 
             if (modeEditPengguna)
@@ -678,6 +701,30 @@ namespace project_akhir_stock_gudang
                         )
                     );
 
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show(
+                        "Password untuk akun ini wajib diisi.",
+                        "Peringatan",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    txtPassword.Focus();
+                    return;
+                }
+
+                DialogResult konfirmasiACC = MessageBox.Show(
+                    "Apakah Anda yakin ingin menyetujui pendaftaran akun ini?\n\n" +
+                    "Email: " + emailTerpilih,
+                    "Konfirmasi Persetujuan Akun",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (konfirmasiACC != DialogResult.Yes)
+                    return;
+
                 bool berhasil = UserStore.ApproveAccount(
                     emailTerpilih,
                     password,
@@ -707,6 +754,19 @@ namespace project_akhir_stock_gudang
             string usernameBaru = txtUsername.Text.Trim();
             string emailBaru = txtEmail.Text.Trim();
             string roleBaru = cmbRole.Text;
+
+            DialogResult konfirmasiBuat = MessageBox.Show(
+            "Apakah Anda yakin ingin membuat akun baru?\n\n" +
+            "Username: " + usernameBaru + "\n" +
+            "Email: " + emailBaru + "\n" +
+            "Role: " + roleBaru,
+            "Konfirmasi Pembuatan Akun",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+            );
+
+            if (konfirmasiBuat != DialogResult.Yes)
+                return;
 
             bool akunBerhasil = UserStore.CreateActiveAccount(
                 usernameBaru,
