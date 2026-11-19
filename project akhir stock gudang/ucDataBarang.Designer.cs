@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             pnlPage1 = new GradientPanel();
             pnlBawah1 = new Panel();
             pnlKartuTabel1 = new Panel();
@@ -46,6 +46,8 @@
             pnlGap1 = new Panel();
             pnlTambahLuar1 = new Panel();
             pnlTambahDalam1 = new Panel();
+            lblHargaBeliAwal = new Label();
+            HargaBeliAwal = new TextBox();
             lblStockAwal = new Label();
             numStockAwal = new NumericUpDown();
             txtHargaBarang = new TextBox();
@@ -131,15 +133,15 @@
             dgvBarang1.BorderStyle = BorderStyle.None;
             dgvBarang1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvBarang1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle1.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle1.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvBarang1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle3.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle3.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvBarang1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvBarang1.ColumnHeadersHeight = 40;
             dgvBarang1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvBarang1.Columns.AddRange(new DataGridViewColumn[] { colKode1, colBarang1, colKategori1, colHargaBarang1, colHapus1 });
@@ -191,12 +193,12 @@
             // 
             // colHapus1
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(169, 50, 38);
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(169, 50, 38);
-            colHapus1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(169, 50, 38);
+            dataGridViewCellStyle4.SelectionBackColor = Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(169, 50, 38);
+            colHapus1.DefaultCellStyle = dataGridViewCellStyle4;
             colHapus1.FlatStyle = FlatStyle.Flat;
             colHapus1.HeaderText = "aksi";
             colHapus1.MinimumWidth = 6;
@@ -263,6 +265,8 @@
             // pnlTambahDalam1
             // 
             pnlTambahDalam1.BackColor = Color.White;
+            pnlTambahDalam1.Controls.Add(lblHargaBeliAwal);
+            pnlTambahDalam1.Controls.Add(HargaBeliAwal);
             pnlTambahDalam1.Controls.Add(lblStockAwal);
             pnlTambahDalam1.Controls.Add(numStockAwal);
             pnlTambahDalam1.Controls.Add(txtHargaBarang);
@@ -281,12 +285,34 @@
             pnlTambahDalam1.Size = new Size(338, 650);
             pnlTambahDalam1.TabIndex = 0;
             // 
+            // lblHargaBeliAwal
+            // 
+            lblHargaBeliAwal.AutoSize = true;
+            lblHargaBeliAwal.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHargaBeliAwal.ForeColor = Color.FromArgb(79, 106, 92);
+            lblHargaBeliAwal.Location = new Point(20, 298);
+            lblHargaBeliAwal.Name = "lblHargaBeliAwal";
+            lblHargaBeliAwal.Size = new Size(170, 20);
+            lblHargaBeliAwal.TabIndex = 13;
+            lblHargaBeliAwal.Text = "Harga beli produk awal";
+            // 
+            // HargaBeliAwal
+            // 
+            HargaBeliAwal.BackColor = Color.White;
+            HargaBeliAwal.BorderStyle = BorderStyle.FixedSingle;
+            HargaBeliAwal.Font = new Font("Leelawadee UI", 11F);
+            HargaBeliAwal.ForeColor = Color.FromArgb(18, 55, 42);
+            HargaBeliAwal.Location = new Point(20, 321);
+            HargaBeliAwal.Name = "HargaBeliAwal";
+            HargaBeliAwal.Size = new Size(298, 32);
+            HargaBeliAwal.TabIndex = 12;
+            // 
             // lblStockAwal
             // 
             lblStockAwal.AutoSize = true;
             lblStockAwal.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblStockAwal.ForeColor = Color.FromArgb(79, 106, 92);
-            lblStockAwal.Location = new Point(20, 365);
+            lblStockAwal.Location = new Point(20, 432);
             lblStockAwal.Name = "lblStockAwal";
             lblStockAwal.Size = new Size(83, 20);
             lblStockAwal.TabIndex = 11;
@@ -294,10 +320,11 @@
             // 
             // numStockAwal
             // 
-            numStockAwal.Location = new Point(20, 388);
+            numStockAwal.Location = new Point(20, 455);
             numStockAwal.Name = "numStockAwal";
             numStockAwal.Size = new Size(298, 31);
             numStockAwal.TabIndex = 10;
+            numStockAwal.ValueChanged += numStockAwal_ValueChanged;
             // 
             // txtHargaBarang
             // 
@@ -305,7 +332,7 @@
             txtHargaBarang.BorderStyle = BorderStyle.FixedSingle;
             txtHargaBarang.Font = new Font("Leelawadee UI", 11F);
             txtHargaBarang.ForeColor = Color.FromArgb(18, 55, 42);
-            txtHargaBarang.Location = new Point(20, 321);
+            txtHargaBarang.Location = new Point(20, 388);
             txtHargaBarang.Name = "txtHargaBarang";
             txtHargaBarang.Size = new Size(298, 32);
             txtHargaBarang.TabIndex = 9;
@@ -315,11 +342,11 @@
             lblHargaBarang1.AutoSize = true;
             lblHargaBarang1.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblHargaBarang1.ForeColor = Color.FromArgb(79, 106, 92);
-            lblHargaBarang1.Location = new Point(20, 298);
+            lblHargaBarang1.Location = new Point(20, 365);
             lblHargaBarang1.Name = "lblHargaBarang1";
-            lblHargaBarang1.Size = new Size(51, 20);
+            lblHargaBarang1.Size = new Size(116, 20);
             lblHargaBarang1.TabIndex = 8;
-            lblHargaBarang1.Text = "Harga";
+            lblHargaBarang1.Text = "Harga jual awal";
             // 
             // btnSimpan1
             // 
@@ -328,7 +355,7 @@
             btnSimpan1.FlatStyle = FlatStyle.Flat;
             btnSimpan1.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSimpan1.ForeColor = Color.White;
-            btnSimpan1.Location = new Point(20, 448);
+            btnSimpan1.Location = new Point(20, 515);
             btnSimpan1.Name = "btnSimpan1";
             btnSimpan1.Size = new Size(298, 40);
             btnSimpan1.TabIndex = 7;
@@ -501,5 +528,7 @@
         private TextBox txtHargaBarang;
         private Label lblStockAwal;
         private NumericUpDown numStockAwal;
+        private Label lblHargaBeliAwal;
+        private TextBox HargaBeliAwal;
     }
 }

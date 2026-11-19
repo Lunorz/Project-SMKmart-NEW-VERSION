@@ -197,12 +197,12 @@ namespace project_akhir_stock_gudang
             return kodeBaru;
         }
 
+
         private void btnSimpan1_Click(object sender, EventArgs e)
         {
             string nama = txtNama1.Text.Trim();
             string kategori = txtKategori1.Text.Trim();
             string hargaText = txtHargaBarang.Text.Trim();
-
 
             if (string.IsNullOrWhiteSpace(nama))
             {
@@ -211,7 +211,6 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-
             if (string.IsNullOrWhiteSpace(kategori))
             {
                 MessageBox.Show("Kategori barang harus diisi.");
@@ -219,20 +218,17 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-
             if (!decimal.TryParse(
                 hargaText,
-                System.Globalization.NumberStyles.Number,
-                System.Globalization.CultureInfo.CurrentCulture,
+                NumberStyles.Number,
+                CultureInfo.CurrentCulture,
                 out decimal harga
             ) || harga <= 0)
             {
-                MessageBox.Show("Harga harus berupa angka lebih dari 0.");
+                MessageBox.Show("Harga jual harus berupa angka lebih dari 0.");
                 txtHargaBarang.Focus();
                 return;
             }
-
-
 
             if (kodeProdukDiedit != null)
             {
@@ -246,18 +242,11 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
-
                 bool namaSudahAda = daftarProduk.Any(
                     p => p.Kode != kodeProdukDiedit &&
                          !p.IsDeleted &&
-                         p.Nama.Equals(
-                             nama,
-                             StringComparison.OrdinalIgnoreCase
-                         ) &&
-                         p.Kategori.Equals(
-                             kategori,
-                             StringComparison.OrdinalIgnoreCase
-                         )
+                         p.Nama.Equals(nama, StringComparison.OrdinalIgnoreCase) &&
+                         p.Kategori.Equals(kategori, StringComparison.OrdinalIgnoreCase)
                 );
 
                 if (namaSudahAda)
@@ -268,29 +257,29 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
-
                 string namaLama = produk.Nama;
                 string kategoriLama = produk.Kategori;
                 decimal hargaLama = produk.Harga;
 
                 try
                 {
-
                     produk.Nama = nama;
                     produk.Kategori = kategori;
                     produk.Harga = harga;
 
                     ProdukJsonStore.Save(daftarProduk);
+
                     LogAktivitasJsonStore.Catat(
-                    emailAdmin,
-                   "Barang",
-                   "Mengubah data barang",
-                    produk.Kode + " - " + produk.Nama,
-                   "Admin mengubah data barang. " +
-                   "Nama: " + namaLama + " menjadi " + produk.Nama +
-                   "; Kategori: " + kategoriLama + " menjadi " + produk.Kategori +
-                   "; Harga: Rp" + hargaLama.ToString("N0") +
-                   " menjadi Rp" + produk.Harga.ToString("N0")
+                        emailAdmin,
+                        "Admin",
+                        "Barang",
+                        "Mengubah data barang",
+                        produk.Kode + " - " + produk.Nama,
+                        "Admin mengubah data barang. " +
+                        "Nama: " + namaLama + " menjadi " + produk.Nama +
+                        "; Kategori: " + kategoriLama + " menjadi " + produk.Kategori +
+                        "; Harga: Rp" + hargaLama.ToString("N0") +
+                        " menjadi Rp" + produk.Harga.ToString("N0")
                     );
 
                     MuatKategori();
@@ -306,7 +295,6 @@ namespace project_akhir_stock_gudang
                 }
                 catch (Exception ex)
                 {
-
                     produk.Nama = namaLama;
                     produk.Kategori = kategoriLama;
                     produk.Harga = hargaLama;
@@ -322,18 +310,10 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-
-
             bool barangSudahAda = daftarProduk.Any(
                 p => !p.IsDeleted &&
-                     p.Nama.Equals(
-                         nama,
-                         StringComparison.OrdinalIgnoreCase
-                     ) &&
-                     p.Kategori.Equals(
-                         kategori,
-                         StringComparison.OrdinalIgnoreCase
-                     )
+                     p.Nama.Equals(nama, StringComparison.OrdinalIgnoreCase) &&
+                     p.Kategori.Equals(kategori, StringComparison.OrdinalIgnoreCase)
             );
 
             if (barangSudahAda)
@@ -341,6 +321,36 @@ namespace project_akhir_stock_gudang
                 MessageBox.Show(
                     "Barang dengan nama dan kategori tersebut sudah tersedia."
                 );
+                return;
+            }
+
+            int stokAwal = (int)numStockAwal.Value;
+
+            decimal hargaBeliAwal = 0;
+
+            if (!string.IsNullOrWhiteSpace(HargaBeliAwal.Text))
+            {
+                if (!decimal.TryParse(
+                    HargaBeliAwal.Text.Trim(),
+                    NumberStyles.Number,
+                    CultureInfo.CurrentCulture,
+                    out hargaBeliAwal
+                ) || hargaBeliAwal < 0)
+                {
+                    MessageBox.Show(
+                        "Harga beli awal harus berupa angka yang valid."
+                    );
+                    HargaBeliAwal.Focus();
+                    return;
+                }
+            }
+
+            if (stokAwal > 0 && hargaBeliAwal <= 0)
+            {
+                MessageBox.Show(
+                    "Harga beli awal harus diisi jika stok awal lebih dari 0."
+                );
+                HargaBeliAwal.Focus();
                 return;
             }
 
@@ -352,36 +362,106 @@ namespace project_akhir_stock_gudang
                 Nama = nama,
                 Kategori = kategori,
                 Harga = harga,
-                Stok = (int)numStockAwal.Value,
-
+                Stok = stokAwal,
                 IsDeleted = false
             };
 
             try
             {
+                List<LapisanStok> semuaLapisan =
+                    LapisanStokJsonStore.Load();
+
+                LapisanStok? lapisanBaru = null;
+
+                if (stokAwal > 0)
+                {
+                    lapisanBaru = new LapisanStok
+                    {
+                        IdLapisan = Guid.NewGuid().ToString(),
+                        KodeBarang = produkBaru.Kode,
+                        NamaBarang = produkBaru.Nama,
+                        TanggalMasuk = DateTime.Now,
+                        Petugas = emailAdmin,
+                        NomorSuratJalan = "SALDO-AWAL",
+                        StokAwal = stokAwal,
+                        SisaStok = stokAwal,
+                        HargaBeli = hargaBeliAwal
+                    };
+
+                    semuaLapisan.Add(lapisanBaru);
+                }
+
                 daftarProduk.Add(produkBaru);
 
-                ProdukJsonStore.Save(daftarProduk);
+                try
+                {
+                    if (lapisanBaru != null)
+                    {
+                        LapisanStokJsonStore.Save(semuaLapisan);
+                    }
 
-                LogAktivitasJsonStore.Catat(
-                emailAdmin,
-                "Admin",
-                "Barang",
-                "Menambahkan produk",
-                 produkBaru.Kode + " - " + produkBaru.Nama,
-                 "Admin menambahkan produk baru dengan kategori " +
-                 produkBaru.Kategori +
-                 " dan harga Rp" +
-                 produkBaru.Harga.ToString("N0")
-                 );
+                    ProdukJsonStore.Save(daftarProduk);
+                }
+                catch
+                {
+                    daftarProduk.Remove(produkBaru);
 
+                    if (lapisanBaru != null)
+                    {
+                        semuaLapisan.Remove(lapisanBaru);
 
+                        try
+                        {
+                            LapisanStokJsonStore.Save(semuaLapisan);
+                        }
+                        catch
+                        {
+                        }
+                    }
+
+                    throw;
+                }
+
+                try
+                {
+                    LogAktivitasJsonStore.Catat(
+                        emailAdmin,
+                        "Admin",
+                        "Barang",
+                        "Menambahkan produk",
+                        produkBaru.Kode + " - " + produkBaru.Nama,
+                        "Admin menambahkan produk baru dengan kategori " +
+                        produkBaru.Kategori +
+                        ", harga jual Rp" + produkBaru.Harga.ToString("N0") +
+                        ", stok awal " + stokAwal +
+                        ", harga beli awal Rp" + hargaBeliAwal.ToString("N0")
+                    );
+                }
+                catch (Exception errorLog)
+                {
+                    MessageBox.Show(
+                        "Produk berhasil disimpan, tetapi log aktivitas gagal dicatat:\n" +
+                        errorLog.Message,
+                        "Peringatan Log",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+
+                MuatDataProduk();
                 MuatKategori();
                 TampilkanDataProduk();
                 BersihkanInput();
 
                 MessageBox.Show(
-                    "Barang berhasil ditambahkan!\nKode: " + kode,
+                    "Barang berhasil ditambahkan!\n\n" +
+                    "Kode: " + kode + "\n" +
+                    "Nama: " + nama + "\n" +
+                    "Stok awal: " + stokAwal + " unit\n" +
+                    "Harga beli awal: Rp" + hargaBeliAwal.ToString("N0") +
+                    (stokAwal > 0
+                        ? "\nLapisan FIFO berhasil dibuat."
+                        : "\nLapisan FIFO belum dibuat karena stok awal 0."),
                     "Berhasil",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
@@ -389,8 +469,6 @@ namespace project_akhir_stock_gudang
             }
             catch (Exception ex)
             {
-                daftarProduk.Remove(produkBaru);
-
                 MessageBox.Show(
                     "Gagal menyimpan barang:\n" + ex.Message,
                     "Kesalahan",
@@ -399,6 +477,7 @@ namespace project_akhir_stock_gudang
                 );
             }
         }
+
 
         private void dgvBarang1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -510,16 +589,17 @@ namespace project_akhir_stock_gudang
         {
             TampilkanDataProduk();
         }
+
         private void BersihkanInput()
         {
             txtKode1.Clear();
             txtNama1.Clear();
             txtKategori1.Clear();
             txtHargaBarang.Clear();
+            HargaBeliAwal.Clear();
 
             numStockAwal.Value = 0;
             numStockAwal.Enabled = true;
-         
 
             kodeProdukDiedit = null;
 
@@ -527,6 +607,7 @@ namespace project_akhir_stock_gudang
 
             txtNama1.Focus();
         }
+
 
         private void dgvBarang1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -565,13 +646,13 @@ namespace project_akhir_stock_gudang
             txtKategori1.Text = produk.Kategori;
             txtHargaBarang.Text = produk.Harga.ToString();
 
-         
+
             numStockAwal.Value = Math.Min(
                 numStockAwal.Maximum,
                 Math.Max(numStockAwal.Minimum, produk.Stok)
             );
 
-            
+
             numStockAwal.Enabled = false;
 
 
@@ -582,6 +663,11 @@ namespace project_akhir_stock_gudang
         }
 
         private void txtNama1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numStockAwal_ValueChanged(object sender, EventArgs e)
         {
 
         }

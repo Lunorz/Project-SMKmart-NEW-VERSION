@@ -149,6 +149,7 @@ namespace project_akhir_stock_gudang
             TampilkanRiwayatBarangKeluar();
         }
 
+
         private void btnSimpanGudang3_Click(object sender, EventArgs e)
         {
             try
@@ -185,16 +186,17 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
-
                 List<Produk> produkTerbaru = ProdukJsonStore.Load();
 
-                Produk produk = produkTerbaru.FirstOrDefault(
+                Produk? produk = produkTerbaru.FirstOrDefault(
                     p => p.Kode == barangDipilih.Kode
                 );
 
                 if (produk == null || produk.IsDeleted)
                 {
-                    MessageBox.Show("Barang tidak ditemukan atau sudah tidak aktif.");
+                    MessageBox.Show(
+                        "Barang tidak ditemukan atau sudah tidak aktif."
+                    );
                     return;
                 }
 
@@ -207,17 +209,44 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
+                List<LapisanStok> semuaLapisan =
+                    LapisanStokJsonStore.Load();
+
+                List<LapisanStok> lapisanBarang = semuaLapisan
+                    .Where(x =>
+                        x.KodeBarang == produk.Kode &&
+                        x.SisaStok > 0
+                    )
+                    .OrderBy(x => x.TanggalMasuk)
+                    .ToList();
+
+                int totalStokLapisan = lapisanBarang.Sum(x => x.SisaStok);
+
+                if (totalStokLapisan < jumlah)
+                {
+                    MessageBox.Show(
+                        "Stok pada lapisan FIFO tidak mencukupi.\n\n" +
+                        "Stok produk: " + produk.Stok + " unit\n" +
+                        "Stok lapisan FIFO: " + totalStokLapisan + " unit\n\n" +
+                        "Periksa data lapisan stok sebelum melanjutkan.",
+                        "Stok FIFO Tidak Sesuai",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+
                 DialogResult konfirmasi = MessageBox.Show(
-                "Apakah Anda yakin ingin menyimpan data barang keluar ini?\n\n" +
-                "Nama barang: " + produk.Nama + "\n" +
-                "Kode barang: " + produk.Kode + "\n" +
-                "Jumlah keluar: " + jumlah + " unit\n" +
-                "Stok sebelum: " + produk.Stok + " unit\n" +
-                "Stok setelah: " + (produk.Stok - jumlah) + " unit\n" +
-                "Alasan: " + cmbAlasanGudang3.Text,
-                "Konfirmasi Barang Keluar",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
+                    "Apakah Anda yakin ingin menyimpan data barang keluar ini?\n\n" +
+                    "Nama barang: " + produk.Nama + "\n" +
+                    "Kode barang: " + produk.Kode + "\n" +
+                    "Jumlah keluar: " + jumlah + " unit\n" +
+                    "Stok sebelum: " + produk.Stok + " unit\n" +
+                    "Stok setelah: " + (produk.Stok - jumlah) + " unit\n" +
+                    "Alasan: " + cmbAlasanGudang3.Text,
+                    "Konfirmasi Barang Keluar",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
                 );
 
                 if (konfirmasi != DialogResult.Yes)
@@ -227,12 +256,70 @@ namespace project_akhir_stock_gudang
 
                 int stokSebelum = produk.Stok;
 
-              
+                List<LapisanStok> salinanLapisan = semuaLapisan
+                    .Select(x => new LapisanStok
+                    {
+                        IdLapisan = x.IdLapisan,
+                        KodeBarang = x.KodeBarang,
+                        NamaBarang = x.NamaBarang,
+                        TanggalMasuk = x.TanggalMasuk,
+                        Petugas = x.Petugas,
+                        NomorSuratJalan = x.NomorSuratJalan,
+                        StokAwal = x.StokAwal,
+                        SisaStok = x.SisaStok,
+                        HargaBeli = x.HargaBeli
+                    })
+                    .ToList();
+
+                int sisaKeluar = jumlah;
+
+                foreach (LapisanStok lapisan in lapisanBarang)
+                {
+                    if (sisaKeluar <= 0)
+                    {
+                        break;
+                    }
+
+                    int jumlahDiambil = Math.Min(
+                        lapisan.SisaStok,
+                        sisaKeluar
+                    );
+
+                    lapisan.SisaStok -= jumlahDiambil;
+                    sisaKeluar -= jumlahDiambil;
+                }
+
+                if (sisaKeluar > 0)
+                {
+                    MessageBox.Show(
+                        "Pengurangan stok FIFO tidak berhasil diselesaikan."
+                    );
+                    return;
+                }
+
                 produk.Stok -= jumlah;
 
-             
-                ProdukJsonStore.Save(produkTerbaru);
+                try
+                {
+                    LapisanStokJsonStore.Save(semuaLapisan);
+                    ProdukJsonStore.Save(produkTerbaru);
+                }
+                catch
+                {
+                    try
+                    {
+                        LapisanStokJsonStore.Save(salinanLapisan);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(
+                            "Penyimpanan gagal dan pemulihan lapisan FIFO juga gagal. " +
+                            "Periksa lapisan_stok.json dan produk.json."
+                        );
+                    }
 
+                    throw;
+                }
 
                 BarangKeluarSimpan dataBaru =
                     new BarangKeluarSimpan
@@ -248,7 +335,7 @@ namespace project_akhir_stock_gudang
                     };
 
                 BarangKeluarJsonStore.Tambah(dataBaru);
-              
+
                 try
                 {
                     LogAktivitasJsonStore.Catat(
@@ -262,7 +349,7 @@ namespace project_akhir_stock_gudang
                         "Alasan: " + cmbAlasanGudang3.Text +
                         ". Stok sebelumnya: " + stokSebelum +
                         ". Stok sekarang: " + produk.Stok +
-                        ". Catatan: " + txtCatatanGudang3.Text.Trim()
+                        ". Pengeluaran menggunakan FIFO."
                     );
                 }
                 catch (Exception ex)
@@ -276,13 +363,13 @@ namespace project_akhir_stock_gudang
                     );
                 }
 
-
                 MuatBarangDariAdmin();
                 MuatRiwayatBarangKeluar();
                 BersihkanForm();
 
                 MessageBox.Show(
-                    "Barang keluar berhasil disimpan dan stok telah diperbarui.",
+                    "Barang keluar berhasil disimpan.\n" +
+                    "Stok produk dan lapisan FIFO telah diperbarui.",
                     "Berhasil",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
@@ -298,6 +385,7 @@ namespace project_akhir_stock_gudang
                 );
             }
         }
+
 
         private void btnBersihkanGudang3_Click(object sender, EventArgs e)
         {
