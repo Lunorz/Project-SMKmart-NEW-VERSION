@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnlPage = new Panel();
+            lblKembaliKeKasir = new Label();
             pnlBaris = new Panel();
             pnlFormLuar = new Panel();
             pnlFormDalam = new Panel();
@@ -64,7 +65,6 @@
             lblUsername = new Label();
             pnlHeaderInfo = new GradientPanel();
             lblJudulInfo = new Label();
-            lblKembaliKeKasir = new Label();
             pnlPage.SuspendLayout();
             pnlBaris.SuspendLayout();
             pnlFormLuar.SuspendLayout();
@@ -85,6 +85,19 @@
             pnlPage.Padding = new Padding(24);
             pnlPage.Size = new Size(1100, 700);
             pnlPage.TabIndex = 1;
+            // 
+            // lblKembaliKeKasir
+            // 
+            lblKembaliKeKasir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblKembaliKeKasir.AutoSize = true;
+            lblKembaliKeKasir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKembaliKeKasir.ForeColor = Color.FromArgb(79, 106, 92);
+            lblKembaliKeKasir.Location = new Point(1078, 0);
+            lblKembaliKeKasir.Name = "lblKembaliKeKasir";
+            lblKembaliKeKasir.Size = new Size(19, 20);
+            lblKembaliKeKasir.TabIndex = 3;
+            lblKembaliKeKasir.Text = "X";
+            lblKembaliKeKasir.Click += lblKembaliKeKasir_Click;
             // 
             // pnlBaris
             // 
@@ -490,18 +503,6 @@
             lblJudulInfo.Size = new Size(123, 31);
             lblJudulInfo.TabIndex = 0;
             lblJudulInfo.Text = "Akun saya";
-            // 
-            // lblKembaliKeKasir
-            // 
-            lblKembaliKeKasir.AutoSize = true;
-            lblKembaliKeKasir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblKembaliKeKasir.ForeColor = Color.FromArgb(79, 106, 92);
-            lblKembaliKeKasir.Location = new Point(1078, 0);
-            lblKembaliKeKasir.Name = "lblKembaliKeKasir";
-            lblKembaliKeKasir.Size = new Size(19, 20);
-            lblKembaliKeKasir.TabIndex = 3;
-            lblKembaliKeKasir.Text = "X";
-            lblKembaliKeKasir.Click += lblKembaliKeKasir_Click;
             // 
             // ucAkunSayaKasir
             // 

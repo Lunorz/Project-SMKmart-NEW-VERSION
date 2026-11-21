@@ -18,6 +18,7 @@ namespace project_akhir_stock_gudang
         private List<Produk> daftarProduk = new();
         private List<DetailTransaksi> keranjang = new();
         private string usernameKasir = "";
+        private formAkunSayaKasir? halamanAkun;
         public Dashboard_kasir(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
@@ -315,25 +316,21 @@ namespace project_akhir_stock_gudang
 
             if (akun == null)
             {
-                MessageBox.Show(
-                    "Data akun kasir tidak ditemukan.",
-                    "Kesalahan",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
+                MessageBox.Show("Data akun kasir tidak ditemukan.");
                 return;
             }
 
-            formAkunSayaKasir akunSayaKasir1 =
-                new formAkunSayaKasir(akun.Email);
-
-            akunSayaKasir1.FormClosed += (s, args) =>
+            if (halamanAkun == null || halamanAkun.IsDisposed)
             {
-                this.Show();
-            };
+                halamanAkun = new formAkunSayaKasir(
+                    akun.Email,
+                    this);
+            }
+
+            halamanAkun.Show();
+            halamanAkun.BringToFront();
 
             this.Hide();
-            akunSayaKasir1.Show();
         }
 
     }

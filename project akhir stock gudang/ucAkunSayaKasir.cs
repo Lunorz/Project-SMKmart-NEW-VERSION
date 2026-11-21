@@ -9,6 +9,8 @@ namespace project_akhir_stock_gudang
     public partial class ucAkunSayaKasir : UserControl
     {
         private string emailKasir = "";
+        private readonly string usernameKasir;
+        private Dashboard_kasir? dashboardAsal;
 
         public ucAkunSayaKasir() : this("")
         {
@@ -255,12 +257,26 @@ namespace project_akhir_stock_gudang
             txtLama.Focus();
         }
 
+
         private void lblKembaliKeKasir_Click(object? sender, EventArgs e)
         {
+            if (dashboardAsal != null)
+            {
+                dashboardAsal.Show();
+                dashboardAsal.BringToFront();
+            }
+
             Form? formAkun = this.FindForm();
 
             if (formAkun != null)
-                formAkun.Close();
+            {
+                formAkun.Hide();
+            }
+        }
+
+        public void AturDashboard(Dashboard_kasir dashboard)
+        {
+            dashboardAsal = dashboard;
         }
     }
 }
