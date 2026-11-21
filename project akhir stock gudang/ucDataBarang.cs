@@ -19,6 +19,7 @@ namespace project_akhir_stock_gudang
         public ucDataBarang()
         {
             InitializeComponent();
+            UiDataBarang.Apply(this);
             this.Load -= ucDataBarang_Load;
             this.Load += ucDataBarang_Load;
 

@@ -31,8 +31,11 @@ namespace project_akhir_stock_gudang
             {
                 LihatLaporanDiminta?.Invoke(this, EventArgs.Empty);
             };
-        }
+           
+            UiTheme.Apply(this);
 
+        }
+       
 
 
         private void TampilkanKartuDashboard()

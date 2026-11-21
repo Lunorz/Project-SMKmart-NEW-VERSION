@@ -27,7 +27,7 @@ namespace project_akhir_stock_gudang
             emailAktif = email;
             usernameAktif = username;
             roleAktif = role;
-
+            UiAkunSaya.Apply(this);
             AturTampilanAwal();
             HubungkanEvent();
             TampilkanInformasiAkun();

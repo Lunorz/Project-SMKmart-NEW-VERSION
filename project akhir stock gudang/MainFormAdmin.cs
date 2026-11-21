@@ -22,6 +22,7 @@ namespace project_akhir_stock_gudang
             InitializeComponent();
             emailAktif = email;
             btnMenuDashboard_Click(this, EventArgs.Empty);
+            UiTheme.DecorateHeader(pnlTopBar);
         }
         ucAdminDataUser? _halUser;
         ucDataBarang? _halBarang;

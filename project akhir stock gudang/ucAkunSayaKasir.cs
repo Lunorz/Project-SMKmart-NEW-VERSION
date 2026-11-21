@@ -19,6 +19,7 @@ namespace project_akhir_stock_gudang
         public ucAkunSayaKasir(string email)
         {
             InitializeComponent();
+            UiAkunSaya.Apply(this);
 
             emailKasir = email ?? "";
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnlSideBar = new GradientPanel();
+            btnLaba = new Button();
             btnPengaturan = new Button();
             btnLogAktivitas = new Button();
             btnKeluar = new Button();
@@ -44,7 +45,6 @@
             pnlTopline = new Panel();
             pnlContent = new Panel();
             ucAdminDataUser1 = new ucAdminDataUser();
-            btnLaba = new Button();
             pnlSideBar.SuspendLayout();
             pnlTopBar.SuspendLayout();
             pnlContent.SuspendLayout();
@@ -72,6 +72,23 @@
             pnlSideBar.Padding = new Padding(16, 24, 16, 24);
             pnlSideBar.Size = new Size(260, 879);
             pnlSideBar.TabIndex = 0;
+            // 
+            // btnLaba
+            // 
+            btnLaba.BackColor = Color.FromArgb(38, 119, 74);
+            btnLaba.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnLaba.FlatAppearance.BorderSize = 0;
+            btnLaba.FlatStyle = FlatStyle.Flat;
+            btnLaba.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLaba.ForeColor = Color.FromArgb(230, 247, 238);
+            btnLaba.Location = new Point(16, 342);
+            btnLaba.Name = "btnLaba";
+            btnLaba.Size = new Size(228, 44);
+            btnLaba.TabIndex = 9;
+            btnLaba.Text = "Laba";
+            btnLaba.TextAlign = ContentAlignment.MiddleLeft;
+            btnLaba.UseVisualStyleBackColor = false;
+            btnLaba.Click += btnLaba_Click;
             // 
             // btnPengaturan
             // 
@@ -232,6 +249,7 @@
             // 
             // pnlTopBar
             // 
+            pnlTopBar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlTopBar.BackColor = Color.White;
             pnlTopBar.Controls.Add(lblTopBar10);
             pnlTopBar.Location = new Point(0, 0);
@@ -279,23 +297,6 @@
             ucAdminDataUser1.Padding = new Padding(24);
             ucAdminDataUser1.Size = new Size(1270, 878);
             ucAdminDataUser1.TabIndex = 0;
-            // 
-            // btnLaba
-            // 
-            btnLaba.BackColor = Color.FromArgb(38, 119, 74);
-            btnLaba.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
-            btnLaba.FlatAppearance.BorderSize = 0;
-            btnLaba.FlatStyle = FlatStyle.Flat;
-            btnLaba.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLaba.ForeColor = Color.FromArgb(230, 247, 238);
-            btnLaba.Location = new Point(16, 342);
-            btnLaba.Name = "btnLaba";
-            btnLaba.Size = new Size(228, 44);
-            btnLaba.TabIndex = 9;
-            btnLaba.Text = "Laba";
-            btnLaba.TextAlign = ContentAlignment.MiddleLeft;
-            btnLaba.UseVisualStyleBackColor = false;
-            btnLaba.Click += btnLaba_Click;
             // 
             // MainFormAdmin
             // 
