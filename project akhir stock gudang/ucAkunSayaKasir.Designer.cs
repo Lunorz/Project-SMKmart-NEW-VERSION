@@ -64,6 +64,7 @@
             lblUsername = new Label();
             pnlHeaderInfo = new GradientPanel();
             lblJudulInfo = new Label();
+            lblKembaliKeKasir = new Label();
             pnlPage.SuspendLayout();
             pnlBaris.SuspendLayout();
             pnlFormLuar.SuspendLayout();
@@ -76,6 +77,7 @@
             // 
             // pnlPage
             // 
+            pnlPage.Controls.Add(lblKembaliKeKasir);
             pnlPage.Controls.Add(pnlBaris);
             pnlPage.Dock = DockStyle.Fill;
             pnlPage.Location = new Point(0, 0);
@@ -489,6 +491,18 @@
             lblJudulInfo.TabIndex = 0;
             lblJudulInfo.Text = "Akun saya";
             // 
+            // lblKembaliKeKasir
+            // 
+            lblKembaliKeKasir.AutoSize = true;
+            lblKembaliKeKasir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKembaliKeKasir.ForeColor = Color.FromArgb(79, 106, 92);
+            lblKembaliKeKasir.Location = new Point(1078, 0);
+            lblKembaliKeKasir.Name = "lblKembaliKeKasir";
+            lblKembaliKeKasir.Size = new Size(19, 20);
+            lblKembaliKeKasir.TabIndex = 3;
+            lblKembaliKeKasir.Text = "X";
+            lblKembaliKeKasir.Click += lblKembaliKeKasir_Click;
+            // 
             // ucAkunSayaKasir
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -497,6 +511,7 @@
             Name = "ucAkunSayaKasir";
             Size = new Size(1100, 700);
             pnlPage.ResumeLayout(false);
+            pnlPage.PerformLayout();
             pnlBaris.ResumeLayout(false);
             pnlFormLuar.ResumeLayout(false);
             pnlFormDalam.ResumeLayout(false);
@@ -549,5 +564,6 @@
         private Label lblUsername;
         private GradientPanel pnlHeaderInfo;
         private Label lblJudulInfo;
+        private Label lblKembaliKeKasir;
     }
 }

@@ -14,7 +14,7 @@ namespace project_akhir_stock_gudang
 {
     public partial class Dashboard_kasir : Form
     {
-  
+
         private List<Produk> daftarProduk = new();
         private List<DetailTransaksi> keranjang = new();
         private string usernameKasir = "";
@@ -27,7 +27,7 @@ namespace project_akhir_stock_gudang
 
             SiapkanDaftarBarang();
             PerbaruiInfoTransaksi();
-           
+
         }
 
         private void Dashboard_kasir_FormClosed(object sender, FormClosedEventArgs e)
@@ -89,10 +89,10 @@ namespace project_akhir_stock_gudang
             }
         }
 
-        
-        
-          private void TampilkanDaftarBarang()
-          {
+
+
+        private void TampilkanDaftarBarang()
+        {
             string kataKunci = textbox_kategori_barang.Text.Trim();
 
             listbox_barang.BeginUpdate();
@@ -100,34 +100,34 @@ namespace project_akhir_stock_gudang
 
             foreach (Produk produk in daftarProduk)
             {
-                
+
                 if (produk.IsDeleted)
                 {
                     continue;
                 }
 
-                
+
                 bool cocokKategori =
                     produk.Kategori.Contains(
                         kataKunci,
                         StringComparison.OrdinalIgnoreCase
                     );
 
-                
+
                 bool cocokNama =
                     produk.Nama.Contains(
                         kataKunci,
                         StringComparison.OrdinalIgnoreCase
                     );
 
-                
+
                 bool cocokKode =
                     produk.Kode.Contains(
                         kataKunci,
                         StringComparison.OrdinalIgnoreCase
                     );
 
-                
+
                 if (string.IsNullOrWhiteSpace(kataKunci) ||
                     cocokKategori ||
                     cocokNama ||
@@ -139,7 +139,7 @@ namespace project_akhir_stock_gudang
 
             listbox_barang.EndUpdate();
         }
-        
+
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -302,5 +302,39 @@ namespace project_akhir_stock_gudang
             dashboard2.Show();
             this.Hide();
         }
+
+
+        private void fotoGir_Click(object sender, EventArgs e)
+        {
+            UserAccount? akun = UserStore.GetAll()
+                .FirstOrDefault(x =>
+                    string.Equals(
+                        x.Username,
+                        usernameKasir,
+                        StringComparison.OrdinalIgnoreCase));
+
+            if (akun == null)
+            {
+                MessageBox.Show(
+                    "Data akun kasir tidak ditemukan.",
+                    "Kesalahan",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            formAkunSayaKasir akunSayaKasir1 =
+                new formAkunSayaKasir(akun.Email);
+
+            akunSayaKasir1.FormClosed += (s, args) =>
+            {
+                this.Show();
+            };
+
+            this.Hide();
+            akunSayaKasir1.Show();
+        }
+
     }
 }

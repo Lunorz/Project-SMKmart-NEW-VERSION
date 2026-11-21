@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard_kasir));
             panel1 = new Panel();
+            fotoGir = new PictureBox();
             panel2 = new Panel();
             panel4 = new Panel();
             label_tanggal_transaksi = new Label();
@@ -48,6 +50,7 @@
             textbox_kategori_barang = new TextBox();
             label3 = new Label();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fotoGir).BeginInit();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -58,6 +61,7 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.SeaGreen;
+            panel1.Controls.Add(fotoGir);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(kembali_ke_login2);
             panel1.Controls.Add(label6);
@@ -66,6 +70,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(686, 102);
             panel1.TabIndex = 0;
+            // 
+            // fotoGir
+            // 
+            fotoGir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            fotoGir.Image = (Image)resources.GetObject("fotoGir.Image");
+            fotoGir.Location = new Point(623, 8);
+            fotoGir.Name = "fotoGir";
+            fotoGir.Size = new Size(28, 21);
+            fotoGir.SizeMode = PictureBoxSizeMode.Zoom;
+            fotoGir.TabIndex = 13;
+            fotoGir.TabStop = false;
+            fotoGir.Click += fotoGir_Click;
             // 
             // panel2
             // 
@@ -306,6 +322,7 @@
             FormClosed += Dashboard_kasir_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)fotoGir).EndInit();
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
@@ -337,5 +354,6 @@
         private Button menuju_dashboard2;
         private Label label5;
         private Label label6;
+        private PictureBox fotoGir;
     }
 }
