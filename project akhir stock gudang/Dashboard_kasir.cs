@@ -22,6 +22,16 @@ namespace project_akhir_stock_gudang
         public Dashboard_kasir(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
+            UiTheme.ApplyCashierPanelDecoration(panel5);
+            UiTheme.DecorateCashierButton(tambah_ke_keranjang, false);
+            UiTheme.DecorateCashierButton(menuju_dashboard2);
+            UiTheme.DecorateCashierList(listbox_barang);
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            fotoGir.BringToFront();
+            kembali_ke_login2.BringToFront();
+            Resize += Dashboard_kasir_Resize;
+            AturLayoutResponsif();
             MuatProduk();
             daftarProduk = ProdukJsonStore.Load();
             usernameKasir = username ?? "";
@@ -29,6 +39,70 @@ namespace project_akhir_stock_gudang
             SiapkanDaftarBarang();
             PerbaruiInfoTransaksi();
 
+        }
+
+        private void Dashboard_kasir_Resize(object? sender, EventArgs e)
+        {
+            AturLayoutResponsif();
+        }
+
+        private void AturLayoutResponsif()
+        {
+            if (ClientSize.Width < 10 || ClientSize.Height < 10)
+                return;
+
+            int lebar = ClientSize.Width;
+            int tinggi = ClientSize.Height;
+            const int tinggiHeader = 102;
+            const int tinggiInfo = 133;
+            const int jarak = 12;
+
+            panel1.Dock = DockStyle.None;
+            panel2.Dock = DockStyle.None;
+            panel5.Dock = DockStyle.None;
+
+            panel1.Location = new Point(0, 0);
+            panel1.Size = new Size(lebar, tinggiHeader);
+
+            panel2.Location = new Point(0, tinggiHeader);
+            panel2.Size = new Size(lebar, tinggiInfo);
+
+            int tinggiKonten = Math.Max(180, tinggi - tinggiHeader - tinggiInfo);
+            panel5.Location = new Point(0, tinggiHeader + tinggiInfo);
+            panel5.Size = new Size(lebar, tinggiKonten);
+
+            int lebarKartu = Math.Max(250, Math.Min(360, (lebar - 3 * jarak) / 2));
+            panel3.Location = new Point(jarak, 19);
+            panel3.Size = new Size(lebarKartu, 97);
+
+            panel4.Location = new Point(lebar - lebarKartu - jarak, 19);
+            panel4.Size = new Size(lebarKartu, 97);
+
+            int lebarDalam = Math.Max(120, lebar - 2 * jarak);
+            label3.Location = new Point(jarak, 18);
+            textbox_kategori_barang.Location = new Point(jarak, 47);
+            textbox_kategori_barang.Size = new Size(lebarDalam, 42);
+
+            int tinggiFooter = 160;
+            int tinggiDaftar = Math.Max(70, tinggiKonten - 47 - 42 - tinggiFooter);
+            listbox_barang.Location = new Point(jarak, 101);
+            listbox_barang.Size = new Size(lebarDalam, tinggiDaftar);
+
+            int posisiFooter = 101 + tinggiDaftar;
+            label4.Location = new Point(jarak, posisiFooter + 7);
+            jumlah_beli_barang.Location = new Point(jarak, posisiFooter + 32);
+            jumlah_beli_barang.Size = new Size(Math.Max(120, lebarDalam - 162), 48);
+
+            tambah_ke_keranjang.Location = new Point(lebar - jarak - 150, posisiFooter + 32);
+            tambah_ke_keranjang.Size = new Size(150, 48);
+
+            menuju_dashboard2.Location = new Point(jarak, tinggiKonten - 60);
+            menuju_dashboard2.Size = new Size(lebarDalam, 48);
+
+            panel1.BringToFront();
+            panel2.BringToFront();
+            panel5.BringToFront();
+            panel5.Invalidate();
         }
 
         private void Dashboard_kasir_FormClosed(object sender, FormClosedEventArgs e)

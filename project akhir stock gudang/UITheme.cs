@@ -247,7 +247,11 @@ public static class UiTheme
                      + d.Rows.GetRowsHeight(DataGridViewElementStates.Visible);
             int h = d.ClientSize.Height - used;
             if (h > 2)
-                PaintEmptyArea(e.Graphics, new Rectangle(0, used, d.ClientSize.Width, h));
+                PaintEmptyArea(
+                    e.Graphics,
+                    new Rectangle(0, used, d.ClientSize.Width, h),
+                    d.Rows.Count == 0,
+                    d.Font);
         };
         d.RowsAdded += (s, e) => d.Invalidate();
         d.RowsRemoved += (s, e) => d.Invalidate();
@@ -255,6 +259,11 @@ public static class UiTheme
     }
 
     static void PaintEmptyArea(Graphics g, Rectangle r)
+    {
+        PaintEmptyArea(g, r, false, SystemFonts.MessageBoxFont);
+    }
+
+    static void PaintEmptyArea(Graphics g, Rectangle r, bool empty, Font font)
     {
         var st = g.Save();
         g.SetClip(r);
@@ -271,7 +280,40 @@ public static class UiTheme
             g.FillEllipse(c, r.Left - 120, r.Bottom - 120, 240, 240);
         }
 
+        if (empty && r.Height > 170 && r.Width > 240)
+            DrawEmptyState(g, r, font);
+
         g.Restore(st);
+    }
+
+    static void DrawEmptyState(Graphics g, Rectangle r, Font font)
+    {
+        int cx = r.Left + r.Width / 2;
+        int cy = r.Top + r.Height / 2 - 30;
+
+        using (var top = new SolidBrush(Color.FromArgb(191, 227, 207)))
+        using (var left = new SolidBrush(Color.FromArgb(143, 205, 170)))
+        using (var right = new SolidBrush(Color.FromArgb(109, 184, 143)))
+        {
+            g.FillPolygon(top, new[] {
+                new Point(cx, cy - 45), new Point(cx + 50, cy - 22),
+                new Point(cx, cy + 1), new Point(cx - 50, cy - 22) });
+            g.FillPolygon(left, new[] {
+                new Point(cx - 50, cy - 22), new Point(cx, cy + 1),
+                new Point(cx, cy + 55), new Point(cx - 50, cy + 32) });
+            g.FillPolygon(right, new[] {
+                new Point(cx, cy + 1), new Point(cx + 50, cy - 22),
+                new Point(cx + 50, cy + 32), new Point(cx, cy + 55) });
+        }
+
+        using (var bold = new Font(font, FontStyle.Bold))
+        using (var title = new SolidBrush(Color.FromArgb(24, 86, 56)))
+        using (var sub = new SolidBrush(Color.FromArgb(92, 122, 107)))
+        using (var sf = new StringFormat { Alignment = StringAlignment.Center })
+        {
+            g.DrawString("Belum ada data", bold, title, cx, cy + 70, sf);
+            g.DrawString("Data akan tampil di sini", font, sub, cx, cy + 94, sf);
+        }
     }
 
     public static void ApplyAuthDecoration(Panel contentPanel, PictureBox illustration)
@@ -325,6 +367,124 @@ public static class UiTheme
 
         contentPanel.Invalidate();
         illustration.Invalidate();
+    }
+
+    public static void ApplyCashierPanelDecoration(Panel panel)
+    {
+        DoubleBuffer(panel);
+        panel.Paint += (s, e) =>
+        {
+            var g = e.Graphics;
+            var r = panel.ClientRectangle;
+            if (r.Width < 20 || r.Height < 20) return;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using var circle = new SolidBrush(Color.FromArgb(22, SeaGreen));
+            g.FillEllipse(circle, r.Right - 190, r.Top - 100, 300, 300);
+            g.FillEllipse(circle, r.Left - 120, r.Bottom - 125, 250, 250);
+
+            using var dot = new SolidBrush(Color.FromArgb(38, SeaGreen));
+            for (int x = 20; x < r.Width; x += 30)
+                for (int y = 16; y < r.Height; y += 30)
+                    g.FillEllipse(dot, x, y, 3, 3);
+        };
+        panel.Invalidate();
+    }
+
+    public static void DecorateCashierButton(Button button, bool primary = true)
+    {
+        button.FlatStyle = FlatStyle.Flat;
+        button.FlatAppearance.BorderSize = primary ? 0 : 1;
+        button.FlatAppearance.BorderColor = SeaGreen;
+        button.FlatAppearance.MouseOverBackColor = primary
+            ? SeaGreenDark
+            : Color.FromArgb(210, 238, 222);
+        button.FlatAppearance.MouseDownBackColor = SeaGreenDark;
+        button.Cursor = Cursors.Hand;
+        button.Font = new Font("Segoe UI Semibold", 10.5F, FontStyle.Bold);
+        button.Padding = new Padding(8, 2, 8, 2);
+        button.UseVisualStyleBackColor = false;
+
+        button.Paint += (s, e) =>
+        {
+            var g = e.Graphics;
+            var r = button.ClientRectangle;
+            if (r.Width < 20 || r.Height < 12) return;
+
+            var state = g.Save();
+            g.SetClip(new Rectangle(Math.Max(0, r.Right - 72), 0, Math.Min(72, r.Width), r.Height));
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using var patternBrush = new SolidBrush(
+                primary ? Color.FromArgb(42, Color.White) : Color.FromArgb(48, SeaGreen));
+            using var patternPen = new Pen(patternBrush.Color, 1.5F);
+            for (int x = r.Right - 64; x < r.Right + r.Height; x += 22)
+                g.DrawLine(patternPen, x, r.Bottom, x + r.Height, r.Top);
+
+            for (int y = 10; y < r.Height; y += 14)
+                g.FillEllipse(patternBrush, r.Right - 18, y, 3, 3);
+
+            g.Restore(state);
+        };
+
+        if (primary)
+        {
+            button.BackColor = SeaGreen;
+            button.ForeColor = Color.White;
+        }
+        else
+        {
+            button.BackColor = Color.FromArgb(232, 246, 237);
+            button.ForeColor = SeaGreenDark;
+        }
+    }
+
+    public static void DecorateCashierGrid(DataGridView grid)
+    {
+        DoubleBuffer(grid);
+        grid.BackgroundColor = Color.White;
+        grid.BorderStyle = BorderStyle.None;
+        grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+        grid.GridColor = Color.FromArgb(218, 237, 225);
+        grid.EnableHeadersVisualStyles = false;
+        grid.ColumnHeadersDefaultCellStyle.BackColor = SeaGreen;
+        grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+        grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+        grid.ColumnHeadersDefaultCellStyle.Padding = new Padding(10, 0, 5, 0);
+        grid.ColumnHeadersHeight = 42;
+        grid.DefaultCellStyle.BackColor = Color.White;
+        grid.DefaultCellStyle.ForeColor = Color.FromArgb(38, 50, 56);
+        grid.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+        grid.DefaultCellStyle.Padding = new Padding(8, 4, 8, 4);
+        grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(204, 232, 214);
+        grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(25, 70, 43);
+        grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(247, 252, 249);
+        grid.RowTemplate.Height = 36;
+
+        grid.Paint += (s, e) =>
+        {
+            int used = (grid.ColumnHeadersVisible ? grid.ColumnHeadersHeight : 0)
+                     + grid.Rows.GetRowsHeight(DataGridViewElementStates.Visible);
+            int height = grid.ClientSize.Height - used;
+            if (height > 2)
+                PaintEmptyArea(
+                    e.Graphics,
+                    new Rectangle(0, used, grid.ClientSize.Width, height),
+                    grid.Rows.Count == 0,
+                    grid.Font);
+        };
+        grid.RowsAdded += (s, e) => grid.Invalidate();
+        grid.RowsRemoved += (s, e) => grid.Invalidate();
+        grid.Resize += (s, e) => grid.Invalidate();
+    }
+
+    public static void DecorateCashierList(ListBox list)
+    {
+        DoubleBuffer(list);
+        list.BorderStyle = BorderStyle.FixedSingle;
+        list.BackColor = Color.White;
+        list.ForeColor = Color.FromArgb(38, 50, 56);
+        list.ItemHeight = Math.Max(list.ItemHeight, 42);
     }
 
     static void DoubleBuffer(Control c)

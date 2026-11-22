@@ -17,6 +17,7 @@ namespace project_akhir_stock_gudang
         public ucLogAktivitas()
         {
             InitializeComponent();
+            UiTheme.Apply(this);
          
 
 

@@ -30,6 +30,7 @@ namespace project_akhir_stock_gudang
         public ucAdminDataUser()
         {
             InitializeComponent();
+            UiTheme.Apply(this);
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
                 return;

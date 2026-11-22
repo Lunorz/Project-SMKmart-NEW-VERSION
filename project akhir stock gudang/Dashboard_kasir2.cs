@@ -20,11 +20,18 @@ namespace project_akhir_stock_gudang
         public Dashboard_kasir2(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
+            UiTheme.ApplyCashierPanelDecoration(panel1);
+            UiTheme.DecorateCashierButton(kembali_ke_Dashboard1, false);
+            UiTheme.DecorateCashierButton(hapus_barang_keranjang, false);
+            UiTheme.DecorateCashierButton(checkout_barang_keranjang);
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.Sizable;
             keranjang = dataKeranjang;
               
             daftarProduk = ProdukJsonStore.Load();
             usernameKasir = username ?? "";
             SiapkanKeranjang();
+            UiTheme.DecorateCashierGrid(dgvkeranjang);
             TampilkanKeranjang();
         }
 

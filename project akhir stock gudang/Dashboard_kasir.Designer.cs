@@ -62,7 +62,6 @@
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.SeaGreen;
             panel1.Controls.Add(fotoGir);
-            panel1.Controls.Add(panel2);
             panel1.Controls.Add(kembali_ke_login2);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
@@ -75,9 +74,11 @@
             // 
             fotoGir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             fotoGir.Image = (Image)resources.GetObject("fotoGir.Image");
-            fotoGir.Location = new Point(623, 8);
+            fotoGir.BackColor = Color.Transparent;
+            fotoGir.Cursor = Cursors.Hand;
+            fotoGir.Location = new Point(620, 10);
             fotoGir.Name = "fotoGir";
-            fotoGir.Size = new Size(28, 21);
+            fotoGir.Size = new Size(30, 30);
             fotoGir.SizeMode = PictureBoxSizeMode.Zoom;
             fotoGir.TabIndex = 13;
             fotoGir.TabStop = false;
@@ -85,12 +86,12 @@
             // 
             // panel2
             // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Dock = DockStyle.Top;
             panel2.BackColor = Color.Honeydew;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
             panel2.ForeColor = SystemColors.Control;
-            panel2.Location = new Point(0, 96);
+            panel2.Location = new Point(0, 102);
             panel2.Name = "panel2";
             panel2.Size = new Size(686, 133);
             panel2.TabIndex = 3;
@@ -164,8 +165,11 @@
             // 
             kembali_ke_login2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             kembali_ke_login2.AutoSize = true;
-            kembali_ke_login2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            kembali_ke_login2.Location = new Point(656, 9);
+            kembali_ke_login2.BackColor = Color.Transparent;
+            kembali_ke_login2.Cursor = Cursors.Hand;
+            kembali_ke_login2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            kembali_ke_login2.ForeColor = Color.White;
+            kembali_ke_login2.Location = new Point(657, 12);
             kembali_ke_login2.Margin = new Padding(2, 0, 2, 0);
             kembali_ke_login2.Name = "kembali_ke_login2";
             kembali_ke_login2.Size = new Size(19, 20);
@@ -198,7 +202,7 @@
             // 
             // panel5
             // 
-            panel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel5.Dock = DockStyle.Fill;
             panel5.BackColor = Color.Honeydew;
             panel5.Controls.Add(menuju_dashboard2);
             panel5.Controls.Add(tambah_ke_keranjang);
@@ -207,7 +211,7 @@
             panel5.Controls.Add(listbox_barang);
             panel5.Controls.Add(textbox_kategori_barang);
             panel5.Controls.Add(label3);
-            panel5.Location = new Point(0, 96);
+            panel5.Location = new Point(0, 235);
             panel5.Name = "panel5";
             panel5.Size = new Size(686, 863);
             panel5.TabIndex = 4;
@@ -315,8 +319,9 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(686, 961);
             Controls.Add(panel5);
+            Controls.Add(panel2);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Sizable;
             Name = "Dashboard_kasir";
             Text = "Dashboard_kasir";
             FormClosed += Dashboard_kasir_FormClosed;

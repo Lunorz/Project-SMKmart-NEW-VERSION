@@ -20,6 +20,9 @@ namespace project_akhir_stock_gudang
         public Dashboard_kasir3(List<DetailTransaksi> dataKeranjang, string username)
         {
             InitializeComponent();
+            UiTheme.ApplyCashierPanelDecoration(panel5);
+            UiTheme.ApplyCashierPanelDecoration(panel6);
+            FormBorderStyle = FormBorderStyle.Sizable;
             keranjang = dataKeranjang ?? new List<DetailTransaksi>();
             usernameKasir = username ?? "";
             txtUangDiterima.TextChanged +=
@@ -31,6 +34,9 @@ namespace project_akhir_stock_gudang
             BuatKartuMetodePembayaran();
             AturInformasiTransaksi();
             AturFontForm(this);
+            UiTheme.DecorateCashierButton(btnBatal, false);
+            UiTheme.DecorateCashierButton(btnSelesaikan);
+            UiTheme.DecorateCashierGrid(dgvCheckout);
         }
         private DateTime tanggalTransaksi;
         private string nomorTransaksi = "";

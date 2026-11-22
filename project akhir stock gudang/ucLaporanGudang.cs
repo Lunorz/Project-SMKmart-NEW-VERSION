@@ -30,6 +30,7 @@ namespace project_akhir_stock_gudang
         public ucLaporanGudang()
         {
             InitializeComponent();
+            UiTheme.Apply(this);
 
             dtpDari.Value = DateTime.Today;
             dtpSampai.Value = DateTime.Today;

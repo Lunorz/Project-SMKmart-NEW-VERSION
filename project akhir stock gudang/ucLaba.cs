@@ -22,6 +22,7 @@ namespace project_akhir_stock_gudang
         public ucLaba()
         {
             InitializeComponent();
+            UiTheme.Apply(this);
             dgvDaftar.AutoGenerateColumns = false;
             dgvLapisan.AutoGenerateColumns = false;
             dgvRiwayat.AutoGenerateColumns = false;
