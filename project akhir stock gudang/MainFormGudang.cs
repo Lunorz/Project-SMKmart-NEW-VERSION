@@ -30,6 +30,8 @@ namespace project_akhir_stock_gudang
         public MainFormGudang(string username, string email)
         {
             InitializeComponent();
+            UiTheme.DecorateGudangSidebar(pnlSideBarGudangMainform);
+            UiTheme.DecorateHeader(pnlTopBarGudangMainform);
             btnMenuDashboardGudangMainform_Click(this, EventArgs.Empty);
             usernamePetugas = username ?? "";
             emailAktif = email;

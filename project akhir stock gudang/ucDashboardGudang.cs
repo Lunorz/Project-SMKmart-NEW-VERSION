@@ -27,6 +27,7 @@ namespace project_akhir_stock_gudang
         public ucDashboardGudang()
         {
             InitializeComponent();
+            UiTheme.Apply(this);
 
 
             this.Load -= ucDashboardGudang_Load;

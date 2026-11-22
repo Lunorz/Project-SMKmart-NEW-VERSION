@@ -358,7 +358,7 @@
             btnSimpanGudang3.FlatStyle = FlatStyle.Flat;
             btnSimpanGudang3.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSimpanGudang3.ForeColor = Color.White;
-            btnSimpanGudang3.Location = new Point(118, 424);
+            btnSimpanGudang3.Location = new Point(130, 424);
             btnSimpanGudang3.Name = "btnSimpanGudang3";
             btnSimpanGudang3.Size = new Size(200, 40);
             btnSimpanGudang3.TabIndex = 8;

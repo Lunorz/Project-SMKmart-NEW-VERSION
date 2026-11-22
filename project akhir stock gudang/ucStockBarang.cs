@@ -20,6 +20,7 @@ namespace project_akhir_stock_gudang
         public ucStockBarang(string username = "")
         {
             InitializeComponent();
+            UiTheme.Apply(this);
             usernamePetugas = username;
             txtCarigudang1.TextChanged -=
                  txtCarigudang1_TextChanged;

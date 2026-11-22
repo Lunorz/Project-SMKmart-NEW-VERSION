@@ -487,6 +487,33 @@ public static class UiTheme
         list.ItemHeight = Math.Max(list.ItemHeight, 42);
     }
 
+    public static void DecorateGudangSidebar(Panel sidebar)
+    {
+        DoubleBuffer(sidebar);
+        sidebar.Resize += (s, e) => sidebar.Invalidate();
+        sidebar.Paint += (s, e) =>
+        {
+            var g = e.Graphics;
+            var r = sidebar.ClientRectangle;
+            if (r.Width < 30 || r.Height < 30) return;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using var glow = new SolidBrush(Color.FromArgb(22, Color.White));
+            g.FillEllipse(glow, r.Right - 120, -70, 190, 190);
+            g.FillEllipse(glow, r.Left - 80, r.Bottom - 130, 180, 180);
+
+            using var dots = new SolidBrush(Color.FromArgb(48, Color.White));
+            for (int row = 0; row < 5; row++)
+                for (int col = 0; col <= row; col++)
+                    g.FillEllipse(dots, 18 + col * 12, 72 + row * 12, 3, 3);
+
+            using var line = new Pen(Color.FromArgb(28, Color.White), 1.2F);
+            for (int x = -r.Height; x < r.Width; x += 38)
+                g.DrawLine(line, x, r.Height, x + r.Height, 0);
+        };
+        sidebar.Invalidate();
+    }
+
     static void DoubleBuffer(Control c)
     {
         typeof(Control)

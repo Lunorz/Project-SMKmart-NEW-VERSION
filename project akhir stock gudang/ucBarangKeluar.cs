@@ -23,6 +23,7 @@ namespace project_akhir_stock_gudang
         public ucBarangKeluar(string username)
         {
             InitializeComponent();
+            UiTheme.Apply(this);
             usernamePetugas = username;
 
             AturComboBox();

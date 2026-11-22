@@ -24,6 +24,7 @@ namespace project_akhir_stock_gudang
         public ucBarangMasuk(string username)
         {
             InitializeComponent();
+            UiTheme.Apply(this);
             usernamePetugas = username;
             InisialisasiBarangMasuk();
         }
