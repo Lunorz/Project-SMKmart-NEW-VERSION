@@ -274,6 +274,59 @@ public static class UiTheme
         g.Restore(st);
     }
 
+    public static void ApplyAuthDecoration(Panel contentPanel, PictureBox illustration)
+    {
+        DoubleBuffer(contentPanel);
+        DoubleBuffer(illustration);
+
+        contentPanel.BackColor = Color.FromArgb(247, 253, 249);
+        contentPanel.Paint += (s, e) =>
+        {
+            var g = e.Graphics;
+            var r = contentPanel.ClientRectangle;
+            if (r.Width < 10 || r.Height < 10) return;
+
+            using var brush = new LinearGradientBrush(
+                r,
+                Color.FromArgb(252, 255, 253),
+                Color.FromArgb(222, 243, 231),
+                35f);
+            g.FillRectangle(brush, r);
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            using var circle = new SolidBrush(Color.FromArgb(24, SeaGreen));
+            g.FillEllipse(circle, r.Right - 210, -110, 340, 340);
+            g.FillEllipse(circle, r.Right - 90, r.Bottom - 130, 220, 220);
+
+            using var dot = new SolidBrush(Color.FromArgb(42, SeaGreen));
+            for (int x = 330; x < r.Width; x += 24)
+                for (int y = 22; y < r.Height; y += 24)
+                    g.FillEllipse(dot, x, y, 3, 3);
+
+            using var line = new Pen(Color.FromArgb(24, SeaGreen), 1f);
+            for (int x = 330; x < r.Width + r.Height; x += 42)
+                g.DrawLine(line, x, 0, x - r.Height, r.Height);
+        };
+
+        illustration.Paint += (s, e) =>
+        {
+            var g = e.Graphics;
+            var r = illustration.ClientRectangle;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using var overlay = new SolidBrush(Color.FromArgb(28, Color.White));
+            g.FillEllipse(overlay, r.Left - 80, r.Top + 35, 180, 180);
+            g.FillEllipse(overlay, r.Right - 110, r.Bottom - 170, 190, 190);
+
+            using var patternPen = new Pen(Color.FromArgb(45, Color.White), 2f);
+            for (int x = -r.Height; x < r.Width; x += 38)
+                g.DrawLine(patternPen, x, r.Height, x + r.Height, 0);
+        };
+
+        contentPanel.Invalidate();
+        illustration.Invalidate();
+    }
+
     static void DoubleBuffer(Control c)
     {
         typeof(Control)

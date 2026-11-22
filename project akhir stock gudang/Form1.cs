@@ -6,7 +6,7 @@ namespace project_akhir_stock_gudang
         public Form1()
         {
             InitializeComponent();
-            
+            UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
         }
 
         public Form1(string email)
@@ -14,6 +14,7 @@ namespace project_akhir_stock_gudang
             InitializeComponent();
             EmailAktif = email;
             this.AcceptButton = tombol_login;
+            UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

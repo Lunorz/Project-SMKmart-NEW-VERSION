@@ -16,6 +16,7 @@ namespace project_akhir_stock_gudang
         public Form_Daftar()
         {
             InitializeComponent();
+            UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
             tombol_daftar.Click -= tombol_daftar_Click;
             tombol_daftar.Click += tombol_daftar_Click;
             cmbRole.Items.Clear();
