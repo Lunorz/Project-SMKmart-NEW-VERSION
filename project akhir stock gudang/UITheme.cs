@@ -141,7 +141,8 @@ public static class UiTheme
                     break;
 
                 case Label l:
-                    l.BackColor = gradient ? Color.Transparent : (surface ?? Color.Transparent);
+                    l.BackColor = Color.Transparent;
+                    if (gradient) l.ForeColor = Color.White;
                     break;
 
                 case Button b:
@@ -199,7 +200,9 @@ public static class UiTheme
                 g.Restore(st);
 
                 g.FillRectangle(DarkBrush, 0, h - 4, w, 4);
+                
             }
+           
             else
             {
                 g.DrawRectangle(BorderPen, 0, 0, w - 1, h - 1);

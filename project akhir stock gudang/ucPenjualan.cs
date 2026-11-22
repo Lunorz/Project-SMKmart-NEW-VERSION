@@ -25,12 +25,11 @@ namespace project_akhir_stock_gudang
         private readonly CultureInfo budaya =
             new CultureInfo("id-ID");
 
-        private UIpenjualan? _backdrop;
+       
         public ucPenjualan()
         {
             InitializeComponent();
-            _backdrop = UIpenjualan.Attach(this);
-            TransparentkanPembungkus(this);
+           
             cmbKasir2.SelectedIndexChanged +=
                cmbKasir2_SelectedIndexChanged;
 
@@ -79,7 +78,9 @@ namespace project_akhir_stock_gudang
                 tabUtama2.TabPages.Add(tabTerlaris2);
             }
 
-            tabTerlaris2.Enabled = true;
+            tabTerlaris2.Enabled = true; 
+            UiTheme.Apply(this);
+
         }
         private void MuatDataTransaksi()
         {
@@ -107,22 +108,7 @@ namespace project_akhir_stock_gudang
             }
         }
 
-        private static void TransparentkanPembungkus(Control induk)
-        {
-            foreach (Control c in induk.Controls)
-            {
-                if (c is not Panel p || p is TabPage) continue;
-
-                bool pembungkus = p.Controls.Count == 0
-                    || p.Controls.Cast<Control>().All(x => x is Panel);
-
-                if (pembungkus)
-                {
-                    p.BackColor = Color.Transparent;
-                    TransparentkanPembungkus(p);
-                }
-            }
-        }
+    
         private void IsiComboBoxKasir()
         {
             cmbKasir2.Items.Clear();
