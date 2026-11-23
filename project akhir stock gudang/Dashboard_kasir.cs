@@ -397,7 +397,7 @@ namespace project_akhir_stock_gudang
             if (halamanAkun == null || halamanAkun.IsDisposed)
             {
                 halamanAkun = new formAkunSayaKasir(
-                    akun.Email,
+                    akun.Username,
                     this);
             }
 

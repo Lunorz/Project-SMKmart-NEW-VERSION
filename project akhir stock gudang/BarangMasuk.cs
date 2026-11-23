@@ -15,8 +15,6 @@ namespace project_akhir_stock_gudang
         public decimal HargaJual { get; set; }
         public string AsalBarang { get; set; } = "";
 
-        public string NomorSuratJalan { get; set; } = "";
-
         public string Catatan { get; set; } = "";
 
         public string Petugas { get; set; } = "";

@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace project_akhir_stock_gudang
 {
@@ -48,21 +47,13 @@ namespace project_akhir_stock_gudang
         public static List<UserAccount> GetAll() => LoadInternal();
 
         public static bool RegisterPending(
-            string username, string email, string role, out string message)
+            string username, string role, out string message)
         {
             username = (username ?? "").Trim();
-            email = (email ?? "").Trim();
 
             if (username.Length < 3)
             {
                 message = "Username minimal 3 karakter.";
-                return false;
-            }
-
-       
-            if (!Regex.IsMatch(email, @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
-            {
-                message = "Gunakan email Gmail dan tulis domain sebagai @gmail.com.";
                 return false;
             }
 
@@ -72,16 +63,15 @@ namespace project_akhir_stock_gudang
                 return false;
             }
 
-            email = email.ToLowerInvariant();
             List<UserAccount> users = LoadInternal();
             UserAccount? existing = users.FirstOrDefault(u =>
-                string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
+                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
 
             if (existing != null)
             {
                 if (existing.Status != Ditolak)
                 {
-                    message = "Email ini sudah terdaftar atau sedang diproses.";
+                    message = "Username ini sudah terdaftar atau sedang diproses.";
                     return false;
                 }
 
@@ -99,7 +89,6 @@ namespace project_akhir_stock_gudang
             users.Add(new UserAccount
             {
                 Username = username,
-                Email = email,
                 Role = role,
                 Status = Menunggu,
                 TanggalDaftar = DateTime.Now
@@ -111,11 +100,11 @@ namespace project_akhir_stock_gudang
         }
 
         public static bool ApproveAccount(
-            string email, string password, out string message)
+            string username, string password, out string message)
         {
             List<UserAccount> users = LoadInternal();
             UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
+                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
 
             if (user == null || user.Status != Menunggu)
             {
@@ -148,11 +137,11 @@ namespace project_akhir_stock_gudang
             return true;
         }
 
-        public static bool RejectAccount(string email, out string message)
+        public static bool RejectAccount(string username, out string message)
         {
             List<UserAccount> users = LoadInternal();
             UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
+                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
 
             if (user == null || user.Status != Menunggu)
             {
@@ -168,14 +157,14 @@ namespace project_akhir_stock_gudang
             return true;
         }
 
-        public static bool ToggleBan(string email, out string message)
+        public static bool ToggleBan(string username, out string message)
         {
             List<UserAccount> users = LoadInternal();
 
             UserAccount? user = users.FirstOrDefault(u =>
                 string.Equals(
-                    u.Email,
-                    email,
+                    u.Username,
+                    username,
                     StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
@@ -212,25 +201,15 @@ namespace project_akhir_stock_gudang
 
         public static bool CreateActiveAccount(
             string username,
-            string email,
             string role,
             string password,
             out string message)
         {
             username = (username ?? "").Trim();
-            email = (email ?? "").Trim();
 
             if (username.Length < 3)
             {
                 message = "Username minimal 3 karakter.";
-                return false;
-            }
-
-            if (!Regex.IsMatch(
-                email,
-                @"^[A-Za-z0-9._%+-]+@gmail\.com$"))
-            {
-                message = "Gunakan email Gmail dengan domain @gmail.com.";
                 return false;
             }
 
@@ -252,19 +231,17 @@ namespace project_akhir_stock_gudang
                 return false;
             }
 
-            email = email.ToLowerInvariant();
-
             List<UserAccount> users = LoadInternal();
 
-            bool emailSudahAda = users.Any(u =>
+            bool usernameSudahAda = users.Any(u =>
                 string.Equals(
-                    u.Email,
-                    email,
+                    u.Username,
+                    username,
                     StringComparison.OrdinalIgnoreCase));
 
-            if (emailSudahAda)
+            if (usernameSudahAda)
             {
-                message = "Email sudah terdaftar.";
+                message = "Username sudah terdaftar.";
                 return false;
             }
 
@@ -280,7 +257,6 @@ namespace project_akhir_stock_gudang
             users.Add(new UserAccount
             {
                 Username = username,
-                Email = email,
                 Role = role,
                 Status = Aktif,
                 TanggalDaftar = DateTime.Now,
@@ -298,7 +274,7 @@ namespace project_akhir_stock_gudang
  
 
         public static bool UpdatePassword(
-    string email,
+    string username,
     string password,
     out string message)
         {
@@ -306,8 +282,8 @@ namespace project_akhir_stock_gudang
 
             UserAccount? user = users.FirstOrDefault(u =>
                 string.Equals(
-                    u.Email,
-                    email,
+                    u.Username,
+                    username,
                     StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
@@ -360,7 +336,7 @@ namespace project_akhir_stock_gudang
         }
 
         public static bool TryLogin(
-      string email,
+      string username,
       string password,
       out UserAccount? account,
       out string message)
@@ -371,13 +347,13 @@ namespace project_akhir_stock_gudang
 
             UserAccount? user = users.FirstOrDefault(u =>
                 string.Equals(
-                    u.Email,
-                    (email ?? "").Trim(),
+                    u.Username,
+                    (username ?? "").Trim(),
                     StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
             {
-                message = "Email atau password salah.";
+                message = "Username atau password salah.";
                 return false;
             }
 
@@ -468,7 +444,7 @@ namespace project_akhir_stock_gudang
         }
 
         public static bool GantiPasswordSendiri(
-        string email,
+        string username,
         string passwordLama,
         string passwordBaru,
         out string message)
@@ -477,8 +453,8 @@ namespace project_akhir_stock_gudang
 
             UserAccount? user = users.FirstOrDefault(u =>
                 string.Equals(
-                    u.Email,
-                    email,
+                    u.Username,
+                    username,
                     StringComparison.OrdinalIgnoreCase
                 )
             );

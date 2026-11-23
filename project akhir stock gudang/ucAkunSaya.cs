@@ -12,7 +12,6 @@ namespace project_akhir_stock_gudang
 {
     public partial class ucAkunSaya : UserControl
     {
-        private readonly string emailAktif;
         private readonly string usernameAktif;
         private readonly string roleAktif;
 
@@ -21,10 +20,9 @@ namespace project_akhir_stock_gudang
         private bool syaratAngka;
         private bool syaratSimbol;
         private bool syaratBerbeda;
-        public ucAkunSaya(string username, string email, string role)
+        public ucAkunSaya(string username, string identity, string role)
         {
             InitializeComponent();
-            emailAktif = email;
             usernameAktif = username;
             roleAktif = role;
             UiAkunSaya.Apply(this);
@@ -184,8 +182,8 @@ namespace project_akhir_stock_gudang
                 UserAccount? akun = UserStore.GetAll()
                     .FirstOrDefault(u =>
                         string.Equals(
-                            u.Email,
-                            emailAktif,
+                            u.Username,
+                            usernameAktif,
                             StringComparison.OrdinalIgnoreCase
                         )
                     );
@@ -248,7 +246,7 @@ namespace project_akhir_stock_gudang
                     else if (roleAktif == "Gudang")
                     {
                         berhasil = UserStore.GantiPasswordSendiri(
-                            emailAktif,
+                            usernameAktif,
                             txtLama.Text,
                             txtBaru.Text,
                             out pesan
@@ -294,13 +292,13 @@ namespace project_akhir_stock_gudang
                 try
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAktif,
+                        usernameAktif,
                         roleAktif == "Gudang"
                             ? "Pengelola Gudang"
                             : "Admin",
                         "Akun",
                         "Mengubah password",
-                        emailAktif,
+                        usernameAktif,
                         "Pengguna berhasil mengubah password akun sendiri."
                     );
                 }

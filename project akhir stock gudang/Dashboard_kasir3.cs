@@ -31,12 +31,49 @@ namespace project_akhir_stock_gudang
             AturTampilanPembayaran();
             TampilkanBarang();
             AturTampilanTotalPembayaran();
-            BuatKartuMetodePembayaran();
             AturInformasiTransaksi();
             AturFontForm(this);
             UiTheme.DecorateCashierButton(btnBatal, false);
             UiTheme.DecorateCashierButton(btnSelesaikan);
             UiTheme.DecorateCashierGrid(dgvCheckout);
+
+            foreach (DataGridViewColumn kolom in dgvCheckout.Columns)
+            {
+                kolom.ReadOnly = true;
+            }
+
+            panel5.Resize += (_, _) => AturLayoutCheckout();
+            panel6.Resize += (_, _) => AturLayoutCheckout();
+            AturLayoutCheckout();
+        }
+
+        private void AturLayoutCheckout()
+        {
+            int lebar = Math.Max(240, panel5.ClientSize.Width - 26);
+            int tinggiTabel = Math.Max(100, panel5.ClientSize.Height - 82);
+
+            dgvCheckout.Location = new Point(13, 43);
+            dgvCheckout.Size = new Size(lebar, tinggiTabel);
+
+            lblTotalPembayaran.AutoSize = true;
+            lblTotalPembayaran.Location = new Point(
+                Math.Max(12, panel5.ClientSize.Width - lblTotalPembayaran.PreferredWidth - 18),
+                panel5.ClientSize.Height - lblTotalPembayaran.PreferredHeight - 12);
+
+            lblUangDiterima.Location = new Point(12, 18);
+            txtUangDiterima.Location = new Point(12, 43);
+            txtUangDiterima.Size = new Size(Math.Max(180, panel6.ClientSize.Width - 24), 39);
+            lblKembalian.Size = new Size(
+                Math.Max(180, panel6.ClientSize.Width - 24),
+                32);
+            lblKembalian.Location = new Point(12, 91);
+
+            btnBatal.Location = new Point(
+                Math.Max(12, panel6.ClientSize.Width - 282),
+                Math.Max(130, panel6.ClientSize.Height - 70));
+            btnSelesaikan.Location = new Point(
+                Math.Max(150, panel6.ClientSize.Width - 144),
+                Math.Max(130, panel6.ClientSize.Height - 70));
         }
         private DateTime tanggalTransaksi;
         private string nomorTransaksi = "";
@@ -243,6 +280,16 @@ namespace project_akhir_stock_gudang
             lblTotalPembayaran.Padding = new Padding(10, 5, 15, 5);
 
             lblTotalPembayaran.BorderStyle = BorderStyle.None;
+
+            lblKembalian.AutoSize = false;
+            lblKembalian.BackColor = Color.White;
+            lblKembalian.ForeColor = Color.SeaGreen;
+            lblKembalian.Font = new Font(
+                "Leelawadee UI",
+                12F,
+                FontStyle.Bold
+            );
+            lblKembalian.TextAlign = ContentAlignment.MiddleRight;
         }
 
         private void TampilkanBarang()
@@ -265,106 +312,6 @@ namespace project_akhir_stock_gudang
 
             HitungKembalian();
         }
-
-        private string metodePembayaranTerpilih = "";
-
-        private void BuatKartuMetodePembayaran()
-        {
-            flpMetodePembayaran.Controls.Clear();
-
-            flpMetodePembayaran.BackColor = Color.White;
-            flpMetodePembayaran.FlowDirection = FlowDirection.LeftToRight;
-            flpMetodePembayaran.WrapContents = false;
-            flpMetodePembayaran.AutoScroll = false;
-            flpMetodePembayaran.Padding = new Padding(5);
-
-            TambahKartuMetode("Tunai", "Pembayaran langsung");
-            TambahKartuMetode("Transfer Bank", "Melalui rekening");
-            TambahKartuMetode("QRIS", "Pembayaran kode QR");
-
-            PilihMetodePembayaran("Tunai");
-        }
-
-        private void TambahKartuMetode(string metode, string deskripsi)
-        {
-            Panel kartu = new Panel
-            {
-                Name = "kartu" + metode.Replace(" ", ""),
-                Width = 180,
-                Height = 90,
-                Margin = new Padding(6),
-                Padding = new Padding(6),
-                BackColor = Color.White,
-                BorderStyle = BorderStyle.FixedSingle,
-                Cursor = Cursors.Hand,
-                Tag = metode
-            };
-
-            Label lblNama = new Label
-            {
-                Text = metode,
-                Font = new Font("Leelawadee UI", 11F, FontStyle.Bold),
-                ForeColor = Color.SeaGreen,
-                Dock = DockStyle.Top,
-                Height = 35,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Cursor = Cursors.Hand
-            };
-
-            Label lblDeskripsi = new Label
-            {
-                Text = deskripsi,
-                Font = new Font("Leelawadee UI", 9F),
-                ForeColor = Color.DimGray,
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Cursor = Cursors.Hand
-            };
-
-            kartu.Controls.Add(lblDeskripsi);
-            kartu.Controls.Add(lblNama);
-
-            kartu.Click += (s, e) => PilihMetodePembayaran(metode);
-            lblNama.Click += (s, e) => PilihMetodePembayaran(metode);
-            lblDeskripsi.Click += (s, e) => PilihMetodePembayaran(metode);
-
-            flpMetodePembayaran.Controls.Add(kartu);
-        }
-
-        private void PilihMetodePembayaran(string metode)
-        {
-            metodePembayaranTerpilih = metode;
-
-            foreach (Control kontrol in flpMetodePembayaran.Controls)
-            {
-                if (kontrol is Panel kartu)
-                {
-                    bool dipilih = kartu.Tag?.ToString() == metode;
-
-                    kartu.BackColor = dipilih
-                        ? Color.FromArgb(225, 245, 238)
-                        : Color.White;
-
-                    kartu.Padding = new Padding(6);
-                    kartu.BorderStyle = BorderStyle.FixedSingle;
-
-                    foreach (Control isi in kartu.Controls)
-                    {
-                        if (isi is Label label)
-                        {
-                            label.ForeColor = dipilih
-                                ? Color.FromArgb(0, 120, 90)
-                                : Color.DimGray;
-                        }
-                    }
-
-                    kartu.Invalidate();
-                }
-            }
-
-            AturPembayaran();
-        }
-
 
         private void AturInformasiTransaksi()
         {
@@ -399,53 +346,19 @@ namespace project_akhir_stock_gudang
 
         }
 
-        private void cmbMetodePembayaran_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            AturPembayaran();
-        }
         private decimal TotalBelanja()
         {
             return keranjang.Sum(item => item.Harga * item.Jumlah);
         }
 
 
-        private void AturPembayaran()
-        {
-            bool tunai = metodePembayaranTerpilih == "Tunai";
-
-            txtUangDiterima.Enabled = tunai;
-
-            lblUangDiterima.ForeColor = tunai
-                ? Color.SeaGreen
-                : Color.Gray;
-
-            if (!tunai)
-            {
-                txtUangDiterima.Clear();
-                lblKembalian.Text = "Tidak Berlaku";
-            }
-            else
-            {
-                HitungKembalian();
-            }
-
-
-        }
-
-
         private void HitungKembalian()
         {
-            if (metodePembayaranTerpilih != "Tunai")
-            {
-                lblKembalian.Text = "Tidak berlaku";
-                return;
-            }
-
             decimal total = TotalBelanja();
 
             if (!decimal.TryParse(txtUangDiterima.Text, out decimal uang))
             {
-                lblKembalian.Text = "Rp0";
+                lblKembalian.Text = "Kembalian: Rp0";
                 return;
             }
 
@@ -453,12 +366,12 @@ namespace project_akhir_stock_gudang
 
             if (kembalian < 0)
             {
-                lblKembalian.Text = "Kurang Rp" +
+                lblKembalian.Text = "Kembalian: Kurang Rp" +
                     Math.Abs(kembalian).ToString("N0");
             }
             else
             {
-                lblKembalian.Text = "Rp" + kembalian.ToString("N0");
+                lblKembalian.Text = "Kembalian: Rp" + kembalian.ToString("N0");
             }
         }
 
@@ -482,29 +395,19 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(metodePembayaranTerpilih))
+            if (!decimal.TryParse(
+                txtUangDiterima.Text.Trim(),
+                out uang) || uang < total)
             {
-                MessageBox.Show("Silakan pilih metode pembayaran.");
+                MessageBox.Show(
+                    "Uang diterima tidak valid atau kurang dari total pembayaran."
+                );
+
+                txtUangDiterima.Focus();
                 return;
             }
 
-            if (metodePembayaranTerpilih == "Tunai")
-            {
-                if (!decimal.TryParse(
-                    txtUangDiterima.Text.Trim(),
-                    out uang) || uang < total)
-                {
-                    MessageBox.Show(
-                        "Uang diterima tidak valid atau kurang dari total pembayaran."
-                    );
-
-                    txtUangDiterima.Focus();
-                    return;
-                }
-            }
-
-            decimal kembalian = metodePembayaranTerpilih == "Tunai"
-            ? uang - total: 0;
+            decimal kembalian = uang - total;
 
             DialogResult konfirmasi = MessageBox.Show(
                 "Apakah Anda yakin ingin menyelesaikan transaksi ini?\n\n" +
@@ -513,7 +416,6 @@ namespace project_akhir_stock_gudang
                 "Jumlah jenis barang: " + keranjang.Count + "\n" +
                 "Total item: " + keranjang.Sum(x => x.Jumlah) + "\n" +
                 "Total pembayaran: Rp" + total.ToString("N0") + "\n" +
-                "Metode pembayaran: " + metodePembayaranTerpilih + "\n" +
                 "Uang diterima: Rp" + uang.ToString("N0") + "\n" +
                 "Kembalian: Rp" + kembalian.ToString("N0") + "\n\n" +
                 "Setelah dikonfirmasi, transaksi akan disimpan dan stok barang diperbarui.",
@@ -655,14 +557,12 @@ namespace project_akhir_stock_gudang
                     NomorTransaksi = nomorTransaksi,
                     UsernameKasir = usernameKasir,
                     Tanggal = tanggalTransaksi,
-                    MetodePembayaran = metodePembayaranTerpilih,
+                    MetodePembayaran = "Tunai",
                     TotalPembayaran = total,
 
                     UangDiterima = uang,
 
-                    Kembalian = metodePembayaranTerpilih == "Tunai"
-                        ? uang - total
-                        : 0,
+                    Kembalian = uang - total,
 
                     Barang = detailTransaksiBaru,
 
@@ -760,8 +660,7 @@ namespace project_akhir_stock_gudang
                             " unit melalui transaksi " + nomorTransaksi +
                             ". Stok sebelumnya: " + stokSebelum +
                             ". Stok sekarang: " + stokSekarang +
-                            ". Metode pembayaran: " +
-                            metodePembayaranTerpilih
+                            ". Pembayaran tunai."
                         );
                     }
                 }

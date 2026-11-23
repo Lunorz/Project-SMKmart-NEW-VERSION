@@ -17,7 +17,6 @@ namespace project_akhir_stock_gudang
 
         private class AdminData
         {
-            public string Email { get; set; } = "admin@gmail.com";
             public string PasswordHash { get; set; } = "";
             public string PasswordSalt { get; set; } = "";
             public DateTime? TerakhirLogin { get; set; }
@@ -67,7 +66,6 @@ namespace project_akhir_stock_gudang
 
             return new AdminData
             {
-                Email = "admin@gmail.com",
                 PasswordSalt = Convert.ToBase64String(salt),
                 PasswordHash = Convert.ToBase64String(hash)
             };
@@ -114,12 +112,12 @@ namespace project_akhir_stock_gudang
         }
 
         public static bool TryLogin(
-            string email,
+            string username,
             string password)
         {
             if (!string.Equals(
-                email?.Trim(),
-                "admin@gmail.com",
+                username?.Trim(),
+                "admin",
                 StringComparison.OrdinalIgnoreCase))
             {
                 return false;

@@ -39,7 +39,6 @@
             lblKembalianStruk = new Label();
             lblUangDiterimaStruk = new Label();
             lblTotalStruk = new Label();
-            lblMetodeStruk = new Label();
             pnlInfoStruk = new Panel();
             lblTanggalStruk = new Label();
             lblJudulTanggalStruk = new Label();
@@ -140,7 +139,6 @@
             pnlRingkasan.Controls.Add(lblKembalianStruk);
             pnlRingkasan.Controls.Add(lblUangDiterimaStruk);
             pnlRingkasan.Controls.Add(lblTotalStruk);
-            pnlRingkasan.Controls.Add(lblMetodeStruk);
             pnlRingkasan.Location = new Point(20, 569);
             pnlRingkasan.Name = "pnlRingkasan";
             pnlRingkasan.Size = new Size(460, 145);
@@ -176,15 +174,6 @@
             lblTotalStruk.Size = new Size(0, 31);
             lblTotalStruk.TabIndex = 6;
             // 
-            // lblMetodeStruk
-            // 
-            lblMetodeStruk.AutoSize = true;
-            lblMetodeStruk.Font = new Font("Leelawadee UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblMetodeStruk.ForeColor = Color.FromArgb(51, 51, 51);
-            lblMetodeStruk.Location = new Point(10, 10);
-            lblMetodeStruk.Name = "lblMetodeStruk";
-            lblMetodeStruk.Size = new Size(0, 20);
-            lblMetodeStruk.TabIndex = 6;
             // 
             // pnlInfoStruk
             // 
@@ -325,7 +314,6 @@
         private Label LblNomorStruk;
         private Label lblTanggalStruk;
         private Label lblTotalStruk;
-        private Label lblMetodeStruk;
         private Label lblKembalianStruk;
         private Label lblUangDiterimaStruk;
         private Label lblUcapanStruk;

@@ -110,7 +110,7 @@ namespace project_akhir_stock_gudang
                 )
             );
 
-            lblAktivitas.Text = totalAktivitas.ToString("N0");
+            lblTotal.Text = totalAktivitas.ToString("N0");
             lblLogin.Text = totalLogin.ToString("N0");
             lblGagal.Text = totalGagal.ToString("N0");
             lblUbah.Text = totalUbah.ToString("N0");

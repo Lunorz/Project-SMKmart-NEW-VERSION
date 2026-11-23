@@ -13,17 +13,17 @@ namespace project_akhir_stock_gudang
 {
     public partial class ucAdminDataUser : UserControl
     {
-        private string selectedEmail = "";
+        private string selectedUsername = "";
 
         [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
         private static extern int SetWindowTheme(IntPtr hWnd, string appName, string idList);
-        private string emailTerpilih = "";
+        private string usernameTerpilih = "";
         private bool modeEditPengguna = false;
         private bool modePersetujuan = false;
         private List<UserAccount> semuaDataPengguna = new List<UserAccount>();
-        private string emailPenggunaTerpilih = "";
+        private string usernamePenggunaTerpilih = "";
 
-        private const string EmailAdminLog = "admin@gmail.com";
+        private const string AdminLog = "admin";
 
 
 
@@ -49,7 +49,7 @@ namespace project_akhir_stock_gudang
             try
             {
                 LogAktivitasJsonStore.Catat(
-                    EmailAdminLog,
+                    AdminLog,
                     "Admin",
                     "Akun",
                     aktivitas,
@@ -88,9 +88,8 @@ namespace project_akhir_stock_gudang
                 .Where(u => u.Status == UserStore.Menunggu)
                 .Where(u =>
                     (u.Username ?? "").Contains(
-                        kataKunci, StringComparison.OrdinalIgnoreCase) ||
-                    (u.Email ?? "").Contains(
                         kataKunci, StringComparison.OrdinalIgnoreCase))
+
                 .Where(u =>
                     role == "Semua Role" ||
                     string.IsNullOrWhiteSpace(role) ||
@@ -102,7 +101,6 @@ namespace project_akhir_stock_gudang
                 int index = dgvPermintaan.Rows.Add();
 
                 dgvPermintaan.Rows[index].Cells["colUsernameP"].Value = user.Username;
-                dgvPermintaan.Rows[index].Cells["colEmailP"].Value = user.Email;
                 dgvPermintaan.Rows[index].Cells["colRoleP"].Value = user.Role;
                 dgvPermintaan.Rows[index].Cells["colTanggalP"].Value =
                     user.TanggalDaftar.ToString("dd/MM/yyyy");
@@ -284,14 +282,12 @@ namespace project_akhir_stock_gudang
             modeEditPengguna = false;
             modePersetujuan = false;
 
-            emailPenggunaTerpilih = "";
-            emailTerpilih = "";
+            usernamePenggunaTerpilih = "";
+            usernameTerpilih = "";
 
-            txtEmail.Clear();
             txtUsername.Clear();
             txtPassword.Clear();
 
-            txtEmail.ReadOnly = false;
             txtUsername.ReadOnly = false;
 
             cmbRole.Enabled = true;
@@ -312,13 +308,11 @@ namespace project_akhir_stock_gudang
 
         private void TampilkanDataPenggunaPadaPanel(UserAccount user)
         {
-            txtEmail.Text = user.Email;
             txtUsername.Text = user.Username;
             txtPassword.Clear();
 
             cmbRole.SelectedItem = user.Role;
 
-            txtEmail.ReadOnly = true;
             txtUsername.ReadOnly = true;
 
             cmbRole.Enabled = false;
@@ -339,10 +333,6 @@ namespace project_akhir_stock_gudang
                     (u.Username ?? "").Contains(
                         kataKunci,
                         StringComparison.OrdinalIgnoreCase
-                    ) ||
-                    (u.Email ?? "").Contains(
-                        kataKunci,
-                        StringComparison.OrdinalIgnoreCase
                     )
                 )
                 .Where(u =>
@@ -361,7 +351,6 @@ namespace project_akhir_stock_gudang
                 int index = dgvSemua.Rows.Add();
 
                 dgvSemua.Rows[index].Cells["colUsernameS"].Value = user.Username;
-                dgvSemua.Rows[index].Cells["colEmailS"].Value = user.Email;
                 dgvSemua.Rows[index].Cells["colRoleS"].Value = user.Role;
                 dgvSemua.Rows[index].Cells["status"].Value = user.Status;
 
@@ -398,7 +387,6 @@ namespace project_akhir_stock_gudang
         private void btnBatal_Click(object sender, EventArgs e)
         {
             bool adaIsi =
-                !string.IsNullOrWhiteSpace(txtEmail.Text) ||
                 !string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 !string.IsNullOrWhiteSpace(txtPassword.Text) ||
                 modeEditPengguna ||
@@ -454,10 +442,10 @@ namespace project_akhir_stock_gudang
             if (e.RowIndex < 0)
                 return;
 
-            emailTerpilih = dgvPermintaan.Rows[e.RowIndex]
-                .Cells["colEmailP"].Value?.ToString() ?? "";
+            usernameTerpilih = dgvPermintaan.Rows[e.RowIndex]
+                .Cells["colUsernameP"].Value?.ToString() ?? "";
 
-            if (string.IsNullOrWhiteSpace(emailTerpilih))
+            if (string.IsNullOrWhiteSpace(usernameTerpilih))
                 return;
 
             txtPassword.Clear();
@@ -474,15 +462,15 @@ namespace project_akhir_stock_gudang
             if (namaKolom != "colSetujui" && namaKolom != "colTolak")
                 return;
 
-            string email = dgvPermintaan.Rows[e.RowIndex]
-                .Cells["colEmailP"].Value?.ToString() ?? "";
+            string username = dgvPermintaan.Rows[e.RowIndex]
+                .Cells["colUsernameP"].Value?.ToString() ?? "";
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(username))
                 return;
 
             if (namaKolom == "colSetujui")
             {
-                emailTerpilih = email;
+                usernameTerpilih = username;
                 modePersetujuan = true;
                 modeEditPengguna = false;
 
@@ -507,7 +495,7 @@ namespace project_akhir_stock_gudang
                 if (hasil == DialogResult.Yes)
                 {
                     bool berhasil = UserStore.RejectAccount(
-                        email,
+                        username,
                         out string pesan
                     );
 
@@ -515,7 +503,7 @@ namespace project_akhir_stock_gudang
 
                     if (berhasil)
                     {
-                        emailTerpilih = "";
+                        usernameTerpilih = "";
                         modePersetujuan = false;
                         txtPassword.Clear();
                         TampilkanDataUser();
@@ -536,16 +524,13 @@ namespace project_akhir_stock_gudang
             if (dgvSemua.Columns[e.ColumnIndex].Name != "btnBanned")
                 return;
 
-            string email = dgvSemua.Rows[e.RowIndex]
-                .Cells["colEmailS"].Value?.ToString() ?? "";
-
             string username = dgvSemua.Rows[e.RowIndex]
                 .Cells["colUsernameS"].Value?.ToString() ?? "";
 
             string role = dgvSemua.Rows[e.RowIndex]
                 .Cells["colRoleS"].Value?.ToString() ?? "";
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(username))
                 return;
 
             string status = dgvSemua.Rows[e.RowIndex]
@@ -568,7 +553,7 @@ namespace project_akhir_stock_gudang
                 return;
 
             bool berhasil = UserStore.ToggleBan(
-                email,
+                username,
                 out string pesan
             );
 
@@ -580,7 +565,7 @@ namespace project_akhir_stock_gudang
                 {
                     CatatLogAkun(
                         "Pemblokiran akun",
-                        email,
+                        username,
                         "Admin memblokir akun. Username: " +
                         username + ", Role: " + role
                     );
@@ -589,7 +574,7 @@ namespace project_akhir_stock_gudang
                 {
                     CatatLogAkun(
                         "Pengaktifan akun",
-                        email,
+                        username,
                         "Admin mengaktifkan kembali akun. Username: " +
                         username + ", Role: " + role
                     );
@@ -660,7 +645,7 @@ namespace project_akhir_stock_gudang
 
 
                 bool berhasil = UserStore.UpdatePassword(
-                    emailPenggunaTerpilih,
+                    usernamePenggunaTerpilih,
                     password,
                     out string pesan
                 );
@@ -672,7 +657,7 @@ namespace project_akhir_stock_gudang
 
                     CatatLogAkun(
                         "Perubahan password pengguna",
-                        emailPenggunaTerpilih,
+                        usernamePenggunaTerpilih,
                         "Admin berhasil mengubah password akun pengguna."
                     );
 
@@ -686,7 +671,7 @@ namespace project_akhir_stock_gudang
 
             if (modePersetujuan)
             {
-                if (string.IsNullOrWhiteSpace(emailTerpilih))
+                if (string.IsNullOrWhiteSpace(usernameTerpilih))
                 {
                     MessageBox.Show("Pilih pendaftaran terlebih dahulu.");
                     return;
@@ -696,8 +681,8 @@ namespace project_akhir_stock_gudang
                 UserAccount? pendaftar = UserStore.GetAll()
                     .FirstOrDefault(u =>
                         string.Equals(
-                            u.Email,
-                            emailTerpilih,
+                            u.Username,
+                            usernameTerpilih,
                             StringComparison.OrdinalIgnoreCase
                         )
                     );
@@ -717,7 +702,7 @@ namespace project_akhir_stock_gudang
 
                 DialogResult konfirmasiACC = MessageBox.Show(
                     "Apakah Anda yakin ingin menyetujui pendaftaran akun ini?\n\n" +
-                    "Email: " + emailTerpilih,
+                    "Username: " + usernameTerpilih,
                     "Konfirmasi Persetujuan Akun",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
@@ -727,7 +712,7 @@ namespace project_akhir_stock_gudang
                     return;
 
                 bool berhasil = UserStore.ApproveAccount(
-                    emailTerpilih,
+                    usernameTerpilih,
                     password,
                     out string pesan
                 );
@@ -738,7 +723,7 @@ namespace project_akhir_stock_gudang
                 {
                     CatatLogAkun(
                         "Persetujuan pembuatan akun",
-                        emailTerpilih,
+                        usernameTerpilih,
                         "Admin menyetujui pendaftaran akun. Username: " +
                         (pendaftar?.Username ?? "-") +
                         ", Role: " + (pendaftar?.Role ?? "-")
@@ -753,13 +738,11 @@ namespace project_akhir_stock_gudang
 
 
             string usernameBaru = txtUsername.Text.Trim();
-            string emailBaru = txtEmail.Text.Trim();
             string roleBaru = cmbRole.Text;
 
             DialogResult konfirmasiBuat = MessageBox.Show(
             "Apakah Anda yakin ingin membuat akun baru?\n\n" +
             "Username: " + usernameBaru + "\n" +
-            "Email: " + emailBaru + "\n" +
             "Role: " + roleBaru,
             "Konfirmasi Pembuatan Akun",
             MessageBoxButtons.YesNo,
@@ -771,7 +754,6 @@ namespace project_akhir_stock_gudang
 
             bool akunBerhasil = UserStore.CreateActiveAccount(
                 usernameBaru,
-                emailBaru,
                 roleBaru,
                 password,
                 out string pesanAkun
@@ -783,7 +765,7 @@ namespace project_akhir_stock_gudang
             {
                 CatatLogAkun(
                     "Pembuatan akun",
-                    emailBaru,
+                    usernameBaru,
                     "Admin membuat akun aktif secara langsung. Username: " +
                     usernameBaru +
                     ", Role: " + roleBaru
@@ -881,18 +863,18 @@ namespace project_akhir_stock_gudang
             if (dgvSemua.Columns[e.ColumnIndex].Name == "btnBanned")
                 return;
 
-            string email = dgvSemua.Rows[e.RowIndex]
-                .Cells["colEmailS"].Value?.ToString() ?? "";
+            string username = dgvSemua.Rows[e.RowIndex]
+                .Cells["colUsernameS"].Value?.ToString() ?? "";
 
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(username))
                 return;
 
 
             UserAccount? user = UserStore.GetAll()
                 .FirstOrDefault(u =>
                     string.Equals(
-                        u.Email,
-                        email,
+                        u.Username,
+                        username,
                         StringComparison.OrdinalIgnoreCase));
 
             if (user == null)
@@ -904,8 +886,8 @@ namespace project_akhir_stock_gudang
             modeEditPengguna = true;
             modePersetujuan = false;
 
-            emailPenggunaTerpilih = user.Email;
-            emailTerpilih = "";
+            usernamePenggunaTerpilih = user.Username;
+            usernameTerpilih = "";
 
 
             TampilkanDataPenggunaPadaPanel(user);

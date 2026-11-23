@@ -42,7 +42,6 @@
             tabPermintaan = new TabPage();
             dgvPermintaan = new DataGridView();
             colUsernameP = new DataGridViewTextBoxColumn();
-            colEmailP = new DataGridViewTextBoxColumn();
             colRoleP = new DataGridViewTextBoxColumn();
             colTanggalP = new DataGridViewTextBoxColumn();
             colSetujui = new DataGridViewButtonColumn();
@@ -53,7 +52,6 @@
             tabSemua = new TabPage();
             dgvSemua = new DataGridView();
             colUsernameS = new DataGridViewTextBoxColumn();
-            colEmailS = new DataGridViewTextBoxColumn();
             colRoleS = new DataGridViewTextBoxColumn();
             status = new DataGridViewTextBoxColumn();
             btnBanned = new DataGridViewButtonColumn();
@@ -67,8 +65,6 @@
             lblRole = new Label();
             txtUsername = new TextBox();
             lblUsername = new Label();
-            txtEmail = new TextBox();
-            label1 = new Label();
             btnSetujui = new Button();
             btnBatal = new Button();
             btnGenerate = new Button();
@@ -188,7 +184,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvPermintaan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvPermintaan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPermintaan.Columns.AddRange(new DataGridViewColumn[] { colUsernameP, colEmailP, colRoleP, colTanggalP, colSetujui, colTolak });
+            dgvPermintaan.Columns.AddRange(new DataGridViewColumn[] { colUsernameP, colRoleP, colTanggalP, colSetujui, colTolak });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = Color.White;
             dataGridViewCellStyle4.Font = new Font("Leelawadee UI", 10.5F);
@@ -221,13 +217,6 @@
             colUsernameP.Name = "colUsernameP";
             colUsernameP.ReadOnly = true;
             // 
-            // colEmailP
-            // 
-            colEmailP.FillWeight = 23F;
-            colEmailP.HeaderText = "email";
-            colEmailP.MinimumWidth = 6;
-            colEmailP.Name = "colEmailP";
-            colEmailP.ReadOnly = true;
             // 
             // colRoleP
             // 
@@ -311,7 +300,7 @@
             txtCariP.ForeColor = Color.FromArgb(18, 55, 42);
             txtCariP.Location = new Point(16, 16);
             txtCariP.Name = "txtCariP";
-            txtCariP.PlaceholderText = "Cari email atau username";
+            txtCariP.PlaceholderText = "Cari username";
             txtCariP.Size = new Size(460, 34);
             txtCariP.TabIndex = 0;
             // 
@@ -348,7 +337,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dgvSemua.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvSemua.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSemua.Columns.AddRange(new DataGridViewColumn[] { colUsernameS, colEmailS, colRoleS, status, btnBanned });
+            dgvSemua.Columns.AddRange(new DataGridViewColumn[] { colUsernameS, colRoleS, status, btnBanned });
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = Color.White;
             dataGridViewCellStyle7.Font = new Font("Leelawadee UI", 10.5F);
@@ -382,13 +371,6 @@
             colUsernameS.Name = "colUsernameS";
             colUsernameS.ReadOnly = true;
             // 
-            // colEmailS
-            // 
-            colEmailS.FillWeight = 23F;
-            colEmailS.HeaderText = "email";
-            colEmailS.MinimumWidth = 6;
-            colEmailS.Name = "colEmailS";
-            colEmailS.ReadOnly = true;
             // 
             // colRoleS
             // 
@@ -455,7 +437,7 @@
             txtCariS.ForeColor = Color.FromArgb(18, 55, 42);
             txtCariS.Location = new Point(16, 16);
             txtCariS.Name = "txtCariS";
-            txtCariS.PlaceholderText = "Cari email atau username";
+            txtCariS.PlaceholderText = "Cari username";
             txtCariS.Size = new Size(460, 34);
             txtCariS.TabIndex = 1;
             // 
@@ -475,7 +457,7 @@
             pnlSetujuiLuar.Location = new Point(712, 0);
             pnlSetujuiLuar.Name = "pnlSetujuiLuar";
             pnlSetujuiLuar.Padding = new Padding(1);
-            pnlSetujuiLuar.Size = new Size(340, 528);
+            pnlSetujuiLuar.Size = new Size(320, 528);
             pnlSetujuiLuar.TabIndex = 0;
             // 
             // pnlSetujuiDalam
@@ -485,8 +467,6 @@
             pnlSetujuiDalam.Controls.Add(lblRole);
             pnlSetujuiDalam.Controls.Add(txtUsername);
             pnlSetujuiDalam.Controls.Add(lblUsername);
-            pnlSetujuiDalam.Controls.Add(txtEmail);
-            pnlSetujuiDalam.Controls.Add(label1);
             pnlSetujuiDalam.Controls.Add(btnSetujui);
             pnlSetujuiDalam.Controls.Add(btnBatal);
             pnlSetujuiDalam.Controls.Add(btnGenerate);
@@ -496,7 +476,7 @@
             pnlSetujuiDalam.Dock = DockStyle.Fill;
             pnlSetujuiDalam.Location = new Point(1, 1);
             pnlSetujuiDalam.Name = "pnlSetujuiDalam";
-            pnlSetujuiDalam.Size = new Size(338, 526);
+            pnlSetujuiDalam.Size = new Size(318, 526);
             pnlSetujuiDalam.TabIndex = 0;
             // 
             // cmbRole
@@ -506,9 +486,9 @@
             cmbRole.ForeColor = Color.FromArgb(18, 55, 42);
             cmbRole.FormattingEnabled = true;
             cmbRole.Items.AddRange(new object[] { "kasir", "gudang" });
-            cmbRole.Location = new Point(20, 236);
+            cmbRole.Location = new Point(20, 176);
             cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(298, 31);
+            cmbRole.Size = new Size(278, 31);
             cmbRole.TabIndex = 12;
             cmbRole.SelectedIndexChanged += cmbRole_SelectedIndexChanged;
             // 
@@ -517,7 +497,7 @@
             lblRole.AutoSize = true;
             lblRole.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRole.ForeColor = Color.FromArgb(79, 106, 92);
-            lblRole.Location = new Point(20, 213);
+            lblRole.Location = new Point(20, 153);
             lblRole.Name = "lblRole";
             lblRole.Size = new Size(40, 20);
             lblRole.TabIndex = 11;
@@ -529,9 +509,9 @@
             txtUsername.BorderStyle = BorderStyle.FixedSingle;
             txtUsername.Font = new Font("Leelawadee UI", 11F);
             txtUsername.ForeColor = Color.FromArgb(18, 55, 42);
-            txtUsername.Location = new Point(20, 178);
+            txtUsername.Location = new Point(20, 118);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(298, 32);
+            txtUsername.Size = new Size(278, 32);
             txtUsername.TabIndex = 10;
             // 
             // lblUsername
@@ -539,33 +519,12 @@
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsername.ForeColor = Color.FromArgb(79, 106, 92);
-            lblUsername.Location = new Point(20, 155);
+            lblUsername.Location = new Point(20, 95);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(80, 20);
             lblUsername.TabIndex = 9;
             lblUsername.Text = "Username";
             // 
-            // txtEmail
-            // 
-            txtEmail.BackColor = Color.White;
-            txtEmail.BorderStyle = BorderStyle.FixedSingle;
-            txtEmail.Font = new Font("Leelawadee UI", 11F);
-            txtEmail.ForeColor = Color.FromArgb(18, 55, 42);
-            txtEmail.Location = new Point(20, 120);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(298, 32);
-            txtEmail.TabIndex = 8;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(79, 106, 92);
-            label1.Location = new Point(20, 97);
-            label1.Name = "label1";
-            label1.Size = new Size(47, 20);
-            label1.TabIndex = 7;
-            label1.Text = "Email";
             // 
             // btnSetujui
             // 
@@ -574,9 +533,9 @@
             btnSetujui.FlatStyle = FlatStyle.Flat;
             btnSetujui.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSetujui.ForeColor = Color.White;
-            btnSetujui.Location = new Point(118, 460);
+            btnSetujui.Location = new Point(118, 382);
             btnSetujui.Name = "btnSetujui";
-            btnSetujui.Size = new Size(200, 40);
+            btnSetujui.Size = new Size(180, 40);
             btnSetujui.TabIndex = 6;
             btnSetujui.Text = "Setujui & buat akun";
             btnSetujui.UseMnemonic = false;
@@ -588,7 +547,7 @@
             btnBatal.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnBatal.FlatStyle = FlatStyle.Flat;
             btnBatal.ForeColor = Color.FromArgb(18, 55, 42);
-            btnBatal.Location = new Point(20, 460);
+            btnBatal.Location = new Point(20, 382);
             btnBatal.Name = "btnBatal";
             btnBatal.Size = new Size(90, 40);
             btnBatal.TabIndex = 5;
@@ -602,9 +561,9 @@
             btnGenerate.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnGenerate.FlatStyle = FlatStyle.Flat;
             btnGenerate.ForeColor = Color.FromArgb(31, 107, 66);
-            btnGenerate.Location = new Point(20, 414);
+            btnGenerate.Location = new Point(20, 336);
             btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(298, 40);
+            btnGenerate.Size = new Size(278, 40);
             btnGenerate.TabIndex = 4;
             btnGenerate.Text = "Generate otomatis";
             btnGenerate.UseVisualStyleBackColor = false;
@@ -612,10 +571,10 @@
             // 
             // prgKekuatan
             // 
-            prgKekuatan.Location = new Point(20, 368);
+            prgKekuatan.Location = new Point(20, 300);
             prgKekuatan.Maximum = 4;
             prgKekuatan.Name = "prgKekuatan";
-            prgKekuatan.Size = new Size(298, 8);
+            prgKekuatan.Size = new Size(278, 8);
             prgKekuatan.Style = ProgressBarStyle.Continuous;
             prgKekuatan.TabIndex = 3;
             // 
@@ -625,9 +584,9 @@
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
             txtPassword.Font = new Font("Leelawadee UI", 11F);
             txtPassword.ForeColor = Color.FromArgb(18, 55, 42);
-            txtPassword.Location = new Point(20, 330);
+            txtPassword.Location = new Point(20, 262);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(298, 32);
+            txtPassword.Size = new Size(278, 32);
             txtPassword.TabIndex = 2;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
@@ -636,7 +595,7 @@
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.FromArgb(79, 106, 92);
-            lblPassword.Location = new Point(20, 307);
+            lblPassword.Location = new Point(20, 239);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(114, 20);
             lblPassword.TabIndex = 1;
@@ -912,19 +871,15 @@
         private DataGridView dgvSemua;
         private DataGridView dgvPermintaan;
         private DataGridViewTextBoxColumn colUsernameP;
-        private DataGridViewTextBoxColumn colEmailP;
         private DataGridViewTextBoxColumn colRoleP;
         private DataGridViewTextBoxColumn colTanggalP;
         private DataGridViewButtonColumn colSetujui;
         private DataGridViewButtonColumn colTolak;
         private DataGridViewTextBoxColumn colUsernameS;
-        private DataGridViewTextBoxColumn colEmailS;
         private DataGridViewTextBoxColumn colRoleS;
         private DataGridViewTextBoxColumn status;
         private DataGridViewButtonColumn btnBanned;
         private Label lblUsername;
-        private TextBox txtEmail;
-        private Label label1;
         private ComboBox cmbRole;
         private Label lblRole;
         private TextBox txtUsername;

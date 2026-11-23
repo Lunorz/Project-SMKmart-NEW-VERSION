@@ -15,7 +15,7 @@ namespace project_akhir_stock_gudang
     {
         private List<Produk> daftarProduk = new List<Produk>();
         private string? kodeProdukDiedit = null;
-        private string emailAdmin = "admin@gmail.com";
+        private const string usernameAdmin = "admin";
         public ucDataBarang()
         {
             InitializeComponent();
@@ -258,6 +258,21 @@ namespace project_akhir_stock_gudang
                     return;
                 }
 
+                DialogResult konfirmasiEdit = MessageBox.Show(
+                    "Apakah Anda yakin ingin menyimpan perubahan barang ini?\n\n" +
+                    "Nama barang: " + nama + "\n" +
+                    "Kategori: " + kategori + "\n" +
+                    "Harga jual: Rp" + harga.ToString("N0"),
+                    "Konfirmasi Perubahan Barang",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (konfirmasiEdit != DialogResult.Yes)
+                {
+                    return;
+                }
+
                 string namaLama = produk.Nama;
                 string kategoriLama = produk.Kategori;
                 decimal hargaLama = produk.Harga;
@@ -271,7 +286,7 @@ namespace project_akhir_stock_gudang
                     ProdukJsonStore.Save(daftarProduk);
 
                     LogAktivitasJsonStore.Catat(
-                        emailAdmin,
+                        usernameAdmin,
                         "Admin",
                         "Barang",
                         "Mengubah data barang",
@@ -355,6 +370,22 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
+            DialogResult konfirmasiTambah = MessageBox.Show(
+                "Apakah Anda yakin ingin menyimpan barang baru ini?\n\n" +
+                "Nama barang: " + nama + "\n" +
+                "Kategori: " + kategori + "\n" +
+                "Harga jual: Rp" + harga.ToString("N0") + "\n" +
+                "Stok awal: " + stokAwal + " unit",
+                "Konfirmasi Simpan Barang",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (konfirmasiTambah != DialogResult.Yes)
+            {
+                return;
+            }
+
             string kode = BuatKodeBarang(kategori);
 
             Produk produkBaru = new Produk
@@ -382,7 +413,7 @@ namespace project_akhir_stock_gudang
                         KodeBarang = produkBaru.Kode,
                         NamaBarang = produkBaru.Nama,
                         TanggalMasuk = DateTime.Now,
-                        Petugas = emailAdmin,
+                        Petugas = usernameAdmin,
                         NomorSuratJalan = "SALDO-AWAL",
                         StokAwal = stokAwal,
                         SisaStok = stokAwal,
@@ -426,7 +457,7 @@ namespace project_akhir_stock_gudang
                 try
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAdmin,
+                        usernameAdmin,
                         "Admin",
                         "Barang",
                         "Menambahkan produk",
@@ -546,7 +577,7 @@ namespace project_akhir_stock_gudang
                 if (produk.IsDeleted)
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAdmin,
+                        usernameAdmin,
                         "Admin",
                         "Barang",
                         "Menonaktifkan produk",
@@ -557,7 +588,7 @@ namespace project_akhir_stock_gudang
                 else
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAdmin,
+                        usernameAdmin,
                         "Admin",
                         "Barang",
                         "Mengaktifkan kembali produk",

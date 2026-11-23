@@ -321,6 +321,15 @@ public static class UiTheme
         DoubleBuffer(contentPanel);
         DoubleBuffer(illustration);
 
+        foreach (Control control in contentPanel.Controls)
+        {
+            if (control is Label label)
+            {
+                label.BackColor = Color.Transparent;
+                label.UseCompatibleTextRendering = true;
+            }
+        }
+
         contentPanel.BackColor = Color.FromArgb(247, 253, 249);
         contentPanel.Paint += (s, e) =>
         {

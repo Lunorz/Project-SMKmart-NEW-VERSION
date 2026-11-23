@@ -2,17 +2,15 @@ namespace project_akhir_stock_gudang
 {
     public partial class Form1 : Form
     {
-        private readonly string EmailAktif;
         public Form1()
         {
             InitializeComponent();
             UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
         }
 
-        public Form1(string email)
+        public Form1(string username)
         {
             InitializeComponent();
-            EmailAktif = email;
             this.AcceptButton = tombol_login;
             UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
         }
@@ -51,22 +49,22 @@ namespace project_akhir_stock_gudang
 
         private void tombol_login_Click(object sender, EventArgs e)
         {
-            string email = textemail.Text.Trim();
+            string username = textusername.Text.Trim();
             string password = textpassword.Text;
 
           
-            if (string.IsNullOrWhiteSpace(email) ||
+            if (string.IsNullOrWhiteSpace(username) ||
                 string.IsNullOrWhiteSpace(password))
             {
                 CatatLogLogin(
-                    email,
+                    username,
                     "Tidak diketahui",
                     "Login gagal",
-                    "Email atau password belum diisi."
+                    "Username atau password belum diisi."
                 );
 
                 MessageBox.Show(
-                    "Email dan password wajib diisi!",
+                    "Username dan password wajib diisi!",
                     "Peringatan",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -75,8 +73,8 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            if (email.Equals(
-            "admin@gmail.com",
+            if (username.Equals(
+            "admin",
             StringComparison.OrdinalIgnoreCase))
             {
                 bool loginAdmin = false;
@@ -84,7 +82,7 @@ namespace project_akhir_stock_gudang
                 try
                 {
                     loginAdmin = AdminPasswordStore.TryLogin(
-                        email,
+                        username,
                         password
                     );
                 }
@@ -103,7 +101,7 @@ namespace project_akhir_stock_gudang
                 if (loginAdmin)
                 {
                     CatatLogLogin(
-                        email,
+                        username,
                         "Admin",
                         "Login berhasil",
                         "Admin berhasil masuk ke aplikasi."
@@ -116,7 +114,7 @@ namespace project_akhir_stock_gudang
                         MessageBoxIcon.Information
                     );
 
-                    MainFormAdmin admin = new MainFormAdmin(email);
+                    MainFormAdmin admin = new MainFormAdmin(username);
                     admin.Show();
 
                     this.Hide();
@@ -124,14 +122,14 @@ namespace project_akhir_stock_gudang
                 }
 
                 CatatLogLogin(
-                    email,
+                    username,
                     "Admin",
                     "Login gagal",
                     "Password Admin salah."
                 );
 
                 MessageBox.Show(
-                    "Email atau password Admin salah.",
+                    "Username atau password Admin salah.",
                     "Login gagal",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -142,7 +140,7 @@ namespace project_akhir_stock_gudang
 
 
             bool berhasil = UserStore.TryLogin(
-                email,
+                username,
                 password,
                 out UserAccount? akun,
                 out string pesan
@@ -151,7 +149,7 @@ namespace project_akhir_stock_gudang
             if (!berhasil)
             {
                 CatatLogLogin(
-                    email,
+                    username,
                     "Tidak diketahui",
                     "Login gagal",
                     pesan
@@ -170,7 +168,7 @@ namespace project_akhir_stock_gudang
             if (akun == null)
             {
                 CatatLogLogin(
-                    email,
+                    username,
                     "Tidak diketahui",
                     "Login gagal",
                     "Data akun tidak ditemukan."
@@ -181,7 +179,7 @@ namespace project_akhir_stock_gudang
             }
 
             CatatLogLogin(
-                email,
+                username,
                 akun.Role,
                 "Login berhasil",
                 "Pengguna berhasil masuk ke aplikasi."
@@ -208,7 +206,7 @@ namespace project_akhir_stock_gudang
             else if (akun.Role == "Gudang")
             {
                 MainFormGudang dashboard =
-                    new MainFormGudang(akun.Username, akun.Email);
+                    new MainFormGudang(akun.Username);
 
                 dashboard.Show();
                 this.Hide();

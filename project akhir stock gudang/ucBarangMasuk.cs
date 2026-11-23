@@ -165,13 +165,13 @@ namespace project_akhir_stock_gudang
             foreach (BarangMasuk item in data.OrderByDescending(x => x.Waktu))
             {
                 dataGridView1.Rows.Add(
-                item.Waktu.ToString("dd/MM/yyyy HH:mm"),
-                item.NamaBarang,
-                item.Jumlah,
-                item.HargaBeli.ToString("N0"),
-                 item.AsalBarang,
-                 item.NomorSuratJalan
-                 );
+                    item.Waktu.ToString("dd/MM/yyyy HH:mm"),
+                    item.NamaBarang,
+                    item.Jumlah,
+                    item.HargaBeli.ToString("N0"),
+                    item.HargaJual.ToString("N0"),
+                    item.AsalBarang
+                );
                 
             }
         }
@@ -193,7 +193,6 @@ namespace project_akhir_stock_gudang
                 nudJumlahGudang2.Value != 0 ||
                 nudHargaBeli.Value != 0 ||
                 !string.IsNullOrWhiteSpace(txtAsalGudang2.Text) ||
-                !string.IsNullOrWhiteSpace(txtSJGudang2.Text) ||
                 !string.IsNullOrWhiteSpace(txtCatatanGudang2.Text);
 
             if (adaIsi)
@@ -210,13 +209,14 @@ namespace project_akhir_stock_gudang
                 {
                     return;
                 }
+
+            decimal hargaJual = nudHargaJual.Value;
             }
 
             cmbBarangGudang2.SelectedIndex = -1;
             nudJumlahGudang2.Value = 0;
             nudHargaBeli.Value = 0;
             txtAsalGudang2.Clear();
-            txtSJGudang2.Clear();
             txtCatatanGudang2.Clear();
 
             cmbBarangGudang2.Focus();
@@ -258,6 +258,8 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
+            decimal hargaJual = nudHargaJual.Value;
+
             string asal = txtAsalGudang2.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(asal))
@@ -267,22 +269,13 @@ namespace project_akhir_stock_gudang
                 return;
             }
 
-            string nomorSurat = txtSJGudang2.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(nomorSurat))
-            {
-                MessageBox.Show("Nomor surat jalan harus diisi.");
-                txtSJGudang2.Focus();
-                return;
-            }
             DialogResult konfirmasi = MessageBox.Show(
             "Apakah Anda yakin ingin menyimpan data barang masuk ini?\n\n" +
             "Nama barang: " + produkDipilih.Nama + "\n" +
             "Jumlah masuk: " + jumlah + " unit\n" +
             "Harga beli/unit: Rp" + hargaBeli.ToString("N0") + "\n" +
             "Total pembelian: Rp" + (hargaBeli * jumlah).ToString("N0") + "\n" +
-            "Asal barang: " + asal + "\n" +
-            "Nomor surat jalan: " + nomorSurat,
+             "Asal barang: " + asal,
             "Konfirmasi Barang Masuk",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question
@@ -328,8 +321,8 @@ namespace project_akhir_stock_gudang
                     NamaBarang = produk.Nama,
                     Jumlah = jumlah,
                     HargaBeli = hargaBeli,
-                    AsalBarang = asal,
-                    NomorSuratJalan = nomorSurat,
+                     HargaJual = hargaJual,
+                     AsalBarang = asal,
                     Catatan = txtCatatanGudang2.Text.Trim(),
                     Petugas = usernamePetugas
                 };
@@ -342,7 +335,6 @@ namespace project_akhir_stock_gudang
                     NamaBarang = produk.Nama,
                     TanggalMasuk = waktuMasuk,
                     Petugas = usernamePetugas,
-                    NomorSuratJalan = nomorSurat,
                     StokAwal = jumlah,
                     SisaStok = jumlah,
                     HargaBeli = hargaBeli
@@ -381,9 +373,8 @@ namespace project_akhir_stock_gudang
                         jumlah + " unit dari " + asal +
                         ". Harga beli per unit: Rp" +
                         hargaBeli.ToString("N0") +
-                        ". Total pembelian: Rp" +
+                         ". Total pembelian: Rp" +
                         (hargaBeli * jumlah).ToString("N0") +
-                        ". Nomor surat jalan: " + nomorSurat +
                         ". Stok sebelumnya: " + stokSebelum +
                         ". Stok sekarang: " + produk.Stok +
                         ". Catatan: " + txtCatatanGudang2.Text.Trim()
@@ -431,8 +422,9 @@ namespace project_akhir_stock_gudang
         {
             cmbBarangGudang2.SelectedIndex = -1;
             nudJumlahGudang2.Value = 0;
+            nudHargaBeli.Value = 0;
+            nudHargaJual.Value = 0;
             txtAsalGudang2.Clear();
-            txtSJGudang2.Clear();
             txtCatatanGudang2.Clear();
         }
 

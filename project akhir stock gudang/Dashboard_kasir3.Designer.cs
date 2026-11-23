@@ -45,7 +45,6 @@
             lblKembalian = new Label();
             lblUangDiterima = new Label();
             panel6 = new Panel();
-            flpMetodePembayaran = new FlowLayoutPanel();
             txtUangDiterima = new TextBox();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -57,8 +56,8 @@
             // 
             // panel1
             // 
-            panel1.Dock = DockStyle.Top;
             panel1.BackColor = Color.SeaGreen;
+            panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(686, 70);
@@ -66,9 +65,9 @@
             // 
             // panel2
             // 
-            panel2.Dock = DockStyle.Top;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
+            panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 70);
             panel2.Name = "panel2";
             panel2.Size = new Size(686, 133);
@@ -141,13 +140,13 @@
             // 
             // panel5
             // 
-            panel5.Dock = DockStyle.Fill;
             panel5.Controls.Add(lblTotalPembayaran);
             panel5.Controls.Add(dgvCheckout);
             panel5.Controls.Add(label3);
+            panel5.Dock = DockStyle.Fill;
             panel5.Location = new Point(0, 203);
             panel5.Name = "panel5";
-            panel5.Size = new Size(686, 456);
+            panel5.Size = new Size(686, 765);
             panel5.TabIndex = 5;
             // 
             // lblTotalPembayaran
@@ -156,9 +155,9 @@
             lblTotalPembayaran.AutoSize = true;
             lblTotalPembayaran.Font = new Font("Leelawadee UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTotalPembayaran.ForeColor = Color.FromArgb(40, 60, 48);
-            lblTotalPembayaran.Location = new Point(12, 420);
+            lblTotalPembayaran.Location = new Point(12, 729);
             lblTotalPembayaran.Name = "lblTotalPembayaran";
-            lblTotalPembayaran.Size = new Size(0, 20);
+            lblTotalPembayaran.Size = new Size(0, 28);
             lblTotalPembayaran.TabIndex = 14;
             // 
             // dgvCheckout
@@ -170,7 +169,7 @@
             dgvCheckout.Name = "dgvCheckout";
             dgvCheckout.ReadOnly = true;
             dgvCheckout.RowHeadersWidth = 51;
-            dgvCheckout.Size = new Size(662, 360);
+            dgvCheckout.Size = new Size(662, 669);
             dgvCheckout.TabIndex = 5;
             dgvCheckout.CellContentClick += dgvCheckout_CellContentClick;
             // 
@@ -209,7 +208,8 @@
             // lblKembalian
             // 
             lblKembalian.AutoSize = true;
-            lblKembalian.Location = new Point(12, 239);
+            lblKembalian.BackColor = Color.Transparent;
+            lblKembalian.Location = new Point(12, 91);
             lblKembalian.Name = "lblKembalian";
             lblKembalian.Size = new Size(0, 20);
             lblKembalian.TabIndex = 11;
@@ -226,29 +226,16 @@
             // 
             // panel6
             // 
-            panel6.Dock = DockStyle.Bottom;
-            panel6.Controls.Add(flpMetodePembayaran);
             panel6.Controls.Add(txtUangDiterima);
             panel6.Controls.Add(lblUangDiterima);
             panel6.Controls.Add(lblKembalian);
             panel6.Controls.Add(btnBatal);
             panel6.Controls.Add(btnSelesaikan);
-            panel6.Location = new Point(0, 659);
+            panel6.Dock = DockStyle.Bottom;
+            panel6.Location = new Point(0, 655);
             panel6.Name = "panel6";
             panel6.Size = new Size(686, 313);
             panel6.TabIndex = 6;
-            // 
-            // flpMetodePembayaran
-            // 
-            flpMetodePembayaran.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            flpMetodePembayaran.BackColor = Color.White;
-            flpMetodePembayaran.Location = new Point(48, 22);
-            flpMetodePembayaran.Name = "flpMetodePembayaran";
-            flpMetodePembayaran.Padding = new Padding(3);
-            flpMetodePembayaran.Size = new Size(590, 126);
-            flpMetodePembayaran.TabIndex = 15;
-            flpMetodePembayaran.AutoScroll = true;
-            flpMetodePembayaran.WrapContents = false;
             // 
             // txtUangDiterima
             // 
@@ -271,7 +258,6 @@
             Controls.Add(panel5);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.Sizable;
             Name = "Dashboard_kasir3";
             Text = "Dashboard_kasir3";
             WindowState = FormWindowState.Maximized;
@@ -310,6 +296,5 @@
         private Label lblTotalPembayaran;
         private Panel panel6;
         private TextBox txtUangDiterima;
-        private FlowLayoutPanel flpMetodePembayaran;
     }
 }

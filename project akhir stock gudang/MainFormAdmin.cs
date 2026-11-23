@@ -15,12 +15,12 @@ namespace project_akhir_stock_gudang
         ucPenjualan? _halPenjualan;
         ucLaporanGudang? _halLaporanGudang;
         ucDashboardAdmin? _halDashboard;
-        private readonly string emailAktif;
+        private readonly string usernameAktif;
 
-        public MainFormAdmin(string email)
+        public MainFormAdmin(string username)
         {
             InitializeComponent();
-            emailAktif = email;
+            usernameAktif = username;
             btnMenuDashboard_Click(this, EventArgs.Empty);
             UiTheme.DecorateHeader(pnlTopBar);
         }
@@ -106,7 +106,7 @@ namespace project_akhir_stock_gudang
                 try
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAktif,
+                        usernameAktif,
                         "Admin",
                         "Autentikasi",
                         "Logout",
@@ -171,8 +171,8 @@ namespace project_akhir_stock_gudang
 
         private void btnPengaturan_Click(object sender, EventArgs e)
         {
-            _halLogAkun ??= new ucAkunSaya(emailAktif,
-            "Administrator",
+            _halLogAkun ??= new ucAkunSaya("admin",
+            "admin",
             "Admin");
 
 

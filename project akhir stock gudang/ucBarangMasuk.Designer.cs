@@ -41,7 +41,6 @@
             colHargaBeli = new DataGridViewTextBoxColumn();
             colHargaJual = new DataGridViewTextBoxColumn();
             colAsalGudang2 = new DataGridViewTextBoxColumn();
-            colSJGudang2 = new DataGridViewTextBoxColumn();
             pnlToolbarGudang = new Panel();
             txtCariGudang2 = new TextBox();
             cmbPerriodeGudang2 = new ComboBox();
@@ -54,11 +53,9 @@
             lblHargaJual = new Label();
             nudHargaBeli = new NumericUpDown();
             lblHargaBeli = new Label();
-            txtSJGudang2 = new TextBox();
             txtCatatanGudang2 = new TextBox();
             txtAsalGudang2 = new TextBox();
             lblCatatanGudang2 = new Label();
-            lblSJGudang2 = new Label();
             lblAsalGudang2 = new Label();
             lblJumlahGudang2 = new Label();
             lblBarang = new Label();
@@ -153,7 +150,7 @@
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeight = 40;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colWaktuGudang2, colBarangGudang2, colJumlahGudang2, colHargaBeli, colHargaJual, colAsalGudang2, colSJGudang2 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { colWaktuGudang2, colBarangGudang2, colJumlahGudang2, colHargaBeli, colHargaJual, colAsalGudang2 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Leelawadee UI", 10.5F);
@@ -225,13 +222,6 @@
             colAsalGudang2.Name = "colAsalGudang2";
             colAsalGudang2.ReadOnly = true;
             // 
-            // colSJGudang2
-            // 
-            colSJGudang2.FillWeight = 17F;
-            colSJGudang2.HeaderText = "No. surat jalan";
-            colSJGudang2.MinimumWidth = 6;
-            colSJGudang2.Name = "colSJGudang2";
-            colSJGudang2.ReadOnly = true;
             // 
             // pnlToolbarGudang
             // 
@@ -298,11 +288,9 @@
             pnlFormDalamGudang.Controls.Add(lblHargaJual);
             pnlFormDalamGudang.Controls.Add(nudHargaBeli);
             pnlFormDalamGudang.Controls.Add(lblHargaBeli);
-            pnlFormDalamGudang.Controls.Add(txtSJGudang2);
             pnlFormDalamGudang.Controls.Add(txtCatatanGudang2);
             pnlFormDalamGudang.Controls.Add(txtAsalGudang2);
             pnlFormDalamGudang.Controls.Add(lblCatatanGudang2);
-            pnlFormDalamGudang.Controls.Add(lblSJGudang2);
             pnlFormDalamGudang.Controls.Add(lblAsalGudang2);
             pnlFormDalamGudang.Controls.Add(lblJumlahGudang2);
             pnlFormDalamGudang.Controls.Add(lblBarang);
@@ -388,16 +376,6 @@
             lblHargaBeli.TabIndex = 18;
             lblHargaBeli.Text = "Harga beli";
             // 
-            // txtSJGudang2
-            // 
-            txtSJGudang2.BackColor = Color.White;
-            txtSJGudang2.BorderStyle = BorderStyle.FixedSingle;
-            txtSJGudang2.Font = new Font("Leelawadee UI", 11F);
-            txtSJGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            txtSJGudang2.Location = new Point(20, 318);
-            txtSJGudang2.Name = "txtSJGudang2";
-            txtSJGudang2.Size = new Size(298, 32);
-            txtSJGudang2.TabIndex = 17;
             // 
             // txtCatatanGudang2
             // 
@@ -405,7 +383,7 @@
             txtCatatanGudang2.BorderStyle = BorderStyle.FixedSingle;
             txtCatatanGudang2.Font = new Font("Leelawadee UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtCatatanGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            txtCatatanGudang2.Location = new Point(20, 376);
+            txtCatatanGudang2.Location = new Point(20, 318);
             txtCatatanGudang2.Name = "txtCatatanGudang2";
             txtCatatanGudang2.PlaceholderText = "Opsional";
             txtCatatanGudang2.Size = new Size(298, 31);
@@ -417,7 +395,7 @@
             txtAsalGudang2.BorderStyle = BorderStyle.FixedSingle;
             txtAsalGudang2.Font = new Font("Leelawadee UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtAsalGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            txtAsalGudang2.Location = new Point(20, 433);
+            txtAsalGudang2.Location = new Point(20, 376);
             txtAsalGudang2.Name = "txtAsalGudang2";
             txtAsalGudang2.Size = new Size(298, 31);
             txtAsalGudang2.TabIndex = 15;
@@ -427,29 +405,19 @@
             lblCatatanGudang2.AutoSize = true;
             lblCatatanGudang2.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCatatanGudang2.ForeColor = Color.FromArgb(79, 106, 92);
-            lblCatatanGudang2.Location = new Point(21, 353);
+            lblCatatanGudang2.Location = new Point(21, 295);
             lblCatatanGudang2.Name = "lblCatatanGudang2";
             lblCatatanGudang2.Size = new Size(63, 20);
             lblCatatanGudang2.TabIndex = 14;
             lblCatatanGudang2.Text = "Catatan";
             // 
-            // lblSJGudang2
-            // 
-            lblSJGudang2.AutoSize = true;
-            lblSJGudang2.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSJGudang2.ForeColor = Color.FromArgb(79, 106, 92);
-            lblSJGudang2.Location = new Point(20, 295);
-            lblSJGudang2.Name = "lblSJGudang2";
-            lblSJGudang2.Size = new Size(111, 20);
-            lblSJGudang2.TabIndex = 13;
-            lblSJGudang2.Text = "No. surat jalan";
             // 
             // lblAsalGudang2
             // 
             lblAsalGudang2.AutoSize = true;
             lblAsalGudang2.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAsalGudang2.ForeColor = Color.FromArgb(79, 106, 92);
-            lblAsalGudang2.Location = new Point(20, 410);
+            lblAsalGudang2.Location = new Point(20, 353);
             lblAsalGudang2.Name = "lblAsalGudang2";
             lblAsalGudang2.Size = new Size(92, 20);
             lblAsalGudang2.TabIndex = 12;
@@ -485,7 +453,7 @@
             btnSimpanGudang2.FlatStyle = FlatStyle.Flat;
             btnSimpanGudang2.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSimpanGudang2.ForeColor = Color.White;
-            btnSimpanGudang2.Location = new Point(119, 471);
+            btnSimpanGudang2.Location = new Point(119, 414);
             btnSimpanGudang2.Name = "btnSimpanGudang2";
             btnSimpanGudang2.Size = new Size(200, 40);
             btnSimpanGudang2.TabIndex = 8;
@@ -498,7 +466,7 @@
             btnBersihkanGudang2.FlatAppearance.BorderColor = Color.FromArgb(213, 235, 223);
             btnBersihkanGudang2.FlatStyle = FlatStyle.Flat;
             btnBersihkanGudang2.ForeColor = Color.FromArgb(18, 55, 42);
-            btnBersihkanGudang2.Location = new Point(20, 471);
+            btnBersihkanGudang2.Location = new Point(20, 414);
             btnBersihkanGudang2.Name = "btnBersihkanGudang2";
             btnBersihkanGudang2.Size = new Size(98, 40);
             btnBersihkanGudang2.TabIndex = 7;
@@ -616,12 +584,10 @@
         private Button btnBersihkanGudang2;
         private DataGridView dataGridView1;
         private Label lblBarang;
-        private Label lblSJGudang2;
         private Label lblAsalGudang2;
         private Label lblJumlahGudang2;
         private Label lblCatatanGudang2;
         private TextBox txtAsalGudang2;
-        private TextBox txtSJGudang2;
         private TextBox txtCatatanGudang2;
         private Label lblHargaBeli;
         private Label lblHargaJual;
@@ -635,6 +601,5 @@
         private DataGridViewTextBoxColumn colHargaBeli;
         private DataGridViewTextBoxColumn colHargaJual;
         private DataGridViewTextBoxColumn colAsalGudang2;
-        private DataGridViewTextBoxColumn colSJGudang2;
     }
 }

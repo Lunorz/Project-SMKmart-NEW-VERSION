@@ -12,11 +12,11 @@ namespace project_akhir_stock_gudang
 {
     public partial class formAkunSayaKasir : Form
     {
-        public formAkunSayaKasir(string email, Dashboard_kasir dashboard)
+        public formAkunSayaKasir(string username, Dashboard_kasir dashboard)
         {
             InitializeComponent();
 
-            ucAkunSayaKasir1.AturEmail(email);
+            ucAkunSayaKasir1.AturUsername(username);
             ucAkunSayaKasir1.AturDashboard(dashboard);
         }
 

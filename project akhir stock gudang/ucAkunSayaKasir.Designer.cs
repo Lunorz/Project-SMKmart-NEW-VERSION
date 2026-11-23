@@ -175,7 +175,7 @@
             lblS3.Name = "lblS3";
             lblS3.Size = new Size(179, 23);
             lblS3.TabIndex = 4;
-            lblS3.Text = "\t○ Minimal satu angka";
+            lblS3.Text = "○ Minimal satu angka";
             // 
             // lblS5
             // 
@@ -197,7 +197,7 @@
             lblS4.Name = "lblS4";
             lblS4.Size = new Size(183, 23);
             lblS4.TabIndex = 2;
-            lblS4.Text = "\t○ Minimal satu simbol\t";
+            lblS4.Text = "○ Minimal satu simbol";
             // 
             // lblS1
             // 
@@ -385,7 +385,7 @@
             llblCatatan.Name = "llblCatatan";
             llblCatatan.Size = new Size(309, 15);
             llblCatatan.TabIndex = 9;
-            llblCatatan.Text = "Password lama diperlukan untuk menyimpan perubahan.\t";
+            llblCatatan.Text = "Password lama diperlukan untuk menyimpan perubahan.";
             // 
             // txtGamti
             // 
@@ -455,7 +455,7 @@
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(106, 20);
             lblLogin.TabIndex = 3;
-            lblLogin.Text = "Terakhir login\t";
+            lblLogin.Text = "Terakhir login";
             // 
             // lblRole
             // 
@@ -477,8 +477,8 @@
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(80, 20);
             lblUsername.TabIndex = 1;
-            lblUsername.Text = "Username\t";
-            lblUsername.TextAlign = ContentAlignment.MiddleCenter;
+            lblUsername.Text = "Username";
+            lblUsername.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlHeaderInfo
             // 

@@ -18,23 +18,19 @@ namespace project_akhir_stock_gudang
         ucStockBarang? _stok;
         ucAkunSaya? _AkunSaya;
 
-        private readonly string emailAktif;
-
         private string username;
         private string usernamePetugas;
-        private readonly string usernameAktif;
 
 
         readonly Font _fReg = new("Leelawadee UI", 10.5f, FontStyle.Regular);
         readonly Font _fBold = new("Leelawadee UI", 10.5f, FontStyle.Bold);
-        public MainFormGudang(string username, string email)
+        public MainFormGudang(string username)
         {
             InitializeComponent();
             UiTheme.DecorateGudangSidebar(pnlSideBarGudangMainform);
             UiTheme.DecorateHeader(pnlTopBarGudangMainform);
             btnMenuDashboardGudangMainform_Click(this, EventArgs.Empty);
             usernamePetugas = username ?? "";
-            emailAktif = email;
         }
 
 
@@ -104,7 +100,7 @@ namespace project_akhir_stock_gudang
                 try
                 {
                     LogAktivitasJsonStore.Catat(
-                        emailAktif,
+                        usernamePetugas,
                         "User",
                         "Autentikasi",
                         "Logout",
@@ -135,8 +131,8 @@ namespace project_akhir_stock_gudang
 
         private void btnPengaturan_Click(object sender, EventArgs e)
         {
-            _AkunSaya ??= new ucAkunSaya(emailAktif,
-            usernameAktif,
+            _AkunSaya ??= new ucAkunSaya(usernamePetugas,
+            usernamePetugas,
             "Gudang");
             Buka(_AkunSaya, "Akun Saya", btnPengaturan);
         }

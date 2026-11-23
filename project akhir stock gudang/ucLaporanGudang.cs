@@ -152,7 +152,6 @@ namespace project_akhir_stock_gudang
                     Jumlah = item.Jumlah,
                     Keterangan = GabungkanKeterangan(
                         item.AsalBarang,
-                        item.NomorSuratJalan,
                         item.Catatan
                     ),
                     Petugas = item.Petugas

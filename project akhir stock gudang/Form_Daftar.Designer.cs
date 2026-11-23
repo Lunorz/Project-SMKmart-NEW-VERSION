@@ -36,9 +36,7 @@
             kembali_ke_login = new Label();
             tombol_daftar = new Button();
             reg_username = new TextBox();
-            reg_email = new TextBox();
             label3 = new Label();
-            label2 = new Label();
             label1 = new Label();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
@@ -55,9 +53,7 @@
             panel1.Controls.Add(kembali_ke_login);
             panel1.Controls.Add(tombol_daftar);
             panel1.Controls.Add(reg_username);
-            panel1.Controls.Add(reg_email);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(panel2);
             panel1.Location = new Point(0, 0);
@@ -71,7 +67,8 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(365, 351);
+            label5.BackColor = Color.Transparent;
+            label5.Location = new Point(365, 218);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(39, 20);
@@ -86,7 +83,7 @@
             cmbRole.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbRole.FormattingEnabled = true;
             cmbRole.Items.AddRange(new object[] { "kasir", "gudang" });
-            cmbRole.Location = new Point(365, 382);
+            cmbRole.Location = new Point(365, 243);
             cmbRole.Name = "cmbRole";
             cmbRole.Size = new Size(326, 33);
             cmbRole.TabIndex = 11;
@@ -96,6 +93,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.DarkCyan;
             label4.Location = new Point(365, 105);
             label4.Margin = new Padding(2, 0, 2, 0);
@@ -125,7 +123,7 @@
             tombol_daftar.FlatStyle = FlatStyle.Flat;
             tombol_daftar.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tombol_daftar.ForeColor = Color.White;
-            tombol_daftar.Location = new Point(365, 461);
+            tombol_daftar.Location = new Point(365, 302);
             tombol_daftar.Margin = new Padding(2);
             tombol_daftar.Name = "tombol_daftar";
             tombol_daftar.Size = new Size(326, 50);
@@ -139,7 +137,7 @@
             reg_username.BackColor = Color.FromArgb(250, 253, 251);
             reg_username.BorderStyle = BorderStyle.FixedSingle;
             reg_username.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reg_username.Location = new Point(365, 283);
+            reg_username.Location = new Point(365, 173);
             reg_username.Margin = new Padding(2);
             reg_username.Name = "reg_username";
             reg_username.PlaceholderText = "masukkan username";
@@ -148,46 +146,25 @@
             reg_username.UseSystemPasswordChar = false;
             reg_username.TextChanged += reg_username_TextChanged;
             // 
-            // reg_email
-            // 
-            reg_email.BackColor = Color.FromArgb(250, 253, 251);
-            reg_email.BorderStyle = BorderStyle.FixedSingle;
-            reg_email.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            reg_email.Location = new Point(365, 190);
-            reg_email.Margin = new Padding(2);
-            reg_email.Name = "reg_email";
-            reg_email.PlaceholderText = "masukkan email";
-            reg_email.Size = new Size(326, 32);
-            reg_email.TabIndex = 4;
-            reg_email.TextChanged += reg_nama_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(365, 254);
+            label3.BackColor = Color.Transparent;
+            label3.Location = new Point(365, 150);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(79, 20);
             label3.TabIndex = 3;
             label3.Text = "username";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(365, 161);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(49, 20);
-            label2.TabIndex = 2;
-            label2.Text = "email";
-            label2.Click += label2_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.BackColor = Color.Transparent;
             label1.Location = new Point(365, 65);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
@@ -243,9 +220,7 @@
         private Panel panel1;
         private Button tombol_daftar;
         private TextBox reg_username;
-        private TextBox reg_email;
         private Label label3;
-        private Label label2;
         private Label label1;
         private Panel panel2;
         private PictureBox pictureBox1;

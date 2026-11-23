@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormGudang));
             pnlSideBarGudangMainform = new GradientPanel();
+            btnPengaturan = new Button();
             btmMenuKeluar = new Button();
             btnMenuKeluarGudangMainform = new Button();
             btnMenuStokGudangMainform = new Button();
@@ -41,7 +43,6 @@
             pnlTopLineGudangMainform = new Panel();
             pnlContentGudangMainform = new Panel();
             ucDashboardGudang1 = new ucDashboardGudang();
-            btnPengaturan = new Button();
             pnlSideBarGudangMainform.SuspendLayout();
             pnlTopBarGudangMainform.SuspendLayout();
             pnlContentGudangMainform.SuspendLayout();
@@ -66,6 +67,20 @@
             pnlSideBarGudangMainform.Size = new Size(260, 943);
             pnlSideBarGudangMainform.TabIndex = 0;
             pnlSideBarGudangMainform.Paint += pnlSideBarGudangMainform_Paint;
+            // 
+            // btnPengaturan
+            // 
+            btnPengaturan.BackColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
+            btnPengaturan.FlatStyle = FlatStyle.Flat;
+            btnPengaturan.ForeColor = Color.FromArgb(230, 247, 238);
+            btnPengaturan.Location = new Point(15, 290);
+            btnPengaturan.Name = "btnPengaturan";
+            btnPengaturan.Size = new Size(228, 44);
+            btnPengaturan.TabIndex = 7;
+            btnPengaturan.Text = "Pengaturan";
+            btnPengaturan.UseVisualStyleBackColor = false;
+            btnPengaturan.Click += btnPengaturan_Click;
             // 
             // btmMenuKeluar
             // 
@@ -201,25 +216,13 @@
             // 
             ucDashboardGudang1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             ucDashboardGudang1.BackColor = Color.FromArgb(245, 251, 248);
+            ucDashboardGudang1.BackgroundImage = (Image)resources.GetObject("ucDashboardGudang1.BackgroundImage");
+            ucDashboardGudang1.BackgroundImageLayout = ImageLayout.None;
             ucDashboardGudang1.Font = new Font("Leelawadee UI", 10.5F);
             ucDashboardGudang1.Location = new Point(0, -64);
             ucDashboardGudang1.Name = "ucDashboardGudang1";
             ucDashboardGudang1.Size = new Size(1270, 879);
             ucDashboardGudang1.TabIndex = 0;
-            // 
-            // btnPengaturan
-            // 
-            btnPengaturan.BackColor = Color.FromArgb(38, 119, 74);
-            btnPengaturan.FlatAppearance.BorderColor = Color.FromArgb(38, 119, 74);
-            btnPengaturan.FlatStyle = FlatStyle.Flat;
-            btnPengaturan.ForeColor = Color.FromArgb(230, 247, 238);
-            btnPengaturan.Location = new Point(15, 290);
-            btnPengaturan.Name = "btnPengaturan";
-            btnPengaturan.Size = new Size(228, 44);
-            btnPengaturan.TabIndex = 7;
-            btnPengaturan.Text = "Pengaturan";
-            btnPengaturan.UseVisualStyleBackColor = false;
-            btnPengaturan.Click += btnPengaturan_Click;
             // 
             // MainFormGudang
             // 

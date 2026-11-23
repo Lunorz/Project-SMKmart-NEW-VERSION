@@ -12,7 +12,7 @@ namespace project_akhir_stock_gudang
 {
     public partial class Form_Daftar : Form
     {
-        private readonly string emailAktif;
+        private readonly string usernameAktif;
         public Form_Daftar()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace project_akhir_stock_gudang
 
         private void kembali_ke_login_Click(object sender, EventArgs e)
         {
-            Form1 kembali = new Form1(emailAktif);
+            Form1 kembali = new Form1(usernameAktif);
             kembali.Show();
             this.Hide();
         }
@@ -50,14 +50,12 @@ namespace project_akhir_stock_gudang
         private void tombol_daftar_Click(object sender, EventArgs e)
         {
             string username = reg_username.Text.Trim();
-            string email = reg_email.Text.Trim();
             string role = cmbRole.SelectedItem?.ToString() ?? "";
 
             if (string.IsNullOrWhiteSpace(username) ||
-                string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(role))
             {
-                MessageBox.Show("Lengkapi username, email, dan role terlebih dahulu.",
+                MessageBox.Show("Lengkapi username dan role terlebih dahulu.",
                     "Pendaftaran", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -65,7 +63,6 @@ namespace project_akhir_stock_gudang
 
             bool berhasil = UserStore.RegisterPending(
                 username,
-                email,
                 role,
                 out string pesan
             );
@@ -85,11 +82,11 @@ namespace project_akhir_stock_gudang
             try
             {
                 LogAktivitasJsonStore.Catat(
-                    email,
+                    username,
                     role,
                     "Akun",
                     "Pendaftaran akun",
-                    email,
+                    username,
                     "Pengguna mendaftarkan akun dengan username: " +
                     username
                 );
@@ -109,7 +106,6 @@ namespace project_akhir_stock_gudang
             MessageBox.Show(pesan, "Pendaftaran berhasil",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             reg_username.Clear();
-            reg_email.Clear();
             cmbRole.SelectedIndex = -1;
         }
 

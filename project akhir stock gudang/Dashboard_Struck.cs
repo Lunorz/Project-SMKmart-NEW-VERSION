@@ -37,6 +37,9 @@ namespace project_akhir_stock_gudang
 
             btnPrint.Click -= btnPrint_Click;
             btnPrint.Click += btnPrint_Click;
+
+            Resize += (_, _) => AturLayoutStruk();
+            AturLayoutStruk();
         }
         private void AturTampilanDgvStruk()
         {
@@ -216,9 +219,6 @@ namespace project_akhir_stock_gudang
             lblTanggalStruk.Text =
                 transaksi.Tanggal.ToString("dd/MM/yyyy HH:mm:ss");
 
-            lblMetodeStruk.Text =
-                "Metode: " + transaksi.MetodePembayaran;
-
             lblTotalStruk.Text =
                 "TOTAL: " + transaksi.TotalPembayaran
                     .ToString("C0",
@@ -252,6 +252,29 @@ namespace project_akhir_stock_gudang
 
             pnlstruk.Visible = true;
             pnlstruk.BringToFront();
+        }
+
+        private void AturLayoutStruk()
+        {
+            int margin = 20;
+            int lebar = Math.Max(460, ClientSize.Width - margin * 2);
+            int tinggi = Math.Max(700, ClientSize.Height - margin * 2);
+
+            pnlstruk.Location = new Point(margin, margin);
+            pnlstruk.Size = new Size(lebar, tinggi);
+
+            int lebarDalam = Math.Max(420, lebar - margin * 2);
+            pnlHeaderStruck.Size = new Size(lebarDalam, 85);
+            pnlInfoStruk.Size = new Size(lebarDalam, 95);
+            pnlInfoStruk.Location = new Point(margin, 106);
+            dgvStruk.Location = new Point(margin, 207);
+            dgvStruk.Size = new Size(lebarDalam, Math.Max(190, tinggi - 560));
+            pnlRingkasan.Location = new Point(margin, dgvStruk.Bottom + 18);
+            pnlRingkasan.Size = new Size(lebarDalam, 145);
+            pnlFooterStruk.Location = new Point(margin, pnlRingkasan.Bottom + 12);
+            pnlFooterStruk.Size = new Size(lebarDalam, 61);
+            btnPrint.Location = new Point(lebarDalam - 286, pnlFooterStruk.Bottom + 6);
+            btnTransaksiBaru.Location = new Point(lebarDalam - 140, pnlFooterStruk.Bottom + 6);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

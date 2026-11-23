@@ -8,20 +8,19 @@ namespace project_akhir_stock_gudang
 {
     public partial class ucAkunSayaKasir : UserControl
     {
-        private string emailKasir = "";
-        private readonly string usernameKasir;
+        private string usernameKasir = "";
         private Dashboard_kasir? dashboardAsal;
 
         public ucAkunSayaKasir() : this("")
         {
         }
 
-        public ucAkunSayaKasir(string email)
+        public ucAkunSayaKasir(string username)
         {
             InitializeComponent();
             UiAkunSaya.Apply(this);
 
-            emailKasir = email ?? "";
+            usernameKasir = username ?? "";
 
             txtLama.UseSystemPasswordChar = true;
             txtBaru.UseSystemPasswordChar = true;
@@ -50,15 +49,15 @@ namespace project_akhir_stock_gudang
 
             PeriksaKekuatanPassword();
 
-            if (!string.IsNullOrWhiteSpace(emailKasir))
+            if (!string.IsNullOrWhiteSpace(usernameKasir))
             {
                 MuatInformasiAkun();
             }
         }
 
-        public void AturEmail(string email)
+        public void AturUsername(string username)
         {
-            emailKasir = email ?? "";
+            usernameKasir = username ?? "";
             MuatInformasiAkun();
         }
         private void MuatInformasiAkun()
@@ -66,8 +65,8 @@ namespace project_akhir_stock_gudang
             UserAccount? akun = UserStore.GetAll()
                 .FirstOrDefault(x =>
                     string.Equals(
-                        x.Email,
-                        emailKasir,
+                        x.Username,
+                        usernameKasir,
                         StringComparison.OrdinalIgnoreCase));
 
             if (akun == null)
@@ -205,7 +204,7 @@ namespace project_akhir_stock_gudang
                 return;
 
             bool berhasil = UserStore.GantiPasswordSendiri(
-                emailKasir,
+                usernameKasir,
                 passwordLama,
                 passwordBaru,
                 out string pesan);

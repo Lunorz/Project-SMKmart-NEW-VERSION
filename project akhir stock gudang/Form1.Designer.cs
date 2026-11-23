@@ -38,7 +38,7 @@
             tombol_batal = new Button();
             tombol_login = new Button();
             textpassword = new TextBox();
-            textemail = new TextBox();
+            textusername = new TextBox();
             label3 = new Label();
             label2 = new Label();
             panel2 = new Panel();
@@ -58,7 +58,7 @@
             panel1.Controls.Add(tombol_batal);
             panel1.Controls.Add(tombol_login);
             panel1.Controls.Add(textpassword);
-            panel1.Controls.Add(textemail);
+            panel1.Controls.Add(textusername);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(panel2);
@@ -73,6 +73,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkCyan;
+            label4.BackColor = Color.Transparent;
             label4.Location = new Point(365, 108);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
@@ -85,6 +86,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.BackColor = Color.Transparent;
             label1.Location = new Point(365, 68);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
@@ -97,8 +99,9 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Teal;
+            label8.BackColor = Color.Transparent;
             label8.Cursor = Cursors.Hand;
-            label8.Location = new Point(612, 448);
+            label8.Location = new Point(612, 414);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(52, 20);
@@ -110,7 +113,8 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(435, 448);
+            label6.Location = new Point(435, 414);
+            label6.BackColor = Color.Transparent;
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(154, 20);
@@ -120,14 +124,16 @@
             // lihat_password
             // 
             lihat_password.AutoSize = true;
+            lihat_password.BackColor = Color.Transparent;
             lihat_password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lihat_password.Location = new Point(536, 306);
+            lihat_password.FlatStyle = FlatStyle.Flat;
+            lihat_password.Location = new Point(536, 276);
             lihat_password.Margin = new Padding(2);
             lihat_password.Name = "lihat_password";
             lihat_password.Size = new Size(127, 24);
             lihat_password.TabIndex = 8;
             lihat_password.Text = "lihat password";
-            lihat_password.UseVisualStyleBackColor = true;
+            lihat_password.UseVisualStyleBackColor = false;
             lihat_password.CheckedChanged += lihat_password_CheckedChanged;
             // 
             // tombol_batal
@@ -138,7 +144,7 @@
             tombol_batal.FlatStyle = FlatStyle.Flat;
             tombol_batal.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tombol_batal.ForeColor = Color.Teal;
-            tombol_batal.Location = new Point(365, 376);
+            tombol_batal.Location = new Point(365, 342);
             tombol_batal.Margin = new Padding(2);
             tombol_batal.Name = "tombol_batal";
             tombol_batal.Size = new Size(155, 48);
@@ -154,7 +160,7 @@
             tombol_login.FlatStyle = FlatStyle.Flat;
             tombol_login.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tombol_login.ForeColor = Color.White;
-            tombol_login.Location = new Point(536, 376);
+            tombol_login.Location = new Point(536, 342);
             tombol_login.Margin = new Padding(2);
             tombol_login.Name = "tombol_login";
             tombol_login.Size = new Size(155, 48);
@@ -168,7 +174,7 @@
             textpassword.BackColor = Color.FromArgb(250, 253, 251);
             textpassword.BorderStyle = BorderStyle.FixedSingle;
             textpassword.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textpassword.Location = new Point(365, 267);
+            textpassword.Location = new Point(365, 230);
             textpassword.Margin = new Padding(2);
             textpassword.Name = "textpassword";
             textpassword.PlaceholderText = "masukkan password";
@@ -177,24 +183,25 @@
             textpassword.UseSystemPasswordChar = true;
             textpassword.TextChanged += textBox2_TextChanged;
             // 
-            // textemail
+            // textusername
             // 
-            textemail.BackColor = Color.FromArgb(250, 253, 251);
-            textemail.BorderStyle = BorderStyle.FixedSingle;
-            textemail.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textemail.Location = new Point(365, 190);
-            textemail.Margin = new Padding(2);
-            textemail.Name = "textemail";
-            textemail.PlaceholderText = "masukkan email";
-            textemail.Size = new Size(326, 32);
-            textemail.TabIndex = 4;
-            textemail.TextChanged += textnama_TextChanged;
+            textusername.BackColor = Color.FromArgb(250, 253, 251);
+            textusername.BorderStyle = BorderStyle.FixedSingle;
+            textusername.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textusername.Location = new Point(365, 173);
+            textusername.Margin = new Padding(2);
+            textusername.Name = "textusername";
+            textusername.PlaceholderText = "masukkan username";
+            textusername.Size = new Size(326, 32);
+            textusername.TabIndex = 4;
+            textusername.TextChanged += textnama_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(365, 238);
+            label3.BackColor = Color.Transparent;
+            label3.Location = new Point(365, 207);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(81, 20);
@@ -206,12 +213,13 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(365, 161);
+            label2.BackColor = Color.Transparent;
+            label2.Location = new Point(365, 144);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(49, 20);
+            label2.Size = new Size(79, 20);
             label2.TabIndex = 2;
-            label2.Text = "email";
+            label2.Text = "username";
             label2.Click += label2_Click;
             // 
             // panel2
@@ -261,7 +269,7 @@
         private Panel panel2;
         private Label label2;
         private TextBox textpassword;
-        private TextBox textemail;
+        private TextBox textusername;
         private Label label3;
         private Button tombol_batal;
         private Button tombol_login;

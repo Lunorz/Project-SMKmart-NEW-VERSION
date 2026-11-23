@@ -54,6 +54,8 @@ namespace project_akhir_stock_gudang
             dgvkeranjang.Columns.Add("Subtotal", "Subtotal");
 
             dgvkeranjang.Columns["Kode"]!.Visible = true;
+            dgvkeranjang.Columns["Kode"]!.ReadOnly = true;
+            dgvkeranjang.Columns["Nama"]!.ReadOnly = false;
             dgvkeranjang.Columns["Harga"]!.ReadOnly = true;
             dgvkeranjang.Columns["Subtotal"]!.ReadOnly = true;
 
