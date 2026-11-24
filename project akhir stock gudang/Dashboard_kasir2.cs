@@ -237,7 +237,11 @@ namespace project_akhir_stock_gudang
 
         private void kembali_ke_Dashboard1_Click(object sender, EventArgs e)
         {
-            Dashboard_kasir kembali_ke_kategori = new Dashboard_kasir(new List<DetailTransaksi>(), usernameKasir);
+            Dashboard_kasir kembali_ke_kategori = new Dashboard_kasir(
+          keranjang,
+          usernameKasir
+         );
+
             kembali_ke_kategori.Show();
             this.Hide();
         }

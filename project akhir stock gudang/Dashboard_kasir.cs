@@ -34,6 +34,7 @@ namespace project_akhir_stock_gudang
             AturLayoutResponsif();
             MuatProduk();
             daftarProduk = ProdukJsonStore.Load();
+            keranjang = dataKeranjang ?? new List<DetailTransaksi>();
             usernameKasir = username ?? "";
 
             SiapkanDaftarBarang();

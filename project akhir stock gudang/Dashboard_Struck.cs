@@ -20,6 +20,14 @@ namespace project_akhir_stock_gudang
         {
             InitializeComponent();
 
+            btnTransaksiBaru.Visible = true;
+
+            btnPrint.BringToFront();
+            btnTransaksiBaru.BringToFront();
+
+            btnPrint.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnTransaksiBaru.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
             AturTampilanDgvStruk();
 
             string nomor = BuatNomorTransaksi();
@@ -31,6 +39,13 @@ namespace project_akhir_stock_gudang
             printDocument1.PrintPage += DokumenCetak_PrintPage;
 
             printPreviewDialog1.Document = printDocument1;
+            printDocument1.DefaultPageSettings.PaperSize =
+    new PaperSize("Struk 80mm", 315, 500);
+
+            printDocument1.DefaultPageSettings.Margins =
+                new Margins(5, 5, 5, 5);
+
+            printDocument1.DefaultPageSettings.Landscape = false;
 
             printPreviewDialog1.Width = 900;
             printPreviewDialog1.Height = 700;
@@ -251,31 +266,82 @@ namespace project_akhir_stock_gudang
             }
 
             pnlstruk.Visible = true;
-            pnlstruk.BringToFront();
+            pnlstruk.SendToBack();
+
+            btnPrint.Visible = true;
+            btnTransaksiBaru.Visible = true;
+
+            btnPrint.BringToFront();
+            btnTransaksiBaru.BringToFront();
+
+            AturLayoutStruk();
         }
+
 
         private void AturLayoutStruk()
         {
             int margin = 20;
-            int lebar = Math.Max(460, ClientSize.Width - margin * 2);
-            int tinggi = Math.Max(700, ClientSize.Height - margin * 2);
+            int jarakTombolPanel = 12;
+
+            int lebarPanel = Math.Max(460, ClientSize.Width - (margin * 2));
+
+            int tinggiTombol = 67;
+            int posisiTombolY = ClientSize.Height - margin - tinggiTombol;
+
+            int tinggiPanel = posisiTombolY - jarakTombolPanel - margin;
 
             pnlstruk.Location = new Point(margin, margin);
-            pnlstruk.Size = new Size(lebar, tinggi);
+            pnlstruk.Size = new Size(lebarPanel, tinggiPanel);
 
-            int lebarDalam = Math.Max(420, lebar - margin * 2);
+            int lebarDalam = Math.Max(420, lebarPanel - (margin * 2));
+
+            pnlHeaderStruck.Location = new Point(margin, 15);
             pnlHeaderStruck.Size = new Size(lebarDalam, 85);
-            pnlInfoStruk.Size = new Size(lebarDalam, 95);
+
             pnlInfoStruk.Location = new Point(margin, 106);
+            pnlInfoStruk.Size = new Size(lebarDalam, 95);
+
             dgvStruk.Location = new Point(margin, 207);
-            dgvStruk.Size = new Size(lebarDalam, Math.Max(190, tinggi - 560));
-            pnlRingkasan.Location = new Point(margin, dgvStruk.Bottom + 18);
+            dgvStruk.Size = new Size(
+                lebarDalam,
+                Math.Max(190, tinggiPanel - 560));
+
+            pnlRingkasan.Location = new Point(
+                margin,
+                dgvStruk.Bottom + 18);
+
             pnlRingkasan.Size = new Size(lebarDalam, 145);
-            pnlFooterStruk.Location = new Point(margin, pnlRingkasan.Bottom + 12);
+
+            pnlFooterStruk.Location = new Point(
+                margin,
+                pnlRingkasan.Bottom + 12);
+
             pnlFooterStruk.Size = new Size(lebarDalam, 61);
-            btnPrint.Location = new Point(lebarDalam - 286, pnlFooterStruk.Bottom + 6);
-            btnTransaksiBaru.Location = new Point(lebarDalam - 140, pnlFooterStruk.Bottom + 6);
+
+            int lebarTombol = 140;
+            int jarakAntarTombol = 6;
+
+            int totalLebarTombol = (lebarTombol * 2) + jarakAntarTombol;
+            int posisiAwalX = (ClientSize.Width - totalLebarTombol) / 2;
+
+            btnPrint.Size = new Size(lebarTombol, tinggiTombol);
+            btnTransaksiBaru.Size = new Size(lebarTombol, tinggiTombol);
+
+            btnPrint.Location = new Point(posisiAwalX, posisiTombolY);
+
+            btnTransaksiBaru.Location = new Point(
+                posisiAwalX + lebarTombol + jarakAntarTombol,
+                posisiTombolY);
+
+            pnlstruk.SendToBack();
+
+            btnPrint.Visible = true;
+            btnTransaksiBaru.Visible = true;
+
+            btnPrint.BringToFront();
+            btnTransaksiBaru.BringToFront();
         }
+
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -349,31 +415,18 @@ namespace project_akhir_stock_gudang
 
             Rectangle areaCetak = e.MarginBounds;
 
-            float skalaLebar =
+            float skala =
                 (float)areaCetak.Width / gambarStrukUntukCetak.Width;
 
-            float skalaTinggi =
-                (float)areaCetak.Height / gambarStrukUntukCetak.Height;
-
-            float skala = Math.Min(skalaLebar, skalaTinggi);
-
-            int lebar = (int)(
-                gambarStrukUntukCetak.Width * skala
-            );
+            int lebar = areaCetak.Width;
 
             int tinggi = (int)(
-                gambarStrukUntukCetak.Height * skala
-            );
-
-            int posisiX = areaCetak.Left +
-                (areaCetak.Width - lebar) / 2;
-
-            int posisiY = areaCetak.Top;
+                gambarStrukUntukCetak.Height * skala);
 
             e.Graphics.DrawImage(
                 gambarStrukUntukCetak,
-                posisiX,
-                posisiY,
+                areaCetak.Left,
+                areaCetak.Top,
                 lebar,
                 tinggi
             );

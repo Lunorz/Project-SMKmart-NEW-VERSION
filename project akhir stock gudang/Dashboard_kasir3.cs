@@ -738,7 +738,7 @@ namespace project_akhir_stock_gudang
 
             strukForm.Show();
 
-            this.Hide();
+           
         }
 
         
