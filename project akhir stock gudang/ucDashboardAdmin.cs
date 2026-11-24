@@ -55,8 +55,7 @@ namespace project_akhir_stock_gudang
             int jumlahTransaksi = transaksiHariIni.Count;
 
 
-            int menungguPersetujuan = UserStore.GetAll()
-                .Count(x => x.Status == UserStore.Menunggu);
+            int jumlahAkun = UserStore.GetAll().Count;
 
 
             int stokMenipis = daftarProduk
@@ -68,7 +67,7 @@ namespace project_akhir_stock_gudang
 
             lblJual.Text = "Rp " + pendapatanHariIni.ToString("N0");
             lblTrx.Text = jumlahTransaksi.ToString("N0");
-            lblUser.Text = menungguPersetujuan.ToString("N0");
+            lblUser.Text = jumlahAkun.ToString("N0");
             lblStok.Text = stokMenipis.ToString("N0");
         }
 

@@ -140,7 +140,6 @@
             // 
             // tabUtama
             // 
-            tabUtama.Controls.Add(tabPermintaan);
             tabUtama.Controls.Add(tabSemua);
             tabUtama.Dock = DockStyle.Fill;
             tabUtama.ItemSize = new Size(220, 38);
@@ -207,7 +206,6 @@
             dgvPermintaan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPermintaan.Size = new Size(672, 402);
             dgvPermintaan.TabIndex = 2;
-            dgvPermintaan.CellContentClick += dgvPermintaan_CellContentClick;
             // 
             // colUsernameP
             // 
@@ -703,7 +701,7 @@
             lblMenunggu.ForeColor = Color.FromArgb(31, 107, 66);
             lblMenunggu.Location = new Point(20, 42);
             lblMenunggu.Name = "lblMenunggu";
-            lblMenunggu.Size = new Size(40, 47);
+            lblMenunggu.Size = new Size(130, 47);
             lblMenunggu.TabIndex = 1;
             lblMenunggu.Text = "0";
             // 
@@ -714,9 +712,9 @@
             lblMenungguJudul.ForeColor = Color.FromArgb(79, 106, 92);
             lblMenungguJudul.Location = new Point(20, 18);
             lblMenungguJudul.Name = "lblMenungguJudul";
-            lblMenungguJudul.Size = new Size(172, 20);
+            lblMenungguJudul.Size = new Size(130, 20);
             lblMenungguJudul.TabIndex = 0;
-            lblMenungguJudul.Text = "Menunggu persetujuan";
+            lblMenungguJudul.Text = "Aktif / Nonaktif";
             // 
             // pnlKartuAktif
             // 
@@ -751,7 +749,7 @@
             lblAktifJudul.Name = "lblAktifJudul";
             lblAktifJudul.Size = new Size(82, 20);
             lblAktifJudul.TabIndex = 1;
-            lblAktifJudul.Text = "Akun aktif";
+            lblAktifJudul.Text = "Akun kasir";
             // 
             // pnlKartuNonaktif
             // 
@@ -786,7 +784,7 @@
             lblNnonaktifjudul.Name = "lblNnonaktifjudul";
             lblNnonaktifjudul.Size = new Size(105, 20);
             lblNnonaktifjudul.TabIndex = 1;
-            lblNnonaktifjudul.Text = "Nonaktif/Ban";
+            lblNnonaktifjudul.Text = "Akun gudang";
             // 
             // ucAdminDataUser
             // 

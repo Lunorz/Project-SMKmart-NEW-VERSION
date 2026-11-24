@@ -34,11 +34,6 @@
             pnlKartuTabel = new Panel();
             pnlKartuTabelDalam = new Panel();
             dgvTransaksi = new DataGridView();
-            colNo = new DataGridViewTextBoxColumn();
-            colWaktu = new DataGridViewTextBoxColumn();
-            colKasir = new DataGridViewTextBoxColumn();
-            colItem = new DataGridViewTextBoxColumn();
-            colTotal = new DataGridViewTextBoxColumn();
             pnlJudulTransaksi = new Panel();
             btnLihatLaporan = new Button();
             lblTransaksiJudulTerbaru = new Label();
@@ -65,6 +60,11 @@
             pnlKartuStokDalam = new Panel();
             lblStok = new Label();
             lblStokJudul = new Label();
+            colNo = new DataGridViewTextBoxColumn();
+            colWaktu = new DataGridViewTextBoxColumn();
+            colKasir = new DataGridViewTextBoxColumn();
+            colItem = new DataGridViewTextBoxColumn();
+            colTotal = new DataGridViewTextBoxColumn();
             pnlPage.SuspendLayout();
             pnlKartuTabel.SuspendLayout();
             pnlKartuTabelDalam.SuspendLayout();
@@ -163,46 +163,6 @@
             dgvTransaksi.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTransaksi.Size = new Size(898, 628);
             dgvTransaksi.TabIndex = 1;
-            // 
-            // colNo
-            // 
-            colNo.FillWeight = 20F;
-            colNo.HeaderText = "\tNo. Transaksi";
-            colNo.MinimumWidth = 6;
-            colNo.Name = "colNo";
-            colNo.ReadOnly = true;
-            // 
-            // colWaktu
-            // 
-            colWaktu.FillWeight = 24F;
-            colWaktu.HeaderText = "Waktu";
-            colWaktu.MinimumWidth = 6;
-            colWaktu.Name = "colWaktu";
-            colWaktu.ReadOnly = true;
-            // 
-            // colKasir
-            // 
-            colKasir.FillWeight = 22F;
-            colKasir.HeaderText = "Kasir";
-            colKasir.MinimumWidth = 6;
-            colKasir.Name = "colKasir";
-            colKasir.ReadOnly = true;
-            // 
-            // colItem
-            // 
-            colItem.FillWeight = 10F;
-            colItem.HeaderText = "Item";
-            colItem.MinimumWidth = 6;
-            colItem.Name = "colItem";
-            colItem.ReadOnly = true;
-            // 
-            // colTotal
-            // 
-            colTotal.FillWeight = 22F;
-            colTotal.HeaderText = "total";
-            colTotal.MinimumWidth = 6;
-            colTotal.Name = "colTotal";
-            colTotal.ReadOnly = true;
             // 
             // pnlJudulTransaksi
             // 
@@ -464,7 +424,7 @@
             lblUserJudul.Name = "lblUserJudul";
             lblUserJudul.Size = new Size(172, 20);
             lblUserJudul.TabIndex = 1;
-            lblUserJudul.Text = "Menunggu Persetujuan";
+            lblUserJudul.Text = "Total Akun";
             // 
             // pnlKartuStok
             // 
@@ -509,6 +469,46 @@
             lblStokJudul.Size = new Size(99, 20);
             lblStokJudul.TabIndex = 1;
             lblStokJudul.Text = "Stok Menipis\t";
+            // 
+            // colNo
+            // 
+            colNo.FillWeight = 20F;
+            colNo.HeaderText = "\tNo. Transaksi";
+            colNo.MinimumWidth = 6;
+            colNo.Name = "colNo";
+            colNo.ReadOnly = true;
+            // 
+            // colWaktu
+            // 
+            colWaktu.FillWeight = 24F;
+            colWaktu.HeaderText = "Waktu";
+            colWaktu.MinimumWidth = 6;
+            colWaktu.Name = "colWaktu";
+            colWaktu.ReadOnly = true;
+            // 
+            // colKasir
+            // 
+            colKasir.FillWeight = 22F;
+            colKasir.HeaderText = "Kasir";
+            colKasir.MinimumWidth = 6;
+            colKasir.Name = "colKasir";
+            colKasir.ReadOnly = true;
+            // 
+            // colItem
+            // 
+            colItem.FillWeight = 20F;
+            colItem.HeaderText = "jumlah jenis Item";
+            colItem.MinimumWidth = 6;
+            colItem.Name = "colItem";
+            colItem.ReadOnly = true;
+            // 
+            // colTotal
+            // 
+            colTotal.FillWeight = 22F;
+            colTotal.HeaderText = "total";
+            colTotal.MinimumWidth = 6;
+            colTotal.Name = "colTotal";
+            colTotal.ReadOnly = true;
             // 
             // ucDashboardAdmin
             // 
@@ -571,15 +571,15 @@
         private Label lblTransaksiJudulTerbaru;
         private DataGridView dgvTransaksi;
         private Button btnLihatLaporan;
-        private DataGridViewTextBoxColumn colNo;
-        private DataGridViewTextBoxColumn colWaktu;
-        private DataGridViewTextBoxColumn colKasir;
-        private DataGridViewTextBoxColumn colItem;
-        private DataGridViewTextBoxColumn colTotal;
         private Panel pnlAktivitasLuar;
         private Panel pnlJarakKanan;
         private Panel pnllAktivitasDalam;
         private ListBox lstAktivitas;
         private Label lblAktivitas;
+        private DataGridViewTextBoxColumn colNo;
+        private DataGridViewTextBoxColumn colWaktu;
+        private DataGridViewTextBoxColumn colKasir;
+        private DataGridViewTextBoxColumn colItem;
+        private DataGridViewTextBoxColumn colTotal;
     }
 }

@@ -19,7 +19,6 @@ namespace project_akhir_stock_gudang
         private static extern int SetWindowTheme(IntPtr hWnd, string appName, string idList);
         private string usernameTerpilih = "";
         private bool modeEditPengguna = false;
-        private bool modePersetujuan = false;
         private List<UserAccount> semuaDataPengguna = new List<UserAccount>();
         private string usernamePenggunaTerpilih = "";
 
@@ -77,38 +76,6 @@ namespace project_akhir_stock_gudang
             prgKekuatan.Value = 0;
             prgKekuatan.Style = ProgressBarStyle.Continuous;
         }
-        private void FilterPermintaan()
-        {
-            string kataKunci = txtCariP.Text.Trim();
-            string role = cmbRoleP.Text;
-
-            dgvPermintaan.Rows.Clear();
-
-            var hasil = semuaDataPengguna
-                .Where(u => u.Status == UserStore.Menunggu)
-                .Where(u =>
-                    (u.Username ?? "").Contains(
-                        kataKunci, StringComparison.OrdinalIgnoreCase))
-
-                .Where(u =>
-                    role == "Semua Role" ||
-                    string.IsNullOrWhiteSpace(role) ||
-                    u.Role == role)
-                .ToList();
-
-            foreach (var user in hasil)
-            {
-                int index = dgvPermintaan.Rows.Add();
-
-                dgvPermintaan.Rows[index].Cells["colUsernameP"].Value = user.Username;
-                dgvPermintaan.Rows[index].Cells["colRoleP"].Value = user.Role;
-                dgvPermintaan.Rows[index].Cells["colTanggalP"].Value =
-                    user.TanggalDaftar.ToString("dd/MM/yyyy");
-
-                dgvPermintaan.Rows[index].Cells["colSetujui"].Value = "ACC";
-                dgvPermintaan.Rows[index].Cells["colTolak"].Value = "Tolak";
-            }
-        }
         private void UpdateStrength()
         {
             int level = PasswordTools.GetStrengthLevel(txtPassword.Text);
@@ -131,12 +98,6 @@ namespace project_akhir_stock_gudang
             txtPassword.TextChanged -= txtPassword_TextChanged;
             txtPassword.TextChanged += txtPassword_TextChanged;
 
-            dgvPermintaan.CellClick -= dgvPermintaan_CellClick;
-            dgvPermintaan.CellClick += dgvPermintaan_CellClick;
-
-            dgvPermintaan.CellContentClick -= dgvPermintaan_CellContentClick;
-            dgvPermintaan.CellContentClick += dgvPermintaan_CellContentClick;
-
             dgvSemua.CellClick -= dgvSemua_CellClick;
             dgvSemua.CellClick += dgvSemua_CellClick;
 
@@ -148,12 +109,6 @@ namespace project_akhir_stock_gudang
 
             btnGenerate.Click -= btnGenerate_Click_1;
             btnGenerate.Click += btnGenerate_Click_1;
-
-            txtCariP.TextChanged -= txtCariPermintaan_TextChanged;
-            txtCariP.TextChanged += txtCariPermintaan_TextChanged;
-
-            cmbRoleP.SelectedIndexChanged -= cmbFilterRolePermintaan_SelectedIndexChanged;
-            cmbRoleP.SelectedIndexChanged += cmbFilterRolePermintaan_SelectedIndexChanged;
 
             txtCariS.TextChanged -= txtCariSemua_TextChanged;
             txtCariS.TextChanged += txtCariSemua_TextChanged;
@@ -252,16 +207,6 @@ namespace project_akhir_stock_gudang
 
             }
         }
-        private void txtCariPermintaan_TextChanged(object sender, EventArgs e)
-        {
-            FilterPermintaan();
-        }
-
-        private void cmbFilterRolePermintaan_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FilterPermintaan();
-        }
-
         private void txtCariSemua_TextChanged(object sender, EventArgs e)
         {
             FilterSemuaPengguna();
@@ -280,8 +225,6 @@ namespace project_akhir_stock_gudang
         private void AturModeBuatAkun()
         {
             modeEditPengguna = false;
-            modePersetujuan = false;
-
             usernamePenggunaTerpilih = "";
             usernameTerpilih = "";
 
@@ -299,7 +242,6 @@ namespace project_akhir_stock_gudang
 
             prgKekuatan.Value = 0;
 
-            dgvPermintaan.ClearSelection();
             dgvSemua.ClearSelection();
 
             PerbaruiKekuatanPassword();
@@ -328,7 +270,6 @@ namespace project_akhir_stock_gudang
             dgvSemua.Rows.Clear();
 
             var hasil = semuaDataPengguna
-                .Where(u => u.Status != UserStore.Menunggu)
                 .Where(u =>
                     (u.Username ?? "").Contains(
                         kataKunci,
@@ -370,12 +311,6 @@ namespace project_akhir_stock_gudang
             cmbRole.SelectedIndex = 0;
 
           
-            cmbRoleP.Items.Clear();
-            cmbRoleP.Items.Add("Semua Role");
-            cmbRoleP.Items.Add("Kasir");
-            cmbRoleP.Items.Add("Gudang");
-            cmbRoleP.SelectedIndex = 0;
-
            
             cmbRoleS.Items.Clear();
             cmbRoleS.Items.Add("Semua Role");
@@ -390,7 +325,7 @@ namespace project_akhir_stock_gudang
                 !string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 !string.IsNullOrWhiteSpace(txtPassword.Text) ||
                 modeEditPengguna ||
-                modePersetujuan;
+                false;
 
             if (adaIsi)
             {
@@ -434,84 +369,6 @@ namespace project_akhir_stock_gudang
             CekKekuatanPassword();
             PerbaruiKekuatanPassword();
         }
-
-
-        private void dgvPermintaan_CellClick(
-            object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-                return;
-
-            usernameTerpilih = dgvPermintaan.Rows[e.RowIndex]
-                .Cells["colUsernameP"].Value?.ToString() ?? "";
-
-            if (string.IsNullOrWhiteSpace(usernameTerpilih))
-                return;
-
-            txtPassword.Clear();
-        }
-
-        private void dgvPermintaan_CellContentClick(
-    object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
-
-            string namaKolom = dgvPermintaan.Columns[e.ColumnIndex].Name;
-
-            if (namaKolom != "colSetujui" && namaKolom != "colTolak")
-                return;
-
-            string username = dgvPermintaan.Rows[e.RowIndex]
-                .Cells["colUsernameP"].Value?.ToString() ?? "";
-
-            if (string.IsNullOrWhiteSpace(username))
-                return;
-
-            if (namaKolom == "colSetujui")
-            {
-                usernameTerpilih = username;
-                modePersetujuan = true;
-                modeEditPengguna = false;
-
-                txtPassword.Clear();
-
-                MessageBox.Show(
-                    "Masukkan atau generate password untuk akun ini."
-                );
-
-                return;
-            }
-
-            if (namaKolom == "colTolak")
-            {
-                DialogResult hasil = MessageBox.Show(
-                    "Apakah kamu yakin ingin menolak pendaftaran ini?",
-                    "Konfirmasi Penolakan",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
-                if (hasil == DialogResult.Yes)
-                {
-                    bool berhasil = UserStore.RejectAccount(
-                        username,
-                        out string pesan
-                    );
-
-                    MessageBox.Show(pesan);
-
-                    if (berhasil)
-                    {
-                        usernameTerpilih = "";
-                        modePersetujuan = false;
-                        txtPassword.Clear();
-                        TampilkanDataUser();
-                    }
-                }
-            }
-        }
-
 
 
         private void dgvSemua_CellContentClick(
@@ -596,7 +453,6 @@ namespace project_akhir_stock_gudang
             PerbaruiRingkasan();
 
 
-            FilterPermintaan();
             FilterSemuaPengguna();
         }
 
@@ -659,74 +515,6 @@ namespace project_akhir_stock_gudang
                         "Perubahan password pengguna",
                         usernamePenggunaTerpilih,
                         "Admin berhasil mengubah password akun pengguna."
-                    );
-
-                    TampilkanDataUser();
-                    AturModeBuatAkun();
-                }
-
-                return;
-            }
-
-
-            if (modePersetujuan)
-            {
-                if (string.IsNullOrWhiteSpace(usernameTerpilih))
-                {
-                    MessageBox.Show("Pilih pendaftaran terlebih dahulu.");
-                    return;
-                }
-
-
-                UserAccount? pendaftar = UserStore.GetAll()
-                    .FirstOrDefault(u =>
-                        string.Equals(
-                            u.Username,
-                            usernameTerpilih,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
-
-                if (string.IsNullOrWhiteSpace(password))
-                {
-                    MessageBox.Show(
-                        "Password untuk akun ini wajib diisi.",
-                        "Peringatan",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning
-                    );
-
-                    txtPassword.Focus();
-                    return;
-                }
-
-                DialogResult konfirmasiACC = MessageBox.Show(
-                    "Apakah Anda yakin ingin menyetujui pendaftaran akun ini?\n\n" +
-                    "Username: " + usernameTerpilih,
-                    "Konfirmasi Persetujuan Akun",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
-
-                if (konfirmasiACC != DialogResult.Yes)
-                    return;
-
-                bool berhasil = UserStore.ApproveAccount(
-                    usernameTerpilih,
-                    password,
-                    out string pesan
-                );
-
-                MessageBox.Show(pesan);
-
-                if (berhasil)
-                {
-                    CatatLogAkun(
-                        "Persetujuan pembuatan akun",
-                        usernameTerpilih,
-                        "Admin menyetujui pendaftaran akun. Username: " +
-                        (pendaftar?.Username ?? "-") +
-                        ", Role: " + (pendaftar?.Role ?? "-")
                     );
 
                     TampilkanDataUser();
@@ -801,24 +589,24 @@ namespace project_akhir_stock_gudang
         {
             List<UserAccount> users = UserStore.GetAll();
 
-            int totalPengguna = users.Count(u =>
-                u.Status == UserStore.Menunggu ||
-                u.Status == UserStore.Aktif ||
-                u.Status == UserStore.Diblokir);
-
-            int menunggu = users.Count(u =>
-                u.Status == UserStore.Menunggu);
+            int totalPengguna = users.Count;
 
             int aktif = users.Count(u =>
                 u.Status == UserStore.Aktif);
 
-            int banned = users.Count(u =>
+            int nonaktif = users.Count(u =>
                 u.Status == UserStore.Diblokir);
 
+            int kasir = users.Count(u =>
+                string.Equals(u.Role, "Kasir", StringComparison.OrdinalIgnoreCase));
+
+            int gudang = users.Count(u =>
+                string.Equals(u.Role, "Gudang", StringComparison.OrdinalIgnoreCase));
+
             lblTotal.Text = totalPengguna.ToString();
-            lblMenunggu.Text = menunggu.ToString();
-            lblAktif.Text = aktif.ToString();
-            lblBanned.Text = banned.ToString();
+            lblMenunggu.Text = $"{aktif}/{nonaktif}";
+            lblAktif.Text = kasir.ToString();
+            lblBanned.Text = gudang.ToString();
         }
         private void PerbaruiKekuatanPassword()
         {
@@ -884,7 +672,6 @@ namespace project_akhir_stock_gudang
             }
 
             modeEditPengguna = true;
-            modePersetujuan = false;
 
             usernamePenggunaTerpilih = user.Username;
             usernameTerpilih = "";
@@ -896,7 +683,6 @@ namespace project_akhir_stock_gudang
             btnSetujui.Text = "Simpan perubahan";
 
 
-            dgvPermintaan.ClearSelection();
         }
 
         private void ucAdminDataUser_Load(object sender, EventArgs e)

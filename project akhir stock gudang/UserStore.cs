@@ -18,7 +18,6 @@ namespace project_akhir_stock_gudang
             WriteIndented = true
         };
 
-        public const string Menunggu = "Menunggu";
         public const string Aktif = "Aktif";
         public const string Diblokir = "Diblokir";
         public const string Ditolak = "Ditolak";
@@ -45,117 +44,6 @@ namespace project_akhir_stock_gudang
         }
 
         public static List<UserAccount> GetAll() => LoadInternal();
-
-        public static bool RegisterPending(
-            string username, string role, out string message)
-        {
-            username = (username ?? "").Trim();
-
-            if (username.Length < 3)
-            {
-                message = "Username minimal 3 karakter.";
-                return false;
-            }
-
-            if (role != "Kasir" && role != "Gudang")
-            {
-                message = "Pilih role Kasir atau Gudang.";
-                return false;
-            }
-
-            List<UserAccount> users = LoadInternal();
-            UserAccount? existing = users.FirstOrDefault(u =>
-                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
-
-            if (existing != null)
-            {
-                if (existing.Status != Ditolak)
-                {
-                    message = "Username ini sudah terdaftar atau sedang diproses.";
-                    return false;
-                }
-
-                existing.Username = username;
-                existing.Role = role;
-                existing.Status = Menunggu;
-                existing.TanggalDaftar = DateTime.Now;
-                existing.PasswordHash = "";
-                existing.PasswordSalt = "";
-                SaveInternal(users);
-                message = "Pendaftaran ulang berhasil dikirim.";
-                return true;
-            }
-
-            users.Add(new UserAccount
-            {
-                Username = username,
-                Role = role,
-                Status = Menunggu,
-                TanggalDaftar = DateTime.Now
-            });
-
-            SaveInternal(users);
-            message = "Pendaftaran berhasil. Tunggu persetujuan admin.";
-            return true;
-        }
-
-        public static bool ApproveAccount(
-            string username, string password, out string message)
-        {
-            List<UserAccount> users = LoadInternal();
-            UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
-
-            if (user == null || user.Status != Menunggu)
-            {
-                message = "Permintaan tidak ditemukan atau sudah diproses.";
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                message = "Password tidak boleh kosong.";
-                return false;
-            }
-
-            if (PasswordTools.GetStrengthLevel(password) < 3)
-            {
-                message = "Password terlalu lemah. Gunakan password tingkat 3 atau 4.";
-                return false;
-            }
-
-            byte[] salt = RandomNumberGenerator.GetBytes(16);
-            byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
-                password, salt, 210000, HashAlgorithmName.SHA256, 32);
-
-            user.PasswordSalt = Convert.ToBase64String(salt);
-            user.PasswordHash = Convert.ToBase64String(hash);
-            user.Status = Aktif;
-            SaveInternal(users);
-
-            message = "Akun berhasil disetujui dan diaktifkan.";
-            return true;
-        }
-
-        public static bool RejectAccount(string username, out string message)
-        {
-            List<UserAccount> users = LoadInternal();
-            UserAccount? user = users.FirstOrDefault(u =>
-                string.Equals(u.Username, username, StringComparison.OrdinalIgnoreCase));
-
-            if (user == null || user.Status != Menunggu)
-            {
-                message = "Permintaan tidak ditemukan atau sudah diproses.";
-                return false;
-            }
-
-            user.Status = Ditolak;
-            user.PasswordHash = "";
-            user.PasswordSalt = "";
-            SaveInternal(users);
-            message = "Pendaftaran berhasil ditolak.";
-            return true;
-        }
 
         public static bool ToggleBan(string username, out string message)
         {
@@ -358,12 +246,6 @@ namespace project_akhir_stock_gudang
             }
 
        
-            if (user.Status == Menunggu)
-            {
-                message = "Akun masih menunggu persetujuan admin.";
-                return false;
-            }
-
             if (user.Status == Ditolak)
             {
                 message = "Pendaftaran akun ditolak.";

@@ -257,9 +257,6 @@ namespace project_akhir_stock_gudang
 
         private void label8_Click(object sender, EventArgs e)
         {
-            Form_Daftar daftar = new Form_Daftar();
-            daftar.Show();
-            this.Hide();
         }
 
         private void label2_Click(object sender, EventArgs e)

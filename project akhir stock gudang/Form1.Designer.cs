@@ -101,6 +101,7 @@
             label8.ForeColor = Color.Teal;
             label8.BackColor = Color.Transparent;
             label8.Cursor = Cursors.Hand;
+            label8.Visible = false;
             label8.Location = new Point(612, 414);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
@@ -120,6 +121,7 @@
             label6.Size = new Size(154, 20);
             label6.TabIndex = 9;
             label6.Text = "belum memiliki akun?";
+            label6.Visible = false;
             // 
             // lihat_password
             // 
