@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard_kasir));
             panel1 = new Panel();
             fotoGir = new PictureBox();
+            kembali_ke_login2 = new Label();
+            label6 = new Label();
+            label5 = new Label();
             panel2 = new Panel();
             panel4 = new Panel();
             label_tanggal_transaksi = new Label();
@@ -38,9 +41,6 @@
             panel3 = new Panel();
             label_nomor_transaksi = new Label();
             label1 = new Label();
-            kembali_ke_login2 = new Label();
-            label6 = new Label();
-            label5 = new Label();
             panel5 = new Panel();
             menuju_dashboard2 = new Button();
             tambah_ke_keranjang = new Button();
@@ -73,9 +73,9 @@
             // fotoGir
             // 
             fotoGir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            fotoGir.Image = (Image)resources.GetObject("fotoGir.Image");
             fotoGir.BackColor = Color.Transparent;
             fotoGir.Cursor = Cursors.Hand;
+            fotoGir.Image = (Image)resources.GetObject("fotoGir.Image");
             fotoGir.Location = new Point(620, 10);
             fotoGir.Name = "fotoGir";
             fotoGir.Size = new Size(30, 30);
@@ -84,14 +84,53 @@
             fotoGir.TabStop = false;
             fotoGir.Click += fotoGir_Click;
             // 
+            // kembali_ke_login2
+            // 
+            kembali_ke_login2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            kembali_ke_login2.AutoSize = true;
+            kembali_ke_login2.BackColor = Color.Transparent;
+            kembali_ke_login2.Cursor = Cursors.Hand;
+            kembali_ke_login2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            kembali_ke_login2.ForeColor = Color.White;
+            kembali_ke_login2.Location = new Point(657, 12);
+            kembali_ke_login2.Margin = new Padding(2, 0, 2, 0);
+            kembali_ke_login2.Name = "kembali_ke_login2";
+            kembali_ke_login2.Size = new Size(24, 25);
+            kembali_ke_login2.TabIndex = 10;
+            kembali_ke_login2.Text = "X";
+            kembali_ke_login2.Click += kembali_ke_login2_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.MediumSeaGreen;
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(21, 59);
+            label6.Name = "label6";
+            label6.Size = new Size(310, 25);
+            label6.TabIndex = 12;
+            label6.Text = "Cari dan pilih  barang untuk transaksi ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft JhengHei UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = SystemColors.Control;
+            label5.Location = new Point(12, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(319, 50);
+            label5.TabIndex = 11;
+            label5.Text = "DATA BARANG";
+            // 
             // panel2
             // 
-            panel2.Dock = DockStyle.Top;
             panel2.BackColor = Color.Honeydew;
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(panel3);
+            panel2.Dock = DockStyle.Top;
             panel2.ForeColor = SystemColors.Control;
-            panel2.Location = new Point(0, 102);
+            panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(686, 133);
             panel2.TabIndex = 3;
@@ -161,48 +200,8 @@
             label1.Text = "Nomor transaksi";
             label1.Click += label1_Click;
             // 
-            // kembali_ke_login2
-            // 
-            kembali_ke_login2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            kembali_ke_login2.AutoSize = true;
-            kembali_ke_login2.BackColor = Color.Transparent;
-            kembali_ke_login2.Cursor = Cursors.Hand;
-            kembali_ke_login2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            kembali_ke_login2.ForeColor = Color.White;
-            kembali_ke_login2.Location = new Point(657, 12);
-            kembali_ke_login2.Margin = new Padding(2, 0, 2, 0);
-            kembali_ke_login2.Name = "kembali_ke_login2";
-            kembali_ke_login2.Size = new Size(19, 20);
-            kembali_ke_login2.TabIndex = 10;
-            kembali_ke_login2.Text = "X";
-            kembali_ke_login2.Click += kembali_ke_login2_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.MediumSeaGreen;
-            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(21, 59);
-            label6.Name = "label6";
-            label6.Size = new Size(310, 25);
-            label6.TabIndex = 12;
-            label6.Text = "Cari dan pilih  barang untuk transaksi ";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Microsoft JhengHei UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = SystemColors.Control;
-            label5.Location = new Point(12, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(319, 50);
-            label5.TabIndex = 11;
-            label5.Text = "DATA BARANG";
-            // 
             // panel5
             // 
-            panel5.Dock = DockStyle.Fill;
             panel5.BackColor = Color.Honeydew;
             panel5.Controls.Add(menuju_dashboard2);
             panel5.Controls.Add(tambah_ke_keranjang);
@@ -211,9 +210,10 @@
             panel5.Controls.Add(listbox_barang);
             panel5.Controls.Add(textbox_kategori_barang);
             panel5.Controls.Add(label3);
-            panel5.Location = new Point(0, 235);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(0, 133);
             panel5.Name = "panel5";
-            panel5.Size = new Size(686, 863);
+            panel5.Size = new Size(686, 828);
             panel5.TabIndex = 4;
             panel5.Paint += panel5_Paint;
             // 
@@ -224,7 +224,7 @@
             menuju_dashboard2.FlatStyle = FlatStyle.Flat;
             menuju_dashboard2.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             menuju_dashboard2.ForeColor = Color.White;
-            menuju_dashboard2.Location = new Point(12, 801);
+            menuju_dashboard2.Location = new Point(12, 766);
             menuju_dashboard2.Name = "menuju_dashboard2";
             menuju_dashboard2.Size = new Size(662, 52);
             menuju_dashboard2.TabIndex = 6;
@@ -239,7 +239,7 @@
             tambah_ke_keranjang.FlatStyle = FlatStyle.Flat;
             tambah_ke_keranjang.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tambah_ke_keranjang.ForeColor = Color.White;
-            tambah_ke_keranjang.Location = new Point(542, 744);
+            tambah_ke_keranjang.Location = new Point(542, 709);
             tambah_ke_keranjang.Name = "tambah_ke_keranjang";
             tambah_ke_keranjang.Size = new Size(132, 51);
             tambah_ke_keranjang.TabIndex = 5;
@@ -251,7 +251,7 @@
             // 
             jumlah_beli_barang.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             jumlah_beli_barang.BackColor = Color.White;
-            jumlah_beli_barang.Location = new Point(12, 744);
+            jumlah_beli_barang.Location = new Point(12, 709);
             jumlah_beli_barang.Multiline = true;
             jumlah_beli_barang.Name = "jumlah_beli_barang";
             jumlah_beli_barang.PlaceholderText = "Masukkan jumlah";
@@ -265,7 +265,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Leelawadee UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkSlateGray;
-            label4.Location = new Point(12, 718);
+            label4.Location = new Point(12, 683);
             label4.Name = "label4";
             label4.Size = new Size(68, 23);
             label4.TabIndex = 3;
@@ -284,7 +284,7 @@
             listbox_barang.ItemHeight = 45;
             listbox_barang.Location = new Point(12, 101);
             listbox_barang.Name = "listbox_barang";
-            listbox_barang.Size = new Size(662, 614);
+            listbox_barang.Size = new Size(662, 579);
             listbox_barang.TabIndex = 2;
             listbox_barang.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -321,9 +321,9 @@
             Controls.Add(panel5);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.Sizable;
             Name = "Dashboard_kasir";
             Text = "Dashboard_kasir";
+            WindowState = FormWindowState.Maximized;
             FormClosed += Dashboard_kasir_FormClosed;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

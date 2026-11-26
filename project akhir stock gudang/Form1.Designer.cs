@@ -43,6 +43,7 @@
             label2 = new Label();
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
+            menuStrip1 = new MenuStrip();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -62,6 +63,7 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(panel2);
+            panel1.Controls.Add(menuStrip1);
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
@@ -71,13 +73,13 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.DarkCyan;
-            label4.BackColor = Color.Transparent;
             label4.Location = new Point(365, 108);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(117, 26);
+            label4.Size = new Size(145, 32);
             label4.TabIndex = 13;
             label4.Text = " ONE-mart";
             label4.Click += label4_Click_1;
@@ -85,40 +87,40 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Yu Gothic", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(365, 68);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(191, 26);
+            label1.Size = new Size(236, 32);
             label1.TabIndex = 12;
             label1.Text = "Selamat datang di";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.Teal;
             label8.BackColor = Color.Transparent;
             label8.Cursor = Cursors.Hand;
-            label8.Visible = false;
+            label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.Teal;
             label8.Location = new Point(612, 414);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(52, 20);
+            label8.Size = new Size(60, 23);
             label8.TabIndex = 11;
             label8.Text = "daftar";
+            label8.Visible = false;
             label8.Click += label8_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.Location = new Point(435, 414);
-            label6.BackColor = Color.Transparent;
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(154, 20);
+            label6.Size = new Size(176, 23);
             label6.TabIndex = 9;
             label6.Text = "belum memiliki akun?";
             label6.Visible = false;
@@ -127,12 +129,12 @@
             // 
             lihat_password.AutoSize = true;
             lihat_password.BackColor = Color.Transparent;
-            lihat_password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lihat_password.FlatStyle = FlatStyle.Flat;
+            lihat_password.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lihat_password.Location = new Point(536, 276);
             lihat_password.Margin = new Padding(2);
             lihat_password.Name = "lihat_password";
-            lihat_password.Size = new Size(127, 24);
+            lihat_password.Size = new Size(137, 27);
             lihat_password.TabIndex = 8;
             lihat_password.Text = "lihat password";
             lihat_password.UseVisualStyleBackColor = false;
@@ -142,7 +144,6 @@
             // 
             tombol_batal.BackColor = Color.FromArgb(224, 242, 233);
             tombol_batal.FlatAppearance.BorderColor = Color.Teal;
-            tombol_batal.FlatAppearance.BorderSize = 1;
             tombol_batal.FlatStyle = FlatStyle.Flat;
             tombol_batal.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tombol_batal.ForeColor = Color.Teal;
@@ -201,12 +202,12 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.Location = new Point(365, 207);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(81, 20);
+            label3.Size = new Size(82, 23);
             label3.TabIndex = 3;
             label3.Text = "password";
             label3.Click += label3_Click;
@@ -214,12 +215,12 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(365, 144);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(79, 20);
+            label2.Size = new Size(85, 23);
             label2.TabIndex = 2;
             label2.Text = "username";
             label2.Click += label2_Click;
@@ -236,15 +237,24 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(336, 620);
+            pictureBox1.Size = new Size(300, 520);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(720, 28);
+            menuStrip1.TabIndex = 14;
+            menuStrip1.Text = "menuStrip1";
             // 
             // Form1
             // 
@@ -253,6 +263,7 @@
             ClientSize = new Size(720, 520);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
+            MainMenuStrip = menuStrip1;
             Margin = new Padding(2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -281,5 +292,6 @@
         private Label label6;
         private Label label1;
         private Label label4;
+        private MenuStrip menuStrip1;
     }
 }

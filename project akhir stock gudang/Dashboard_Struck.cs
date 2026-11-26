@@ -55,6 +55,8 @@ namespace project_akhir_stock_gudang
 
             Resize += (_, _) => AturLayoutStruk();
             AturLayoutStruk();
+            this.KeyPreview = true;
+            this.KeyDown += Dashboard_Struck_KeyDown;
         }
         private void AturTampilanDgvStruk()
         {
@@ -475,7 +477,20 @@ namespace project_akhir_stock_gudang
             dashboardKasirKEMBALI.Show();
             this.Hide();
         }
+        private void Dashboard_Struck_KeyDown(object? sender, KeyEventArgs e)
+        {
 
-    
+            if (e.Control && e.KeyCode == Keys.T)
+            {
+                e.SuppressKeyPress = true;
+                btnTransaksiBaru.Focus();
+            }
+            if (e.Control && e.KeyCode == Keys.P)
+            {
+                e.SuppressKeyPress = true;
+                btnPrint.Focus();
+            }
+        }
+
     }
 }

@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formAkunSayaKasir));
             ucAkunSayaKasir1 = new ucAkunSayaKasir();
             SuspendLayout();
             // 
             // ucAkunSayaKasir1
             // 
+            ucAkunSayaKasir1.BackColor = Color.FromArgb(234, 246, 239);
+            ucAkunSayaKasir1.BackgroundImage = (Image)resources.GetObject("ucAkunSayaKasir1.BackgroundImage");
+            ucAkunSayaKasir1.BackgroundImageLayout = ImageLayout.None;
             ucAkunSayaKasir1.Dock = DockStyle.Fill;
             ucAkunSayaKasir1.Location = new Point(0, 0);
             ucAkunSayaKasir1.Name = "ucAkunSayaKasir1";
@@ -48,6 +52,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "formAkunSayaKasir";
             Text = "formAkunSayaKasir";
+            WindowState = FormWindowState.Maximized;
             FormClosed += formAkunSayaKasir_FormClosed;
             ResumeLayout(false);
         }

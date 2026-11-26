@@ -23,6 +23,9 @@ namespace project_akhir_stock_gudang
             usernameAktif = username;
             btnMenuDashboard_Click(this, EventArgs.Empty);
             UiTheme.DecorateHeader(pnlTopBar);
+            this.CancelButton = btnKeluar;  
+            this.KeyPreview = true;
+            this.KeyDown += MainFormAdmin_KeyDown;
         }
         ucAdminDataUser? _halUser;
         ucDataBarang? _halBarang;
@@ -183,6 +186,51 @@ namespace project_akhir_stock_gudang
         {
             _halLaba ??= new ucLaba();
             Buka(_halLaba, "Laba", btnLaba);
+        }
+
+        private void MainFormAdmin_KeyDown(object? sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.KeyCode == Keys.D1)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuUser.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D2)
+            {
+                e.SuppressKeyPress = true;
+                btnDataBarang.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D3)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuLapPenjualan.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D4)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuLapGudang.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D6)
+            {
+                e.SuppressKeyPress = true;
+                btnLogAktivitas.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D7)
+            {
+                e.SuppressKeyPress = true;
+                btnPengaturan.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D5)
+            {
+                e.SuppressKeyPress = true;
+                btnLaba.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D0)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuDashboard.PerformClick();
+            }
         }
     }
 }

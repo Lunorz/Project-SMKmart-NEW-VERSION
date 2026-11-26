@@ -237,6 +237,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainFormGudang";
             Text = "MainFormGudang";
+            WindowState = FormWindowState.Maximized;
             FormClosed += MainFormGudang_FormClosed;
             pnlSideBarGudangMainform.ResumeLayout(false);
             pnlSideBarGudangMainform.PerformLayout();

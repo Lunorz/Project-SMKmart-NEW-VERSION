@@ -31,6 +31,9 @@ namespace project_akhir_stock_gudang
             UiTheme.DecorateHeader(pnlTopBarGudangMainform);
             btnMenuDashboardGudangMainform_Click(this, EventArgs.Empty);
             usernamePetugas = username ?? "";
+            this.CancelButton = btmMenuKeluar;
+            this.KeyPreview = true;
+            this.KeyDown += MainFormGudang_KeyDown;
         }
 
 
@@ -135,6 +138,41 @@ namespace project_akhir_stock_gudang
             usernamePetugas,
             "Gudang");
             Buka(_AkunSaya, "Akun Saya", btnPengaturan);
+        }
+
+        private void MainFormGudang_KeyDown(object? sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.KeyCode == Keys.D1)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuStokGudangMainform.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D2)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuMasukGudangMainform.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D3)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuKeluarGudangMainform.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D4)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuStokGudangMainform.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D6)
+            {
+                e.SuppressKeyPress = true;
+                btnPengaturan.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.D0)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuDashboardGudangMainform.PerformClick();
+            }
         }
     }
 }

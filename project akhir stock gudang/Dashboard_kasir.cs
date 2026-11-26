@@ -39,6 +39,9 @@ namespace project_akhir_stock_gudang
 
             SiapkanDaftarBarang();
             PerbaruiInfoTransaksi();
+            this.AcceptButton = tambah_ke_keranjang;
+            this.KeyPreview = true;
+            this.KeyDown += Dashboard_kasir_KeyDown;
 
         }
 
@@ -407,6 +410,35 @@ namespace project_akhir_stock_gudang
 
             this.Hide();
         }
+        private void Dashboard_kasir_KeyDown(object? sender, KeyEventArgs e)
+        {
 
+            if (e.Control && e.KeyCode == Keys.S)
+            {
+                e.SuppressKeyPress = true;
+                textbox_kategori_barang.Focus();
+            }
+
+            else if (e.Control && e.KeyCode == Keys.N)
+            {
+                e.SuppressKeyPress = true;
+                menuju_dashboard2.PerformClick();
+            }
+
+            else if (e.Control && e.KeyCode == Keys.J)
+            {
+                e.SuppressKeyPress = true;
+                jumlah_beli_barang.Focus();
+            }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                kembali_ke_login2_Click(this, EventArgs.Empty); 
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

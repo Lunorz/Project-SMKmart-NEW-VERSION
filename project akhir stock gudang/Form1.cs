@@ -6,6 +6,10 @@ namespace project_akhir_stock_gudang
         {
             InitializeComponent();
             UiTheme.ApplyAuthDecoration(panel1, pictureBox1);
+            this.AcceptButton = tombol_login; 
+            this.CancelButton = tombol_batal;  
+            this.KeyPreview = true;
+            this.KeyDown += Form1_KeyDown;
         }
 
         public Form1(string username)
@@ -277,6 +281,26 @@ namespace project_akhir_stock_gudang
         private void label4_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_KeyDown(object? sender, KeyEventArgs e)
+        {
+          
+            if (e.Control && e.KeyCode == Keys.D1)
+            {
+                e.SuppressKeyPress = true;
+                textusername.Focus();
+            }
+            else if (e.Control && e.KeyCode == Keys.D2)
+            {
+                e.SuppressKeyPress = true;
+                textpassword.Focus();
+            }
+            else if (e.Control && e.KeyCode == Keys.P)
+            {
+                e.SuppressKeyPress = true;
+                lihat_password.Checked = !lihat_password.Checked;
+            }
         }
     }
 }

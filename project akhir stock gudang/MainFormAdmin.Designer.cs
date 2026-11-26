@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFormAdmin));
             pnlSideBar = new GradientPanel();
             btnLaba = new Button();
             btnPengaturan = new Button();
@@ -290,6 +291,8 @@
             // ucAdminDataUser1
             // 
             ucAdminDataUser1.BackColor = Color.FromArgb(245, 251, 248);
+            ucAdminDataUser1.BackgroundImage = (Image)resources.GetObject("ucAdminDataUser1.BackgroundImage");
+            ucAdminDataUser1.BackgroundImageLayout = ImageLayout.None;
             ucAdminDataUser1.Dock = DockStyle.Fill;
             ucAdminDataUser1.Font = new Font("Leelawadee UI", 10.5F);
             ucAdminDataUser1.Location = new Point(0, 0);
@@ -312,6 +315,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainFormAdmin";
             Text = "MainFormAdmin";
+            WindowState = FormWindowState.Maximized;
             FormClosed += MainFormAdmin_FormClosed;
             pnlSideBar.ResumeLayout(false);
             pnlSideBar.PerformLayout();

@@ -33,6 +33,9 @@ namespace project_akhir_stock_gudang
             SiapkanKeranjang();
             UiTheme.DecorateCashierGrid(dgvkeranjang);
             TampilkanKeranjang();
+            this.AcceptButton = checkout_barang_keranjang;
+            this.KeyPreview = true;
+            this.KeyDown += Dashboard_kasir2_KeyDown;
         }
 
         private void SiapkanKeranjang()
@@ -284,6 +287,24 @@ namespace project_akhir_stock_gudang
 
             formCheckout.ShowDialog();
             this.Hide();
+        }
+        private void Dashboard_kasir2_KeyDown(object? sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.KeyCode == Keys.D)
+            {
+                e.SuppressKeyPress = true;
+                hapus_barang_keranjang.PerformClick();
+            }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                kembali_ke_Dashboard1_Click(this, EventArgs.Empty);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

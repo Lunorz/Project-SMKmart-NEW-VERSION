@@ -45,6 +45,10 @@ namespace project_akhir_stock_gudang
             panel5.Resize += (_, _) => AturLayoutCheckout();
             panel6.Resize += (_, _) => AturLayoutCheckout();
             AturLayoutCheckout();
+            this.AcceptButton = btnSelesaikan;
+            this.CancelButton = btnBatal;
+            this.KeyPreview = true;
+            this.KeyDown += Dashboard_kasir3_KeyDown;
         }
 
         private void AturLayoutCheckout()
@@ -830,6 +834,15 @@ namespace project_akhir_stock_gudang
             };
         }
 
+        private void Dashboard_kasir3_KeyDown(object? sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.KeyCode == Keys.J)
+            {
+                e.SuppressKeyPress = true;
+                txtUangDiterima.Focus();
+            }
+        }
     }
 }
      
