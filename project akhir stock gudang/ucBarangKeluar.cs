@@ -11,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace project_akhir_stock_gudang
 {
-    
+
     public partial class ucBarangKeluar : UserControl
     {
         private List<Produk> daftarProduk = new List<Produk>();
@@ -427,7 +427,24 @@ namespace project_akhir_stock_gudang
 
         private void ucBarangKeluar_Load(object sender, EventArgs e)
         {
-           
+
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSimpanGudang3.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btnBersihkanGudang3.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+      
     }
 }

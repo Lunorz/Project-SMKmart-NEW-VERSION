@@ -39,6 +39,8 @@ namespace project_akhir_stock_gudang
             ConnectEvents();
             UpdateStrength();
             TampilkanDataUser();
+            this.KeyDown += ucAdminDataUser_KeyDown;
+
         }
         private void CatatLogAkun(
            string aktivitas,
@@ -304,14 +306,14 @@ namespace project_akhir_stock_gudang
 
         private void SiapkanFilter()
         {
-            
+
             cmbRole.Items.Clear();
             cmbRole.Items.Add("Kasir");
             cmbRole.Items.Add("Gudang");
             cmbRole.SelectedIndex = 0;
 
-          
-           
+
+
             cmbRoleS.Items.Clear();
             cmbRoleS.Items.Add("Semua Role");
             cmbRoleS.Items.Add("Kasir");
@@ -354,7 +356,7 @@ namespace project_akhir_stock_gudang
                 MessageBoxIcon.Information
             );
         }
-        
+
 
 
 
@@ -467,10 +469,10 @@ namespace project_akhir_stock_gudang
 
         private void btnSetujui_Click_1(object sender, EventArgs e)
         {
-            
-            
-            
-            
+
+
+
+
             string password = txtPassword.Text;
 
             if (modeEditPengguna)
@@ -694,5 +696,34 @@ namespace project_akhir_stock_gudang
         {
 
         }
+
+        private void ucAdminDataUser_KeyDown(object? sender, KeyEventArgs e)
+        {
+
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                e.SuppressKeyPress = true;
+                btnGenerate.PerformClick();
+            }
+        }
+
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSetujui.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btnBatal.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+  
     }
 }

@@ -703,6 +703,16 @@ namespace project_akhir_stock_gudang
         {
 
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSimpan1.PerformClick();
+                return true;
+            }
+          
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 
 }

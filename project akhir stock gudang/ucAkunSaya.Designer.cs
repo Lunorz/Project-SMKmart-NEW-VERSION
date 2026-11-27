@@ -133,6 +133,7 @@
             // 
             // pnlSyarat
             // 
+            pnlSyarat.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSyarat.BackColor = Color.FromArgb(245, 251, 248);
             pnlSyarat.Controls.Add(lblS2);
             pnlSyarat.Controls.Add(lblS3);
@@ -140,7 +141,6 @@
             pnlSyarat.Controls.Add(lblS4);
             pnlSyarat.Controls.Add(lblS1);
             pnlSyarat.Controls.Add(lblSyaratJudul);
-            pnlSyarat.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlSyarat.Location = new Point(424, 76);
             pnlSyarat.Name = "pnlSyarat";
             pnlSyarat.Size = new Size(216, 196);
@@ -501,6 +501,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "ucAkunSaya";
             Size = new Size(1100, 700);
+           
             pnlPage.ResumeLayout(false);
             pnlBaris.ResumeLayout(false);
             pnlFormLuar.ResumeLayout(false);

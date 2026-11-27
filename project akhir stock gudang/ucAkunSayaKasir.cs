@@ -26,7 +26,7 @@ namespace project_akhir_stock_gudang
             txtBaru.UseSystemPasswordChar = true;
             txtKonfirmasi.UseSystemPasswordChar = true;
 
-           
+
 
             prgKekuatan.Minimum = 0;
             prgKekuatan.Maximum = 5;
@@ -277,6 +277,31 @@ namespace project_akhir_stock_gudang
         public void AturDashboard(Dashboard_kasir dashboard)
         {
             dashboardAsal = dashboard;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSimpan.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                lblKembaliKeKasir_Click(this, EventArgs.Empty);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ucAkunSayaKasir_KeyDown(object sender, KeyEventArgs e)
+        {
+          
+            if (e.Control && e.KeyCode == Keys.B)
+            {
+                e.SuppressKeyPress = true;
+                btnBersihkan.Focus();
+            }
         }
     }
 }

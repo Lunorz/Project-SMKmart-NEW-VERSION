@@ -490,6 +490,7 @@
             Size = new Size(1100, 700);
             Load += ucStockBarang_Load;
             VisibleChanged += ucStockBarang_VisibleChanged;
+            KeyDown += ucStockBarang_KeyDown;
             pnlPageGudang.ResumeLayout(false);
             pnlBawahGudang.ResumeLayout(false);
             pnlKartuTabelGudang.ResumeLayout(false);

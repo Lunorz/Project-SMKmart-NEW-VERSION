@@ -24,7 +24,7 @@ namespace project_akhir_stock_gudang
             usernamePetugas = username;
             txtCarigudang1.TextChanged -=
                  txtCarigudang1_TextChanged;
-           
+
 
             txtCarigudang1.TextChanged +=
                 txtCarigudang1_TextChanged;
@@ -127,7 +127,7 @@ namespace project_akhir_stock_gudang
                 }
 
 
-                
+
             }
             catch (Exception ex)
             {
@@ -603,6 +603,20 @@ namespace project_akhir_stock_gudang
             if (this.Visible)
             {
                 MuatDataBarang();
+            }
+        }
+
+        private void ucStockBarang_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.P)
+            {
+                e.SuppressKeyPress = true;
+                btnPengaturanGudang1.Focus();
+            }
+            else if (e.Control && e.KeyCode == Keys.O)
+            {
+                e.SuppressKeyPress = true;
+                btnOpnameGudang1.Focus();
             }
         }
     }

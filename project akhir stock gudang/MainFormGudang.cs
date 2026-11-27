@@ -31,7 +31,6 @@ namespace project_akhir_stock_gudang
             UiTheme.DecorateHeader(pnlTopBarGudangMainform);
             btnMenuDashboardGudangMainform_Click(this, EventArgs.Empty);
             usernamePetugas = username ?? "";
-            this.CancelButton = btmMenuKeluar;
             this.KeyPreview = true;
             this.KeyDown += MainFormGudang_KeyDown;
         }
@@ -172,6 +171,11 @@ namespace project_akhir_stock_gudang
             {
                 e.SuppressKeyPress = true;
                 btnMenuDashboardGudangMainform.PerformClick();
+            }
+            if (e.Control && e.KeyCode == Keys.K)
+            {
+                e.SuppressKeyPress = true;
+                btnMenuKeluarGudangMainform.PerformClick();
             }
         }
     }

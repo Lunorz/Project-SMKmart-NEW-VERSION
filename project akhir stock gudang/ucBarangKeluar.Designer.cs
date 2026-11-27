@@ -474,6 +474,7 @@
             Name = "ucBarangKeluar";
             Size = new Size(1100, 700);
             Load += ucBarangKeluar_Load;
+           
             pnlPageGudang.ResumeLayout(false);
             pnlBawahGudang.ResumeLayout(false);
             pnlKartuTabelGudang.ResumeLayout(false);

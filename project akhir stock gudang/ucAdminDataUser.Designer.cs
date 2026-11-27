@@ -29,26 +29,16 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             pnlBawah = new Panel();
             pnlKartuTabel = new Panel();
             pnlKartuTabelDalam = new Panel();
             tabUtama = new TabControl();
-            tabPermintaan = new TabPage();
-            dgvPermintaan = new DataGridView();
-            colUsernameP = new DataGridViewTextBoxColumn();
-            colRoleP = new DataGridViewTextBoxColumn();
-            colTanggalP = new DataGridViewTextBoxColumn();
-            colSetujui = new DataGridViewButtonColumn();
-            colTolak = new DataGridViewButtonColumn();
-            pnlToolbarP = new Panel();
-            cmbRoleP = new ComboBox();
-            txtCariP = new TextBox();
             tabSemua = new TabPage();
             dgvSemua = new DataGridView();
             colUsernameS = new DataGridViewTextBoxColumn();
@@ -71,6 +61,16 @@
             prgKekuatan = new ProgressBar();
             txtPassword = new TextBox();
             lblPassword = new Label();
+            tabPermintaan = new TabPage();
+            dgvPermintaan = new DataGridView();
+            colUsernameP = new DataGridViewTextBoxColumn();
+            colRoleP = new DataGridViewTextBoxColumn();
+            colTanggalP = new DataGridViewTextBoxColumn();
+            colSetujui = new DataGridViewButtonColumn();
+            colTolak = new DataGridViewButtonColumn();
+            pnlToolbarP = new Panel();
+            cmbRoleP = new ComboBox();
+            txtCariP = new TextBox();
             lblJudul = new Label();
             pnlJarak = new Panel();
             tlpKartu = new TableLayoutPanel();
@@ -90,14 +90,14 @@
             pnlKartuTabel.SuspendLayout();
             pnlKartuTabelDalam.SuspendLayout();
             tabUtama.SuspendLayout();
-            tabPermintaan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvPermintaan).BeginInit();
-            pnlToolbarP.SuspendLayout();
             tabSemua.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSemua).BeginInit();
             pnlToolbarS.SuspendLayout();
             pnlSetujuiLuar.SuspendLayout();
             pnlSetujuiDalam.SuspendLayout();
+            tabPermintaan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvPermintaan).BeginInit();
+            pnlToolbarP.SuspendLayout();
             tlpKartu.SuspendLayout();
             pnlKartuTotal.SuspendLayout();
             pnlKartuMenunngu.SuspendLayout();
@@ -125,7 +125,7 @@
             pnlKartuTabel.Location = new Point(0, 0);
             pnlKartuTabel.Name = "pnlKartuTabel";
             pnlKartuTabel.Padding = new Padding(1);
-            pnlKartuTabel.Size = new Size(688, 528);
+            pnlKartuTabel.Size = new Size(708, 528);
             pnlKartuTabel.TabIndex = 2;
             // 
             // pnlKartuTabelDalam
@@ -135,7 +135,7 @@
             pnlKartuTabelDalam.Dock = DockStyle.Fill;
             pnlKartuTabelDalam.Location = new Point(1, 1);
             pnlKartuTabelDalam.Name = "pnlKartuTabelDalam";
-            pnlKartuTabelDalam.Size = new Size(686, 526);
+            pnlKartuTabelDalam.Size = new Size(706, 526);
             pnlKartuTabelDalam.TabIndex = 0;
             // 
             // tabUtama
@@ -146,161 +146,9 @@
             tabUtama.Location = new Point(0, 0);
             tabUtama.Name = "tabUtama";
             tabUtama.SelectedIndex = 0;
-            tabUtama.Size = new Size(686, 526);
+            tabUtama.Size = new Size(706, 526);
             tabUtama.SizeMode = TabSizeMode.Fixed;
             tabUtama.TabIndex = 0;
-            // 
-            // tabPermintaan
-            // 
-            tabPermintaan.BackColor = Color.White;
-            tabPermintaan.Controls.Add(dgvPermintaan);
-            tabPermintaan.Controls.Add(pnlToolbarP);
-            tabPermintaan.Location = new Point(4, 42);
-            tabPermintaan.Name = "tabPermintaan";
-            tabPermintaan.Padding = new Padding(3);
-            tabPermintaan.Size = new Size(678, 480);
-            tabPermintaan.TabIndex = 0;
-            tabPermintaan.Text = "Permintaan pendaftaran";
-            // 
-            // dgvPermintaan
-            // 
-            dgvPermintaan.AllowUserToAddRows = false;
-            dgvPermintaan.AllowUserToDeleteRows = false;
-            dgvPermintaan.AllowUserToResizeColumns = false;
-            dgvPermintaan.AllowUserToResizeRows = false;
-            dgvPermintaan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPermintaan.BackgroundColor = Color.White;
-            dgvPermintaan.BorderStyle = BorderStyle.None;
-            dgvPermintaan.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvPermintaan.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle1.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle1.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvPermintaan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvPermintaan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPermintaan.Columns.AddRange(new DataGridViewColumn[] { colUsernameP, colRoleP, colTanggalP, colSetujui, colTolak });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle4.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvPermintaan.DefaultCellStyle = dataGridViewCellStyle4;
-            dgvPermintaan.Dock = DockStyle.Fill;
-            dgvPermintaan.EnableHeadersVisualStyles = false;
-            dgvPermintaan.GridColor = Color.FromArgb(230, 247, 238);
-            dgvPermintaan.Location = new Point(3, 75);
-            dgvPermintaan.MultiSelect = false;
-            dgvPermintaan.Name = "dgvPermintaan";
-            dgvPermintaan.ReadOnly = true;
-            dgvPermintaan.RowHeadersVisible = false;
-            dgvPermintaan.RowHeadersWidth = 51;
-            dgvPermintaan.RowTemplate.Height = 56;
-            dgvPermintaan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPermintaan.Size = new Size(672, 402);
-            dgvPermintaan.TabIndex = 2;
-            // 
-            // colUsernameP
-            // 
-            colUsernameP.FillWeight = 18F;
-            colUsernameP.HeaderText = "username";
-            colUsernameP.MinimumWidth = 6;
-            colUsernameP.Name = "colUsernameP";
-            colUsernameP.ReadOnly = true;
-            // 
-            // 
-            // colRoleP
-            // 
-            colRoleP.FillWeight = 10F;
-            colRoleP.HeaderText = "role";
-            colRoleP.MinimumWidth = 6;
-            colRoleP.Name = "colRoleP";
-            colRoleP.ReadOnly = true;
-            // 
-            // colTanggalP
-            // 
-            colTanggalP.FillWeight = 13F;
-            colTanggalP.HeaderText = "tanggal";
-            colTanggalP.MinimumWidth = 6;
-            colTanggalP.Name = "colTanggalP";
-            colTanggalP.ReadOnly = true;
-            // 
-            // colSetujui
-            // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(42, 127, 80);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(42, 127, 80);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            colSetujui.DefaultCellStyle = dataGridViewCellStyle2;
-            colSetujui.FillWeight = 11F;
-            colSetujui.FlatStyle = FlatStyle.Flat;
-            colSetujui.HeaderText = "aksi";
-            colSetujui.MinimumWidth = 6;
-            colSetujui.Name = "colSetujui";
-            colSetujui.ReadOnly = true;
-            colSetujui.Text = "Setujui";
-            colSetujui.UseColumnTextForButtonValue = true;
-            // 
-            // colTolak
-            // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(169, 50, 38);
-            dataGridViewCellStyle3.SelectionBackColor = Color.White;
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(169, 50, 38);
-            colTolak.DefaultCellStyle = dataGridViewCellStyle3;
-            colTolak.FillWeight = 11F;
-            colTolak.FlatStyle = FlatStyle.Flat;
-            colTolak.HeaderText = "";
-            colTolak.MinimumWidth = 6;
-            colTolak.Name = "colTolak";
-            colTolak.ReadOnly = true;
-            colTolak.Text = "Tolak";
-            colTolak.UseColumnTextForButtonValue = true;
-            // 
-            // pnlToolbarP
-            // 
-            pnlToolbarP.Controls.Add(cmbRoleP);
-            pnlToolbarP.Controls.Add(txtCariP);
-            pnlToolbarP.Dock = DockStyle.Top;
-            pnlToolbarP.Location = new Point(3, 3);
-            pnlToolbarP.Name = "pnlToolbarP";
-            pnlToolbarP.Size = new Size(672, 72);
-            pnlToolbarP.TabIndex = 0;
-            // 
-            // cmbRoleP
-            // 
-            cmbRoleP.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            cmbRoleP.BackColor = Color.White;
-            cmbRoleP.FlatStyle = FlatStyle.Flat;
-            cmbRoleP.ForeColor = Color.FromArgb(18, 55, 42);
-            cmbRoleP.FormattingEnabled = true;
-            cmbRoleP.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
-            cmbRoleP.Location = new Point(500, 18);
-            cmbRoleP.Name = "cmbRoleP";
-            cmbRoleP.Size = new Size(150, 31);
-            cmbRoleP.TabIndex = 1;
-            // 
-            // txtCariP
-            // 
-            txtCariP.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtCariP.BackColor = Color.White;
-            txtCariP.BorderStyle = BorderStyle.FixedSingle;
-            txtCariP.Font = new Font("Leelawadee UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCariP.ForeColor = Color.FromArgb(18, 55, 42);
-            txtCariP.Location = new Point(16, 16);
-            txtCariP.Name = "txtCariP";
-            txtCariP.PlaceholderText = "Cari username";
-            txtCariP.Size = new Size(460, 34);
-            txtCariP.TabIndex = 0;
             // 
             // tabSemua
             // 
@@ -310,7 +158,7 @@
             tabSemua.Location = new Point(4, 42);
             tabSemua.Name = "tabSemua";
             tabSemua.Padding = new Padding(3);
-            tabSemua.Size = new Size(678, 480);
+            tabSemua.Size = new Size(698, 480);
             tabSemua.TabIndex = 1;
             tabSemua.Text = "Semua pengguna";
             // 
@@ -325,26 +173,26 @@
             dgvSemua.BorderStyle = BorderStyle.None;
             dgvSemua.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvSemua.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle5.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle5.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(245, 251, 248);
-            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(79, 106, 92);
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            dgvSemua.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle1.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle1.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvSemua.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvSemua.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvSemua.Columns.AddRange(new DataGridViewColumn[] { colUsernameS, colRoleS, status, btnBanned });
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.White;
-            dataGridViewCellStyle7.Font = new Font("Leelawadee UI", 10.5F);
-            dataGridViewCellStyle7.ForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle7.Padding = new Padding(12, 0, 0, 0);
-            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(230, 247, 238);
-            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(18, 55, 42);
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            dgvSemua.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle3.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvSemua.DefaultCellStyle = dataGridViewCellStyle3;
             dgvSemua.Dock = DockStyle.Fill;
             dgvSemua.EnableHeadersVisualStyles = false;
             dgvSemua.GridColor = Color.FromArgb(230, 247, 238);
@@ -356,7 +204,7 @@
             dgvSemua.RowHeadersWidth = 51;
             dgvSemua.RowTemplate.Height = 56;
             dgvSemua.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSemua.Size = new Size(672, 402);
+            dgvSemua.Size = new Size(692, 402);
             dgvSemua.TabIndex = 1;
             dgvSemua.CellContentClick += dgvSemua_CellContentClick;
             dgvSemua.CellFormatting += dgvSemua_CellFormatting;
@@ -368,7 +216,6 @@
             colUsernameS.MinimumWidth = 6;
             colUsernameS.Name = "colUsernameS";
             colUsernameS.ReadOnly = true;
-            // 
             // 
             // colRoleS
             // 
@@ -388,12 +235,12 @@
             // 
             // btnBanned
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = Color.White;
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(169, 50, 38);
-            dataGridViewCellStyle6.SelectionBackColor = Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(169, 50, 38);
-            btnBanned.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(169, 50, 38);
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(169, 50, 38);
+            btnBanned.DefaultCellStyle = dataGridViewCellStyle2;
             btnBanned.FillWeight = 11F;
             btnBanned.FlatStyle = FlatStyle.Flat;
             btnBanned.HeaderText = "";
@@ -410,7 +257,7 @@
             pnlToolbarS.Dock = DockStyle.Top;
             pnlToolbarS.Location = new Point(3, 3);
             pnlToolbarS.Name = "pnlToolbarS";
-            pnlToolbarS.Size = new Size(672, 72);
+            pnlToolbarS.Size = new Size(692, 72);
             pnlToolbarS.TabIndex = 0;
             // 
             // cmbRoleS
@@ -421,7 +268,7 @@
             cmbRoleS.ForeColor = Color.FromArgb(18, 55, 42);
             cmbRoleS.FormattingEnabled = true;
             cmbRoleS.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
-            cmbRoleS.Location = new Point(500, 18);
+            cmbRoleS.Location = new Point(520, 18);
             cmbRoleS.Name = "cmbRoleS";
             cmbRoleS.Size = new Size(150, 31);
             cmbRoleS.TabIndex = 2;
@@ -436,13 +283,13 @@
             txtCariS.Location = new Point(16, 16);
             txtCariS.Name = "txtCariS";
             txtCariS.PlaceholderText = "Cari username";
-            txtCariS.Size = new Size(460, 34);
+            txtCariS.Size = new Size(480, 34);
             txtCariS.TabIndex = 1;
             // 
             // pnlGap
             // 
             pnlGap.Dock = DockStyle.Right;
-            pnlGap.Location = new Point(688, 0);
+            pnlGap.Location = new Point(708, 0);
             pnlGap.Name = "pnlGap";
             pnlGap.Size = new Size(24, 528);
             pnlGap.TabIndex = 1;
@@ -452,7 +299,7 @@
             pnlSetujuiLuar.BackColor = Color.FromArgb(213, 235, 223);
             pnlSetujuiLuar.Controls.Add(pnlSetujuiDalam);
             pnlSetujuiLuar.Dock = DockStyle.Right;
-            pnlSetujuiLuar.Location = new Point(712, 0);
+            pnlSetujuiLuar.Location = new Point(732, 0);
             pnlSetujuiLuar.Name = "pnlSetujuiLuar";
             pnlSetujuiLuar.Padding = new Padding(1);
             pnlSetujuiLuar.Size = new Size(320, 528);
@@ -522,7 +369,6 @@
             lblUsername.Size = new Size(80, 20);
             lblUsername.TabIndex = 9;
             lblUsername.Text = "Username";
-            // 
             // 
             // btnSetujui
             // 
@@ -598,6 +444,157 @@
             lblPassword.Size = new Size(114, 20);
             lblPassword.TabIndex = 1;
             lblPassword.Text = "Password akun";
+            // 
+            // tabPermintaan
+            // 
+            tabPermintaan.BackColor = Color.White;
+            tabPermintaan.Controls.Add(dgvPermintaan);
+            tabPermintaan.Controls.Add(pnlToolbarP);
+            tabPermintaan.Location = new Point(4, 42);
+            tabPermintaan.Name = "tabPermintaan";
+            tabPermintaan.Padding = new Padding(3);
+            tabPermintaan.Size = new Size(678, 480);
+            tabPermintaan.TabIndex = 0;
+            tabPermintaan.Text = "Permintaan pendaftaran";
+            // 
+            // dgvPermintaan
+            // 
+            dgvPermintaan.AllowUserToAddRows = false;
+            dgvPermintaan.AllowUserToDeleteRows = false;
+            dgvPermintaan.AllowUserToResizeColumns = false;
+            dgvPermintaan.AllowUserToResizeRows = false;
+            dgvPermintaan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPermintaan.BackgroundColor = Color.White;
+            dgvPermintaan.BorderStyle = BorderStyle.None;
+            dgvPermintaan.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvPermintaan.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle4.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle4.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(245, 251, 248);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(79, 106, 92);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvPermintaan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgvPermintaan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPermintaan.Columns.AddRange(new DataGridViewColumn[] { colUsernameP, colRoleP, colTanggalP, colSetujui, colTolak });
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.White;
+            dataGridViewCellStyle7.Font = new Font("Leelawadee UI", 10.5F);
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle7.Padding = new Padding(12, 0, 0, 0);
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(230, 247, 238);
+            dataGridViewCellStyle7.SelectionForeColor = Color.FromArgb(18, 55, 42);
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            dgvPermintaan.DefaultCellStyle = dataGridViewCellStyle7;
+            dgvPermintaan.Dock = DockStyle.Fill;
+            dgvPermintaan.EnableHeadersVisualStyles = false;
+            dgvPermintaan.GridColor = Color.FromArgb(230, 247, 238);
+            dgvPermintaan.Location = new Point(3, 75);
+            dgvPermintaan.MultiSelect = false;
+            dgvPermintaan.Name = "dgvPermintaan";
+            dgvPermintaan.ReadOnly = true;
+            dgvPermintaan.RowHeadersVisible = false;
+            dgvPermintaan.RowHeadersWidth = 51;
+            dgvPermintaan.RowTemplate.Height = 56;
+            dgvPermintaan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPermintaan.Size = new Size(672, 402);
+            dgvPermintaan.TabIndex = 2;
+            // 
+            // colUsernameP
+            // 
+            colUsernameP.FillWeight = 18F;
+            colUsernameP.HeaderText = "username";
+            colUsernameP.MinimumWidth = 6;
+            colUsernameP.Name = "colUsernameP";
+            colUsernameP.ReadOnly = true;
+            // 
+            // colRoleP
+            // 
+            colRoleP.FillWeight = 10F;
+            colRoleP.HeaderText = "role";
+            colRoleP.MinimumWidth = 6;
+            colRoleP.Name = "colRoleP";
+            colRoleP.ReadOnly = true;
+            // 
+            // colTanggalP
+            // 
+            colTanggalP.FillWeight = 13F;
+            colTanggalP.HeaderText = "tanggal";
+            colTanggalP.MinimumWidth = 6;
+            colTanggalP.Name = "colTanggalP";
+            colTanggalP.ReadOnly = true;
+            // 
+            // colSetujui
+            // 
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(42, 127, 80);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(42, 127, 80);
+            dataGridViewCellStyle5.SelectionForeColor = Color.White;
+            colSetujui.DefaultCellStyle = dataGridViewCellStyle5;
+            colSetujui.FillWeight = 11F;
+            colSetujui.FlatStyle = FlatStyle.Flat;
+            colSetujui.HeaderText = "aksi";
+            colSetujui.MinimumWidth = 6;
+            colSetujui.Name = "colSetujui";
+            colSetujui.ReadOnly = true;
+            colSetujui.Text = "Setujui";
+            colSetujui.UseColumnTextForButtonValue = true;
+            // 
+            // colTolak
+            // 
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(169, 50, 38);
+            dataGridViewCellStyle6.SelectionBackColor = Color.White;
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(169, 50, 38);
+            colTolak.DefaultCellStyle = dataGridViewCellStyle6;
+            colTolak.FillWeight = 11F;
+            colTolak.FlatStyle = FlatStyle.Flat;
+            colTolak.HeaderText = "";
+            colTolak.MinimumWidth = 6;
+            colTolak.Name = "colTolak";
+            colTolak.ReadOnly = true;
+            colTolak.Text = "Tolak";
+            colTolak.UseColumnTextForButtonValue = true;
+            // 
+            // pnlToolbarP
+            // 
+            pnlToolbarP.Controls.Add(cmbRoleP);
+            pnlToolbarP.Controls.Add(txtCariP);
+            pnlToolbarP.Dock = DockStyle.Top;
+            pnlToolbarP.Location = new Point(3, 3);
+            pnlToolbarP.Name = "pnlToolbarP";
+            pnlToolbarP.Size = new Size(672, 72);
+            pnlToolbarP.TabIndex = 0;
+            // 
+            // cmbRoleP
+            // 
+            cmbRoleP.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cmbRoleP.BackColor = Color.White;
+            cmbRoleP.FlatStyle = FlatStyle.Flat;
+            cmbRoleP.ForeColor = Color.FromArgb(18, 55, 42);
+            cmbRoleP.FormattingEnabled = true;
+            cmbRoleP.Items.AddRange(new object[] { "semua", "kasir", "gudang" });
+            cmbRoleP.Location = new Point(500, 18);
+            cmbRoleP.Name = "cmbRoleP";
+            cmbRoleP.Size = new Size(150, 28);
+            cmbRoleP.TabIndex = 1;
+            // 
+            // txtCariP
+            // 
+            txtCariP.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCariP.BackColor = Color.White;
+            txtCariP.BorderStyle = BorderStyle.FixedSingle;
+            txtCariP.Font = new Font("Leelawadee UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCariP.ForeColor = Color.FromArgb(18, 55, 42);
+            txtCariP.Location = new Point(16, 16);
+            txtCariP.Name = "txtCariP";
+            txtCariP.PlaceholderText = "Cari username";
+            txtCariP.Size = new Size(460, 34);
+            txtCariP.TabIndex = 0;
             // 
             // lblJudul
             // 
@@ -701,7 +698,7 @@
             lblMenunggu.ForeColor = Color.FromArgb(31, 107, 66);
             lblMenunggu.Location = new Point(20, 42);
             lblMenunggu.Name = "lblMenunggu";
-            lblMenunggu.Size = new Size(130, 47);
+            lblMenunggu.Size = new Size(40, 47);
             lblMenunggu.TabIndex = 1;
             lblMenunggu.Text = "0";
             // 
@@ -712,7 +709,7 @@
             lblMenungguJudul.ForeColor = Color.FromArgb(79, 106, 92);
             lblMenungguJudul.Location = new Point(20, 18);
             lblMenungguJudul.Name = "lblMenungguJudul";
-            lblMenungguJudul.Size = new Size(130, 20);
+            lblMenungguJudul.Size = new Size(121, 20);
             lblMenungguJudul.TabIndex = 0;
             lblMenungguJudul.Text = "Aktif / Nonaktif";
             // 
@@ -747,7 +744,7 @@
             lblAktifJudul.ForeColor = Color.FromArgb(79, 106, 92);
             lblAktifJudul.Location = new Point(20, 18);
             lblAktifJudul.Name = "lblAktifJudul";
-            lblAktifJudul.Size = new Size(82, 20);
+            lblAktifJudul.Size = new Size(83, 20);
             lblAktifJudul.TabIndex = 1;
             lblAktifJudul.Text = "Akun kasir";
             // 
@@ -782,7 +779,7 @@
             lblNnonaktifjudul.ForeColor = Color.FromArgb(79, 106, 92);
             lblNnonaktifjudul.Location = new Point(20, 18);
             lblNnonaktifjudul.Name = "lblNnonaktifjudul";
-            lblNnonaktifjudul.Size = new Size(105, 20);
+            lblNnonaktifjudul.Size = new Size(103, 20);
             lblNnonaktifjudul.TabIndex = 1;
             lblNnonaktifjudul.Text = "Akun gudang";
             // 
@@ -799,14 +796,11 @@
             Padding = new Padding(24);
             Size = new Size(1100, 700);
             Load += ucAdminDataUser_Load;
+       
             pnlBawah.ResumeLayout(false);
             pnlKartuTabel.ResumeLayout(false);
             pnlKartuTabelDalam.ResumeLayout(false);
             tabUtama.ResumeLayout(false);
-            tabPermintaan.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvPermintaan).EndInit();
-            pnlToolbarP.ResumeLayout(false);
-            pnlToolbarP.PerformLayout();
             tabSemua.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvSemua).EndInit();
             pnlToolbarS.ResumeLayout(false);
@@ -814,6 +808,10 @@
             pnlSetujuiLuar.ResumeLayout(false);
             pnlSetujuiDalam.ResumeLayout(false);
             pnlSetujuiDalam.PerformLayout();
+            tabPermintaan.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvPermintaan).EndInit();
+            pnlToolbarP.ResumeLayout(false);
+            pnlToolbarP.PerformLayout();
             tlpKartu.ResumeLayout(false);
             pnlKartuTotal.ResumeLayout(false);
             pnlKartuTotal.PerformLayout();

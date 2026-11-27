@@ -23,7 +23,7 @@ namespace project_akhir_stock_gudang
             usernameAktif = username;
             btnMenuDashboard_Click(this, EventArgs.Empty);
             UiTheme.DecorateHeader(pnlTopBar);
-            this.CancelButton = btnKeluar;  
+           
             this.KeyPreview = true;
             this.KeyDown += MainFormAdmin_KeyDown;
         }
@@ -230,6 +230,12 @@ namespace project_akhir_stock_gudang
             {
                 e.SuppressKeyPress = true;
                 btnMenuDashboard.PerformClick();
+            }
+
+            if (e.Control && e.KeyCode == Keys.K)
+            {
+                e.SuppressKeyPress = true;
+                btnKeluar.PerformClick();
             }
         }
     }

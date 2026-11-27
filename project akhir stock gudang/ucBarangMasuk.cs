@@ -442,6 +442,21 @@ namespace project_akhir_stock_gudang
         {
 
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSimpanGudang2.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btnBersihkanGudang2.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }
     

@@ -511,6 +511,7 @@
             Controls.Add(pnlPage);
             Name = "ucAkunSayaKasir";
             Size = new Size(1100, 700);
+            KeyDown += ucAkunSayaKasir_KeyDown;
             pnlPage.ResumeLayout(false);
             pnlPage.PerformLayout();
             pnlBaris.ResumeLayout(false);

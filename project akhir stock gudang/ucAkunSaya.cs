@@ -206,7 +206,7 @@ namespace project_akhir_stock_gudang
 
         private void btnSimpan_Click(object sender, EventArgs e)
         {
-          
+
             DialogResult hasil = MessageBox.Show(
                 "Apakah Anda yakin ingin mengganti password akun ini?",
                 "Konfirmasi Ganti Password",
@@ -324,9 +324,9 @@ namespace project_akhir_stock_gudang
                 TampilkanInformasiAkun();
             }
 
-          
-        
-       
+
+
+
         }
 
         private void BersihkanForm()
@@ -360,7 +360,22 @@ namespace project_akhir_stock_gudang
                     MessageBoxIcon.Information);
             }
 
-            
+
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                btnSimpan.PerformClick();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                btnBersihkan.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
