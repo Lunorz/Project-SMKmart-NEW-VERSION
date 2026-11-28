@@ -541,7 +541,7 @@ namespace project_akhir_stock_gudang
             {
                 DialogResult konfirmasi = MessageBox.Show(
                     "Apakah kamu yakin ingin menghapus barang ini?\n" +
-                    "Barang tidak akan muncul di Dashboard Kasir.",
+                    "Barang tidak akan muncul di bagian kasir dan gudang.",
                     "Konfirmasi Hapus",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question

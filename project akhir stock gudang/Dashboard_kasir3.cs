@@ -736,13 +736,14 @@ namespace project_akhir_stock_gudang
             }
 
          
-            Dashboard_Struck strukForm = new Dashboard_Struck();
+            Dashboard_Struck strukForm = new Dashboard_Struck(usernameKasir);
 
             strukForm.TampilkanStruk(transaksi);
 
             strukForm.Show();
 
            
+
         }
 
         

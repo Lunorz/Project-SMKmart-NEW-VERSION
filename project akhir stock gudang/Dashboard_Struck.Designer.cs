@@ -50,6 +50,8 @@
             printDialog1 = new PrintDialog();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             printPreviewDialog1 = new PrintPreviewDialog();
+            lblKasir = new Label();
+            lblNamaKasir = new Label();
             pnlstruk.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStruk).BeginInit();
             pnlFooterStruk.SuspendLayout();
@@ -146,6 +148,8 @@
             // pnlInfoStruk
             // 
             pnlInfoStruk.BackColor = Color.Honeydew;
+            pnlInfoStruk.Controls.Add(lblNamaKasir);
+            pnlInfoStruk.Controls.Add(lblKasir);
             pnlInfoStruk.Controls.Add(lblTanggalStruk);
             pnlInfoStruk.Controls.Add(lblJudulTanggalStruk);
             pnlInfoStruk.Controls.Add(LblNomorStruk);
@@ -273,6 +277,27 @@
             printPreviewDialog1.Name = "printPreviewDialog1";
             printPreviewDialog1.Visible = false;
             // 
+            // lblKasir
+            // 
+            lblKasir.AutoSize = true;
+            lblKasir.Font = new Font("Leelawadee UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblKasir.ForeColor = Color.SeaGreen;
+            lblKasir.Location = new Point(10, 68);
+            lblKasir.Name = "lblKasir";
+            lblKasir.Size = new Size(44, 20);
+            lblKasir.TabIndex = 9;
+            lblKasir.Text = "Kasir";
+            // 
+            // lblNamaKasir
+            // 
+            lblNamaKasir.AutoSize = true;
+            lblNamaKasir.Font = new Font("Leelawadee UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNamaKasir.ForeColor = Color.FromArgb(51, 51, 51);
+            lblNamaKasir.Location = new Point(145, 68);
+            lblNamaKasir.Name = "lblNamaKasir";
+            lblNamaKasir.Size = new Size(0, 20);
+            lblNamaKasir.TabIndex = 10;
+            // 
             // Dashboard_Struck
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -320,5 +345,7 @@
         private PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PrintPreviewDialog printPreviewDialog1;
+        private Label lblKasir;
+        private Label lblNamaKasir;
     }
 }

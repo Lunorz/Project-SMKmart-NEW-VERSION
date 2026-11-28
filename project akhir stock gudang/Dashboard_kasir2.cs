@@ -285,7 +285,7 @@ namespace project_akhir_stock_gudang
             Dashboard_kasir3 formCheckout =
                 new Dashboard_kasir3(keranjang, usernameKasir);
 
-            formCheckout.ShowDialog();
+            formCheckout.Show();
             this.Hide();
         }
         private void Dashboard_kasir2_KeyDown(object? sender, KeyEventArgs e)

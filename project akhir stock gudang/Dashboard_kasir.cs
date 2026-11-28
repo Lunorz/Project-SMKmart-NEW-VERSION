@@ -385,6 +385,7 @@ namespace project_akhir_stock_gudang
 
         private void fotoGir_Click(object sender, EventArgs e)
         {
+
             UserAccount? akun = UserStore.GetAll()
                 .FirstOrDefault(x =>
                     string.Equals(

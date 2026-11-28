@@ -16,7 +16,7 @@ namespace project_akhir_stock_gudang
     {
         private readonly string usernameKasir;
         private Bitmap gambarStrukUntukCetak;
-        public Dashboard_Struck()
+        public Dashboard_Struck(string username)
         {
             InitializeComponent();
 
@@ -57,6 +57,11 @@ namespace project_akhir_stock_gudang
             AturLayoutStruk();
             this.KeyPreview = true;
             this.KeyDown += Dashboard_Struck_KeyDown;
+            usernameKasir = username ?? "";
+            lblNamaKasir.Text = 
+      (string.IsNullOrWhiteSpace(usernameKasir)
+          ? "-"
+          : usernameKasir);
         }
         private void AturTampilanDgvStruk()
         {
